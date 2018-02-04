@@ -3,8 +3,18 @@ const Quote = require('../models/quote');
 
 const router = express.Router();
 
+// if hitting the /api route, send a message
+router.get('/', (req, res, next) => {
+  res.status(404).send({
+    warning: "there's nothing here"
+  });
+});
+
 // get a list of quotes from the db
 router.get('/quotes', (req, res, next) => {
+  if(!req.query.tags){
+    next(new Error('you entered no tags'));
+  }
   const selectedTags = (req.query.tags.split(',').map(item => item.trim()));
   Quote.find({
     tags: { $in: selectedTags }
@@ -21,7 +31,7 @@ router.post('/quotes', (req, res, next) => {
   .then((quote) => {
     res.send(quote);
   })
-  .catch(next); // passess to server.js
+  .catch(next); // passes error to app.js
 
 });
 
@@ -34,6 +44,7 @@ router.put('/quotes/:id', (req, res, next) => {
       res.send(quote);
     });
   })
+  .catch(next); // passes error to app.js
 });
 
 // delete a quote from the db
@@ -44,6 +55,7 @@ router.delete('/quotes/:id', (req, res, next) => {
   .then((quote) => {
     res.send(quote);
   })
+  .catch(next); // passes error to app.js
 });
 
 

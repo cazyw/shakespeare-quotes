@@ -2,13 +2,13 @@
   "name": "shakespeare-quotes",
   "version": "1.0.0",
   "description": "collection of Shakespeare Quotes",
-  "main": "server/server.js",
+  "main": "server/app.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress -p",
     "watch:webpack": "webpack --progress --watch",
-    "watch:server": "nodemon server.js",
+    "watch:server": "nodemon server/app.js",
     "watch": "npm run watch:webpack & npm run watch:server"
   },
   "keywords": [

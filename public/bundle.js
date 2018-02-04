@@ -983,29 +983,34 @@ var Quotes = function (_React$Component) {
           { key: index },
           React.createElement(
             'span',
+            { className: 'quote' },
+            '"',
+            quoteQ.quote,
+            '"'
+          ),
+          React.createElement(
+            'span',
             { className: 'work' },
             quoteQ.work
           ),
           React.createElement(
             'span',
             { className: 'act' },
-            'Act ',
-            quoteQ.act
+            '(Act ',
+            quoteQ.act,
+            ' '
           ),
           React.createElement(
             'span',
             { className: 'scene' },
-            'Scene ',
-            quoteQ.scene
-          ),
-          React.createElement(
-            'span',
-            { className: 'quote' },
-            quoteQ.quote
+            ' Scene ',
+            quoteQ.scene,
+            ')'
           ),
           React.createElement(
             'span',
             { className: 'tags' },
+            'Tags: ',
             _this2.displayTags(quoteQ.tags)
           )
         );
@@ -1021,8 +1026,8 @@ var Quotes = function (_React$Component) {
             null,
             'Enter search tags, separated by a comma'
           ),
-          React.createElement('input', { type: 'text', ref: 'keywords', onChange: this.handleChange, value: this.state.tags, required: true }),
-          React.createElement('input', { type: 'Submit', placeholder: 'Find Quotes' })
+          React.createElement('input', { type: 'text', ref: 'keywords', placeholder: 'courage, family', onChange: this.handleChange, value: this.state.tags, required: true }),
+          React.createElement('input', { type: 'Submit', defaultValue: 'Find Quotes' })
         ),
         React.createElement(
           'ul',
@@ -1034,7 +1039,15 @@ var Quotes = function (_React$Component) {
   }, {
     key: 'displayTags',
     value: function displayTags(tags) {
-      return tags.join(',');
+      var tagButtons = tags.map(function (tag, index) {
+        return React.createElement(
+          'span',
+          { key: index, className: 'tag' },
+          tag
+        );
+      });
+      console.log(tagButtons);
+      return tagButtons;
     }
   }, {
     key: 'handleChange',

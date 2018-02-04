@@ -20,11 +20,11 @@ class Quotes extends React.Component {
       quotes = quotes.map((quoteQ, index) => {
           return(
               <li key={index}>
+                <span className="quote">"{quoteQ.quote}"</span>
                 <span className="work">{quoteQ.work}</span>
-                <span className="act">Act {quoteQ.act}</span>
-                <span className="scene">Scene {quoteQ.scene}</span>
-                <span className="quote">{quoteQ.quote}</span>
-                <span className="tags">{this.displayTags(quoteQ.tags)}</span>
+                <span className="act">(Act {quoteQ.act} </span>
+                <span className="scene"> Scene {quoteQ.scene})</span>
+                <span className="tags">Tags: {this.displayTags(quoteQ.tags)}</span>
               </li>
           )
       });
@@ -32,8 +32,8 @@ class Quotes extends React.Component {
           <div id="quote-container">
               <form id="search" onSubmit={this.handleSubmit}>
                   <label>Enter search tags, separated by a comma</label>
-                  <input type="text" ref="keywords" onChange={this.handleChange} value={this.state.tags} required  />
-                  <input type="Submit" placeholder="Find Quotes" />
+                  <input type="text" ref="keywords" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
+                  <input type="Submit" defaultValue="Find Quotes" />
               </form>
               <ul>{quotes}</ul>
           </div>
@@ -41,7 +41,11 @@ class Quotes extends React.Component {
   }
 
   displayTags(tags) {
-    return tags.join(',');
+    const tagButtons = tags.map((tag, index) => {
+      return (<span key={index} className="tag">{tag}</span>);
+    });
+    console.log(tagButtons);
+    return tagButtons;
   }
 
   handleChange(event) {

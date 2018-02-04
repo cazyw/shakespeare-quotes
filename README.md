@@ -10,8 +10,11 @@ Server-side kind-of completed (working on local server).
 
 To do:
 
+* design interface
+* refactor/modularise the front-end React
 * deploy to Heroku and research connecting to mongo (mLab)
 * add form to post data to database
+* tag suggestion
 
 ## Operating Instructions
 
@@ -73,7 +76,7 @@ $ npm run watch
 The project uses webpack.js to build the final Javascript file. The following are the final project files:
 ```
 server/
-  |- server.js
+  |- app.js
   |- routes.js
 models/
   |- quote.js
@@ -83,6 +86,10 @@ public/
   |- styles.css
 
 ```
+
+The working files that go into building `bundle.js`:
+working/
+  |- shakespeare.js
 
 ## Testing
 
