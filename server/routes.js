@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 // get a list of quotes from the db
 router.get('/quotes', (req, res, next) => {
   if(!req.query.tags){
-    next(new Error('you entered no tags'));
+    return next(new Error('you entered no tags'));
   }
   const selectedTags = (req.query.tags.split(',').map(item => item.trim()));
   Quote.find({
@@ -21,6 +21,13 @@ router.get('/quotes', (req, res, next) => {
   })
   .then((quote) => {
     res.send(quote);
+  });
+});
+
+// get a list of quotes from the db
+router.get('*', (req, res, next) => {
+  res.status(404).send({
+    warning: "there's nothing here"
   });
 });
 
