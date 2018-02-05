@@ -3,12 +3,6 @@ const Quote = require('../models/quote');
 
 const router = express.Router();
 
-// if hitting the /api route, send a message
-router.get('/', (req, res, next) => {
-  res.status(404).send({
-    warning: "there's nothing here"
-  });
-});
 
 // get a list of quotes from the db
 router.get('/quotes', (req, res, next) => {
@@ -21,13 +15,6 @@ router.get('/quotes', (req, res, next) => {
   })
   .then((quote) => {
     res.send(quote);
-  });
-});
-
-// get a list of quotes from the db
-router.get('*', (req, res, next) => {
-  res.status(404).send({
-    warning: "there's nothing here"
   });
 });
 
