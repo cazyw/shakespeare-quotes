@@ -28,7 +28,7 @@ input:required {
 }
 
 
-label{
+label {
   font-size: 1em;
   font-weight: 400;
   padding-left: 10px;
@@ -54,17 +54,7 @@ form{
   max-width: 600px;
   margin: 30px auto;
 }
-input[type="submit"]{
-  background: rgb(85, 85, 85);
-   color: rgb(255, 255, 255);
-   border: 0;
-   padding: 10px;
-   font-size: 18px;
-   width: 200px;
-   margin: 0 auto;
-   display: block;
-   cursor: pointer;
-}
+
 ul{
   margin: 0;
   padding: 0;
@@ -110,15 +100,3 @@ span.tag {
   cursor: pointer;
   font-size: 0.8em;
 }
-
-button{
-  float: right;
-  background: rgb(0, 66, 128);
-  border: 0;
-  padding: 5px 10px;
-  color: rgb(255, 255, 255);
-  display: inline-block;
-  border-radius: 4px;
-  cursor: pointer;
-}
-button.false{display: none;}

@@ -1,7 +1,8 @@
 const path = require('path');
 
+
 module.exports = {
-  entry: path.resolve(__dirname, 'working') + '/shakespeare.js',
+  entry: path.resolve(__dirname, 'src') + '/Home.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
@@ -15,6 +16,10 @@ module.exports = {
         options: {
             presets: ['env', 'react']
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   }

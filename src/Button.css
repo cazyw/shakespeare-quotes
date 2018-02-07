@@ -1,0 +1,16 @@
+button {
+  background: rgb(85, 85, 85);
+  color: rgb(255, 255, 255);
+  border: 0;
+  padding: 10px;
+  font-size: 18px;
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+
+button:focus {
+  outline-color: rgb(85, 85, 85);
+  outline-width: 0px;
+}

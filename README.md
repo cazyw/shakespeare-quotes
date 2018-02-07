@@ -6,7 +6,8 @@ Create an online collection of Shakespeare quotes. Users can submit quotes and s
 
 ## Status
 
-Server-side routing kind-of completed (working on local server). 
+Server-side routing mostly completed (working on local server). 
+Currently working on front-end React and rendering components properly.
 
 To do:
 
@@ -39,6 +40,8 @@ Other packages installed via npm
 * babel-loader - v7.1.2 (development env)
 * babel-preset-env - v1.6.1 (development env)
 * babel-preset-react - 6.24.1 (development env)
+* css-loader: 0.28.9 (development env)
+* style-loader: 0.20.1 (development env)
 * nodemon - v1.14.12 (development env)
 * webpack - v3.10.0 (development env)
 
@@ -88,7 +91,7 @@ public/
 ```
 
 The working files that go into building `bundle.js`:
-working/
+src/
   |- shakespeare.js
 
 ## Testing

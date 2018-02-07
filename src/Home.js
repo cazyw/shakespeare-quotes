@@ -6,8 +6,9 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Button = require('./Button');
 
-class Quotes extends React.Component {
+class Home extends React.Component {
 // var Quotes = React.createClass({
 
   constructor(props){
@@ -39,12 +40,15 @@ class Quotes extends React.Component {
               <form id="search" onSubmit={this.handleSubmit}>
                   <label>Enter search tags, separated by a comma</label>
                   <input type="text" ref="keywords" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
-                  <input type="Submit" defaultValue="Find Quotes" />
+                  <Button label="Find Quotes" />
+                  
               </form>
               <ul>{quotes}</ul>
           </div>
       );
   }
+
+  //<input type="Submit" defaultValue="Find Quotes" />
 
   displayTags(tags) {
     const tagButtons = tags.map((tag, index) => {
@@ -72,4 +76,4 @@ class Quotes extends React.Component {
     event.preventDefault();
   }
 }
-ReactDOM.render(<Quotes />, document.getElementById('quotes'));
+ReactDOM.render(<Home />, document.getElementById('quotes'));
