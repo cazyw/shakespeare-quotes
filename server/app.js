@@ -1,3 +1,8 @@
+/*
+ * Shakespeare Quote App
+ * Main app server
+ */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');

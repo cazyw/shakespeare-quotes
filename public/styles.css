@@ -1,7 +1,7 @@
 body{
   font-family: Raleway;
   color: rgb(84, 84, 84);
-  background: rgb(82, 163, 255);
+  background: rgb(62, 118, 182);
   margin: 10px 30px;
 }
 #homepage{
@@ -9,7 +9,7 @@ body{
   margin: 60px auto;
   margin-top: 30px;
   padding: 10px 20px;
-  background: rgba(253, 253, 253, 0.301);
+  background: rgba(253, 253, 253, 0.401);
   box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
 }
 input[type="text"]{

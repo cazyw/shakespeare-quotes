@@ -1,3 +1,8 @@
+/*
+ * Shakespeare Quote App
+ * Route handling
+ */
+
 const express = require('express');
 const Quote = require('../models/quote');
 
