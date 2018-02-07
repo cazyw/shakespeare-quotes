@@ -20,6 +20,14 @@ input[type="text"]{
   border-radius: 4px;
   border: 1px solid rgb(221, 221, 221);
 }
+
+input:required {
+  border-color: rgb(221, 221, 221);
+  outline: rgb(221, 221, 221);
+  box-shadow: none;
+}
+
+
 label{
   font-size: 1em;
   font-weight: 400;
