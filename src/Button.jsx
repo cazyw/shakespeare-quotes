@@ -1,8 +1,6 @@
-const React = require('react');
+import React from 'react';
 require('./Button.css');
 
-function Button ({ label }) {
+export default function Button ({ label }) {
     return <button type="Submit">{label}</button>;
 }
-
-module.exports = Button;

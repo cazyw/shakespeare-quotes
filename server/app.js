@@ -15,9 +15,10 @@ mongoose.Promise = global.Promise;
 // log all server calls
 app.use((req, res, next) => {
   const now = new Date().toString();
-  console.log(`${now}: ${req.method} ${req.url}`);
+  console.log(`\n${now}: ${req.method} ${req.url}`);
   next();
 });
+
 
 // static files
 app.use('/', express.static(__dirname + '/../public'));

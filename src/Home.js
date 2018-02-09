@@ -4,12 +4,11 @@
  */
 
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Button = require('./Button');
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Button from './Button';
 
-class Home extends React.Component {
-// var Quotes = React.createClass({
+export default class Home extends Component {
 
   constructor(props){
     super(props);
@@ -20,6 +19,32 @@ class Home extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  displayTags(tags) {
+    const tagButtons = tags.map((tag, index) => {
+      return (<span key={index} className="tag">{tag}</span>);
+    });
+    console.log(tagButtons);
+    return tagButtons;
+  }
+
+  handleChange(event) {
+    this.setState({tags: event.target.value});
+  }
+
+  handleSubmit(event) {
+    var tags = this.state.tags;
+    fetch('/api/quotes?tags=' + tags)
+    .then((data) => {
+      return data.json();
+    })
+    .then((json) => {
+      this.setState({
+        quotes: json
+      });
+    });
+    event.preventDefault();
   }
 
   render(){
@@ -48,32 +73,6 @@ class Home extends React.Component {
       );
   }
 
-  //<input type="Submit" defaultValue="Find Quotes" />
 
-  displayTags(tags) {
-    const tagButtons = tags.map((tag, index) => {
-      return (<span key={index} className="tag">{tag}</span>);
-    });
-    console.log(tagButtons);
-    return tagButtons;
-  }
-
-  handleChange(event) {
-    this.setState({tags: event.target.value});
-  }
-
-  handleSubmit(event) {
-    var tags = this.state.tags;
-    fetch('/api/quotes?tags=' + tags)
-    .then((data) => {
-      return data.json();
-    })
-    .then((json) => {
-      this.setState({
-        quotes: json
-      });
-    });
-    event.preventDefault();
-  }
 }
 ReactDOM.render(<Home />, document.getElementById('quotes'));
