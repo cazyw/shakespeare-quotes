@@ -7,7 +7,7 @@ Create an online collection of Shakespeare quotes. Users can submit quotes and s
 ## Status
 
 Server-side routing mostly completed (working on local server). 
-Currently working on front-end React and rendering components properly.
+Currently working on  testing and front-end React and rendering components properly.
 
 To do:
 
@@ -98,10 +98,13 @@ public/
 ```
 
 The working files that go into building `bundle.js`:
+
+```
 src/
   |- Home.js
   |- Button.jsx
   |- Button.css
+```
 
 Note: this section is being refactored to be done properly in React
 
@@ -120,7 +123,7 @@ Then run the following:
 $ npm test
 ```
 
-Note: do not run `npm start` or `npm run watch` at the same time as `npm test` as it will throw an error as they'll both try running a server on the same port. `npm test` script includes `nodemon` and will automatically both start the server (updating automatically for any changes) and run `mocha` (and re-running the tests with any changes)
+Note: do not run `npm start` or `npm run watch` at the same time as `npm test` as it will throw an error as they'll both try running a server on the same port. `npm test` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
 
 ## Discussion
 

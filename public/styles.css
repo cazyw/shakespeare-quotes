@@ -21,11 +21,11 @@ input[type="text"]{
   border: 1px solid rgb(221, 221, 221);
 }
 
-input:required {
+/* input:required {
   border-color: rgb(221, 221, 221);
   outline: rgb(221, 221, 221);
   box-shadow: none;
-}
+} */
 
 
 label {
