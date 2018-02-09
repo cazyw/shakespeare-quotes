@@ -29,21 +29,22 @@ To do:
 * MongoDB and Robomongo
 
 Other packages installed via npm
-
-* express - v4.16.2
-* body-parser - v1.18.2
-* mongoose - v5.0.3
-* react - 16.2.0
-* react-dom - 16.2.0
-* nodemon - v1.14.11 (development env)
-* babel-core - v6.26.0 (development env)
-* babel-loader - v7.1.2 (development env)
-* babel-preset-env - v1.6.1 (development env)
-* babel-preset-react - 6.24.1 (development env)
-* css-loader: 0.28.9 (development env)
-* style-loader: 0.20.1 (development env)
-* nodemon - v1.14.12 (development env)
-* webpack - v3.10.0 (development env)
+* "body-parser": "^1.18.2",
+* "express": "^4.16.2",
+* "mongoose": "^5.0.3",
+* "react": "^16.2.0",
+* "react-dom": "^16.2.0"
+* "babel-core": "^6.26.0",
+* "babel-loader": "^7.1.2",
+* "babel-preset-env": "^1.6.1",
+* "babel-preset-react": "^6.24.1",
+* "chai": "^4.1.2",
+* "css-loader": "^0.28.9",
+* "mocha": "^5.0.0",
+* "nodemon": "^1.14.12",
+* "style-loader": "^0.20.1",
+* "supertest": "^3.0.0",
+* "webpack": "^3.10.0"
 
 ## Application Installation Instructions
 
@@ -58,13 +59,19 @@ To install the required packages (see package.json), run:
 $ npm install
 ```
 
+Start the database locally (in my case):
+
+```
+$ mongod --dbpath ~/data/db/
+```
+
 Start the server locally:
 ```
 $ npm start
 ```
 Then open the browser and go to http://localhost:3000/
 
-To rebuild (after any file changes), run:
+To rebuild the final js file (after any file changes), run:
 ```
 $ npm run build
 ```
@@ -92,11 +99,28 @@ public/
 
 The working files that go into building `bundle.js`:
 src/
-  |- shakespeare.js
+  |- Home.js
+  |- Button.jsx
+  |- Button.css
+
+Note: this section is being refactored to be done properly in React
 
 ## Testing
 
-Will be using `mocha`, `chai` and `supertest`
+Testing using the `mocha` framework, and using the `supertest` and `chai` libraries
+
+Since it connects to mongodb, the database needs to be running first (in my case):
+
+```
+$ mongod --dbpath ~/data/db/
+```
+Then run the following:
+
+```
+$ npm test
+```
+
+Note: do not run `npm start` or `npm run watch` at the same time as `npm test` as it will throw an error as they'll both try running a server on the same port. `npm test` script includes `nodemon` and will automatically both start the server (updating automatically for any changes) and run `mocha` (and re-running the tests with any changes)
 
 ## Discussion
 

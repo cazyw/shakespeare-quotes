@@ -5,7 +5,8 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -w",
+    "test:watch": "webpack -p -w & nodemon --exec \"mocha -w\"",
     "build": "webpack --progress -p",
     "watch:webpack": "webpack --progress --watch",
     "watch:server": "nodemon server/app.js",
@@ -29,9 +30,13 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
     "css-loader": "^0.28.9",
-    "style-loader": "^0.20.1",
+    "mocha": "^5.0.0",
+    "mocha-webpack": "^1.0.1",
     "nodemon": "^1.14.12",
+    "style-loader": "^0.20.1",
+    "supertest": "^3.0.0",
     "webpack": "^3.10.0"
   },
   "engines": {
