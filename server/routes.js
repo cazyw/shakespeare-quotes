@@ -10,17 +10,23 @@ const router = express.Router();
 
 
 // get a list of quotes from the db
+// if tags provided, must match at least one of the tags
+// if no tags provided, display all
 router.get('/quotes', (req, res, next) => {
   if(!req.query.tags){
-    return next(new Error('you entered no tags'));
+    Quote.find({})
+    .then((quote) => {
+      res.send(quote);
+    });
+  } else {
+    const selectedTags = (req.query.tags.split(',').map(item => item.trim()));
+    Quote.find({
+      tags: { $in: selectedTags }
+    })
+    .then((quote) => {
+      res.send(quote);
+    });
   }
-  const selectedTags = (req.query.tags.split(',').map(item => item.trim()));
-  Quote.find({
-    tags: { $in: selectedTags }
-  })
-  .then((quote) => {
-    res.send(quote);
-  });
 });
 
 // add a new quote to the db

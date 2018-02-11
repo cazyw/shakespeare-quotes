@@ -6,9 +6,10 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Button from './Button';
+import ButtonForm from './ButtonForm';
+import ButtonDisplay from './ButtonDisplay';
 
-export default class Home extends Component {
+export default class DisplayQuote extends Component {
 
   constructor(props){
     super(props);
@@ -19,6 +20,7 @@ export default class Home extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.displayAll = this.displayAll.bind(this);
   }
 
   displayTags(tags) {
@@ -47,6 +49,19 @@ export default class Home extends Component {
     event.preventDefault();
   }
 
+  displayAll(event){
+    console.log('stuff');
+    fetch('/api/quotes/')
+    .then((data) => {
+      return data.json();
+    })
+    .then((json) => {
+      this.setState({
+        quotes: json
+      });
+    });
+  }
+
   render(){
       var quotes = this.state.quotes;
       quotes = quotes.map((quoteQ, index) => {
@@ -61,18 +76,16 @@ export default class Home extends Component {
           )
       });
       return(
-          <div id="quote-container">
+          <div id="quote-search-container">
               <form id="search" onSubmit={this.handleSubmit}>
                   <label>Enter search tags, separated by a comma</label>
                   <input type="text" ref="keywords" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
-                  <Button label="Find Quotes" />
-                  
-              </form>
+                  <ButtonForm type="Submit" label="Find Quotes" />
+                </form>
+                <ButtonDisplay label="Display All" className="button-display-all" displayAllQuotes={this.displayAll} />
+
               <ul>{quotes}</ul>
           </div>
       );
   }
-
-
 }
-ReactDOM.render(<Home />, document.getElementById('quotes'));
