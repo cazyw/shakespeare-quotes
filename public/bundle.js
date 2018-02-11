@@ -1134,6 +1134,7 @@ var Home = function (_Component) {
         'div',
         { className: 'quote-body' },
         _react2.default.createElement(_PostQuote2.default, null),
+        _react2.default.createElement('hr', null),
         _react2.default.createElement(_DisplayQuote2.default, null)
       );
     }
@@ -18446,7 +18447,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Shakespeare Quote App
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React form to search and display data
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 var DisplayQuote = function (_Component) {
@@ -18522,6 +18523,8 @@ var DisplayQuote = function (_Component) {
 
       var quotes = this.state.quotes;
       quotes = quotes.map(function (quoteQ, index) {
+        var act = quoteQ.act === "" ? "" : '(Act ' + quoteQ.act;
+        var scene = quoteQ.scene === "" ? "" : ' Scene ' + quoteQ.act + ')';
         return _react2.default.createElement(
           'li',
           { key: index },
@@ -18540,16 +18543,12 @@ var DisplayQuote = function (_Component) {
           _react2.default.createElement(
             'span',
             { className: 'act' },
-            '(Act ',
-            quoteQ.act,
-            ' '
+            act
           ),
           _react2.default.createElement(
             'span',
             { className: 'scene' },
-            ' Scene ',
-            quoteQ.scene,
-            ')'
+            scene
           ),
           _react2.default.createElement(
             'span',
@@ -18573,6 +18572,7 @@ var DisplayQuote = function (_Component) {
           _react2.default.createElement('input', { type: 'text', ref: 'keywords', placeholder: 'courage, family', onChange: this.handleChange, value: this.state.tags, required: true }),
           _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Find Quotes' })
         ),
+        _react2.default.createElement('hr', null),
         _react2.default.createElement(_ButtonDisplay2.default, { label: 'Display All', className: 'button-display-all', displayAllQuotes: this.displayAll }),
         _react2.default.createElement(
           'ul',
@@ -19245,28 +19245,104 @@ var _ButtonForm2 = _interopRequireDefault(_ButtonForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Shakespeare Quote App
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React form to post data
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 var PostQuote = function (_Component) {
     _inherits(PostQuote, _Component);
 
-    function PostQuote() {
+    function PostQuote(props) {
         _classCallCheck(this, PostQuote);
 
-        return _possibleConstructorReturn(this, (PostQuote.__proto__ || Object.getPrototypeOf(PostQuote)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (PostQuote.__proto__ || Object.getPrototypeOf(PostQuote)).call(this, props));
+
+        _this.state = {
+            work: "",
+            act: "",
+            scene: "",
+            quote: "",
+            tags: []
+        };
+
+        _this.submitQuote = _this.submitQuote.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.resetFields = _this.resetFields.bind(_this);
+        return _this;
     }
 
     _createClass(PostQuote, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState(_defineProperty({}, event.target.name, event.target.value));
+        }
+    }, {
+        key: 'resetFields',
+        value: function resetFields() {
+            this.setState({
+                work: "",
+                act: "",
+                scene: "",
+                quote: "",
+                tags: ""
+            });
+        }
+    }, {
+        key: 'submitQuote',
+        value: function submitQuote(event) {
+            var _this2 = this;
+
+            fetch('/api/quotes', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    work: this.state.work,
+                    act: this.state.act,
+                    scene: this.state.scene,
+                    quote: this.state.quote,
+                    tags: this.state.tags
+                })
+            }).then(function () {
+                _this2.resetFields();
+                alert('quote added');
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            event.preventDefault();
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { id: 'quote-container' });
+            return _react2.default.createElement(
+                'div',
+                { id: 'quote-post-container' },
+                _react2.default.createElement(
+                    'form',
+                    { id: 'post-quote', onSubmit: this.submitQuote },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Add a quote to the collection'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', name: 'work', placeholder: 'Henry V', onChange: this.handleChange, value: this.state.work, required: true }),
+                    _react2.default.createElement('input', { type: 'text', name: 'act', placeholder: '3', onChange: this.handleChange, value: this.state.act }),
+                    _react2.default.createElement('input', { type: 'text', name: 'scene', placeholder: '1', onChange: this.handleChange, value: this.state.scene }),
+                    _react2.default.createElement('input', { type: 'text', name: 'quote', placeholder: 'Once more unto the breach, dear friends, once more', onChange: this.handleChange, value: this.state.quote, required: true }),
+                    _react2.default.createElement('input', { type: 'text', name: 'tags', placeholder: 'courage, friends, battle, comraderie', onChange: this.handleChange, value: this.state.tags, required: true }),
+                    _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Add Quote' })
+                )
+            );
         }
     }]);
 

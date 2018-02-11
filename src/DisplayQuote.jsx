@@ -1,6 +1,6 @@
 /*
  * Shakespeare Quote App
- * Front-end React
+ * Front-end React form to search and display data
  */
 
 
@@ -65,12 +65,14 @@ export default class DisplayQuote extends Component {
   render(){
       var quotes = this.state.quotes;
       quotes = quotes.map((quoteQ, index) => {
+          const act = quoteQ.act === "" ? "" : `(Act ${quoteQ.act}`;
+          const scene = quoteQ.scene === "" ? "" : ` Scene ${quoteQ.act})`;
           return(
               <li key={index}>
                 <span className="quote">"{quoteQ.quote}"</span>
                 <span className="work">{quoteQ.work}</span>
-                <span className="act">(Act {quoteQ.act} </span>
-                <span className="scene"> Scene {quoteQ.scene})</span>
+                <span className="act">{act}</span>
+                <span className="scene">{scene}</span>
                 <span className="tags">Tags: {this.displayTags(quoteQ.tags)}</span>
               </li>
           )
@@ -81,9 +83,9 @@ export default class DisplayQuote extends Component {
                   <label>Enter search tags, separated by a comma</label>
                   <input type="text" ref="keywords" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
                   <ButtonForm type="Submit" label="Find Quotes" />
-                </form>
-                <ButtonDisplay label="Display All" className="button-display-all" displayAllQuotes={this.displayAll} />
-
+              </form>
+              <hr />
+              <ButtonDisplay label="Display All" className="button-display-all" displayAllQuotes={this.displayAll} />
               <ul>{quotes}</ul>
           </div>
       );

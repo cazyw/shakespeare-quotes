@@ -14,10 +14,10 @@ const QuoteSchema = new Schema({
     required: [true, "Work (Play, Sonnet etc) field is required"]
   },
   act: {
-    type: Number
+    type: String
   },
   scene: {
-    type: Number
+    type: String
   },
   quote: {
     type: String,

@@ -7,14 +7,15 @@ Create an online collection of Shakespeare quotes. Users can submit quotes and s
 ## Status
 
 Server-side routing mostly completed (working on local server). 
-Currently working on  testing and front-end React and rendering components properly.
+Currently working on testing and front-end React and rendering components properly.
 
 To do:
 
-* refactor/modularise the front-end React and add form to post data to the database
-* deploy to Heroku and research connecting to mongo 
+* refactor/modularise the front-end React properly
+* deploy to Heroku and research connecting to mongoDB 
 * include tag suggestions and link tags so they become search terms
 * user login
+* testing
 
 ## Operating Instructions
 
@@ -59,7 +60,7 @@ To install the required packages (see package.json), run:
 $ npm install
 ```
 
-Start the database locally (in my case):
+Start the database locally (in my case path required as not stored in the default location):
 
 ```
 $ mongod --dbpath ~/data/db/
@@ -69,6 +70,7 @@ Start the server locally:
 ```
 $ npm start
 ```
+
 Then open the browser and go to http://localhost:3000/
 
 To rebuild the final js file (after any file changes), run:
@@ -101,12 +103,15 @@ The working files that go into building `bundle.js`:
 
 ```
 src/
-  |- Home.js
-  |- Button.jsx
+  |- Home.jsx
+  |- PostQUote.jsx
+  |- DisplayQuote.jsx
+  |- ButtonForm.jsx
+  |- ButtonDisplay.jsx
   |- Button.css
 ```
 
-Note: this section is being refactored to be done properly in React
+Note: this section is being refactored to be done properly in React which I'm still learning
 
 ## Testing
 
@@ -124,6 +129,8 @@ $ npm test
 ```
 
 Note: do not run `npm start` or `npm run watch` at the same time as `npm test` as it will throw an error as they'll both try running a server on the same port. `npm test` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
+
+This is a section that needs working on.
 
 ## Discussion
 

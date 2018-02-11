@@ -8,6 +8,7 @@ export default class Home extends Component {
     return (
       <div className="quote-body">
         <PostQuote />
+        <hr />
         <DisplayQuote />
       </div>
     );
