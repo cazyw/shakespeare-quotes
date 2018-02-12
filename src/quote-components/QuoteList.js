@@ -1,7 +1,9 @@
 /*
  * Shakespeare Quote App
- * Front-end React component to display a list of quotes
+ * Front-end React Component: Quote List
+ * Container for the list of quotes to be displayed
  */
+
 
 import React, { Component } from 'react';
 import QuoteItem from './QuoteItem';

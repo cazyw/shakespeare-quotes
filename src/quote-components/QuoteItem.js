@@ -1,7 +1,9 @@
 /*
  * Shakespeare Quote App
- * Front-end React component to display an individual quote
+ * Front-end React Component: Quote Item
+ * Renders each individual quote
  */
+
 
 import React, { Component } from 'react';
 require('./Quote.css');

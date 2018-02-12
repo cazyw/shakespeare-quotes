@@ -1,14 +1,18 @@
 /*
  * Shakespeare Quote App
- * Front-end React form to search and display data
+ * Front-end React Component: Display Quote
+ * Option to:
+ *  - displays all quotes
+ *  - display quotes that match certain keywords
  */
 
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ButtonForm from './ButtonForm';
-import ButtonDisplay from './ButtonDisplay';
+import ButtonForm from '../button-components/ButtonForm';
+import ButtonDisplay from '../button-components/ButtonDisplay';
 import QuoteList from './QuoteList';
+require('./DisplayQuote.css');
 
 export default class DisplayQuote extends Component {
 
@@ -42,6 +46,7 @@ export default class DisplayQuote extends Component {
     event.preventDefault();
   }
 
+  // display all quotes in the database
   displayAll(event){
     console.log('stuff');
     fetch('/api/quotes/')

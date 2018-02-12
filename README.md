@@ -12,6 +12,7 @@ Currently working on testing and front-end React and rendering components proper
 To do:
 
 * refactor/modularise the front-end React properly
+* delete and modify tags
 * deploy to Heroku and research connecting to mongoDB 
 * include tag suggestions and link tags so they become search terms
 * user login
@@ -103,15 +104,22 @@ The working files that go into building `bundle.js`:
 
 ```
 src/
-  |- Home.jsx
-  |- PostQUote.jsx
-  |- DisplayQuote.jsx
-  |- ButtonForm.jsx
-  |- ButtonDisplay.jsx
-  |- Button.css
+  |- index.js
+  |- button-components/
+      |- ButtonForm.js
+      |- ButtonDisplay.js
+      |- Button.css
+  |- quote-components/
+      |- PostQuote.js
+      |- PostQuote.css
+      |- DisplayQuote.js
+      |- DisplayQuote.css
+      |- QuoteList.js
+      |- QuoteItem.js
+      |- Quote.css
 ```
 
-Note: this section is being refactored to be done properly in React which I'm still learning
+Note: this section and structure is being refactored as I'm still learning React
 
 ## Testing
 
@@ -153,8 +161,8 @@ The project required installing MongoDB (database), mongoose (object data modeli
 In thinking on the model of the data, I looked at the information usually included in tweets and what information might be useful, deciding on:
 
 * The title of the piece of work (play, sonnet etc) [required]
-* The act [not required as the work may not have Acts]
-* The scene [not required as the work may not have Scenes]
+* The act [conditional requirement - depends if Scene entered]
+* The scene [conditional requirement - depends if Act entered]
 * The quote itself [required]
 * Tags / keywords [required]
 
@@ -162,6 +170,11 @@ In future, each quote may be linked to the user posting the quote.
 
 ### Display
 
-The front-end is using `React`. Currently users are able to search tags and display quotes matching one or more of the tags entered. This section is still being worked on.
+The front-end is using `React`. Currently users are able to:
+* submit quotes to be entered into the collection
+* display all quotes in the collection
+* display quotes that match a keyword
+
+This section is still being worked on. This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. I'm going through Stephen Grider's course on Udemy [Modern React with Redux](https://www.udemy.com/react-redux/) as a foundation for how to use React but applying it to my own project. Currently my setup is a bit ad-hoc but as I go through this course, I intend to refactor as necessary.
 
 ## Contributing

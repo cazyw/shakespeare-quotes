@@ -1,12 +1,13 @@
 /*
  * Shakespeare Quote App
- * Front-end React form to post data to the database
+ * Front-end React Component: Post Quote
+ * Form that validates data and then posts to the database
  */
-
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ButtonForm from './ButtonForm';
+import ButtonForm from '../button-components/ButtonForm';
+require('./PostQuote.css');
 
 export default class PostQuote extends Component {
 
@@ -29,6 +30,7 @@ export default class PostQuote extends Component {
         this.setState({[event.target.name]: event.target.value});
         }
     
+    // reset fields if sucessfully posted to the dataabse
     resetFields(){
         this.setState({
             work: "",
@@ -39,6 +41,7 @@ export default class PostQuote extends Component {
         });
     }
 
+    // post data to the database
     submitQuote(event) {
         fetch('/api/quotes', {
             method: 'POST',
@@ -61,9 +64,8 @@ export default class PostQuote extends Component {
         .catch((error) => {
             console.log(error);
         });
-    
 
-    event.preventDefault();
+        event.preventDefault();
     }
     
     render(){
