@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/shakespeare');
+mongoose.connect('mongodb://localhost/shakespeare').catch((error) => {console.log('cannot connect to the database - check: is it running?')});
 mongoose.Promise = global.Promise;
 
 // log all server calls

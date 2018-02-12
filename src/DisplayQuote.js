@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ButtonForm from './ButtonForm';
 import ButtonDisplay from './ButtonDisplay';
+import QuoteList from './QuoteList';
 
 export default class DisplayQuote extends Component {
 
@@ -21,14 +22,6 @@ export default class DisplayQuote extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.displayAll = this.displayAll.bind(this);
-  }
-
-  displayTags(tags) {
-    const tagButtons = tags.map((tag, index) => {
-      return (<span key={index} className="tag">{tag}</span>);
-    });
-    console.log(tagButtons);
-    return tagButtons;
   }
 
   handleChange(event) {
@@ -63,20 +56,6 @@ export default class DisplayQuote extends Component {
   }
 
   render(){
-      var quotes = this.state.quotes;
-      quotes = quotes.map((quoteQ, index) => {
-          const act = quoteQ.act === "" ? "" : `(Act ${quoteQ.act}`;
-          const scene = quoteQ.scene === "" ? "" : ` Scene ${quoteQ.act})`;
-          return(
-              <li key={index}>
-                <span className="quote">"{quoteQ.quote}"</span>
-                <span className="work">{quoteQ.work}</span>
-                <span className="act">{act}</span>
-                <span className="scene">{scene}</span>
-                <span className="tags">Tags: {this.displayTags(quoteQ.tags)}</span>
-              </li>
-          )
-      });
       return(
           <div id="quote-search-container">
               <form id="search" onSubmit={this.handleSubmit}>
@@ -86,7 +65,7 @@ export default class DisplayQuote extends Component {
               </form>
               <hr />
               <ButtonDisplay label="Display All" className="button-display-all" displayAllQuotes={this.displayAll} />
-              <ul>{quotes}</ul>
+              <ul><QuoteList quotes={this.state.quotes} /></ul>
           </div>
       );
   }

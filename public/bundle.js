@@ -18439,6 +18439,10 @@ var _ButtonDisplay = __webpack_require__(34);
 
 var _ButtonDisplay2 = _interopRequireDefault(_ButtonDisplay);
 
+var _QuoteList = __webpack_require__(37);
+
+var _QuoteList2 = _interopRequireDefault(_QuoteList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18470,19 +18474,6 @@ var DisplayQuote = function (_Component) {
   }
 
   _createClass(DisplayQuote, [{
-    key: 'displayTags',
-    value: function displayTags(tags) {
-      var tagButtons = tags.map(function (tag, index) {
-        return _react2.default.createElement(
-          'span',
-          { key: index, className: 'tag' },
-          tag
-        );
-      });
-      console.log(tagButtons);
-      return tagButtons;
-    }
-  }, {
     key: 'handleChange',
     value: function handleChange(event) {
       this.setState({ tags: event.target.value });
@@ -18519,45 +18510,6 @@ var DisplayQuote = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
-
-      var quotes = this.state.quotes;
-      quotes = quotes.map(function (quoteQ, index) {
-        var act = quoteQ.act === "" ? "" : '(Act ' + quoteQ.act;
-        var scene = quoteQ.scene === "" ? "" : ' Scene ' + quoteQ.act + ')';
-        return _react2.default.createElement(
-          'li',
-          { key: index },
-          _react2.default.createElement(
-            'span',
-            { className: 'quote' },
-            '"',
-            quoteQ.quote,
-            '"'
-          ),
-          _react2.default.createElement(
-            'span',
-            { className: 'work' },
-            quoteQ.work
-          ),
-          _react2.default.createElement(
-            'span',
-            { className: 'act' },
-            act
-          ),
-          _react2.default.createElement(
-            'span',
-            { className: 'scene' },
-            scene
-          ),
-          _react2.default.createElement(
-            'span',
-            { className: 'tags' },
-            'Tags: ',
-            _this4.displayTags(quoteQ.tags)
-          )
-        );
-      });
       return _react2.default.createElement(
         'div',
         { id: 'quote-search-container' },
@@ -18577,7 +18529,7 @@ var DisplayQuote = function (_Component) {
         _react2.default.createElement(
           'ul',
           null,
-          quotes
+          _react2.default.createElement(_QuoteList2.default, { quotes: this.state.quotes })
         )
       );
     }
@@ -19253,7 +19205,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Shakespeare Quote App
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React form to post data
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React form to post data to the database
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 var PostQuote = function (_Component) {
@@ -19310,7 +19262,7 @@ var PostQuote = function (_Component) {
                     act: this.state.act,
                     scene: this.state.scene,
                     quote: this.state.quote,
-                    tags: this.state.tags
+                    tags: this.state.tags.split(',')
                 })
             }).then(function () {
                 _this2.resetFields();
@@ -19324,6 +19276,8 @@ var PostQuote = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var required = this.state.act !== "" || this.state.scene !== "";
+
             return _react2.default.createElement(
                 'div',
                 { id: 'quote-post-container' },
@@ -19336,8 +19290,8 @@ var PostQuote = function (_Component) {
                         'Add a quote to the collection'
                     ),
                     _react2.default.createElement('input', { type: 'text', name: 'work', placeholder: 'Henry V', onChange: this.handleChange, value: this.state.work, required: true }),
-                    _react2.default.createElement('input', { type: 'text', name: 'act', placeholder: '3', onChange: this.handleChange, value: this.state.act }),
-                    _react2.default.createElement('input', { type: 'text', name: 'scene', placeholder: '1', onChange: this.handleChange, value: this.state.scene }),
+                    _react2.default.createElement('input', { type: 'text', name: 'act', placeholder: '3', onChange: this.handleChange, value: this.state.act, required: required }),
+                    _react2.default.createElement('input', { type: 'text', name: 'scene', placeholder: '1', onChange: this.handleChange, value: this.state.scene, required: required }),
                     _react2.default.createElement('input', { type: 'text', name: 'quote', placeholder: 'Once more unto the breach, dear friends, once more', onChange: this.handleChange, value: this.state.quote, required: true }),
                     _react2.default.createElement('input', { type: 'text', name: 'tags', placeholder: 'courage, friends, battle, comraderie', onChange: this.handleChange, value: this.state.tags, required: true }),
                     _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Add Quote' })
@@ -19350,6 +19304,226 @@ var PostQuote = function (_Component) {
 }(_react.Component);
 
 exports.default = PostQuote;
+
+/***/ }),
+/* 36 */,
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _QuoteItem = __webpack_require__(38);
+
+var _QuoteItem2 = _interopRequireDefault(_QuoteItem);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Shakespeare Quote App
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React component to display a list of quotes
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+__webpack_require__(39);
+
+var QuoteList = function (_Component) {
+  _inherits(QuoteList, _Component);
+
+  function QuoteList(props) {
+    _classCallCheck(this, QuoteList);
+
+    return _possibleConstructorReturn(this, (QuoteList.__proto__ || Object.getPrototypeOf(QuoteList)).call(this, props));
+  }
+
+  _createClass(QuoteList, [{
+    key: 'render',
+    value: function render() {
+      console.log(this.props.quotes);
+      return this.props.quotes.map(function (quoteQ, index) {
+        console.log(index);
+        return _react2.default.createElement(_QuoteItem2.default, { key: index, quote: quoteQ.quote, work: quoteQ.work, act: quoteQ.act, scene: quoteQ.scene, tags: quoteQ.tags });
+      });
+    }
+  }]);
+
+  return QuoteList;
+}(_react.Component);
+
+exports.default = QuoteList;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Shakespeare Quote App
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React component to display an individual quote
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+__webpack_require__(39);
+
+var QuoteItem = function (_Component) {
+  _inherits(QuoteItem, _Component);
+
+  function QuoteItem(props) {
+    _classCallCheck(this, QuoteItem);
+
+    return _possibleConstructorReturn(this, (QuoteItem.__proto__ || Object.getPrototypeOf(QuoteItem)).call(this, props));
+  }
+
+  _createClass(QuoteItem, [{
+    key: 'displayTags',
+    value: function displayTags(tags) {
+      var tagButtons = tags.map(function (tag, index) {
+        return _react2.default.createElement(
+          'span',
+          { key: index, className: 'tag' },
+          tag
+        );
+      });
+      return tagButtons;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var act = this.props.act === "" ? "" : '(Act ' + this.props.act;
+      var scene = this.props.scene === "" ? "" : ' Scene ' + this.props.act + ')';
+      return _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'span',
+          { className: 'quote' },
+          '"',
+          this.props.quote,
+          '"'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'work' },
+          this.props.work
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'act' },
+          act
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'scene' },
+          scene
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'tags' },
+          'Tags: ',
+          this.displayTags(this.props.tags)
+        )
+      );
+    }
+  }]);
+
+  return QuoteItem;
+}(_react.Component);
+
+exports.default = QuoteItem;
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(40);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(32)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../node_modules/css-loader/index.js!./Quote.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js!./Quote.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(31)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

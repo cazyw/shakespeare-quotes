@@ -1,6 +1,6 @@
 /*
  * Shakespeare Quote App
- * Front-end React form to post data
+ * Front-end React form to post data to the database
  */
 
 
@@ -22,8 +22,8 @@ export default class PostQuote extends Component {
 
         this.submitQuote = this.submitQuote.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.resetFields= this.resetFields.bind(this);
-        }
+        this.resetFields = this.resetFields.bind(this);
+    }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
@@ -51,7 +51,7 @@ export default class PostQuote extends Component {
                 act: this.state.act,
                 scene: this.state.scene,
                 quote: this.state.quote,
-                tags: this.state.tags
+                tags: this.state.tags.split(',')
             })
         })
         .then(() => {
@@ -65,15 +65,17 @@ export default class PostQuote extends Component {
 
     event.preventDefault();
     }
-
+    
     render(){
+        let required = this.state.act !== "" || this.state.scene !== "";
+        
         return(
-            <div id="quote-post-container">
+        <div id="quote-post-container">
             <form id="post-quote" onSubmit={this.submitQuote}>
                 <label>Add a quote to the collection</label>
                 <input type="text" name="work" placeholder="Henry V" onChange={this.handleChange} value={this.state.work} required  />
-                <input type="text" name="act" placeholder="3" onChange={this.handleChange} value={this.state.act} />
-                <input type="text" name="scene" placeholder="1" onChange={this.handleChange} value={this.state.scene} />
+                <input type="text" name="act" placeholder="3" onChange={this.handleChange} value={this.state.act} required={required} />
+                <input type="text" name="scene" placeholder="1" onChange={this.handleChange} value={this.state.scene} required={required} />
                 <input type="text" name="quote" placeholder="Once more unto the breach, dear friends, once more" onChange={this.handleChange} value={this.state.quote} required  />
                 <input type="text" name="tags" placeholder="courage, friends, battle, comraderie" onChange={this.handleChange} value={this.state.tags} required  />
                 <ButtonForm type="Submit" label="Add Quote" />
