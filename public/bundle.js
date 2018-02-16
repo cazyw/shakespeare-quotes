@@ -18993,6 +18993,7 @@ var DisplayQuote = function (_Component) {
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.displayAll = _this.displayAll.bind(_this);
+    _this.showSection = _this.showSection.bind(_this);
     return _this;
   }
 
@@ -19034,14 +19035,25 @@ var DisplayQuote = function (_Component) {
       });
     }
   }, {
+    key: 'showSection',
+    value: function showSection(event) {
+      console.log(document.getElementById('search'));
+      document.getElementById('search').classList.toggle('open');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { id: 'quote-search-container' },
         _react2.default.createElement(
+          'h2',
+          { onClick: this.showSection },
+          'Search for a Quote'
+        ),
+        _react2.default.createElement(
           'form',
-          { id: 'search', onSubmit: this.handleSubmit },
+          { className: '', id: 'search', onSubmit: this.handleSubmit },
           _react2.default.createElement(
             'label',
             null,
@@ -19466,7 +19478,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 15px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nform{\n  max-width: 600px;\n  margin: 30px auto;\n}", ""]);
+exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 15px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nform#search {\n  max-width: 600px;\n  margin: 0;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: 30px auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\ntext-align: center;\ncursor: pointer;\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n}", ""]);
 
 // exports
 
@@ -19531,6 +19543,7 @@ var PostQuote = function (_Component) {
         _this.submitQuote = _this.submitQuote.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         _this.resetFields = _this.resetFields.bind(_this);
+        _this.showSection = _this.showSection.bind(_this);
         return _this;
     }
 
@@ -19584,6 +19597,13 @@ var PostQuote = function (_Component) {
             event.preventDefault();
         }
     }, {
+        key: 'showSection',
+        value: function showSection(event) {
+            console.log(document.getElementById('post-quote'));
+            document.getElementById('post-quote').classList.toggle('open');
+            // document.getElementById('post-quote').classList.toggle('hide');
+        }
+    }, {
         key: 'render',
         value: function render() {
             var required = this.state.act !== "" || this.state.scene !== "";
@@ -19592,8 +19612,13 @@ var PostQuote = function (_Component) {
                 'div',
                 { id: 'quote-post-container' },
                 _react2.default.createElement(
+                    'h2',
+                    { onClick: this.showSection },
+                    'Add a Quote'
+                ),
+                _react2.default.createElement(
                     'form',
-                    { id: 'post-quote', onSubmit: this.submitQuote },
+                    { className: '', id: 'post-quote', onSubmit: this.submitQuote },
                     _react2.default.createElement(
                         'label',
                         { className: 'instruction' },
@@ -19731,7 +19756,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 15px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform{\n  max-width: 600px;\n  margin: 30px auto;\n}", ""]);
+exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 15px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 600px;\n  margin: 0;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: 30px auto;\n  height: 330px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}", ""]);
 
 // exports
 

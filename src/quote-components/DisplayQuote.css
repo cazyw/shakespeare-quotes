@@ -13,7 +13,35 @@ label {
   padding-left: 10px;
 }
 
-form{
+form#search {
   max-width: 600px;
+  margin: 0;
+  height: 0px;
+  overflow: hidden;
+  -webkit-transition: height 0.5s linear;
+  -moz-transition: height 0.5s linear;
+  -ms-transition: height 0.5s linear;
+  -o-transition: height 0.5s linear;
+  transition: height 0.5s linear;
+}
+
+form#search.open {
   margin: 30px auto;
+  height: 150px;
+    -webkit-transition: height 0.5s linear;
+       -moz-transition: height 0.5s linear;
+        -ms-transition: height 0.5s linear;
+         -o-transition: height 0.5s linear;
+            transition: height 0.5s linear;
+}
+
+h2 {
+text-align: center;
+cursor: pointer;
+}
+
+@media (max-width: 378px) {
+  form#search.open {
+    height: 170px;
+  }
 }

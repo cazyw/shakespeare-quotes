@@ -26,6 +26,7 @@ export default class DisplayQuote extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.displayAll = this.displayAll.bind(this);
+    this.showSection = this.showSection.bind(this);
   }
 
   handleChange(event) {
@@ -60,10 +61,16 @@ export default class DisplayQuote extends Component {
     });
   }
 
+  showSection(event) {
+    console.log(document.getElementById('search'));
+    document.getElementById('search').classList.toggle('open');
+  }
+
   render(){
       return(
           <div id="quote-search-container">
-              <form id="search" onSubmit={this.handleSubmit}>
+              <h2 onClick={this.showSection}>Search for a Quote</h2>
+              <form className="" id="search" onSubmit={this.handleSubmit}>
                   <label>Enter search tags, separated by a comma</label>
                   <input type="text" ref="keywords" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
                   <ButtonForm type="Submit" label="Find Quotes" />

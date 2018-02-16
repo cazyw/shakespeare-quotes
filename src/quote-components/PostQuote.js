@@ -24,6 +24,7 @@ export default class PostQuote extends Component {
         this.submitQuote = this.submitQuote.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.resetFields = this.resetFields.bind(this);
+        this.showSection = this.showSection.bind(this);
     }
 
     handleChange(event) {
@@ -67,13 +68,20 @@ export default class PostQuote extends Component {
 
         event.preventDefault();
     }
+
+    showSection(event) {
+        console.log(document.getElementById('post-quote'));
+        document.getElementById('post-quote').classList.toggle('open');
+        // document.getElementById('post-quote').classList.toggle('hide');
+    }
     
     render(){
         let required = this.state.act !== "" || this.state.scene !== "";
         
         return(
         <div id="quote-post-container">
-            <form id="post-quote" onSubmit={this.submitQuote}>
+            <h2 onClick={this.showSection}>Add a Quote</h2>
+            <form className="" id="post-quote" onSubmit={this.submitQuote}>
                 <label className="instruction">Add a quote to the collection</label>
                 <div className="form-row">
                     <div className="form-group col-xs-6">

@@ -22,7 +22,42 @@ label.instruction {
   padding-left: 25px;
 }
 
-form{
+form {
   max-width: 600px;
+  margin: 0;
+  height: 0px;
+  overflow: hidden;
+  -webkit-transition: height 0.5s linear;
+  -moz-transition: height 0.5s linear;
+  -ms-transition: height 0.5s linear;
+  -o-transition: height 0.5s linear;
+  transition: height 0.5s linear;
+}
+
+form.open {
   margin: 30px auto;
+  height: 330px;
+    -webkit-transition: height 0.5s linear;
+       -moz-transition: height 0.5s linear;
+        -ms-transition: height 0.5s linear;
+         -o-transition: height 0.5s linear;
+            transition: height 0.5s linear;
+}
+
+h2 {
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  div.form-group.col-xs-6 {
+    padding-right: 2px;
+  }
+  div.form-group.col-xs-3 {
+    padding: 0px 2px;
+  }
+  div.form-group.col-md-12 {
+    padding-right: 2px;
+  }
+
 }
