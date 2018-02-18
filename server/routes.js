@@ -4,7 +4,7 @@
  */
 
 const express = require('express');
-const Quote = require('../models/quote');
+const {Quote} = require('../models/quote');
 
 const router = express.Router();
 
