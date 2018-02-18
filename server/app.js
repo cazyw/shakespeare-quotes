@@ -10,12 +10,16 @@ const app = express();
 
 // connect to mongodb
 mongoose.connect('mongodb://localhost/shakespeare').catch((error) => {console.log('cannot connect to the database - check: is it running?')});
+const db = mongoose.connection;
+db.once('open', function() {
+  console.log('We are connected to the quotes database!');
+});
 mongoose.Promise = global.Promise;
 
 // log all server calls
 app.use((req, res, next) => {
   const now = new Date().toString();
-  console.log(`\n\t${now}: ${req.method} ${req.url}`);
+  console.log(`\t${now}: ${req.method} ${req.url}`);
   next();
 });
 
@@ -32,6 +36,12 @@ app.use('/api', require('./routes'));
 
 // warning - invalid route
 app.get('*', (req, res, next) => {
+  res.status(404).send({
+    warning: "there's nothing here"
+  });
+});
+
+app.post('*', (req, res, next) => {
   res.status(404).send({
     warning: "there's nothing here"
   });

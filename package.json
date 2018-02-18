@@ -5,8 +5,8 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "mocha",
-    "test-watch": "nodemon --exec 'npm test' & webpack --watch",
+    "test": "mocha --recursive --slow 0",
+    "test-watch": "nodemon --exec 'npm test'",
     "build": "webpack --progress -p",
     "watch:webpack": "webpack --progress --watch",
     "watch:server": "nodemon server/app.js",
