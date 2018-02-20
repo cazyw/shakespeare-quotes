@@ -133,12 +133,13 @@ $ mongod --dbpath ~/data/db/
 Then run the following:
 
 ```
-$ npm test
+$ npm run test-watch
 ```
 
-Note: do not run `npm start` or `npm run watch` at the same time as `npm test` as it will throw an error as they'll both try running a server on the same port. `npm test` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
+Note: do not run `npm start` or `npm run watch` at the same time as `npm run test-watch` as it will throw an error as they'll both try running a server on the same port. `npm run test-watch` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
 
-This is a section that needs working on.
+This section is a work in progress. 
+
 
 ## Discussion
 
@@ -147,6 +148,10 @@ The idea for this project came about because I participate in  a worldwide twitt
 I thought it'd be fun to build an online collection of Shakespeare quotes so I could save the quotes I'd selected each week and tag them with keywords. As themes are sometimes re-used or quotes might be applicable across multiple themes, this would be a way for me to see if any quotes I'd previously used match a theme. 
 
 And it'd be a cool way for me to learn and put into practice routing, APIs, databases (MongoDB), React, forms and testing! An additional step I might add is logins and authentication.
+
+### Setup and Environment
+
+As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case) and delve into more complicated `webpack.config.js` and `package.json` setups. A new step for me in this project was to add a `config.js` file that included different settings for production (push to Heroku), development (locally) and test (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data).
 
 ### Server
 
@@ -176,5 +181,13 @@ The front-end is using `React`. Currently users are able to:
 * display quotes that match a keyword
 
 This section is still being worked on. This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. I'm going through Stephen Grider's course on Udemy [Modern React with Redux](https://www.udemy.com/react-redux/) as a foundation for how to use React but applying it to my own project. Currently my setup is a bit ad-hoc but as I go through this course, I intend to refactor as necessary.
+
+### Testing
+
+This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing
+
+`routes.test.js` sets up a test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, and that getting data from the database returns all data. The next steps will be to test what happens when invalid data is sent. The mongoDB schema will also need to be tested
+
+
 
 ## Contributing

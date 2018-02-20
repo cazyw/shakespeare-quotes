@@ -52,23 +52,23 @@ const validQuotes = [{
 }];
 
 
-before((done) => {
-  mongoose.connect('mongodb://localhost/testDatabase');
-  const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error'));
-  db.once('open', () => {
-    console.log('We are connected to test database!');
-    done();
-  });
-});
+// before((done) => {
+//   mongoose.connect('mongodb://localhost/testDatabase');
+//   const db = mongoose.connection;
+//   db.on('error', console.error.bind(console, 'connection error'));
+//   db.once('open', () => {
+//     console.log('We are connected to test database!');
+//     done();
+//   });
+// });
 
 
-after((done) => {
-  mongoose.connection.db.dropDatabase(() => {
-    console.log('Disconnected from the test database!');
-    mongoose.connection.close(done);
-  });
-});
+// after((done) => {
+//   mongoose.connection.db.dropDatabase(() => {
+//     console.log('Disconnected from the test database!');
+//     mongoose.connection.close(done);
+//   });
+// });
 
 
 

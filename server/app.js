@@ -6,13 +6,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('../config').get(process.env.NODE_ENV);
+
 const app = express();
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/shakespeare').catch((error) => {console.log('cannot connect to the database - check: is it running?')});
+
+
+mongoose.connect(config.database).catch((error) => {console.log('cannot connect to the database - check: is it running?')});
 const db = mongoose.connection;
 db.once('open', function() {
-  console.log('We are connected to the quotes database!');
+  console.log(`We are connected to the ${config.database} database!`);
 });
 mongoose.Promise = global.Promise;
 

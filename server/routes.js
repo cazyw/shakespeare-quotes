@@ -5,6 +5,7 @@
 
 const express = require('express');
 const {Quote} = require('../models/quote');
+const config = require('../config').get(process.env.NODE_ENV);
 
 const router = express.Router();
 

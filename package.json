@@ -4,13 +4,13 @@
   "description": "collection of Shakespeare Quotes",
   "main": "server/app.js",
   "scripts": {
-    "start": "node server/app.js",
-    "test": "mocha --recursive --slow 0",
-    "test-watch": "nodemon --exec 'npm test'",
+    "start": "NODE_ENV=production node server/app.js",
+    "test": "NODE_ENV=test mocha --recursive --slow 0",
+    "test-watch": "NODE_ENV=test nodemon --exec 'npm test' & npm run watch:webpack",
     "build": "webpack --progress -p",
     "watch:webpack": "webpack --progress --watch",
     "watch:server": "nodemon server/app.js",
-    "watch": "npm run watch:webpack & npm run watch:server"
+    "watch": "NODE_ENV=development npm run watch:webpack & npm run watch:server"
   },
   "keywords": [
     "shakespeare",
