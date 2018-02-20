@@ -4,6 +4,8 @@
 
 Create an online collection of Shakespeare quotes. Users can submit quotes and search for quotes that have been tagged with certain keywords
 
+A very very rough version (look and style is in serious need of work) is up and running here: https://shakespeare-sunday.herokuapp.com/
+
 ## Status
 
 Server-side routing mostly completed (working on local server). 
@@ -13,12 +15,20 @@ To do:
 
 * refactor/modularise the front-end React properly
 * delete and modify tags
-* deploy to Heroku and research connecting to mongoDB 
 * include tag suggestions and link tags so they become search terms
 * user login
 * testing
+* add pagination (when displaying quotes)
 
 ## Operating Instructions
+
+Go to https://shakespeare-sunday.herokuapp.com/
+
+You can:
+
+* add quotes
+* search for quotes (via keywords)
+* display all quotes in the database
 
 <img src="" width="450" alt="">
 
