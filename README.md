@@ -151,7 +151,7 @@ And it'd be a cool way for me to learn and put into practice routing, APIs, data
 
 ### Setup and Environment
 
-As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case) and delve into more complicated `webpack.config.js` and `package.json` setups. A new step for me in this project was to add a `config.js` file that included different settings for production (push to Heroku), development (locally) and test (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data).
+As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case) and delve into more complicated `webpack.config.js` and `package.json` setups. A new step for me in this project was to add a `config.js` file that included different settings for production (push to Heroku), development (locally) and test (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data). 
 
 ### Server
 
@@ -172,6 +172,8 @@ In thinking on the model of the data, I looked at the information usually includ
 * Tags / keywords [required]
 
 In future, each quote may be linked to the user posting the quote. 
+
+For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this less-reliable option
 
 ### Display
 
