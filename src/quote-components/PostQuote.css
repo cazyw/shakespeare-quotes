@@ -24,7 +24,7 @@ label.instruction {
 
 form {
   max-width: 600px;
-  margin: 0;
+  margin: auto auto;
   height: 0px;
   overflow: hidden;
   -webkit-transition: height 0.5s linear;
@@ -35,7 +35,7 @@ form {
 }
 
 form.open {
-  margin: 30px auto;
+  margin: auto auto;
   height: 350px;
     -webkit-transition: height 0.5s linear;
        -moz-transition: height 0.5s linear;

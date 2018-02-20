@@ -15,7 +15,7 @@ label {
 
 form#search {
   max-width: 600px;
-  margin: 0;
+  margin: auto auto;
   height: 0px;
   overflow: hidden;
   -webkit-transition: height 0.5s linear;
@@ -26,7 +26,7 @@ form#search {
 }
 
 form#search.open {
-  margin: 30px auto;
+  margin: auto auto;
   height: 150px;
     -webkit-transition: height 0.5s linear;
        -moz-transition: height 0.5s linear;
