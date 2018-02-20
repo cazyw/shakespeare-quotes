@@ -36,7 +36,7 @@ form {
 
 form.open {
   margin: 30px auto;
-  height: 330px;
+  height: 350px;
     -webkit-transition: height 0.5s linear;
        -moz-transition: height 0.5s linear;
         -ms-transition: height 0.5s linear;

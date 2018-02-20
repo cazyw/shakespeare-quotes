@@ -173,7 +173,7 @@ In thinking on the model of the data, I looked at the information usually includ
 
 In future, each quote may be linked to the user posting the quote. 
 
-For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this less-reliable option
+For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this less-reliable option. The `config` file selects the correct database (online, local, test) depending on the `NODE_ENV` setting.
 
 ### Display
 
