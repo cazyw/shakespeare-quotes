@@ -1,7 +1,7 @@
 input[type="text"]{
   display: block;
   width: 100%;
-  margin: 15px 0;
+  margin: 10px 0;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid rgb(221, 221, 221);
@@ -36,7 +36,7 @@ form {
 
 form.open {
   margin: auto auto;
-  height: 350px;
+  height: 330px;
     -webkit-transition: height 0.5s linear;
        -moz-transition: height 0.5s linear;
         -ms-transition: height 0.5s linear;
@@ -47,6 +47,16 @@ form.open {
 h2 {
   text-align: center;
   cursor: pointer;
+}
+
+div.form-group.col-xs-6, 
+div.form-group.col-xs-3,
+div.form-group.col-md-12 {
+  margin-bottom: 10px;
+}
+
+input.form-control {
+  margin-bottom: 5px;
 }
 
 @media (max-width: 500px) {

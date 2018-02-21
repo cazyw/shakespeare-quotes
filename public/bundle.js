@@ -19007,7 +19007,7 @@ var DisplayQuote = function (_Component) {
     value: function handleSubmit(event) {
       var _this2 = this;
 
-      var tags = this.state.tags;
+      var tags = this.state.tags.toLowerCase();
       fetch('/api/quotes?tags=' + tags).then(function (data) {
         return data.json();
       }).then(function (json) {
@@ -19478,7 +19478,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 15px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nform#search {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: auto auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\ntext-align: center;\ncursor: pointer;\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n}", ""]);
+exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nform#search {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: auto auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\ntext-align: center;\ncursor: pointer;\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n}", ""]);
 
 // exports
 
@@ -19585,7 +19585,7 @@ var PostQuote = function (_Component) {
                     act: this.state.act,
                     scene: this.state.scene,
                     quote: this.state.quote,
-                    tags: this.state.tags.split(',')
+                    tags: this.state.tags.toLowerCase().split(',')
                 })
             }).then(function () {
                 _this2.resetFields();
@@ -19756,7 +19756,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 15px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: auto auto;\n  height: 350px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}", ""]);
+exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: auto auto;\n  height: 330px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n}\n\ndiv.form-group.col-xs-6, \ndiv.form-group.col-xs-3,\ndiv.form-group.col-md-12 {\n  margin-bottom: 10px;\n}\n\ninput.form-control {\n  margin-bottom: 5px;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}", ""]);
 
 // exports
 

@@ -34,7 +34,7 @@ export default class DisplayQuote extends Component {
   }
 
   handleSubmit(event) {
-    var tags = this.state.tags;
+    var tags = this.state.tags.toLowerCase();
     fetch('/api/quotes?tags=' + tags)
     .then((data) => {
       return data.json();

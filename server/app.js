@@ -12,7 +12,6 @@ const app = express();
 
 // connect to mongodb
 
-
 mongoose.connect(config.database).catch((error) => {console.log('cannot connect to the database - check: is it running?')});
 const db = mongoose.connection;
 db.once('open', function() {
@@ -20,12 +19,14 @@ db.once('open', function() {
 });
 mongoose.Promise = global.Promise;
 
-// log all server calls
-app.use((req, res, next) => {
-  const now = new Date().toString();
-  console.log(`\t${now}: ${req.method} ${req.url}`);
-  next();
-});
+// log all server calls if in development
+if (process.env.NODE_ENV === 'development'){
+  app.use((req, res, next) => {
+    const now = new Date().toString();
+    console.log(`\t${now}: ${req.method} ${req.url}`);
+    next();
+  });
+}
 
 
 // static files

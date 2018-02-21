@@ -55,7 +55,7 @@ export default class PostQuote extends Component {
                 act: this.state.act,
                 scene: this.state.scene,
                 quote: this.state.quote,
-                tags: this.state.tags.split(',')
+                tags: this.state.tags.toLowerCase().split(',')
             })
         })
         .then(() => {
