@@ -3,8 +3,8 @@ button {
   color: rgb(255, 255, 255);
   border: 0;
   padding: 10px;
-  font-size: 18px;
-  width: 200px;
+  font-size: 1em;
+  width: 150px;
   margin: 0 auto;
   display: block;
   cursor: pointer;

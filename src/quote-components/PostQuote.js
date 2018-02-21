@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ButtonForm from '../button-components/ButtonForm';
-require('./PostQuote.css');
+require('./Forms.css');
 
 export default class PostQuote extends Component {
 
@@ -70,16 +70,14 @@ export default class PostQuote extends Component {
     }
 
     showSection(event) {
-        console.log(document.getElementById('post-quote'));
         document.getElementById('post-quote').classList.toggle('open');
-        // document.getElementById('post-quote').classList.toggle('hide');
     }
     
     render(){
         let required = this.state.act !== "" || this.state.scene !== "";
         
         return(
-        <div id="quote-post-container">
+        <div className="homepage" id="quote-post-container">
             <h2 onClick={this.showSection}>Add a Quote</h2>
             <form className="" id="post-quote" onSubmit={this.submitQuote}>
                 <label className="instruction">Add a quote to the collection</label>

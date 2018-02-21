@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import DisplayQuote from './quote-components/DisplayQuote';
+import SearchQuote from './quote-components/SearchQuote';
 import PostQuote from './quote-components/PostQuote';
 
 export default class Home extends Component {
@@ -8,8 +8,7 @@ export default class Home extends Component {
     return (
       <div className="quote-body">
         <PostQuote />
-        <hr />
-        <DisplayQuote />
+        <SearchQuote />
       </div>
     );
   }

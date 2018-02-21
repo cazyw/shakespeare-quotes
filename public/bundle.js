@@ -433,6 +433,181 @@ module.exports = emptyObject;
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var validateFormat = function validateFormat(format) {};
+
+if (process.env.NODE_ENV !== 'production') {
+  validateFormat = function validateFormat(format) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  };
+}
+
+function invariant(condition, format, a, b, c, d, e, f) {
+  validateFormat(format);
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+}
+
+module.exports = invariant;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+
+
+var emptyFunction = __webpack_require__(2);
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = emptyFunction;
+
+if (process.env.NODE_ENV !== 'production') {
+  var printWarning = function printWarning(format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  warning = function warning(condition, format) {
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.indexOf('Failed Composite propType: ') === 0) {
+      return; // Ignore CompositeComponent proptype check.
+    }
+
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
+}
+
+module.exports = warning;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+function checkDCE() {
+  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+  if (
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
+  ) {
+    return;
+  }
+  if (process.env.NODE_ENV !== 'production') {
+    // This branch is unreachable because this function is only called
+    // in production, but the condition is true only in development.
+    // Therefore if the branch is still here, dead code elimination wasn't
+    // properly applied.
+    // Don't change the message. React DevTools relies on it. Also make sure
+    // this message doesn't occur elsewhere in this function, or it will cause
+    // a false positive.
+    throw new Error('^_^');
+  }
+  try {
+    // Verify that the code above has been dead code eliminated (DCE'd).
+    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
+  } catch (err) {
+    // DevTools shouldn't crash React, no matter what.
+    // We should still report in case we break this code.
+    console.error(err);
+  }
+}
+
+if (process.env.NODE_ENV === 'production') {
+  // DCE check should happen before ReactDOM bundle executes so that
+  // DevTools can report bad minification during injection.
+  checkDCE();
+  module.exports = __webpack_require__(24);
+} else {
+  module.exports = __webpack_require__(27);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 /*
@@ -514,7 +689,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 6 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -896,181 +1071,6 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var validateFormat = function validateFormat(format) {};
-
-if (process.env.NODE_ENV !== 'production') {
-  validateFormat = function validateFormat(format) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  };
-}
-
-function invariant(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-}
-
-module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-var emptyFunction = __webpack_require__(2);
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = emptyFunction;
-
-if (process.env.NODE_ENV !== 'production') {
-  var printWarning = function printWarning(format) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    var argIndex = 0;
-    var message = 'Warning: ' + format.replace(/%s/g, function () {
-      return args[argIndex++];
-    });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-
-  warning = function warning(condition, format) {
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.indexOf('Failed Composite propType: ') === 0) {
-      return; // Ignore CompositeComponent proptype check.
-    }
-
-    if (!condition) {
-      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      printWarning.apply(undefined, [format].concat(args));
-    }
-  };
-}
-
-module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-function checkDCE() {
-  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
-  if (
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
-  ) {
-    return;
-  }
-  if (process.env.NODE_ENV !== 'production') {
-    // This branch is unreachable because this function is only called
-    // in production, but the condition is true only in development.
-    // Therefore if the branch is still here, dead code elimination wasn't
-    // properly applied.
-    // Don't change the message. React DevTools relies on it. Also make sure
-    // this message doesn't occur elsewhere in this function, or it will cause
-    // a false positive.
-    throw new Error('^_^');
-  }
-  try {
-    // Verify that the code above has been dead code eliminated (DCE'd).
-    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
-  } catch (err) {
-    // DevTools shouldn't crash React, no matter what.
-    // We should still report in case we break this code.
-    console.error(err);
-  }
-}
-
-if (process.env.NODE_ENV === 'production') {
-  // DCE check should happen before ReactDOM bundle executes so that
-  // DevTools can report bad minification during injection.
-  checkDCE();
-  module.exports = __webpack_require__(24);
-} else {
-  module.exports = __webpack_require__(27);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1085,8 +1085,8 @@ if (process.env.NODE_ENV === 'production') {
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(7);
-  var warning = __webpack_require__(8);
+  var invariant = __webpack_require__(5);
+  var warning = __webpack_require__(6);
   var ReactPropTypesSecret = __webpack_require__(23);
   var loggedTypeFailures = {};
 }
@@ -1518,7 +1518,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -1568,7 +1568,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -1616,13 +1616,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _DisplayQuote = __webpack_require__(32);
+var _SearchQuote = __webpack_require__(42);
 
-var _DisplayQuote2 = _interopRequireDefault(_DisplayQuote);
+var _SearchQuote2 = _interopRequireDefault(_SearchQuote);
 
 var _PostQuote = __webpack_require__(41);
 
@@ -1652,8 +1652,7 @@ var Home = function (_Component) {
         'div',
         { className: 'quote-body' },
         _react2.default.createElement(_PostQuote2.default, null),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(_DisplayQuote2.default, null)
+        _react2.default.createElement(_SearchQuote2.default, null)
       );
     }
   }]);
@@ -1718,8 +1717,8 @@ if (process.env.NODE_ENV !== "production") {
 
 var _assign = __webpack_require__(3);
 var emptyObject = __webpack_require__(4);
-var invariant = __webpack_require__(7);
-var warning = __webpack_require__(8);
+var invariant = __webpack_require__(5);
+var warning = __webpack_require__(6);
 var emptyFunction = __webpack_require__(2);
 var checkPropTypes = __webpack_require__(10);
 
@@ -3393,8 +3392,8 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(0);
-var invariant = __webpack_require__(7);
-var warning = __webpack_require__(8);
+var invariant = __webpack_require__(5);
+var warning = __webpack_require__(6);
 var ExecutionEnvironment = __webpack_require__(11);
 var _assign = __webpack_require__(3);
 var emptyFunction = __webpack_require__(2);
@@ -18929,165 +18928,16 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(9);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _ButtonForm = __webpack_require__(17);
-
-var _ButtonForm2 = _interopRequireDefault(_ButtonForm);
-
-var _ButtonDisplay = __webpack_require__(35);
-
-var _ButtonDisplay2 = _interopRequireDefault(_ButtonDisplay);
-
-var _QuoteList = __webpack_require__(36);
-
-var _QuoteList2 = _interopRequireDefault(_QuoteList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Shakespeare Quote App
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React Component: Display Quote
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Option to:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  - displays all quotes
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  - display quotes that match certain keywords
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-__webpack_require__(39);
-
-var DisplayQuote = function (_Component) {
-  _inherits(DisplayQuote, _Component);
-
-  function DisplayQuote(props) {
-    _classCallCheck(this, DisplayQuote);
-
-    var _this = _possibleConstructorReturn(this, (DisplayQuote.__proto__ || Object.getPrototypeOf(DisplayQuote)).call(this, props));
-
-    _this.state = {
-      tags: "",
-      quotes: []
-    };
-
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.displayAll = _this.displayAll.bind(_this);
-    _this.showSection = _this.showSection.bind(_this);
-    return _this;
-  }
-
-  _createClass(DisplayQuote, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState({ tags: event.target.value });
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      var _this2 = this;
-
-      var tags = this.state.tags.toLowerCase();
-      fetch('/api/quotes?tags=' + tags).then(function (data) {
-        return data.json();
-      }).then(function (json) {
-        _this2.setState({
-          quotes: json
-        });
-      });
-      event.preventDefault();
-    }
-
-    // display all quotes in the database
-
-  }, {
-    key: 'displayAll',
-    value: function displayAll(event) {
-      var _this3 = this;
-
-      console.log('stuff');
-      fetch('/api/quotes/').then(function (data) {
-        return data.json();
-      }).then(function (json) {
-        _this3.setState({
-          quotes: json
-        });
-      });
-    }
-  }, {
-    key: 'showSection',
-    value: function showSection(event) {
-      console.log(document.getElementById('search'));
-      document.getElementById('search').classList.toggle('open');
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { id: 'quote-search-container' },
-        _react2.default.createElement(
-          'h2',
-          { onClick: this.showSection },
-          'Search for a Quote'
-        ),
-        _react2.default.createElement(
-          'form',
-          { className: '', id: 'search', onSubmit: this.handleSubmit },
-          _react2.default.createElement(
-            'label',
-            null,
-            'Enter search tags, separated by a comma'
-          ),
-          _react2.default.createElement('input', { type: 'text', ref: 'keywords', placeholder: 'courage, family', onChange: this.handleChange, value: this.state.tags, required: true }),
-          _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Find Quotes' })
-        ),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(_ButtonDisplay2.default, { label: 'Display All', className: 'button-display-all', displayAllQuotes: this.displayAll }),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(_QuoteList2.default, { quotes: this.state.quotes })
-        )
-      );
-    }
-  }]);
-
-  return DisplayQuote;
-}(_react.Component);
-
-exports.default = DisplayQuote;
-
-/***/ }),
+/* 32 */,
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
 // module
-exports.push([module.i, "button {\n  background: rgb(85, 85, 85);\n  color: rgb(255, 255, 255);\n  border: 0;\n  padding: 10px;\n  font-size: 18px;\n  width: 200px;\n  margin: 0 auto;\n  display: block;\n  cursor: pointer;\n}\n\nbutton:focus {\n  outline-color: rgb(85, 85, 85);\n  outline-width: 0px;\n}\n", ""]);
+exports.push([module.i, "button {\n  background: rgb(85, 85, 85);\n  color: rgb(255, 255, 255);\n  border: 0;\n  padding: 10px;\n  font-size: 1em;\n  width: 150px;\n  margin: 0 auto;\n  display: block;\n  cursor: pointer;\n}\n\nbutton:focus {\n  outline-color: rgb(85, 85, 85);\n  outline-width: 0px;\n}\n", ""]);
 
 // exports
 
@@ -19295,9 +19145,7 @@ var QuoteList = function (_Component) {
   _createClass(QuoteList, [{
     key: 'render',
     value: function render() {
-      console.log(this.props.quotes);
       return this.props.quotes.map(function (quoteQ, index) {
-        console.log(index);
         return _react2.default.createElement(_QuoteItem2.default, { key: index, quote: quoteQ.quote, work: quoteQ.work, act: quoteQ.act, scene: quoteQ.scene, tags: quoteQ.tags });
       });
     }
@@ -19409,7 +19257,7 @@ exports.default = QuoteItem;
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -19438,13 +19286,13 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../../node_modules/css-loader/index.js!./DisplayQuote.css", function() {
-		var newContent = require("!!../../node_modules/css-loader/index.js!./DisplayQuote.css");
+	module.hot.accept("!!../../node_modules/css-loader/index.js!./Forms.css", function() {
+		var newContent = require("!!../../node_modules/css-loader/index.js!./Forms.css");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -19473,12 +19321,12 @@ if(false) {
 /* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
 // module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nform#search {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: auto auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\ntext-align: center;\ncursor: pointer;\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n}", ""]);
+exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: auto auto;\n  height: 330px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\n\nform#search {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: auto auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n  font-size: 1.5em;\n  margin: 10px auto;\n}\n\nh2:hover {\n  color: rgb(51, 122, 183);\n  font-weight: 700;\n}\n\ndiv.form-group.col-xs-6, \ndiv.form-group.col-xs-3,\ndiv.form-group.col-md-12 {\n  margin-bottom: 10px;\n}\n\ninput.form-control {\n  margin-bottom: 5px;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n\n  h2 {\n    font-size: 1em;\n  }\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -19500,7 +19348,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(7);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -19522,7 +19370,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Form that validates data and then posts to the database
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-__webpack_require__(42);
+__webpack_require__(39);
 
 var PostQuote = function (_Component) {
     _inherits(PostQuote, _Component);
@@ -19599,9 +19447,7 @@ var PostQuote = function (_Component) {
     }, {
         key: 'showSection',
         value: function showSection(event) {
-            console.log(document.getElementById('post-quote'));
             document.getElementById('post-quote').classList.toggle('open');
-            // document.getElementById('post-quote').classList.toggle('hide');
         }
     }, {
         key: 'render',
@@ -19610,7 +19456,7 @@ var PostQuote = function (_Component) {
 
             return _react2.default.createElement(
                 'div',
-                { id: 'quote-post-container' },
+                { className: 'homepage', id: 'quote-post-container' },
                 _react2.default.createElement(
                     'h2',
                     { onClick: this.showSection },
@@ -19701,65 +19547,230 @@ exports.default = PostQuote;
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-var content = __webpack_require__(43);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
+"use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var options = {"hmr":true}
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-options.transform = transform
-options.insertInto = undefined;
+var _react = __webpack_require__(0);
 
-var update = __webpack_require__(6)(content, options);
+var _react2 = _interopRequireDefault(_react);
 
-if(content.locals) module.exports = content.locals;
+var _reactDom = __webpack_require__(7);
 
-if(false) {
-	module.hot.accept("!!../../node_modules/css-loader/index.js!./PostQuote.css", function() {
-		var newContent = require("!!../../node_modules/css-loader/index.js!./PostQuote.css");
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+var _ButtonForm = __webpack_require__(17);
 
-		var locals = (function(a, b) {
-			var key, idx = 0;
+var _ButtonForm2 = _interopRequireDefault(_ButtonForm);
 
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
+var _ButtonDisplay = __webpack_require__(35);
 
-			for(key in b) idx--;
+var _ButtonDisplay2 = _interopRequireDefault(_ButtonDisplay);
 
-			return idx === 0;
-		}(content.locals, newContent.locals));
+var _DisplayQuotes = __webpack_require__(43);
 
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+var _DisplayQuotes2 = _interopRequireDefault(_DisplayQuotes);
 
-		update(newContent);
-	});
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.hot.dispose(function() { update(); });
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Shakespeare Quote App
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React Component: Search Quote
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+__webpack_require__(39);
+
+var SearchQuote = function (_Component) {
+  _inherits(SearchQuote, _Component);
+
+  function SearchQuote(props) {
+    _classCallCheck(this, SearchQuote);
+
+    var _this = _possibleConstructorReturn(this, (SearchQuote.__proto__ || Object.getPrototypeOf(SearchQuote)).call(this, props));
+
+    _this.state = {
+      tags: "",
+      quotes: []
+    };
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.showSection = _this.showSection.bind(_this);
+    return _this;
+  }
+
+  _createClass(SearchQuote, [{
+    key: 'handleChange',
+    value: function handleChange(event) {
+      this.setState({ tags: event.target.value });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      var tags = this.state.tags.toLowerCase();
+      fetch('/api/quotes?tags=' + tags).then(function (data) {
+        return data.json();
+      }).then(function (json) {
+        _this2.setState({
+          quotes: json
+        });
+      });
+      event.preventDefault();
+    }
+  }, {
+    key: 'showSection',
+    value: function showSection(event) {
+      document.getElementById('search').classList.toggle('open');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { id: 'quote-search-container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'homepage' },
+          _react2.default.createElement(
+            'h2',
+            { onClick: this.showSection },
+            'Search for a Quote'
+          ),
+          _react2.default.createElement(
+            'form',
+            { className: '', id: 'search', onSubmit: this.handleSubmit },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Enter search tags, separated by a comma'
+            ),
+            _react2.default.createElement('input', { type: 'text', ref: 'keywords', placeholder: 'courage, family', onChange: this.handleChange, value: this.state.tags, required: true }),
+            _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Find Quotes' })
+          )
+        ),
+        _react2.default.createElement(_DisplayQuotes2.default, { quotes: this.state.quotes })
+      );
+    }
+  }]);
+
+  return SearchQuote;
+}(_react.Component);
+
+exports.default = SearchQuote;
 
 /***/ }),
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
-// imports
+"use strict";
 
 
-// module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: auto auto;\n  height: 330px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n}\n\ndiv.form-group.col-xs-6, \ndiv.form-group.col-xs-3,\ndiv.form-group.col-md-12 {\n  margin-bottom: 10px;\n}\n\ninput.form-control {\n  margin-bottom: 5px;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}", ""]);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-// exports
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(7);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _QuoteList = __webpack_require__(36);
+
+var _QuoteList2 = _interopRequireDefault(_QuoteList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Shakespeare Quote App
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Front-end React Component: Display Quotes
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Option to:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  - displays all quotes
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  - display quotes that match certain keywords
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+__webpack_require__(39);
+
+var DisplayQuotes = function (_Component) {
+  _inherits(DisplayQuotes, _Component);
+
+  function DisplayQuotes(props) {
+    _classCallCheck(this, DisplayQuotes);
+
+    var _this = _possibleConstructorReturn(this, (DisplayQuotes.__proto__ || Object.getPrototypeOf(DisplayQuotes)).call(this, props));
+
+    _this.state = {
+      quotes: []
+    };
+
+    _this.displayAll = _this.displayAll.bind(_this);
+    return _this;
+  }
+
+  _createClass(DisplayQuotes, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(newProps) {
+      this.setState({ quotes: newProps.quotes });
+    }
+
+    // display all quotes in the database
+
+  }, {
+    key: 'displayAll',
+    value: function displayAll(event) {
+      var _this2 = this;
+
+      fetch('/api/quotes/').then(function (data) {
+        return data.json();
+      }).then(function (json) {
+        _this2.setState({
+          quotes: json
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'homepage' },
+        _react2.default.createElement(
+          'h2',
+          { onClick: this.displayAll },
+          'Display Quotes'
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(_QuoteList2.default, { quotes: this.state.quotes })
+        )
+      );
+    }
+  }]);
+
+  return DisplayQuotes;
+}(_react.Component);
+
+exports.default = DisplayQuotes;
 
 /***/ })
 /******/ ]);

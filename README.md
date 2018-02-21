@@ -40,23 +40,7 @@ You can:
 * Postman account if you wish to try posting to the service
 * MongoDB and Robomongo
 
-Other packages installed via npm
-* "body-parser": "^1.18.2",
-* "express": "^4.16.2",
-* "mongoose": "^5.0.3",
-* "react": "^16.2.0",
-* "react-dom": "^16.2.0"
-* "babel-core": "^6.26.0",
-* "babel-loader": "^7.1.2",
-* "babel-preset-env": "^1.6.1",
-* "babel-preset-react": "^6.24.1",
-* "chai": "^4.1.2",
-* "css-loader": "^0.28.9",
-* "mocha": "^5.0.0",
-* "nodemon": "^1.14.12",
-* "style-loader": "^0.20.1",
-* "supertest": "^3.0.0",
-* "webpack": "^3.10.0"
+Check `package.json` for other packages installed
 
 ## Application Installation Instructions
 
@@ -121,9 +105,9 @@ src/
       |- Button.css
   |- quote-components/
       |- PostQuote.js
-      |- PostQuote.css
-      |- DisplayQuote.js
-      |- DisplayQuote.css
+      |- SearchQuote.js
+      |- DisplayQuotes.js
+      |- Forms.css
       |- QuoteList.js
       |- QuoteItem.js
       |- Quote.css
@@ -157,7 +141,7 @@ The idea for this project came about because I participate in  a worldwide twitt
 
 I thought it'd be fun to build an online collection of Shakespeare quotes so I could save the quotes I'd selected each week and tag them with keywords. As themes are sometimes re-used or quotes might be applicable across multiple themes, this would be a way for me to see if any quotes I'd previously used match a theme. 
 
-And it'd be a cool way for me to learn and put into practice routing, APIs, databases (MongoDB), React, forms and testing! An additional step I might add is logins and authentication.
+And it'd be a cool way for me to learn and put into practice routing, Express, APIs, databases (MongoDB), React, forms and testing! An additional step I might add is logins and authentication.
 
 ### Setup and Environment
 
@@ -203,3 +187,4 @@ This is an ongoing work in progress as I learn how to do testing with APIs and d
 
 
 ## Contributing
+Carol Wong

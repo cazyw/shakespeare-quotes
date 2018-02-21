@@ -4,10 +4,9 @@ body{
   background: rgb(219, 212, 197);
   margin: 10px 30px;
 }
-#homepage{
+.homepage{
   max-width: 800px;
-  margin: 60px auto;
-  margin-top: 30px;
+  margin: 20px auto;
   padding: 10px 20px;
   background: rgba(253, 253, 253, 0.401);
   box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
@@ -25,7 +24,15 @@ body{
 }
 #homepage h1{
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
+@media (max-width: 378px) {
+  h1.title {
+    font-size: 2em;
+  }
+  h2.sub-title {
+    font-size: 1em;
+  }
+}
 
