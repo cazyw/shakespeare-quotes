@@ -1,3 +1,5 @@
+'use strict';
+
 const config = {
   production: {
     database: `${process.env.MONGODB_URI}`

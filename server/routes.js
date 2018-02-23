@@ -2,6 +2,7 @@
  * Shakespeare Quote App
  * Route handling
  */
+'use strict';
 
 const express = require('express');
 const {Quote} = require('../models/quote');

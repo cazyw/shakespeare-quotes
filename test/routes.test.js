@@ -3,6 +3,7 @@
  * Shakespeare Quote App
  * Testing routes.js (via app.js)
  */
+'use strict';
 
 const expect = require('chai').expect;
 const request = require('supertest');
@@ -51,78 +52,76 @@ const validQuotes = [{
   tags: ["death", "battle", "war"]
 }];
 
-
-// before((done) => {
-//   mongoose.connect('mongodb://localhost/testDatabase');
-//   const db = mongoose.connection;
-//   db.on('error', console.error.bind(console, 'connection error'));
-//   db.once('open', () => {
-//     console.log('We are connected to test database!');
-//     done();
-//   });
-// });
+const invalidQuote = {
+  work: "Henry V",
+  act: "4",
+  quote: "I am afeard there are few die well that die in a battle...",
+  tags: ["death", "battle", "war"]
+}
 
 
-// after((done) => {
-//   mongoose.connection.db.dropDatabase(() => {
-//     console.log('Disconnected from the test database!');
-//     mongoose.connection.close(done);
-//   });
-// });
+describe('Routes', () => {
 
-
-
-describe('GET /api/quotes', () => {
   beforeEach((done) => {
-    console.log('running delete');
+    //console.log('\t-- deleting database');
     Quote.remove({})
         .then(() => {
           return Quote.insertMany(quotes);
         })
         .then(() => done());
   });
-  it('should return all quotes', (done) => {
-    request(app)
-    .get('/api/quotes')
-    .expect(200)
-    .expect((res) => {
-      expect(res.body).to.have.lengthOf(3);
-      expect(res.body[0].work).to.equal(quotes[0].work);
-    })
-    .end((err) => {
-      if (err) return done(err);
-      done();
-    })
-  });
-});
 
-describe('POST /api/quotes', () => {
-  beforeEach((done) => {
-    console.log('running delete');
-    Quote.remove({})
-        .then(() => {
-          return Quote.insertMany(quotes);
-        })
-        .then(() => done());
-  });
-  it('should create a valid quote with valid data', (done) => {
-    request(app)
-    .post('/api/quotes')
-    .send(validQuotes[0])
-    .expect(200)
-    .expect((res) => {
-      expect(res.body.work).to.equal(validQuotes[0].work)
-    })
-    .end((err, res) => {
-      if (err) return done(err);
-
-      Quote.find().then((quotes) => {
-        expect(quotes).to.have.lengthOf(4);
-        expect(quotes[3].quote).to.equal(validQuotes[0].quote);
+  describe('GET /api/quotes', () => {
+    
+    it('should return all quotes', (done) => {
+      request(app)
+      .get('/api/quotes')
+      .expect(200)
+      .end((err, res) => {
+        expect(res.body).to.have.lengthOf(3);
+        expect(res.body[0].work).to.equal(quotes[0].work);
+        if (err) return done(err);
         done();
-      }).catch((e) => done(e));
-      
+      })
     });
   });
-});
 
+  describe('POST /api/quotes', () => {
+
+    it('should create a quote with valid data', (done) => {
+      request(app)
+      .post('/api/quotes')
+      .send(validQuotes[0])
+      .expect(200)
+      .end((err, res) => {
+        expect(res.body.work).to.equal(validQuotes[0].work)
+        if (err) return done(err);
+
+        Quote.find().then((quotes) => {
+          expect(quotes).to.have.lengthOf(4);
+          expect(quotes[3].quote).to.equal(validQuotes[0].quote);
+          done();
+        }).catch((e) => done(e));
+        
+      });
+    });
+
+    it('should not create a quote with invalid data', (done) => {
+      request(app)
+      .post('/api/quotes')
+      .send(invalidQuote)
+      .expect(422)
+      .end((err, res) => {
+        expect(res.body).to.have.key('error')
+        if (err) return done(err);
+
+        Quote.find().then((quotes) => {
+          expect(quotes).to.have.lengthOf(3);
+          done();
+        }).catch((e) => done(e));
+      })
+    });
+
+  });
+
+});
