@@ -11,14 +11,14 @@ require('./Quote.css');
 
 export default class QuoteList extends Component {
   constructor(props){
-  super(props);  
+    super(props);  
   }
 
   render(){
     return this.props.quotes.map((quoteQ, index) => {
       return(
-          <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} />
-      )
+        <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} />
+      );
     });
   }
 }
