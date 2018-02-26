@@ -44,7 +44,7 @@ router.post('/quotes', (req, res, next) => {
 // update a quote in the db
 router.put('/quotes/:id', (req, res, next) => {
   Quote.findByIdAndUpdate({_id: req.params.id}, req.body)
-    .then((quote) => {
+    .then(() => {
       Quote.findOne({_id: req.params.id})
         .then((quote) => {
           res.send(quote);
@@ -63,7 +63,5 @@ router.delete('/quotes/:id', (req, res, next) => {
     })
     .catch(next); // passes error to app.js
 });
-
-
 
 module.exports = router;

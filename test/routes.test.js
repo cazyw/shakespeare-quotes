@@ -93,12 +93,11 @@ const invalidQuote = [
 
 ];
 
-
 describe('Routes', () => {
   
   before((done) => {
     if(!mongoose.connection.readyState) {
-      mongoose.conndect(MONGO_URI);
+      mongoose.connect(MONGO_URI);
     }
     done();
   });

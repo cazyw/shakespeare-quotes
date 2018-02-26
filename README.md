@@ -182,9 +182,9 @@ This section is still being worked on. This is my first real dive into React so 
 
 This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing
 
-`routes.test.js` sets up a test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, and that getting data from the database returns all data. The next steps will be to test what happens when invalid data is sent. The mongoDB schema will also need to be tested
+`routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, and that getting data from the database returns all data. The next steps will be to test what happens when invalid data is sent. The mongoDB schema will also need to be tested
 
-
+`quotes.test.js` tests the MongoDB/mongoose schema.
 
 ## Contributing
 Carol Wong
