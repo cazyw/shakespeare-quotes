@@ -130,7 +130,7 @@ Then run the following:
 $ npm run test-watch
 ```
 
-Note: do not run `npm start` or `npm run watch` at the same time as `npm run test-watch` as it will throw an error as they'll both try running a server on the same port. `npm run test-watch` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
+Note: do not run the other scripts at the same time as `npm run test-watch` as it will throw an error as multiple scripts will try running multiple servers on the same port. `npm run test-watch` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
 
 This section is a work in progress. 
 
@@ -145,7 +145,11 @@ And it'd be a cool way for me to learn and put into practice routing, Express, A
 
 ### Setup and Environment
 
-As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case) and delve into more complicated `webpack.config.js` and `package.json` setups. A new step for me in this project was to add a `config.js` file that included different settings for production (push to Heroku), development (locally) and test (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data). 
+As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case) and delve into more complicated `webpack.config.js` and `package.json` setups . It was a challenge to get the scripts watching for various changes without throwing errors due to existing servers and schemas (mostly during testing). I learnt that `&` runs scripts concurrently and `&&` runs them sequentially. 
+
+A new step for me in this project was to add a `config.js` file that included different settings for production (push to Heroku), development (locally) and testing (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data). 
+
+I also used ESLint in this project and am getting to know some of the settings and configuration options. My biggest amendment was switching to single-quotes as I'd been using a mix throughout my project.
 
 ### Server
 
@@ -165,6 +169,7 @@ In thinking on the model of the data, I looked at the information usually includ
 * The quote itself [required]
 * Tags / keywords [required]
 
+At the moment there's not a lot of deep validation (e.g. checking whether the work/act/scene is correct).
 In future, each quote may be linked to the user posting the quote. 
 
 For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this less-reliable option. The `config` file selects the correct database (online, local, test) depending on the `NODE_ENV` setting.
@@ -180,9 +185,9 @@ This section is still being worked on. This is my first real dive into React so 
 
 ### Testing
 
-This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing
+This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing.
 
-`routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, and that getting data from the database returns all data. The next steps will be to test what happens when invalid data is sent. The mongoDB schema will also need to be tested
+`routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data. 
 
 `quotes.test.js` tests the MongoDB/mongoose schema.
 
