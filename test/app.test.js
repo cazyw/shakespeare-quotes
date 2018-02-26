@@ -10,97 +10,97 @@ const request = require('supertest');
 const {app} = require('../server/app');
 
 const quote = {
-  work: "The Taming of the Shrew",
-  act: "1",
-  scene: "2",
-  quote: "O this learning, what a thing it is!",
-  tags: ["learning", "education", "teaching"]
-}
+  work: 'The Taming of the Shrew',
+  act: '1',
+  scene: '2',
+  quote: 'O this learning, what a thing it is!',
+  tags: ['learning', 'education', 'teaching']
+};
 
-const warningOutput = { warning: "there's nothing here" };
+const warningOutput = { warning: 'there\'s nothing here' };
 
 describe('App', () => {
 
   describe('/GET ', () => {
     it('should return status 200 and render html on /', (done) => {
       request(app)
-      .get('/')
-      .set('Accept', 'text/html')
-      .expect(200)
-      .expect('Content-Type', /text\/html/)
-      .expect(/DOCTYPE html/)
-      .end(done)
+        .get('/')
+        .set('Accept', 'text/html')
+        .expect(200)
+        .expect('Content-Type', /text\/html/)
+        .expect(/DOCTYPE html/)
+        .end(done);
     });
 
     it('should return status 404 on /api', (done) => {
       request(app)
-      .get('/api')
-      .expect(404)
-      .expect((res) => {
-        expect(res.body).to.be.an('object').to.deep.include(warningOutput)
-      })
-      .end((err, res) => {
-        if (err) return done(err);
-        done();
-      })
+        .get('/api')
+        .expect(404)
+        .expect((res) => {
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
     });
 
     it('should return status 404 on /random', (done) => {
       request(app)
-      .get('/random')
-      .expect(404)
-      .expect('Content-Type', /json/)
-      .expect((res) => {
-        expect(res.body).to.be.an('object').to.deep.include(warningOutput)
-      })
-      .end((err, res) => {
-        if (err) return done(err);
-        done();
-      })
+        .get('/random')
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
     });
   });
 
   describe('/POST ', () => {
     it('should return status 404 on /', (done) => {
       request(app)
-      .post('/')
-      .send(quote)
-      .expect(404)
-      .expect((res) => {
-        expect(res.body).to.be.an('object').to.deep.include(warningOutput)
-      })
-      .end((err) => {
-        if(err) return done(err);
-        done();
-      })
+        .post('/')
+        .send(quote)
+        .expect(404)
+        .expect((res) => {
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+        })
+        .end((err) => {
+          if(err) return done(err);
+          done();
+        });
     });
 
     it('should return status 404 on /api', (done) => {
       request(app)
-      .post('/api')
-      .send(quote)
-      .expect(404)
-      .expect((res) => {
-        expect(res.body).to.be.an('object').to.deep.include(warningOutput)
-      })
-      .end((err) => {
-        if(err) return done(err);
-        done();
-      })
+        .post('/api')
+        .send(quote)
+        .expect(404)
+        .expect((res) => {
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+        })
+        .end((err) => {
+          if(err) return done(err);
+          done();
+        });
     });
 
     it('should return status 404 on /random', (done) => {
       request(app)
-      .post('/random')
-      .send(quote)
-      .expect(404)
-      .expect((res) => {
-        expect(res.body).to.be.an('object').to.deep.include(warningOutput)
-      })
-      .end((err) => {
-        if(err) return done(err);
-        done();
-      })
+        .post('/random')
+        .send(quote)
+        .expect(404)
+        .expect((res) => {
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+        })
+        .end((err) => {
+          if(err) return done(err);
+          done();
+        });
     });
   });
 });

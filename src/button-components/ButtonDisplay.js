@@ -5,7 +5,14 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 require('./Button.css');
+
+ButtonDisplay.propTypes = {
+  className: PropTypes.string,
+  displayAllQuotes: PropTypes.func,
+  label: PropTypes.string
+};
 
 export default class ButtonDisplay extends Component {
   parentFunction() {

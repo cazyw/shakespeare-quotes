@@ -7,7 +7,12 @@
 
 import React, { Component } from 'react';
 import QuoteItem from './QuoteItem';
+import PropTypes from 'prop-types';
 require('./Quote.css');
+
+QuoteList.propTypes = {
+  quotes: PropTypes.array
+};
 
 export default class QuoteList extends Component {
   constructor(props){

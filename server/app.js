@@ -42,13 +42,13 @@ app.use('/api', require('./routes'));
 // warning - invalid route
 app.get('*', (req, res, next) => {
   res.status(404).send({
-    warning: "there's nothing here"
+    warning: 'there\'s nothing here'
   });
 });
 
 app.post('*', (req, res, next) => {
   res.status(404).send({
-    warning: "there's nothing here"
+    warning: 'there\'s nothing here'
   });
 });
 

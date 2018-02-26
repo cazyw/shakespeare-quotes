@@ -5,9 +5,9 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "NODE_ENV=test mocha --recursive --watch --slow 0",
-    "test-watch": "NODE_ENV=test nodemon --exec 'npm test' & npm run watch:webpack",
-    "build": "webpack --progress -p",
+    "test": "NODE_ENV=test mocha --recursive --slow 0",
+    "test-watch": "NODE_ENV=test npm run watch:webpack & nodemon --exec 'npm test'",
+    "build": "webpack --progress",
     "watch:webpack": "webpack --progress --watch",
     "watch:server": "nodemon server/app.js",
     "watch": "NODE_ENV=development npm run watch:webpack & npm run watch:server"
@@ -22,6 +22,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^5.0.3",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },

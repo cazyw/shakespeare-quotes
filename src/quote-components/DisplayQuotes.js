@@ -7,7 +7,6 @@
  */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import QuoteList from './QuoteList';
 require('./Forms.css');
 
@@ -27,16 +26,16 @@ export default class DisplayQuotes extends Component {
   }
 
   // display all quotes in the database
-  displayAll(event){
+  displayAll(){
     fetch('/api/quotes/')
-    .then((data) => {
-      return data.json();
-    })
-    .then((json) => {
-      this.setState({
-        quotes: json
+      .then((data) => {
+        return data.json();
+      })
+      .then((json) => {
+        this.setState({
+          quotes: json
+        });
       });
-    });
   }
 
   render() {
@@ -45,6 +44,6 @@ export default class DisplayQuotes extends Component {
         <h2 onClick={this.displayAll}>Display Quotes</h2>
         <ul><QuoteList quotes={this.state.quotes} /></ul>
       </div>
-    )
+    );
   }
 }

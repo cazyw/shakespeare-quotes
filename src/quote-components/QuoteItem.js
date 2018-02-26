@@ -6,7 +6,16 @@
 
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 require('./Quote.css');
+
+QuoteItem.propTypes = {
+  work: PropTypes.string,
+  act: PropTypes.string,
+  scene: PropTypes.string,
+  quote: PropTypes.string,
+  tags: PropTypes.array,
+};
 
 export default class QuoteItem extends Component {
   constructor(props){
@@ -31,7 +40,7 @@ export default class QuoteItem extends Component {
         <span className='scene'>{scene}</span>    
         <span className='tags'>Tags: {this.displayTags(this.props.tags)}</span>      
       </li>
-    )
+    );
   }
 }
 

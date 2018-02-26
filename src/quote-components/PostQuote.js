@@ -5,7 +5,6 @@
  */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import ButtonForm from '../button-components/ButtonForm';
 require('./Forms.css');
 
@@ -14,10 +13,10 @@ export default class PostQuote extends Component {
   constructor(props){
     super(props);
     this.state = {
-      work: "",
-      act: "",
-      scene: "",
-      quote: "",
+      work: '',
+      act: '',
+      scene: '',
+      quote: '',
       tags: []
     };
 
@@ -34,11 +33,11 @@ export default class PostQuote extends Component {
   // reset fields if sucessfully posted to the dataabse
   resetFields(){
     this.setState({
-      work: "",
-      act: "",
-      scene: "",
-      quote: "",
-      tags: ""
+      work: '',
+      act: '',
+      scene: '',
+      quote: '',
+      tags: ''
     });
   }
 
@@ -69,45 +68,45 @@ export default class PostQuote extends Component {
     event.preventDefault();
   }
 
-  showSection(event) {
+  showSection() {
     document.getElementById('post-quote').classList.toggle('open');
   }
     
   render(){
-    let required = this.state.act !== "" || this.state.scene !== "";
+    let required = this.state.act !== '' || this.state.scene !== '';
         
     return(
-      <div className="homepage" id="quote-post-container">
+      <div className='homepage' id='quote-post-container'>
         <h2 onClick={this.showSection}>Add a Quote</h2>
-        <form className="" id="post-quote" onSubmit={this.submitQuote}>
-          <label className="instruction">Add a quote to the collection</label>
-          <div className="form-row">
-            <div className="form-group col-xs-6">
-              <label htmlFor="work">Work</label>
-              <input className="form-control" type="text" name="work" id="work" placeholder="Henry V" onChange={this.handleChange} value={this.state.work} required  />
+        <form className='' id='post-quote' onSubmit={this.submitQuote}>
+          <label className='instruction'>Add a quote to the collection</label>
+          <div className='form-row'>
+            <div className='form-group col-xs-6'>
+              <label htmlFor='work'>Work</label>
+              <input className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
             </div>
-            <div className="form-group col-xs-3">
-              <label htmlFor="act">Act</label>
-              <input className="form-control" type="text" name="act" placeholder="3" onChange={this.handleChange} value={this.state.act} required={required} />
+            <div className='form-group col-xs-3'>
+              <label htmlFor='act'>Act</label>
+              <input className='form-control' type='text' name='act' placeholder='3' onChange={this.handleChange} value={this.state.act} required={required} />
             </div>
-            <div className="form-group col-xs-3">
-              <label htmlFor="scene">Scene</label>
-              <input className="form-control" type="text" name="scene" placeholder="1" onChange={this.handleChange} value={this.state.scene} required={required} />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group col-md-12">
-              <label htmlFor="quote">Quote</label>
-              <input className="form-control" type="text" id="quote" name="quote" placeholder="Once more unto the breach, dear friends, once more" onChange={this.handleChange} value={this.state.quote} required  />
+            <div className='form-group col-xs-3'>
+              <label htmlFor='scene'>Scene</label>
+              <input className='form-control' type='text' name='scene' placeholder='1' onChange={this.handleChange} value={this.state.scene} required={required} />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group col-md-12">
-              <label htmlFor="tags">Tags</label>
-              <input className="form-control" type="text" id="tags" name="tags" placeholder="courage, friends, battle, comraderie" onChange={this.handleChange} value={this.state.tags} required  />
+          <div className='form-row'>
+            <div className='form-group col-md-12'>
+              <label htmlFor='quote'>Quote</label>
+              <input className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onChange={this.handleChange} value={this.state.quote} required  />
             </div>
           </div>
-          <ButtonForm type="Submit" label="Add Quote" />
+          <div className='form-row'>
+            <div className='form-group col-md-12'>
+              <label htmlFor='tags'>Tags</label>
+              <input className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onChange={this.handleChange} value={this.state.tags} required  />
+            </div>
+          </div>
+          <ButtonForm type='Submit' label='Add Quote' />
         </form>
       </div>
     );

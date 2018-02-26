@@ -5,9 +5,7 @@
 
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import ButtonForm from '../button-components/ButtonForm';
-import ButtonDisplay from '../button-components/ButtonDisplay';
 import DisplayQuotes from './DisplayQuotes';
 require('./Forms.css');
 
@@ -16,7 +14,7 @@ export default class SearchQuote extends Component {
   constructor(props){
     super(props);
     this.state = {
-      tags: "",
+      tags: '',
       quotes: []
     };
 
@@ -43,9 +41,7 @@ export default class SearchQuote extends Component {
     event.preventDefault();
   }
 
-
-
-  showSection(event) {
+  showSection() {
     document.getElementById('search').classList.toggle('open');
   }
 
@@ -56,7 +52,7 @@ export default class SearchQuote extends Component {
           <h2 onClick={this.showSection}>Search for a Quote</h2>
           <form className="" id="search" onSubmit={this.handleSubmit}>
             <label>Enter search tags, separated by a comma</label>
-            <input type="text" ref="keywords" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
+            <input type="text" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
             <ButtonForm type="Submit" label="Find Quotes" />
           </form>
         </div>

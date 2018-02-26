@@ -5,7 +5,14 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 require('./Button.css');
+
+Button.propTypes = {
+  type: PropTypes.string,
+  className: PropTypes.string,
+  label: PropTypes.string
+};
 
 export default class Button extends Component {
   render() {

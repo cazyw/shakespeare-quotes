@@ -7,9 +7,12 @@
 
 const expect = require('chai').expect;
 const request = require('supertest');
+const mongoose = require('mongoose');
 const {ObjectID} = require('mongodb');
 const {app} = require('../server/app');
 const {Quote} = require('../models/quote');
+
+const MONGO_URI = 'mongodb://localhost/testDatabase';
 
 const quotes = [{
   _id: new ObjectID(),
@@ -92,6 +95,22 @@ const invalidQuote = [
 
 
 describe('Routes', () => {
+  
+  before((done) => {
+    if(!mongoose.connection.readyState) {
+      mongoose.conndect(MONGO_URI);
+    }
+    done();
+  });
+
+  after((done) => {
+    mongoose.models = {};
+    mongoose.modelSchemas = {};
+    if(mongoose.connection.db) {
+      mongoose.connection.db.dropDatabase();
+    }
+    done();
+  });
 
   beforeEach((done) => {
     //console.log('\t-- deleting database');
