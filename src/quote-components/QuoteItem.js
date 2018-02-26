@@ -9,15 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 require('./Quote.css');
 
-QuoteItem.propTypes = {
-  work: PropTypes.string,
-  act: PropTypes.string,
-  scene: PropTypes.string,
-  quote: PropTypes.string,
-  tags: PropTypes.array,
-};
-
-export default class QuoteItem extends Component {
+class QuoteItem extends Component {
   constructor(props){
     super(props);  
   }
@@ -43,4 +35,14 @@ export default class QuoteItem extends Component {
     );
   }
 }
+
+QuoteItem.propTypes = {
+  work: PropTypes.string,
+  act: PropTypes.string,
+  scene: PropTypes.string,
+  quote: PropTypes.string,
+  tags: PropTypes.array,
+};
+
+module.exports = QuoteItem;
 

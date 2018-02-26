@@ -10,11 +10,7 @@ import QuoteItem from './QuoteItem';
 import PropTypes from 'prop-types';
 require('./Quote.css');
 
-QuoteList.propTypes = {
-  quotes: PropTypes.array
-};
-
-export default class QuoteList extends Component {
+class QuoteList extends Component {
   constructor(props){
     super(props);  
   }
@@ -28,3 +24,8 @@ export default class QuoteList extends Component {
   }
 }
 
+QuoteList.propTypes = {
+  quotes: PropTypes.array
+};
+
+module.exports = QuoteList;

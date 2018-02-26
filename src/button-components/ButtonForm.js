@@ -8,14 +8,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 require('./Button.css');
 
-Button.propTypes = {
+class ButtonForm extends Component {
+  render() {
+    return <button type={this.props.type} className={this.props.className}>{this.props.label}</button>;
+  }
+}
+
+ButtonForm.propTypes = {
   type: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string
 };
 
-export default class Button extends Component {
-  render() {
-    return <button type={this.props.type} className={this.props.className}>{this.props.label}</button>;
-  }
-}
+module.exports = ButtonForm;

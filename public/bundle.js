@@ -1508,10 +1508,6 @@ module.exports = focusNode;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -1536,22 +1532,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 __webpack_require__(36);
 
-Button.propTypes = {
-  type: _propTypes2.default.string,
-  className: _propTypes2.default.string,
-  label: _propTypes2.default.string
-};
+var ButtonForm = function (_Component) {
+  _inherits(ButtonForm, _Component);
 
-var Button = function (_Component) {
-  _inherits(Button, _Component);
+  function ButtonForm() {
+    _classCallCheck(this, ButtonForm);
 
-  function Button() {
-    _classCallCheck(this, Button);
-
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ButtonForm.__proto__ || Object.getPrototypeOf(ButtonForm)).apply(this, arguments));
   }
 
-  _createClass(Button, [{
+  _createClass(ButtonForm, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -1562,10 +1552,16 @@ var Button = function (_Component) {
     }
   }]);
 
-  return Button;
+  return ButtonForm;
 }(_react.Component);
 
-exports.default = Button;
+ButtonForm.propTypes = {
+  type: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  label: _propTypes2.default.string
+};
+
+module.exports = ButtonForm;
 
 /***/ }),
 /* 20 */
@@ -19970,10 +19966,6 @@ exports.default = DisplayQuotes;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -20002,10 +19994,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 __webpack_require__(20);
 
-QuoteList.propTypes = {
-  quotes: _propTypes2.default.array
-};
-
 var QuoteList = function (_Component) {
   _inherits(QuoteList, _Component);
 
@@ -20027,7 +20015,11 @@ var QuoteList = function (_Component) {
   return QuoteList;
 }(_react.Component);
 
-exports.default = QuoteList;
+QuoteList.propTypes = {
+  quotes: _propTypes2.default.array
+};
+
+module.exports = QuoteList;
 
 /***/ }),
 /* 41 */
@@ -20035,10 +20027,6 @@ exports.default = QuoteList;
 
 "use strict";
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20063,14 +20051,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 __webpack_require__(20);
-
-QuoteItem.propTypes = {
-  work: _propTypes2.default.string,
-  act: _propTypes2.default.string,
-  scene: _propTypes2.default.string,
-  quote: _propTypes2.default.string,
-  tags: _propTypes2.default.array
-};
 
 var QuoteItem = function (_Component) {
   _inherits(QuoteItem, _Component);
@@ -20136,7 +20116,15 @@ var QuoteItem = function (_Component) {
   return QuoteItem;
 }(_react.Component);
 
-exports.default = QuoteItem;
+QuoteItem.propTypes = {
+  work: _propTypes2.default.string,
+  act: _propTypes2.default.string,
+  scene: _propTypes2.default.string,
+  quote: _propTypes2.default.string,
+  tags: _propTypes2.default.array
+};
+
+module.exports = QuoteItem;
 
 /***/ }),
 /* 42 */
