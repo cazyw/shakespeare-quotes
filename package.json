@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "NODE_ENV=test mocha --recursive --slow 0",
+    "test": "NODE_ENV=test mocha --recursive --watch --slow 0",
     "test-watch": "NODE_ENV=test nodemon --exec 'npm test' & npm run watch:webpack",
     "build": "webpack --progress -p",
     "watch:webpack": "webpack --progress --watch",

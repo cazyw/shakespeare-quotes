@@ -51,12 +51,44 @@ const validQuotes = [{
   tags: ['death', 'battle', 'war']
 }];
 
-const invalidQuote = {
-  work: 'Henry V',
-  act: '4',
-  quote: 'I am afeard there are few die well that die in a battle...',
-  tags: ['death', 'battle', 'war']
-};
+const invalidQuote = [
+  {
+    work: '',
+    act: '4',
+    scene: '1',
+    quote: 'I am afeard there are few die well that die in a battle...',
+    tags: ['death', 'battle', 'war']
+  } ,
+  {
+    work: 'Henry V',
+    act: '',
+    scene: '1',
+    quote: 'I am afeard there are few die well that die in a battle...',
+    tags: ['death', 'battle', 'war']
+  } ,
+  {
+    work: 'Henry V',
+    act: '4',
+    scene: '',
+    quote: 'I am afeard there are few die well that die in a battle...',
+    tags: ['death', 'battle', 'war']
+  } ,
+  {
+    work: 'Henry V',
+    act: '4',
+    scene: '1',
+    quote: '',
+    tags: ['death', 'battle', 'war']
+  } ,
+  {
+    work: 'Henry V',
+    act: '4',
+    scene: '1',
+    quote: 'I am afeard there are few die well that die in a battle...',
+  } ,
+  
+
+];
 
 
 describe('Routes', () => {
@@ -87,7 +119,7 @@ describe('Routes', () => {
 
   describe('POST /api/quotes', () => {
 
-    it('should create a quote with valid data', (done) => {
+    it('should create a quote with valid data (all fields completed)', (done) => {
       request(app)
         .post('/api/quotes')
         .send(validQuotes[0])
@@ -104,10 +136,27 @@ describe('Routes', () => {
         });
     });
 
-    it('should not create a quote with invalid data', (done) => {
+    it('should create a quote with valid data (neither act nor scene completed)', (done) => {
       request(app)
         .post('/api/quotes')
-        .send(invalidQuote)
+        .send(validQuotes[1])
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.work).to.equal(validQuotes[1].work);
+          if (err) return done(err);
+
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(4);
+            expect(quotes[3].quote).to.equal(validQuotes[1].quote);
+            done();
+          }).catch((e) => done(e));
+        });
+    });
+
+    it('should not create a quote if "work" is missing', (done) => {
+      request(app)
+        .post('/api/quotes')
+        .send(invalidQuote[0])
         .expect(422)
         .end((err, res) => {
           expect(res.body).to.have.key('error');
@@ -120,6 +169,69 @@ describe('Routes', () => {
         });
     });
 
+    it('should not create a quote if "act" is missing', (done) => {
+      request(app)
+        .post('/api/quotes')
+        .send(invalidQuote[1])
+        .expect(422)
+        .end((err, res) => {
+          expect(res.body).to.have.key('error');
+          if (err) return done(err);
+
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(3);
+            done();
+          }).catch((e) => done(e));
+        });
+    });
+
+    it('should not create a quote "scene" is missing', (done) => {
+      request(app)
+        .post('/api/quotes')
+        .send(invalidQuote[2])
+        .expect(422)
+        .end((err, res) => {
+          expect(res.body).to.have.key('error');
+          if (err) return done(err);
+
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(3);
+            done();
+          }).catch((e) => done(e));
+        });
+    });
+
+    it('should not create a quote if "quote" is missing', (done) => {
+      request(app)
+        .post('/api/quotes')
+        .send(invalidQuote[3])
+        .expect(422)
+        .end((err, res) => {
+          expect(res.body).to.have.key('error');
+          if (err) return done(err);
+
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(3);
+            done();
+          }).catch((e) => done(e));
+        });
+    });
+
+    it('should not create a quote if "tag" is missing', (done) => {
+      request(app)
+        .post('/api/quotes')
+        .send(invalidQuote[4])
+        .expect(422)
+        .end((err, res) => {
+          expect(res.body).to.have.key('error');
+          if (err) return done(err);
+
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(3);
+            done();
+          }).catch((e) => done(e));
+        });
+    });
   });
 
 });

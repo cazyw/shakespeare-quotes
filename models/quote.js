@@ -10,37 +10,43 @@ const Schema = mongoose.Schema;
 // validator, either both Act and Scene must be blank (e.g. for sonnets)
 // or they must both be filled out
 
-function hasActOrScene(){ 
-  return (this.act != "" || this.scene != "");
-};
+function hasActOrScene() { 
+  return (this.act != '' || this.scene != '');
+}
+
+function hasTags(val) {
+  return val.length > 0;
+}
 
 // create quote schema & model
 const QuoteSchema = new Schema({
   
   work: {
     type: String,
-    required: [true, "Work (Play, Sonnet etc) field is required"]
+    required: [true, 'Work (Play, Sonnet etc) field is required']
   },
   act: {
     type: String,
-    required: [hasActOrScene, "Both Act and Scene must be blank or completed"]
+    required: [hasActOrScene, 'Both Act and Scene must be blank or completed']
   },
   scene: {
     type: String,
-    required: [hasActOrScene, "Both Act and Scene must be blank or completed"]
+    required: [hasActOrScene, 'Both Act and Scene must be blank or completed']
   },
   quote: {
     type: String,
-    required: [true, "Quote is required"]
+    required: [true, 'Quote is required']
   },
   tags: {
     type: Array,
-    required: [true, "Tags are required"]
+    required: [true, 'Tags are required'],
+    validate: [hasTags, 'Tags are required']
   }
 });
 
 
 
 // 'quote' collection
+
 const Quote = mongoose.model('quote', QuoteSchema);
 module.exports = {Quote};
