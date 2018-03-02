@@ -37,9 +37,9 @@ describe('App', () => {
         .get('/api')
         .expect(404)
         .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
         })
-        .end((err, res) => {
+        .end((err) => {
           if (err) return done(err);
           done();
         });
@@ -51,9 +51,9 @@ describe('App', () => {
         .expect(404)
         .expect('Content-Type', /json/)
         .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
         })
-        .end((err, res) => {
+        .end((err) => {
           if (err) return done(err);
           done();
         });
@@ -67,7 +67,7 @@ describe('App', () => {
         .send(quote)
         .expect(404)
         .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
         })
         .end((err) => {
           if(err) return done(err);
@@ -81,7 +81,7 @@ describe('App', () => {
         .send(quote)
         .expect(404)
         .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
         })
         .end((err) => {
           if(err) return done(err);
@@ -95,7 +95,7 @@ describe('App', () => {
         .send(quote)
         .expect(404)
         .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput)
+          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
         })
         .end((err) => {
           if(err) return done(err);
