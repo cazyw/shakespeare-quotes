@@ -89,17 +89,24 @@ const invalidQuote = [
     scene: '1',
     quote: 'I am afeard there are few die well that die in a battle...',
   } ,
-  
-
 ];
+
+const caseQuote = {
+  work: 'Sonnet 50',
+  act: '',
+  scene: '',
+  quote: 'For that same groan doth put this in my mind; My grief lies onward, and my joy behind.',
+  tags: ['Grief', 'Joy']
+};
 
 describe('Routes', () => {
   
   before((done) => {
     if(!mongoose.connection.readyState) {
-      mongoose.connect(MONGO_URI);
+      mongoose.connect(MONGO_URI).then(() => done());
+    } else {
+      done();
     }
-    done();
   });
 
   after((done) => {
@@ -111,8 +118,8 @@ describe('Routes', () => {
     done();
   });
 
-  beforeEach((done) => {
-    //console.log('\t-- deleting database');
+  beforeEach(function(done){
+    this.timeout(2000);
     Quote.remove({})
       .then(() => {
         return Quote.insertMany(quotes);
@@ -250,6 +257,25 @@ describe('Routes', () => {
           }).catch((e) => done(e));
         });
     });
+
+    it('should convert tags to lower case', (done) => {
+      request(app)
+        .post('/api/quotes')
+        .send(caseQuote)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.work).to.equal(caseQuote.work);
+          if(err) return done(err);
+
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(4);
+            expect(quotes[3].tags).to.include('grief');
+            expect(quotes[3].tags).to.not.include('Joy');
+            done();
+          }).catch((e) => done(e));
+        });
+    });
+
   });
 
 });

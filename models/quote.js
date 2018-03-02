@@ -38,12 +38,14 @@ const QuoteSchema = new Schema({
     required: [true, 'Quote is required']
   },
   tags: {
-    type: Array,
+    type: [{
+      type: String,
+      lowercase: true}
+    ],
     required: [true, 'Tags are required'],
     validate: [hasTags, 'Tags are required']
   }
 });
-
 
 
 // 'quote' collection
