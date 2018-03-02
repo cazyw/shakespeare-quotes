@@ -1,3 +1,12 @@
+/*
+ * Shakespeare Quote App
+ * Testing quotes model
+ * Does not require a connection to any database
+ * To run this test only
+ * $ ./node_modules/mocha/bin/mocha test/quote.test.js
+ */
+'use strict';
+
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
 const {Quote} = require('../models/quote');
@@ -24,7 +33,37 @@ describe('Quote Schema', () => {
     });
   });
 
+  it('should be invalid if "work" is blank', (done) => {
+    let quote = new Quote({
+      work: '',
+      act: '4',
+      scene: '1',
+      quote: 'I am afeard there are few die well that die in a battle...',
+      tags: ['death', 'battle', 'war']
+    });
+
+    quote.validate((err) => {
+      expect(err.errors.work).to.exist;
+      done();
+    });
+  });
+
   it('should be invalid if "act" is missing', (done) => {
+    let quote = new Quote({
+      work: 'Henry V',
+      act:'',
+      scene: '1',
+      quote: 'I am afeard there are few die well that die in a battle...',
+      tags: ['death', 'battle', 'war']
+    });
+
+    quote.validate((err) => {
+      expect(err.errors.act).to.exist;
+      done();
+    });
+  });
+
+  it('should be invalid if "act" is blank and "scene" is not', (done) => {
     let quote = new Quote({
       work: 'Henry V',
       scene: '1',
@@ -52,11 +91,41 @@ describe('Quote Schema', () => {
     });
   });
 
+  it('should be invalid if "scene" is blank and "act" is not', (done) => {
+    let quote = new Quote({
+      work: 'Henry V',
+      act: '4',
+      scene: '',
+      quote: 'I am afeard there are few die well that die in a battle...',
+      tags: ['death', 'battle', 'war']
+    });
+
+    quote.validate((err) => {
+      expect(err.errors.scene).to.exist;
+      done();
+    });
+  });
+
   it('should be invalid if "quote" is missing', (done) => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
       scene: '1',
+      tags: ['death', 'battle', 'war']
+    });
+
+    quote.validate((err) => {
+      expect(err.errors.quote).to.exist;
+      done();
+    });
+  });
+
+  it('should be invalid if "quote" is blank', (done) => {
+    let quote = new Quote({
+      work: 'Henry V',
+      act: '4',
+      scene: '1',
+      quote: '',
       tags: ['death', 'battle', 'war']
     });
 
