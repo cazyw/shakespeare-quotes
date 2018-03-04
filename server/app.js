@@ -12,7 +12,7 @@ const config = require('../config').get(process.env.NODE_ENV);
 const app = express();
 
 // connect to mongodb
-const options = { connectTimeoutMS: 30 };
+const options = { connectTimeoutMS: 30000 };
 mongoose.connect(config.database, options).catch(() => console.log('cannot connect to the database - check: is it running?'));
 const db = mongoose.connection;
 db.on('error', () => console.error.bind(console, 'MongoDB connection error:'));
