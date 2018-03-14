@@ -51,8 +51,8 @@ export default class SearchQuote extends Component {
         <div className="homepage">
           <h2 onClick={this.showSection}>Search for a Quote</h2>
           <form className="" id="search" onSubmit={this.handleSubmit}>
-            <label>Enter search tags, separated by a comma</label>
-            <input type="text" placeholder="courage, family" onChange={this.handleChange} value={this.state.tags} required  />
+            <label>Enter search tags, separated by a space</label>
+            <input type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
             <ButtonForm type="Submit" label="Find Quotes" />
           </form>
         </div>
