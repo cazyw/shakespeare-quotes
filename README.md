@@ -14,7 +14,7 @@ Currently working on testing and front-end React and rendering components proper
 To do:
 
 * refactor/modularise the front-end React properly
-* delete and modify tags
+* delete and modify tags and quotes
 * include tag suggestions and link tags so they become search terms
 * user login
 * testing
@@ -27,7 +27,7 @@ Go to https://shakespeare-sunday.herokuapp.com/
 You can:
 
 * add quotes
-* search for quotes (via keywords)
+* search for quotes (via tags)
 * display all quotes in the database
 
 <img src="" width="450" alt="">
@@ -38,7 +38,7 @@ You can:
 * npm - v5.6.0
 * Heroku account to host the service
 * Postman account if you wish to try posting to the service
-* MongoDB and Robomongo
+* MongoDB and Robomongo (mLab used for production database)
 
 Check `package.json` for other packages installed
 
@@ -73,10 +73,12 @@ To rebuild the final js file (after any file changes), run:
 $ npm run build
 ```
 
-Or to watch for and rebuild automatically after any changes (`webpack`) AND automatically re-start the server if there are changes there as well (`nodemon`), run:
+Or to watch for and rebuild automatically after any changes (**webpack**) AND automatically re-start the server if there are changes there as well (**nodemon**), run:
 ```
 $ npm run watch
 ```
+
+For online production, accounts were setup in **Heroku** and  and 
 
 ## Project file structure
 
@@ -117,7 +119,7 @@ Note: this section and structure is being refactored as I'm still learning React
 
 ## Testing
 
-Testing using the `mocha` framework, and using the `supertest` and `chai` libraries
+Testing using the **mocha** framework, and using the **supertest** and **chai** libraries.
 
 Since it connects to mongodb, the database needs to be running first (in my case):
 
@@ -130,10 +132,9 @@ Then run the following:
 $ npm run test-watch
 ```
 
-Note: do not run the other scripts at the same time as `npm run test-watch` as it will throw an error as multiple scripts will try running multiple servers on the same port. `npm run test-watch` script runs `webpack`, `nodemon` and `mocha` so file changes re-bundles the files, restarts the server and re-runs the tests.
+Note: do not run the other scripts at the same time as `npm run test-watch` as it will throw an error as multiple scripts will try running multiple servers on the same port. `npm run test-watch` script runs **webpack**, **nodemon** and **mocha** so file changes re-bundles the files, restarts the server and re-runs the tests.
 
-This section is a work in progress. 
-
+This section is a work in progress as I develop more thorough testing practices. 
 
 ## Discussion
 
@@ -141,7 +142,7 @@ The idea for this project came about because I participate in  a worldwide twitt
 
 I thought it'd be fun to build an online collection of Shakespeare quotes so I could save the quotes I'd selected each week and tag them with keywords. As themes are sometimes re-used or quotes might be applicable across multiple themes, this would be a way for me to see if any quotes I'd previously used match a theme. 
 
-And it'd be a cool way for me to learn and put into practice routing, Express, APIs, databases (MongoDB), React, forms and testing! An additional step I might add is logins and authentication.
+And it'd be a cool way for me to learn and put into practice routing, Express, APIs, databases (MongoDB), React, forms and testing! An additional step I might add is logins and authentication. 
 
 ### Setup and Environment
 
@@ -185,7 +186,7 @@ This section is still being worked on. This is my first real dive into React so 
 
 ### Testing
 
-This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing.
+This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing. Setup and teardown functions have been added.
 
 `routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data. 
 

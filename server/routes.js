@@ -20,7 +20,7 @@ router.get('/quotes', (req, res, next) => {
         res.send(quote);
       });
   } else {
-    const selectedTags = (req.query.tags.split(',').map(item => item.trim()));
+    const selectedTags = (req.query.tags.split(' ').map(item => item.trim()));
     Quote.find({
       tags: { $in: selectedTags }
     })

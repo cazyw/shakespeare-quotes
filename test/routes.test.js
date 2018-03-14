@@ -105,6 +105,7 @@ describe('Routes', () => {
     if(!mongoose.connection.readyState) {
       mongoose.connect(MONGO_URI).then(() => done());
     } else {
+      // console.log('Error: mongodb has not been started. Run mongod --dbpath ~/data/db');
       done();
     }
   });
@@ -114,8 +115,10 @@ describe('Routes', () => {
     mongoose.modelSchemas = {};
     if(mongoose.connection.db) {
       mongoose.connection.db.dropDatabase();
+      done();
+    } else {
+      done();
     }
-    done();
   });
 
   beforeEach(function(done){
@@ -140,6 +143,41 @@ describe('Routes', () => {
           done();
         });
     });
+
+    it('should return a subset if a tag that exists in the db is provided', (done) => {
+      request(app)
+        .get('/api/quotes')
+        .query({ tags: 'learning' })
+        .end((err, res) => {
+          expect(res.body).to.have.lengthOf(1);
+          expect(res.body[0].work).to.equal(quotes[0].work);
+          if(err) return done(err);
+        });
+
+      request(app)
+        .get('/api/quotes')
+        .query({ tags: 'suprise doubt'} )
+        .end((err, res) => {
+          expect(res.body).to.have.lengthOf(2);
+          expect(res.body[0].work).to.equal(quotes[1].work);
+          expect(res.body[1].work).to.equal(quotes[2].work);
+          if(err) return done(err);
+          done();
+        });
+    });
+
+    it('should return no entries if a tag with no matches in the db is provided', (done) => {
+      request(app)
+        .get('/api/quotes')
+        .query({tags: 'England'})
+        .end((err, res) => {
+          expect(res.body).to.have.lengthOf(0);
+          expect(res.body).to.be.an('array').that.is.empty;
+          if(err) return done(err);
+          done();
+        });
+    });
+
   });
 
   describe('POST /api/quotes', () => {
