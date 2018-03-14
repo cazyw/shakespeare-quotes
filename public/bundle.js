@@ -19070,9 +19070,9 @@ var SearchQuote = function (_Component) {
             _react2.default.createElement(
               'label',
               null,
-              'Enter search tags, separated by a comma'
+              'Enter search tags, separated by a space'
             ),
-            _react2.default.createElement('input', { type: 'text', placeholder: 'courage, family', onChange: this.handleChange, value: this.state.tags, required: true }),
+            _react2.default.createElement('input', { type: 'text', placeholder: 'courage family battle', onChange: this.handleChange, value: this.state.tags, required: true }),
             _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Find Quotes' })
           )
         ),
