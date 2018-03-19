@@ -32,7 +32,7 @@ describe('App', () => {
         .end(done);
     });
 
-    it('should return status 404 on /api', (done) => {
+    it('should return status 404 on invalid routes', (done) => {
       request(app)
         .get('/api')
         .expect(404)
@@ -41,11 +41,8 @@ describe('App', () => {
         })
         .end((err) => {
           if (err) return done(err);
-          done();
         });
-    });
 
-    it('should return status 404 on /random', (done) => {
       request(app)
         .get('/random')
         .expect(404)
@@ -61,7 +58,7 @@ describe('App', () => {
   });
 
   describe('/POST ', () => {
-    it('should return status 404 on /', (done) => {
+    it('should return status 404 on invalid routes', (done) => {
       request(app)
         .post('/')
         .send(quote)
@@ -71,11 +68,8 @@ describe('App', () => {
         })
         .end((err) => {
           if(err) return done(err);
-          done();
         });
-    });
 
-    it('should return status 404 on /api', (done) => {
       request(app)
         .post('/api')
         .send(quote)
@@ -85,11 +79,8 @@ describe('App', () => {
         })
         .end((err) => {
           if(err) return done(err);
-          done();
         });
-    });
 
-    it('should return status 404 on /random', (done) => {
       request(app)
         .post('/random')
         .send(quote)
