@@ -28,6 +28,7 @@ You can:
 
 * add quotes
 * search for quotes (via tags)
+  * the serach terms do not need to be exact, but the tag must contain the search term e.g. searching for 'love' will also retrieve any quotes tagged 'loves'
 * display all quotes in the database
 
 <img src="" width="450" alt="">
@@ -155,6 +156,8 @@ I also used ESLint in this project and am getting to know some of the settings a
 ### Server
 
 Coding in Javascript, I again am using `Node.js` and the `express` framework to create my API. This time adding  `express.Router` to create modular route handlers. At the moment it's being used to handle the `/api/quotes` route but I may also add a `/api/users` route if I decide to add login/user features. The main `app.js` file sets up the server, and does the console logging and error handling. 
+
+Some logic is currently being handled in the router that should be extracted to a separate file.
 
 ### Database and Modelling
 
