@@ -174,6 +174,16 @@ describe('Routes', () => {
           expect(res.body).to.have.lengthOf(1);
           expect(res.body[0].work).to.equal(quotes[0].work);
           if(err) return done(err);
+        });
+
+      request(app)
+        .get('/api/quotes')
+        .query({tags: 'learn teach accident'})
+        .end((err, res) => {
+          expect(res.body).to.be.lengthOf(2);
+          expect(res.body[0].work).to.equal(quotes[0].work);
+          expect(res.body[1].work).to.equal(quotes[2].work);
+          if(err) return done(err);
           done();
         });
     });

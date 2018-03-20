@@ -13,6 +13,8 @@ const router = express.Router();
 // get a list of quotes from the db
 // if tags provided, must match at least one of the tags
 // if no tags provided, display all
+// the regex is so that search terms that are part of a tag work
+// e.g. 'learn' will match 'learning'
 router.get('/quotes', (req, res, next) => {
   if(!req.query.tags){
     Quote.find({})
@@ -20,7 +22,7 @@ router.get('/quotes', (req, res, next) => {
         res.send(quote);
       });
   } else {
-    const selectedTags = (req.query.tags.split(' ').map(item => item.trim()));
+    const selectedTags = (req.query.tags.split(' ').map(item => item.trim()).map(item => new RegExp(item, 'i')));
     Quote.find({
       tags: { $in: selectedTags }
     })
