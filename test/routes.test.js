@@ -166,6 +166,18 @@ describe('Routes', () => {
         });
     });
 
+    it('should return entries where the seach term is part of a tag word', (done) => {
+      request(app)
+        .get('/api/quotes')
+        .query({ tags: 'learn' })
+        .end((err, res) => {
+          expect(res.body).to.have.lengthOf(1);
+          expect(res.body[0].work).to.equal(quotes[0].work);
+          if(err) return done(err);
+          done();
+        });
+    });
+
     it('should return no entries if a tag with no matches in the db is provided', (done) => {
       request(app)
         .get('/api/quotes')
