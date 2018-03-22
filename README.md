@@ -28,17 +28,18 @@ You can:
 
 * add quotes
 * search for quotes (via tags)
-  * the serach terms do not need to be exact, but the tag must contain the search term e.g. searching for 'love' will also retrieve any quotes tagged 'loves'
+  * the search terms do not need to be exact, but the tag must contain the search term e.g. searching for 'love' will also retrieve any quotes tagged 'loves'
 * display all quotes in the database
 
 <img src="" width="450" alt="">
 
 ## System Dependencies & Configuration
 
+For this app:
 * node - v8.9.1
 * npm - v5.6.0
 * Heroku account to host the service
-* Postman account if you wish to try posting to the service
+* Postman account if you wish to try posting to the API without using the front end
 * MongoDB and Robomongo (mLab used for production database)
 
 Check `package.json` for other packages installed
@@ -47,8 +48,7 @@ Check `package.json` for other packages installed
 
 Clone the repository.
 
-Install node, npm
-Install mongodb and robomongo for local server usage.
+Install node, mongodb and robomongo for local server usage.
 
 
 To install the required packages (see package.json), run:
@@ -79,7 +79,7 @@ Or to watch for and rebuild automatically after any changes (**webpack**) AND au
 $ npm run watch
 ```
 
-For online production, accounts were setup in **Heroku** and  and 
+For online production, accounts were setup in **Heroku** and **mLab**
 
 ## Project file structure
 
@@ -120,7 +120,7 @@ Note: this section and structure is being refactored as I'm still learning React
 
 ## Testing
 
-Testing using the **mocha** framework, and using the **supertest** and **chai** libraries.
+Testing using the **mocha** framework, and using the **supertest** and **chai** libraries. At the moment these are more 'integration' tests than 'unit' tests.
 
 Since it connects to mongodb, the database needs to be running first (in my case):
 
@@ -135,7 +135,7 @@ $ npm run test-watch
 
 Note: do not run the other scripts at the same time as `npm run test-watch` as it will throw an error as multiple scripts will try running multiple servers on the same port. `npm run test-watch` script runs **webpack**, **nodemon** and **mocha** so file changes re-bundles the files, restarts the server and re-runs the tests.
 
-This section is a work in progress as I develop more thorough testing practices. 
+This section is a work in progress as I develop more thorough testing practices. I'll also need to write unit tests that use mocking as at the moment my tests actually rely on an active database and server. 
 
 ## Discussion
 
@@ -189,7 +189,7 @@ This section is still being worked on. This is my first real dive into React so 
 
 ### Testing
 
-This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing. Setup and teardown functions have been added.
+This is an ongoing work in progress as I learn how to do testing with APIs and databases. I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing. Setup and teardown functions have been added. At the moment the tests run against a test database and running server. I'll look into mocking the setup and unit-level testing.
 
 `routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data. 
 
