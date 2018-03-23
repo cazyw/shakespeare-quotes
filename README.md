@@ -9,15 +9,15 @@ A very very rough version (look and style is in serious need of work) is up and 
 ## Status
 
 Server-side routing mostly completed (working on local server). 
-Currently working on testing and front-end React and rendering components properly.
+Currently working on testing and restructuring the project back-end before restructuring the project front-end.
 
 To do:
 
-* refactor/modularise the front-end React properly
-* delete and modify tags and quotes
+* refactor/modularise the API into more of an MVC structure
+* refactor the front-end to use view templates rather than React
+* allow users to delete and modify tags and quotes
 * include tag suggestions and link tags so they become search terms
-* user login
-* testing
+* further testing esp unit testing
 * add pagination (when displaying quotes)
 
 ## Operating Instructions
@@ -157,7 +157,7 @@ I also used ESLint in this project and am getting to know some of the settings a
 
 Coding in Javascript, I again am using `Node.js` and the `express` framework to create my API. This time adding  `express.Router` to create modular route handlers. At the moment it's being used to handle the `/api/quotes` route but I may also add a `/api/users` route if I decide to add login/user features. The main `app.js` file sets up the server, and does the console logging and error handling. 
 
-Some logic is currently being handled in the router that should be extracted to a separate file.
+Some logic is currently being handled in the router that should be extracted to a separate file and I'm currently converting my API model into an MVC pattern (adding controllers for the routing).
 
 ### Database and Modelling
 
@@ -179,6 +179,13 @@ In future, each quote may be linked to the user posting the quote.
 For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this less-reliable option. The `config` file selects the correct database (online, local, test) depending on the `NODE_ENV` setting.
 
 ### Display
+
+#### Update
+
+I'll probably eventually convert the front-end to use templates. Whilst it's currently using React, it isn't using best practices and as this project will focus more on back-end structuring and testing and the MVC model, I want to keep my learning of React separate.
+
+
+#### Old discussion 
 
 The front-end is using `React`. Currently users are able to:
 * submit quotes to be entered into the collection

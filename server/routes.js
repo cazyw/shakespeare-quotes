@@ -6,6 +6,7 @@
 
 const express = require('express');
 const {Quote} = require('../models/quote');
+const quotesController = require('./controllers/quotes');
 
 const router = express.Router();
 
@@ -15,22 +16,7 @@ const router = express.Router();
 // if no tags provided, display all
 // the regex is so that search terms that are part of a tag work
 // e.g. 'learn' will match 'learning'
-router.get('/quotes', (req, res, next) => {
-  if(!req.query.tags){
-    Quote.find({})
-      .then((quote) => {
-        res.send(quote);
-      });
-  } else {
-    const selectedTags = (req.query.tags.split(' ').map(item => item.trim()).map(item => new RegExp(item, 'i')));
-    Quote.find({
-      tags: { $in: selectedTags }
-    })
-      .then((quote) => {
-        res.send(quote);
-      });
-  }
-});
+router.get('/quotes', quotesController.retrieveQuotes);
 
 // add a new quote to the db
 router.post('/quotes', (req, res, next) => {
