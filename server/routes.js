@@ -5,51 +5,19 @@
 'use strict';
 
 const express = require('express');
-const {Quote} = require('../models/quote');
 const quotesController = require('./controllers/quotes');
-
 const router = express.Router();
 
-
 // get a list of quotes from the db
-// if tags provided, must match at least one of the tags
-// if no tags provided, display all
-// the regex is so that search terms that are part of a tag work
-// e.g. 'learn' will match 'learning'
 router.get('/quotes', quotesController.retrieveQuotes);
 
 // add a new quote to the db
-router.post('/quotes', (req, res, next) => {
-  // save new instance of a quote (returns a promise)
-  Quote.create(req.body)
-    .then((quote) => {
-      res.send(quote);
-    })
-    .catch(next); // passes error to app.js
-
-});
+router.post('/quotes', quotesController.postQuote);
 
 // update a quote in the db
-router.put('/quotes/:id', (req, res, next) => {
-  Quote.findByIdAndUpdate({_id: req.params.id}, req.body)
-    .then(() => {
-      Quote.findOne({_id: req.params.id})
-        .then((quote) => {
-          res.send(quote);
-        });
-    })
-    .catch(next); // passes error to app.js
-});
+router.put('/quotes/:id', quotesController.updateQuote);
 
 // delete a quote from the db
-router.delete('/quotes/:id', (req, res, next) => {
-  Quote.findByIdAndRemove({
-    _id: req.params.id
-  })
-    .then((quote) => {
-      res.send(quote);
-    })
-    .catch(next); // passes error to app.js
-});
+router.delete('/quotes/:id', quotesController.deleteQuote);
 
 module.exports = router;
