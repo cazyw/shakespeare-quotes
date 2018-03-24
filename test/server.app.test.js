@@ -21,7 +21,7 @@ const warningOutput = { warning: 'there\'s nothing here' };
 
 describe('App', () => {
 
-  describe('/GET ', () => {
+  describe('GET ', () => {
     it('should return status 200 and render html on /', (done) => {
       request(app)
         .get('/')
@@ -57,7 +57,7 @@ describe('App', () => {
     });
   });
 
-  describe('/POST ', () => {
+  describe('POST ', () => {
     it('should return status 404 on invalid routes', (done) => {
       request(app)
         .post('/')

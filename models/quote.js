@@ -2,8 +2,6 @@
  * Shakespeare Quote App
  * Quote schema
  */
-
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,6 +16,11 @@ function hasTags(val) {
   return val.length > 0;
 }
 
+// blank or up to three digits
+function isInteger(val){
+  return /^(?:|[1-9][0-9]{0,2})$/.test(val);
+}
+
 // create quote schema & model
 const QuoteSchema = new Schema({
   
@@ -27,11 +30,13 @@ const QuoteSchema = new Schema({
   },
   act: {
     type: String,
-    required: [hasActOrScene, 'Both Act and Scene must be blank or completed']
+    required: [hasActOrScene, 'Both Act and Scene must be blank or completed'],
+    validate: isInteger, msg: 'The Act must be blank or a numerical value'
   },
   scene: {
     type: String,
-    required: [hasActOrScene, 'Both Act and Scene must be blank or completed']
+    required: [hasActOrScene, 'Both Act and Scene must be blank or completed'],
+    validate: isInteger, msg: 'The Scene must be blank or a numerical value'
   },
   quote: {
     type: String,

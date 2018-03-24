@@ -77,6 +77,21 @@ describe('Quote Schema', () => {
     });
   });
 
+  it('should be invalid if "act" is not a numerical value', (done) => {
+    let quote = new Quote({
+      work: 'Henry V',
+      act: 'IV',
+      scene: '1',
+      quote: 'I am afeard there are few die well that die in a battle...',
+      tags: ['death', 'battle', 'war']
+    });
+
+    quote.validate((err) => {
+      expect(err.errors.act).to.exist;
+      done();
+    });
+  });
+
   it('should be invalid if "scene" is missing', (done) => {
     let quote = new Quote({
       work: 'Henry V',
@@ -96,6 +111,21 @@ describe('Quote Schema', () => {
       work: 'Henry V',
       act: '4',
       scene: '',
+      quote: 'I am afeard there are few die well that die in a battle...',
+      tags: ['death', 'battle', 'war']
+    });
+
+    quote.validate((err) => {
+      expect(err.errors.scene).to.exist;
+      done();
+    });
+  });
+
+  it('should be invalid if "scene" is not a numerical value', (done) => {
+    let quote = new Quote({
+      work: 'Henry V',
+      act: '4',
+      scene: 'three',
       quote: 'I am afeard there are few die well that die in a battle...',
       tags: ['death', 'battle', 'war']
     });
