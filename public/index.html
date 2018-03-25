@@ -1,27 +1,97 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Shakespeare Quote Collection</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,800|Berkshire+Swash" rel="stylesheet">
-        <link href="./styles.css" rel="stylesheet">
-    </head>
-    <body>
-        <h1 class="title">Speaking Shakespeare</h1>
-        <h2 class="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
-            <!-- <h1>Shakespeare Quotes Collection</h1> -->
-        <div id="quotes"></div>
-
-
-        <!-- Scripts -->
-        <script src="./bundle.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- <script src="js\.js"></script> -->
-    </body>
-</html>
+Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Entry module not found: Error: Can't resolve '/Users/caz/coding/shakespeare-quotes/index.ejs' in '  /Users/caz/coding/shakespeare-quotes':
+  Error: Can't resolve '/Users/caz/coding/shakespeare-quotes/index.ejs' in '/Users/caz/coding/shakes  peare-quotes'
+  
+  - compiler.js:79 childCompiler.runAsChild
+    [shakespeare-quotes]/[html-webpack-plugin]/lib/compiler.js:79:16
+  
+  - Compiler.js:300 compile
+    [shakespeare-quotes]/[webpack]/lib/Compiler.js:300:11
+  
+  - Compiler.js:510 applyPluginsAsync.err
+    [shakespeare-quotes]/[webpack]/lib/Compiler.js:510:14
+  
+  - Tapable.js:202 next
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:202:11
+  
+  - CachePlugin.js:78 Compiler.<anonymous>
+    [shakespeare-quotes]/[webpack]/lib/CachePlugin.js:78:5
+  
+  - Tapable.js:206 Compiler.applyPluginsAsyncSeries
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:206:13
+  
+  - Compiler.js:507 compilation.seal.err
+    [shakespeare-quotes]/[webpack]/lib/Compiler.js:507:11
+  
+  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:195:46
+  
+  - Compilation.js:680 self.applyPluginsAsync.err
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:680:19
+  
+  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:195:46
+  
+  - Compilation.js:671 self.applyPluginsAsync.err
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:671:11
+  
+  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:195:46
+  
+  - Compilation.js:666 self.applyPluginsAsync.err
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:666:10
+  
+  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:195:46
+  
+  - Compilation.js:662 sealPart2
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:662:9
+  
+  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:195:46
+  
+  - Compilation.js:605 Compilation.seal
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:605:8
+  
+  - Compiler.js:504 applyPluginsParallel.err
+    [shakespeare-quotes]/[webpack]/lib/Compiler.js:504:17
+  
+  - Tapable.js:289 
+    [shakespeare-quotes]/[tapable]/lib/Tapable.js:289:11
+  
+  - Compilation.js:507 _addModuleChain
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:507:11
+  
+  - Compilation.js:390 errorAndCallback.bail
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:390:4
+  
+  - Compilation.js:413 moduleFactory.create
+    [shakespeare-quotes]/[webpack]/lib/Compilation.js:413:13
+  
+  - NormalModuleFactory.js:235 factory
+    [shakespeare-quotes]/[webpack]/lib/NormalModuleFactory.js:235:20
+  
+  - NormalModuleFactory.js:60 resolver
+    [shakespeare-quotes]/[webpack]/lib/NormalModuleFactory.js:60:20
+  
+  - NormalModuleFactory.js:127 asyncLib.parallel
+    [shakespeare-quotes]/[webpack]/lib/NormalModuleFactory.js:127:20
+  
+  - async.js:3874 
+    [shakespeare-quotes]/[async]/dist/async.js:3874:9
+  
+  - async.js:473 
+    [shakespeare-quotes]/[async]/dist/async.js:473:16
+  
+  - async.js:1048 iteratorCallback
+    [shakespeare-quotes]/[async]/dist/async.js:1048:13
+  
+  - async.js:958 
+    [shakespeare-quotes]/[async]/dist/async.js:958:16
+  
+  - async.js:3871 
+    [shakespeare-quotes]/[async]/dist/async.js:3871:13
+  
+</pre>

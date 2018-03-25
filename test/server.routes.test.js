@@ -8,10 +8,8 @@
 const expect = require('chai').expect;
 const request = require('supertest');
 const mongoose = require('mongoose');
-const {ObjectID} = require('mongodb');
 const {app} = require('../server/app');
 const {Quote} = require('../models/quote');
-const quotesController = require('../server/controllers/quotes');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
 

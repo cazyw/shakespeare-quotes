@@ -1,9 +1,17 @@
 body{
   font-family: Raleway;
   color: rgb(84, 84, 84);
-  background: rgb(219, 212, 197);
+  background: rgb(70, 70, 70);
   margin: 10px 30px;
 }
+
+nav.navbar-expand{
+  margin-top: -10px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-radius: 0px;
+}
+
 .homepage{
   max-width: 800px;
   margin: 20px auto;
