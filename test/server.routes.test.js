@@ -11,11 +11,11 @@ const mongoose = require('mongoose');
 const {ObjectID} = require('mongodb');
 const {app} = require('../server/app');
 const {Quote} = require('../models/quote');
+const quotesController = require('../server/controllers/quotes');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
 
 const quotes = [{
-  _id: new ObjectID(),
   work: 'The Taming of the Shrew',
   act: '1',
   scene: '2',
@@ -23,7 +23,6 @@ const quotes = [{
   tags: ['learning', 'education', 'teaching']
 },
 {
-  _id: new ObjectID(),
   work: 'Hamlet',
   act: '3',
   scene: '2',
@@ -31,7 +30,6 @@ const quotes = [{
   tags: ['love', 'fear', 'doubt', 'protect']
 },
 {
-  _id: new ObjectID(),
   work: 'Henry IV Part 1',
   act: '1',
   scene: '2',

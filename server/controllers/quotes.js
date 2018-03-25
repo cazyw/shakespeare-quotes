@@ -6,19 +6,21 @@ const collateTags = (tags) => {
     .map(tag => new RegExp(tag, 'i'));
 };
 
-const displayAllQuotes = (res) => {
+const displayAllQuotes = (res, next) => {
   Quote.find({})
-    .then((quote) => res.send(quote));
+    .then((quote) => res.send(quote))
+    .catch((error) => next(error)); // passes error to app.js
 };
 
-const displaySelectedQuotes = (res, selectedTags) => {
+const displaySelectedQuotes = (res, selectedTags, next) => {
   Quote.find({ tags: { $in: selectedTags } })
-    .then((quote) => res.send(quote));
+    .then((quote) => res.send(quote))
+    .catch((error) => next(error)); // passes error to app.js
 };
 
-function retrieveQuotes(req, res) {
+function retrieveQuotes(req, res, next) {
   if(!req.query.tags){
-    displayAllQuotes(res);
+    displayAllQuotes(res, next);
   } else {
     const selectedTags = collateTags(req.query.tags);
     displaySelectedQuotes(res, selectedTags);
@@ -29,9 +31,9 @@ function postQuote(req, res, next) {
   // save new instance of a quote (returns a promise)
   Quote.create(req.body)
     .then((quote) => {
-      res.send(quote);
+      res.json(quote);
     })
-    .catch(next); // passes error to app.js
+    .catch((error) => next(error)); // passes error to app.js
 }
 
 function updateQuote(req, res, next) {

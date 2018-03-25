@@ -57,9 +57,13 @@ export default class PostQuote extends Component {
         tags: this.state.tags.toLowerCase().split(',')
       })
     })
-      .then(() => {
-        this.resetFields();
-        alert('quote added');
+      .then((res) => {
+        if(res.status === 200) {
+          this.resetFields();
+          alert('quote added');
+        } else {
+          res.json().then(body => alert(`${body.error}`));
+        }
       })
       .catch((error) => {
         console.log(error);

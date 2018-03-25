@@ -20254,9 +20254,15 @@ var PostQuote = function (_Component) {
           quote: this.state.quote,
           tags: this.state.tags.toLowerCase().split(',')
         })
-      }).then(function () {
-        _this2.resetFields();
-        alert('quote added');
+      }).then(function (res) {
+        if (res.status === 200) {
+          _this2.resetFields();
+          alert('quote added');
+        } else {
+          res.json().then(function (body) {
+            return alert('' + body.error);
+          });
+        }
       }).catch(function (error) {
         console.log(error);
       });

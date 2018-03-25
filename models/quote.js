@@ -31,12 +31,12 @@ const QuoteSchema = new Schema({
   act: {
     type: String,
     required: [hasActOrScene, 'Both Act and Scene must be blank or completed'],
-    validate: isInteger, msg: 'The Act must be blank or a numerical value'
+    validate: [isInteger, 'The Act must be blank or a numerical value']
   },
   scene: {
     type: String,
     required: [hasActOrScene, 'Both Act and Scene must be blank or completed'],
-    validate: isInteger, msg: 'The Scene must be blank or a numerical value'
+    validate: [isInteger, 'The Scene must be blank or a numerical value']
   },
   quote: {
     type: String,
@@ -45,10 +45,10 @@ const QuoteSchema = new Schema({
   tags: {
     type: [{
       type: String,
-      lowercase: true}
-    ],
+      lowercase: true
+    }],
     required: [true, 'Tags are required'],
-    validate: [hasTags, 'Tags are required']
+    validate: [hasTags, 'Tags are required!']
   }
 });
 
