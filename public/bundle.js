@@ -1642,6 +1642,10 @@ var _PostQuote = __webpack_require__(44);
 
 var _PostQuote2 = _interopRequireDefault(_PostQuote);
 
+var _Header = __webpack_require__(45);
+
+var _Header2 = _interopRequireDefault(_Header);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1653,10 +1657,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_Component) {
   _inherits(Home, _Component);
 
-  function Home() {
+  function Home(props) {
     _classCallCheck(this, Home);
 
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
   }
 
   _createClass(Home, [{
@@ -1664,9 +1668,28 @@ var Home = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'quote-body' },
-        _react2.default.createElement(_PostQuote2.default, null),
-        _react2.default.createElement(_SearchQuote2.default, null)
+        null,
+        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(
+          'h1',
+          { className: 'title' },
+          'Speaking Shakespeare'
+        ),
+        _react2.default.createElement(
+          'h2',
+          { className: 'sub-title' },
+          'A collection of Shakespeare quotes for ',
+          _react2.default.createElement(
+            'a',
+            { href: 'https://twitter.com/hashtag/ShakespeareSunday?src=hash', target: '_blank', alt: 'Shakespeare Sunday hashtag on Twitter' },
+            '#ShakespeareSunday'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'quote-body' },
+          _react2.default.createElement(_PostQuote2.default, null)
+        )
       );
     }
   }]);
@@ -20149,7 +20172,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 650px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: auto auto;\n  height: 330px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\n\nform#search {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: auto auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n  font-size: 1.5em;\n  margin: 10px auto;\n}\n\nh2:hover {\n  color: rgb(51, 122, 183);\n  font-weight: 700;\n}\n\ndiv.form-group.col-xs-6, \ndiv.form-group.col-xs-3,\ndiv.form-group.col-md-12 {\n  margin-bottom: 10px;\n}\n\ninput.form-control {\n  margin-bottom: 5px;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n\n  h2 {\n    font-size: 1em;\n  }\n}\n\n\n\n", ""]);
+exports.push([module.i, "input[type=\"text\"]{\n  display: block;\n  width: 100%;\n  margin: 10px 0;\n  padding: 10px;\n  border-radius: 4px;\n  border: 1px solid rgb(221, 221, 221);\n}\n\ninput.form-control {\n  margin-top: 0px;\n}\n\nlabel {\n  font-size: 1em;\n  font-weight: 400;\n  padding-left: 10px;\n}\n\nlabel.instruction {\n  margin-bottom: 20px;\n  padding-left: 25px;\n}\n\nform {\n  max-width: 650px;\n  margin: auto auto;\n  height: 0px;\n  color: rgb(255, 255, 255);\n  background: rgba(255, 255, 255, 0.2);\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform.open {\n  margin: auto auto;\n  height: 330px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\n\nform#search {\n  max-width: 600px;\n  margin: auto auto;\n  height: 0px;\n  overflow: hidden;\n  -webkit-transition: height 0.5s linear;\n  -moz-transition: height 0.5s linear;\n  -ms-transition: height 0.5s linear;\n  -o-transition: height 0.5s linear;\n  transition: height 0.5s linear;\n}\n\nform#search.open {\n  margin: auto auto;\n  height: 150px;\n    -webkit-transition: height 0.5s linear;\n       -moz-transition: height 0.5s linear;\n        -ms-transition: height 0.5s linear;\n         -o-transition: height 0.5s linear;\n            transition: height 0.5s linear;\n}\n\nh2 {\n  text-align: center;\n  cursor: pointer;\n  font-size: 1.5em;\n  margin: 10px auto;\n}\n\n/* h2:hover {\n  color: rgb(51, 122, 183);\n  font-weight: 700;\n} */\n\ndiv.form-group.col-xs-6, \ndiv.form-group.col-xs-3,\ndiv.form-group.col-md-12 {\n  margin-bottom: 10px;\n}\n\ninput.form-control {\n  margin-bottom: 5px;\n}\n\n.form-inner {\n  padding: 20px;\n}\n\n@media (max-width: 500px) {\n  div.form-group.col-xs-6 {\n    padding-right: 2px;\n  }\n  div.form-group.col-xs-3 {\n    padding: 0px 2px;\n  }\n  div.form-group.col-md-12 {\n    padding-right: 2px;\n  }\n\n}\n\n@media (max-width: 378px) {\n  form#search.open {\n    height: 170px;\n  }\n\n  h2 {\n    font-size: 1em;\n  }\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -20283,81 +20306,80 @@ var PostQuote = function (_Component) {
         'div',
         { className: 'homepage', id: 'quote-post-container' },
         _react2.default.createElement(
-          'h2',
-          { onClick: this.showSection },
-          'Add a Quote'
-        ),
-        _react2.default.createElement(
           'form',
           { className: '', id: 'post-quote', onSubmit: this.submitQuote },
           _react2.default.createElement(
-            'label',
-            { className: 'instruction' },
-            'Add a quote to the collection'
-          ),
-          _react2.default.createElement(
             'div',
-            { className: 'form-row' },
+            { className: 'form-inner' },
             _react2.default.createElement(
-              'div',
-              { className: 'form-group col-xs-6' },
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'work' },
-                'Work'
-              ),
-              _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'work', id: 'work', placeholder: 'Henry V', onChange: this.handleChange, value: this.state.work, required: true })
+              'label',
+              { className: 'instruction' },
+              'Add a quote to the collection'
             ),
             _react2.default.createElement(
               'div',
-              { className: 'form-group col-xs-3' },
+              { className: 'form-row' },
               _react2.default.createElement(
-                'label',
-                { htmlFor: 'act' },
-                'Act'
+                'div',
+                { className: 'form-group col-xs-6' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'work' },
+                  'Work'
+                ),
+                _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'work', id: 'work', placeholder: 'Henry V', onChange: this.handleChange, value: this.state.work, required: true })
               ),
-              _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'act', placeholder: '3', onChange: this.handleChange, value: this.state.act, required: required })
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col-xs-3' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'act' },
+                  'Act'
+                ),
+                _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'act', placeholder: '3', onChange: this.handleChange, value: this.state.act, required: required })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col-xs-3' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'scene' },
+                  'Scene'
+                ),
+                _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'scene', placeholder: '1', onChange: this.handleChange, value: this.state.scene, required: required })
+              )
             ),
             _react2.default.createElement(
               'div',
-              { className: 'form-group col-xs-3' },
+              { className: 'form-row' },
               _react2.default.createElement(
-                'label',
-                { htmlFor: 'scene' },
-                'Scene'
-              ),
-              _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'scene', placeholder: '1', onChange: this.handleChange, value: this.state.scene, required: required })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-row' },
+                'div',
+                { className: 'form-group col-md-12' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'quote' },
+                  'Quote'
+                ),
+                _react2.default.createElement('input', { className: 'form-control', type: 'text', id: 'quote', name: 'quote', placeholder: 'Once more unto the breach, dear friends, once more', onChange: this.handleChange, value: this.state.quote, required: true })
+              )
+            ),
             _react2.default.createElement(
               'div',
-              { className: 'form-group col-md-12' },
+              { className: 'form-row' },
               _react2.default.createElement(
-                'label',
-                { htmlFor: 'quote' },
-                'Quote'
-              ),
-              _react2.default.createElement('input', { className: 'form-control', type: 'text', id: 'quote', name: 'quote', placeholder: 'Once more unto the breach, dear friends, once more', onChange: this.handleChange, value: this.state.quote, required: true })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'form-group col-md-12' },
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'tags' },
-                'Tags'
-              ),
-              _react2.default.createElement('input', { className: 'form-control', type: 'text', id: 'tags', name: 'tags', placeholder: 'courage, friends, battle, comraderie', onChange: this.handleChange, value: this.state.tags, required: true })
-            )
-          ),
-          _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Add Quote' })
+                'div',
+                { className: 'form-group col-md-12' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'tags' },
+                  'Tags'
+                ),
+                _react2.default.createElement('input', { className: 'form-control', type: 'text', id: 'tags', name: 'tags', placeholder: 'courage, friends, battle, comraderie', onChange: this.handleChange, value: this.state.tags, required: true })
+              )
+            ),
+            _react2.default.createElement(_ButtonForm2.default, { type: 'Submit', label: 'Add Quote' })
+          )
         )
       );
     }
@@ -20367,6 +20389,131 @@ var PostQuote = function (_Component) {
 }(_react.Component);
 
 exports.default = PostQuote;
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(24);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _SearchQuote = __webpack_require__(33);
+
+var _SearchQuote2 = _interopRequireDefault(_SearchQuote);
+
+var _PostQuote = __webpack_require__(44);
+
+var _PostQuote2 = _interopRequireDefault(_PostQuote);
+
+var _DisplayQuotes = __webpack_require__(39);
+
+var _DisplayQuotes2 = _interopRequireDefault(_DisplayQuotes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_Component) {
+  _inherits(Header, _Component);
+
+  function Header(props) {
+    _classCallCheck(this, Header);
+
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this.showSection = _this.showSection.bind(_this);
+    return _this;
+  }
+
+  _createClass(Header, [{
+    key: 'showSection',
+    value: function showSection() {
+      document.getElementById('post-quote').classList.toggle('open');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'header',
+        null,
+        _react2.default.createElement(
+          'nav',
+          { className: 'navbar navbar-default navbar-expand', role: 'navigation' },
+          _react2.default.createElement(
+            'div',
+            { className: 'container-fluid' },
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-header' },
+              _react2.default.createElement(
+                'a',
+                { className: 'navbar-brand', href: '/' },
+                _react2.default.createElement('span', { className: 'glyphicon glyphicon glyphicon glyphicon-tower' }),
+                'Shakespeare'
+              ),
+              _react2.default.createElement(
+                'ul',
+                { className: 'nav navbar-nav pull-right' },
+                _react2.default.createElement(
+                  'li',
+                  { onClick: this.showSection },
+                  _react2.default.createElement(
+                    'a',
+                    null,
+                    'Add Quote'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '/' },
+                    'Search'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '/' },
+                    'All'
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Header;
+}(_react.Component);
+
+// ReactDOM.render(<Header />, document.getElementById('header'));
+
+
+exports.default = Header;
 
 /***/ })
 /******/ ]);
