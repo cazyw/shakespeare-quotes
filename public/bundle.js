@@ -20080,32 +20080,32 @@ var QuoteItem = function (_Component) {
       var scene = this.props.scene === '' ? '' : ' Scene ' + this.props.act + ')';
       return _react2.default.createElement(
         'li',
-        null,
+        { className: 'quote-box' },
         _react2.default.createElement(
           'span',
-          { className: 'quote' },
+          { className: 'quote quote-span' },
           '"',
           this.props.quote,
           '"'
         ),
         _react2.default.createElement(
           'span',
-          { className: 'work' },
+          { className: 'work quote-span' },
           this.props.work
         ),
         _react2.default.createElement(
           'span',
-          { className: 'act' },
+          { className: 'act quote-span' },
           act
         ),
         _react2.default.createElement(
           'span',
-          { className: 'scene' },
+          { className: 'scene quote-span' },
           scene
         ),
         _react2.default.createElement(
           'span',
-          { className: 'tags' },
+          { className: 'tags quote-span' },
           'Tags: ',
           this.displayTags(this.props.tags)
         )
@@ -20135,7 +20135,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\nul{\n  margin: 0;\n  padding: 0;\n}\nli{\n  padding: 15px 5px;\n  background: rgb(238, 238, 238);\n  list-style-type: none;\n  font-size: 1.2em;\n  margin: 10px 0;\n  border-radius: 4px;\n}\nspan{\n  display: inline-block;\n  margin: 3px 5px;\n}\n\nspan.act{\n  margin: 3px;\n}\nspan.scene{\n  margin: 3px;\n}\nspan.quote{\n  display: block;\n  margin: 3px;\n  font-weight: 700;\n}\nspan.tags{\n  display: block;\n  margin: 3px;\n}\n\nspan.tag {\n  background: rgb(82, 163, 255);\n  border: 0;\n  color: rgb(255, 255, 255);\n  display: inline-block;\n  padding: 2px 10px;\n  margin: 3px 5px;\n  border-radius: 4px;\n  cursor: pointer;\n  font-size: 0.8em;\n}", ""]);
+exports.push([module.i, "\nul > li.quote-box {\n  margin: 0;\n  padding: 0;\n}\nli.quote-box{\n  padding: 15px 5px;\n  background: rgb(238, 238, 238);\n  list-style-type: none;\n  font-size: 1.2em;\n  margin: 10px 0;\n  border-radius: 4px;\n}\nspan.quote-span {\n  display: inline-block;\n  margin: 3px 5px;\n}\n\nspan.act{\n  margin: 3px;\n}\nspan.scene{\n  margin: 3px;\n}\nspan.quote{\n  display: block;\n  margin: 3px;\n  font-weight: 700;\n}\nspan.tags{\n  display: block;\n  margin: 3px;\n}\n\nspan.tag {\n  background: rgb(82, 163, 255);\n  border: 0;\n  color: rgb(255, 255, 255);\n  display: inline-block;\n  padding: 2px 10px;\n  margin: 3px 5px;\n  border-radius: 4px;\n  cursor: pointer;\n  font-size: 0.8em;\n}", ""]);
 
 // exports
 

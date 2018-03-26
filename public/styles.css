@@ -1,38 +1,40 @@
-body{
+body {
   font-family: Raleway;
   color: rgb(84, 84, 84);
   background: rgb(70, 70, 70);
   margin: 10px 30px;
 }
 
-nav.navbar-expand{
+nav.navbar-expand {
   margin-top: -10px;
   margin-left: -15px;
   margin-right: -15px;
   border-radius: 0px;
 }
 
-.homepage{
+.quote-box {
   max-width: 800px;
   margin: 20px auto;
   padding: 10px 20px;
-  background: rgba(253, 253, 253, 0.401);
+  background: rgb(253, 253, 253);
   box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
 }
 
-.title{
+.title {
   text-align: center;
   font-size: 3.5em;
   font-family: 'Berkshire Swash', cursive;
 }
-.sub-title{
+.sub-title {
   text-align: center;
   font-size: 1.5em;
   margin-top: 40px;
 }
-#homepage h1{
+.display h1 {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 3em;
+  color: rgb(255, 255, 255);
+
 }
 
 @media (max-width: 378px) {

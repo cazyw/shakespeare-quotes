@@ -1,0 +1,17 @@
+<%
+  const displayAll = () => {
+    fetch('/api/quotes/')
+    .then((data) => {
+      let rendered = ejs.render(quoteBox, data);
+      return data.json();
+    });
+  }
+%>
+
+<div class="display">
+  <h1>Quotes</h1>
+  <div class="display-quotes">
+    <% displayAll() %>
+  </div>
+</div>
+

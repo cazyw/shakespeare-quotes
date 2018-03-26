@@ -25,12 +25,12 @@ class QuoteItem extends Component {
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.act})`;
     return(
-      <li>
-        <span className='quote'>"{this.props.quote}"</span>
-        <span className='work'>{this.props.work}</span>
-        <span className='act'>{act}</span>
-        <span className='scene'>{scene}</span>    
-        <span className='tags'>Tags: {this.displayTags(this.props.tags)}</span>      
+      <li className="quote-box">
+        <span className='quote quote-span'>"{this.props.quote}"</span>
+        <span className='work quote-span'>{this.props.work}</span>
+        <span className='act quote-span'>{act}</span>
+        <span className='scene quote-span'>{scene}</span>    
+        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span>      
       </li>
     );
   }

@@ -1,9 +1,9 @@
 
-ul{
+ul > li.quote-box {
   margin: 0;
   padding: 0;
 }
-li{
+li.quote-box{
   padding: 15px 5px;
   background: rgb(238, 238, 238);
   list-style-type: none;
@@ -11,7 +11,7 @@ li{
   margin: 10px 0;
   border-radius: 4px;
 }
-span{
+span.quote-span {
   display: inline-block;
   margin: 3px 5px;
 }

@@ -28,10 +28,11 @@ if (process.env.NODE_ENV === 'development'){
   });
 }
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 // app.engine('.ejs', 'ejs');  // <-- this one
 
 // static files
+app.use(express.static(__dirname + '/../public'));
 
 app.use(bodyParser.json());
 
@@ -39,7 +40,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.use(express.static(__dirname + '/../public'));
 
 // initialise routes
 app.use('/api', require('./routes'));
