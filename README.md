@@ -14,7 +14,7 @@ Currently working on testing and restructuring the project back-end before restr
 To do:
 
 * refactor/modularise the API into more of an MVC structure
-* refactor the front-end to use view templates rather than React
+* refactor the front-end React pages
 * allow users to delete and modify tags and quotes
 * include tag suggestions and link tags so they become search terms
 * further testing esp unit testing
@@ -180,12 +180,7 @@ For online storage, I went with `mLab` as it can be added as an add-on to Heroku
 
 ### Display
 
-#### Update
-
-I'll probably eventually convert the front-end to use templates. Whilst it's currently using React, it isn't using best practices and as this project will focus more on back-end structuring and testing and the MVC model, I want to keep my learning of React separate.
-
-
-#### Old discussion 
+After a bit of back and forth.....I'l sticking with React but am refactoring it.
 
 The front-end is using `React`. Currently users are able to:
 * submit quotes to be entered into the collection
