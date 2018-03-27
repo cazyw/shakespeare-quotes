@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Header extends Component {
   constructor(props){
@@ -6,7 +7,11 @@ export default class Header extends Component {
     this.toggleSections = this.toggleSections.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
-    this.showDisplaySection = this.showDisplaySection.bind(this);
+    this.parentFunction = this.parentFunction.bind(this);
+  }
+
+  parentFunction() {
+    this.props.displayAllQuotes();
   }
 
   toggleSections(sectionToOpen, sectionToClose1, sectionToClose2){
@@ -27,11 +32,7 @@ export default class Header extends Component {
   }
 
   showSearchSection() {
-    this.toggleSections('search','post-quote','quote-display-container');
-  }
-
-  showDisplaySection() {
-    this.toggleSections('quote-display-container', 'post-quote','search');
+    this.toggleSections('search','post-quote','quote-display-container'); 
   }
 
   render(){
@@ -47,7 +48,7 @@ export default class Header extends Component {
               <ul className="nav navbar-nav pull-right">
                 <li onClick={this.showPostSection}><a>Add Quote</a></li>
                 <li onClick={this.showSearchSection}><a>Search</a></li>
-                <li onClick={this.showDisplaySection}><a>All</a></li>
+                <li onClick={this.parentFunction}><a>All</a></li>
               </ul>
             </div>
           </div>
@@ -56,3 +57,8 @@ export default class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  displayAllQuotes: PropTypes.func
+};
+  

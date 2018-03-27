@@ -21,6 +21,10 @@ export default class SearchQuote extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({ quotes: newProps.quotes });
+  }
+  
   handleChange(event) {
     this.setState({tags: event.target.value});
   }

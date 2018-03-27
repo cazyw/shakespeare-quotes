@@ -17,30 +17,30 @@ export default class DisplayQuotes extends Component {
       quotes: []
     };
 
-    this.displayAll = this.displayAll.bind(this);
+    // this.displayAll = this.displayAll.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
 
-  // display all quotes in the database
-  displayAll(){
-    fetch('/api/quotes/')
-      .then((data) => {
-        return data.json();
-      })
-      .then((json) => {
-        this.setState({
-          quotes: json
-        });
-      });
-  }
+  // // display all quotes in the database
+  // displayAll(){
+  //   fetch('/api/quotes/')
+  //     .then((data) => {
+  //       return data.json();
+  //     })
+  //     .then((json) => {
+  //       this.toggleSections('quote-display-container', 'post-quote','search');
+  //       this.setState({
+  //         quotes: json
+  //       });
+  //     });
+  // }
 
   render() {
     return(
       <div className="homepage" id="quote-display-container">
-        <h2 onClick={this.displayAll}>Display All</h2>
         <ul><QuoteList quotes={this.state.quotes} /></ul>
       </div>
     );

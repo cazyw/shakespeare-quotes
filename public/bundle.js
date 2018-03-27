@@ -1072,11 +1072,11 @@ var _SearchQuote = __webpack_require__(29);
 
 var _SearchQuote2 = _interopRequireDefault(_SearchQuote);
 
-var _PostQuote = __webpack_require__(40);
+var _PostQuote = __webpack_require__(35);
 
 var _PostQuote2 = _interopRequireDefault(_PostQuote);
 
-var _Header = __webpack_require__(41);
+var _Header = __webpack_require__(36);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -1094,16 +1094,53 @@ var Home = function (_Component) {
   function Home(props) {
     _classCallCheck(this, Home);
 
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+
+    _this.state = {
+      quotes: []
+    };
+    _this.displayAll = _this.displayAll.bind(_this);
+    _this.toggleSections = _this.toggleSections.bind(_this);
+    return _this;
   }
 
   _createClass(Home, [{
+    key: 'toggleSections',
+    value: function toggleSections(sectionToOpen, sectionToClose1, sectionToClose2) {
+      if (document.getElementById(sectionToClose1).classList.contains('open') || document.getElementById(sectionToClose2).classList.contains('open')) {
+        document.getElementById(sectionToClose1).classList.remove('open');
+        document.getElementById(sectionToClose2).classList.remove('open');
+        setTimeout(function () {
+          document.getElementById(sectionToOpen).classList.add('open');
+        }, 750);
+      } else {
+        document.getElementById(sectionToOpen).classList.add('open');
+      }
+    }
+
+    // display all quotes in the database
+
+  }, {
+    key: 'displayAll',
+    value: function displayAll() {
+      var _this2 = this;
+
+      fetch('/api/quotes/').then(function (data) {
+        return data.json();
+      }).then(function (json) {
+        _this2.toggleSections('quote-display-container', 'post-quote', 'search');
+        _this2.setState({
+          quotes: json
+        });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_Header2.default, { displayAllQuotes: this.displayAll }),
         _react2.default.createElement(
           'h1',
           { className: 'title' },
@@ -1123,7 +1160,7 @@ var Home = function (_Component) {
           'div',
           { className: 'quote-body' },
           _react2.default.createElement(_PostQuote2.default, null),
-          _react2.default.createElement(_SearchQuote2.default, null)
+          _react2.default.createElement(_SearchQuote2.default, { quotes: this.state.quotes })
         )
       );
     }
@@ -18447,7 +18484,7 @@ var _ButtonForm = __webpack_require__(16);
 
 var _ButtonForm2 = _interopRequireDefault(_ButtonForm);
 
-var _DisplayQuotes = __webpack_require__(37);
+var _DisplayQuotes = __webpack_require__(32);
 
 var _DisplayQuotes2 = _interopRequireDefault(_DisplayQuotes);
 
@@ -18481,6 +18518,11 @@ var SearchQuote = function (_Component) {
   }
 
   _createClass(SearchQuote, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(newProps) {
+      this.setState({ quotes: newProps.quotes });
+    }
+  }, {
     key: 'handleChange',
     value: function handleChange(event) {
       this.setState({ tags: event.target.value });
@@ -19152,12 +19194,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19173,7 +19210,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _QuoteList = __webpack_require__(38);
+var _QuoteList = __webpack_require__(33);
 
 var _QuoteList2 = _interopRequireDefault(_QuoteList);
 
@@ -19203,7 +19240,7 @@ var DisplayQuotes = function (_Component) {
       quotes: []
     };
 
-    _this.displayAll = _this.displayAll.bind(_this);
+    // this.displayAll = this.displayAll.bind(this);
     return _this;
   }
 
@@ -19213,32 +19250,26 @@ var DisplayQuotes = function (_Component) {
       this.setState({ quotes: newProps.quotes });
     }
 
-    // display all quotes in the database
+    // // display all quotes in the database
+    // displayAll(){
+    //   fetch('/api/quotes/')
+    //     .then((data) => {
+    //       return data.json();
+    //     })
+    //     .then((json) => {
+    //       this.toggleSections('quote-display-container', 'post-quote','search');
+    //       this.setState({
+    //         quotes: json
+    //       });
+    //     });
+    // }
 
-  }, {
-    key: 'displayAll',
-    value: function displayAll() {
-      var _this2 = this;
-
-      fetch('/api/quotes/').then(function (data) {
-        return data.json();
-      }).then(function (json) {
-        _this2.setState({
-          quotes: json
-        });
-      });
-    }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { className: 'homepage', id: 'quote-display-container' },
-        _react2.default.createElement(
-          'h2',
-          { onClick: this.displayAll },
-          'Display All'
-        ),
         _react2.default.createElement(
           'ul',
           null,
@@ -19254,7 +19285,7 @@ var DisplayQuotes = function (_Component) {
 exports.default = DisplayQuotes;
 
 /***/ }),
-/* 38 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19266,7 +19297,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _QuoteItem = __webpack_require__(39);
+var _QuoteItem = __webpack_require__(34);
 
 var _QuoteItem2 = _interopRequireDefault(_QuoteItem);
 
@@ -19314,7 +19345,7 @@ QuoteList.propTypes = {
 module.exports = QuoteList;
 
 /***/ }),
-/* 39 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19417,7 +19448,7 @@ QuoteItem.propTypes = {
 module.exports = QuoteItem;
 
 /***/ }),
-/* 40 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19622,7 +19653,7 @@ var PostQuote = function (_Component) {
 exports.default = PostQuote;
 
 /***/ }),
-/* 41 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19637,6 +19668,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(9);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19657,11 +19692,16 @@ var Header = function (_Component) {
     _this.toggleSections = _this.toggleSections.bind(_this);
     _this.showPostSection = _this.showPostSection.bind(_this);
     _this.showSearchSection = _this.showSearchSection.bind(_this);
-    _this.showDisplaySection = _this.showDisplaySection.bind(_this);
+    _this.parentFunction = _this.parentFunction.bind(_this);
     return _this;
   }
 
   _createClass(Header, [{
+    key: 'parentFunction',
+    value: function parentFunction() {
+      this.props.displayAllQuotes();
+    }
+  }, {
     key: 'toggleSections',
     value: function toggleSections(sectionToOpen, sectionToClose1, sectionToClose2) {
       if (document.getElementById(sectionToClose1).classList.contains('open') || document.getElementById(sectionToClose2).classList.contains('open')) {
@@ -19683,11 +19723,6 @@ var Header = function (_Component) {
     key: 'showSearchSection',
     value: function showSearchSection() {
       this.toggleSections('search', 'post-quote', 'quote-display-container');
-    }
-  }, {
-    key: 'showDisplaySection',
-    value: function showDisplaySection() {
-      this.toggleSections('quote-display-container', 'post-quote', 'search');
     }
   }, {
     key: 'render',
@@ -19733,7 +19768,7 @@ var Header = function (_Component) {
                 ),
                 _react2.default.createElement(
                   'li',
-                  { onClick: this.showDisplaySection },
+                  { onClick: this.parentFunction },
                   _react2.default.createElement(
                     'a',
                     null,
@@ -19752,6 +19787,11 @@ var Header = function (_Component) {
 }(_react.Component);
 
 exports.default = Header;
+
+
+Header.propTypes = {
+  displayAllQuotes: _propTypes2.default.func
+};
 
 /***/ })
 /******/ ]);
