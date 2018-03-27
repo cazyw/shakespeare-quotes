@@ -7,7 +7,6 @@
 import React, { Component } from 'react';
 import ButtonForm from '../button-components/ButtonForm';
 import DisplayQuotes from './DisplayQuotes';
-require('./Forms.css');
 
 export default class SearchQuote extends Component {
 
@@ -20,7 +19,6 @@ export default class SearchQuote extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.showSection = this.showSection.bind(this);
   }
 
   handleChange(event) {
@@ -41,19 +39,16 @@ export default class SearchQuote extends Component {
     event.preventDefault();
   }
 
-  showSection() {
-    document.getElementById('search').classList.toggle('open');
-  }
-
   render(){
     return(
       <div id="quote-search-container">
         <div className="homepage">
-          <h2 onClick={this.showSection}>Search for a Quote</h2>
           <form className="" id="search" onSubmit={this.handleSubmit}>
-            <label>Enter search tags, separated by a space</label>
-            <input type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
-            <ButtonForm type="Submit" label="Find Quotes" />
+            <div className='form-inner'>
+              <label>Enter search tags, separated by a space</label>
+              <input type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
+              <ButtonForm type="Submit" label="Find Quotes" />
+            </div>
           </form>
         </div>
         <DisplayQuotes quotes={this.state.quotes} />

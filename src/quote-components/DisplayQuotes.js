@@ -8,7 +8,6 @@
 
 import React, { Component } from 'react';
 import QuoteList from './QuoteList';
-require('./Forms.css');
 
 export default class DisplayQuotes extends Component {
 
@@ -40,8 +39,7 @@ export default class DisplayQuotes extends Component {
 
   render() {
     return(
-      <div className="homepage">
-        <h2 onClick={this.displayAll}>Display Quotes</h2>
+      <div className="homepage" id="quote-display-container">
         <ul><QuoteList quotes={this.state.quotes} /></ul>
       </div>
     );

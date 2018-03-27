@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import ButtonForm from '../button-components/ButtonForm';
-require('./Forms.css');
 
 export default class PostQuote extends Component {
 
@@ -23,7 +22,6 @@ export default class PostQuote extends Component {
     this.submitQuote = this.submitQuote.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.resetFields = this.resetFields.bind(this);
-    this.showSection = this.showSection.bind(this);
   }
 
   handleChange(event) {
@@ -70,10 +68,6 @@ export default class PostQuote extends Component {
       });
 
     event.preventDefault();
-  }
-
-  showSection() {
-    document.getElementById('post-quote').classList.toggle('open');
   }
     
   render(){

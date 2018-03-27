@@ -17,6 +17,7 @@ export default class Home extends Component {
         <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
         <div className="quote-body">
           <PostQuote />
+          <SearchQuote />
         </div>
       </div>
     );

@@ -8,7 +8,6 @@
 import React, { Component } from 'react';
 import QuoteItem from './QuoteItem';
 import PropTypes from 'prop-types';
-require('./Quote.css');
 
 class QuoteList extends Component {
   constructor(props){
