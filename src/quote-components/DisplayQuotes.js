@@ -40,6 +40,7 @@ export default class DisplayQuotes extends Component {
   render() {
     return(
       <div className="homepage" id="quote-display-container">
+        <h2 onClick={this.displayAll}>Display All</h2>
         <ul><QuoteList quotes={this.state.quotes} /></ul>
       </div>
     );

@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-require('./Button.css');
 
 class ButtonDisplay extends Component {
   parentFunction() {

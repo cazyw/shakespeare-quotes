@@ -32,6 +32,7 @@ export default class SearchQuote extends Component {
         return data.json();
       })
       .then((json) => {
+        document.getElementById('quote-display-container').classList.add('open');
         this.setState({
           quotes: json
         });

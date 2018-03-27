@@ -15,10 +15,10 @@ export default class Header extends Component {
       document.getElementById(sectionToClose1).classList.remove('open');
       document.getElementById(sectionToClose2).classList.remove('open');
       setTimeout(() => {
-        document.getElementById(sectionToOpen).classList.toggle('open');
-      }, 1000);
+        document.getElementById(sectionToOpen).classList.add('open');
+      }, 750);
     } else {
-      document.getElementById(sectionToOpen).classList.toggle('open');
+      document.getElementById(sectionToOpen).classList.add('open');
     }
   }
 
@@ -47,7 +47,7 @@ export default class Header extends Component {
               <ul className="nav navbar-nav pull-right">
                 <li onClick={this.showPostSection}><a>Add Quote</a></li>
                 <li onClick={this.showSearchSection}><a>Search</a></li>
-                <li><a href="/">All</a></li>
+                <li onClick={this.showDisplaySection}><a>All</a></li>
               </ul>
             </div>
           </div>

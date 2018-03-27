@@ -51,17 +51,17 @@ a {
 
 /* Quotes */
 
-ul > li.quote-box {
+ul {
   margin: 0;
   padding: 0;
 }
 li.quote-box{
   padding: 15px 5px;
-  background: rgb(238, 238, 238);
+  background: rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255);
   list-style-type: none;
   font-size: 1.2em;
   margin: 10px 0;
-  border-radius: 4px;
 }
 span.quote-span {
   display: inline-block;
@@ -85,9 +85,9 @@ span.tags{
 }
 
 span.tag {
-  background: rgb(82, 163, 255);
+  background: rgb(255, 211, 145);
   border: 0;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   display: inline-block;
   padding: 2px 10px;
   margin: 3px 5px;
@@ -105,6 +105,7 @@ input[type="text"]{
   padding: 10px;
   border-radius: 4px;
   border: 1px solid rgb(221, 221, 221);
+  color: rgb(0, 0, 0);
 }
 
 input.form-control {
@@ -123,6 +124,7 @@ label.instruction {
 }
 
 form {
+  box-sizing: border-box;
   max-width: 650px;
   margin: auto auto;
   height: 0px;
@@ -148,7 +150,8 @@ form.open {
 
 
 form#search {
-  max-width: 600px;
+  box-sizing: border-box;
+  max-width: 650px;
   margin: auto auto;
   height: 0px;
   overflow: hidden;
@@ -168,8 +171,10 @@ form#search.open {
          -o-transition: height 0.5s linear;
             transition: height 0.5s linear;
 }
+
 #quote-display-container {
-  max-width: 600px;
+  box-sizing: border-box;
+  max-width: 650px;
   margin: auto auto;
   height: 0px;
   overflow: hidden;
@@ -182,7 +187,7 @@ form#search.open {
 
 #quote-display-container.open {
   margin: auto auto;
-  height: 600px;
+  height: 650px;
     -webkit-transition: height 0.5s linear;
        -moz-transition: height 0.5s linear;
         -ms-transition: height 0.5s linear;
@@ -195,6 +200,7 @@ h2 {
   cursor: pointer;
   font-size: 1.5em;
   margin: 10px auto;
+  color: rgb(255, 255, 255);
 }
 
 /* h2:hover {
@@ -215,6 +221,26 @@ input.form-control {
 .form-inner {
   padding: 20px;
 }
+
+/* Buttons */
+
+button {
+  background: rgb(85, 85, 85);
+  color: rgb(255, 255, 255);
+  border: 0;
+  padding: 10px;
+  font-size: 1em;
+  width: 150px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+
+button:focus {
+  outline-color: rgb(85, 85, 85);
+  outline-width: 0px;
+}
+
 
 @media (max-width: 500px) {
   div.form-group.col-xs-6 {
