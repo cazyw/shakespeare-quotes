@@ -1128,7 +1128,7 @@ var Home = function (_Component) {
       fetch('/api/quotes/').then(function (data) {
         return data.json();
       }).then(function (json) {
-        _this2.toggleSections('quote-display-container', 'post-quote', 'search');
+        _this2.toggleSections('page-display-container', 'post-quote', 'search');
         _this2.setState({
           quotes: json
         });
@@ -1158,7 +1158,7 @@ var Home = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'quote-body' },
+          { className: 'page-body' },
           _react2.default.createElement(_PostQuote2.default, null),
           _react2.default.createElement(_SearchQuote2.default, { quotes: this.state.quotes })
         )

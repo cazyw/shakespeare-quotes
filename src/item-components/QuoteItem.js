@@ -4,7 +4,6 @@
  * Renders each individual quote
  */
 
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 

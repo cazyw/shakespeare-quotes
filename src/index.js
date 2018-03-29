@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SearchQuote from './quote-components/SearchQuote';
-import PostQuote from './quote-components/PostQuote';
-import Header from './Header';
+import SearchQuote from './page-components/SearchQuote';
+import PostQuote from './page-components/PostQuote';
+import Header from './page-components/Header';
 
 export default class Home extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ export default class Home extends Component {
         return data.json();
       })
       .then((json) => {
-        this.toggleSections('quote-display-container', 'post-quote','search');
+        this.toggleSections('page-display-container', 'post-quote','search');
         this.setState({
           quotes: json
         });
@@ -47,7 +47,7 @@ export default class Home extends Component {
         <Header displayAllQuotes={this.displayAll} />
         <h1 className="title">Speaking Shakespeare</h1>
         <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
-        <div className="quote-body">
+        <div className="page-body">
           <PostQuote />
           <SearchQuote quotes={this.state.quotes} />
         </div>

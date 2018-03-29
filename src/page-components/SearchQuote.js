@@ -5,7 +5,7 @@
 
 
 import React, { Component } from 'react';
-import ButtonForm from '../button-components/ButtonForm';
+import ButtonForm from '../item-components/ButtonForm';
 import DisplayQuotes from './DisplayQuotes';
 
 export default class SearchQuote extends Component {

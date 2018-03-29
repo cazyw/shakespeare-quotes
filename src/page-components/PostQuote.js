@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import ButtonForm from '../button-components/ButtonForm';
+import ButtonForm from '../item-components/ButtonForm';
 
 export default class PostQuote extends Component {
 

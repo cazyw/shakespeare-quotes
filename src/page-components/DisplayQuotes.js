@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import QuoteList from './QuoteList';
+import QuoteList from '../item-components/QuoteList';
 
 export default class DisplayQuotes extends Component {
 
