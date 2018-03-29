@@ -34,7 +34,7 @@ export default class Home extends Component {
         return data.json();
       })
       .then((json) => {
-        this.toggleSections('page-display-container', 'post-quote','search');
+        this.toggleSections('quote-display-container', 'post-quote','search');
         this.setState({
           quotes: json
         });
