@@ -132,10 +132,10 @@ form {
   background: rgba(255, 255, 255, 0.2);
   overflow: hidden;
   -webkit-transition: height 0.5s linear;
-  -moz-transition: height 0.5s linear;
-  -ms-transition: height 0.5s linear;
-  -o-transition: height 0.5s linear;
-  transition: height 0.5s linear;
+     -moz-transition: height 0.5s linear;
+      -ms-transition: height 0.5s linear;
+       -o-transition: height 0.5s linear;
+          transition: height 0.5s linear;
 }
 
 form.open {
@@ -156,10 +156,10 @@ form#search {
   height: 0px;
   overflow: hidden;
   -webkit-transition: height 0.5s linear;
-  -moz-transition: height 0.5s linear;
-  -ms-transition: height 0.5s linear;
-  -o-transition: height 0.5s linear;
-  transition: height 0.5s linear;
+     -moz-transition: height 0.5s linear;
+      -ms-transition: height 0.5s linear;
+       -o-transition: height 0.5s linear;
+          transition: height 0.5s linear;
 }
 
 form#search.open {
@@ -176,23 +176,23 @@ form#search.open {
   box-sizing: border-box;
   max-width: 650px;
   margin: auto auto;
-  height: 0px;
+  opacity: 0;
   overflow: hidden;
-  -webkit-transition: height 0.5s linear;
-  -moz-transition: height 0.5s linear;
-  -ms-transition: height 0.5s linear;
-  -o-transition: height 0.5s linear;
-  transition: height 0.5s linear;
+  -webkit-transition: opacity 0.5s linear;
+     -moz-transition: opacity 0.5s linear;
+      -ms-transition: opacity 0.5s linear;
+       -o-transition: opacity 0.5s linear;
+          transition: opacity 0.5s linear;
 }
 
 #quote-display-container.open {
   margin: auto auto;
-  height: 650px;
-    -webkit-transition: height 0.5s linear;
-       -moz-transition: height 0.5s linear;
-        -ms-transition: height 0.5s linear;
-         -o-transition: height 0.5s linear;
-            transition: height 0.5s linear;
+  opacity: 1;
+    -webkit-transition: opacity 0.5s linear;
+       -moz-transition: opacity 0.5s linear;
+        -ms-transition: opacity 0.5s linear;
+         -o-transition: opacity 0.5s linear;
+            transition: opacity 0.5s linear;
 }
 
 h2 {
