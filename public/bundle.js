@@ -19716,7 +19716,7 @@ var Header = function (_Component) {
         null,
         _react2.default.createElement(
           'nav',
-          { className: 'navbar navbar-default navbar-expand', role: 'navigation' },
+          { className: 'navbar navbar-default' },
           _react2.default.createElement(
             'div',
             { className: 'container-fluid' },
@@ -19724,14 +19724,30 @@ var Header = function (_Component) {
               'div',
               { className: 'navbar-header' },
               _react2.default.createElement(
+                'button',
+                { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+                _react2.default.createElement(
+                  'span',
+                  { className: 'sr-only' },
+                  'Toggle navigation'
+                ),
+                _react2.default.createElement('span', { className: 'icon-bar' }),
+                _react2.default.createElement('span', { className: 'icon-bar' }),
+                _react2.default.createElement('span', { className: 'icon-bar' })
+              ),
+              _react2.default.createElement(
                 'a',
                 { className: 'navbar-brand', href: '/' },
                 _react2.default.createElement('span', { className: 'glyphicon glyphicon glyphicon glyphicon-tower' }),
                 'Shakespeare'
-              ),
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
               _react2.default.createElement(
                 'ul',
-                { className: 'nav navbar-nav pull-right' },
+                { className: 'nav navbar-nav navbar-right' },
                 _react2.default.createElement(
                   'li',
                   { onClick: this.showPostSection },

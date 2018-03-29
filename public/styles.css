@@ -1,8 +1,12 @@
 body {
   font-family: Raleway;
   color: rgb(84, 84, 84);
-  background: rgb(70, 70, 70);
+  background: rgb(70, 70, 70) url('./paper2_med.jpg');
   margin: 10px 30px;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 100% auto;
+  background-attachment: fixed;
 }
 
 nav.navbar-expand {
@@ -24,7 +28,7 @@ a {
   max-width: 800px;
   margin: 20px auto;
   padding: 10px 20px;
-  background: rgb(253, 253, 253);
+  background: rgba(0, 0, 0, 0.2);
   box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
 }
 
@@ -57,7 +61,7 @@ ul {
 }
 li.quote-box{
   padding: 15px 5px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   color: rgb(255, 255, 255);
   list-style-type: none;
   font-size: 1.2em;
@@ -129,7 +133,7 @@ form {
   margin: auto auto;
   height: 0px;
   color: rgb(255, 255, 255);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   overflow: hidden;
   -webkit-transition: height 0.5s linear;
      -moz-transition: height 0.5s linear;
@@ -195,17 +199,12 @@ form#search.open {
             transition: opacity 0.5s linear;
 }
 
-h2 {
+/* h2 {
   text-align: center;
   cursor: pointer;
   font-size: 1.5em;
   margin: 10px auto;
   color: rgb(255, 255, 255);
-}
-
-/* h2:hover {
-  color: rgb(51, 122, 183);
-  font-weight: 700;
 } */
 
 div.form-group.col-xs-6, 
@@ -224,7 +223,8 @@ input.form-control {
 
 /* Buttons */
 
-button {
+input + button,
+.form-row + button {
   background: rgb(85, 85, 85);
   color: rgb(255, 255, 255);
   border: 0;
@@ -236,7 +236,8 @@ button {
   cursor: pointer;
 }
 
-button:focus {
+input + button:focus,
+.form-row + button  {
   outline-color: rgb(85, 85, 85);
   outline-width: 0px;
 }
@@ -271,6 +272,7 @@ button:focus {
     font-size: 2em;
   }
   h2.sub-title {
-    font-size: 1em;
+    font-size: 1.2em;
+    margin-top: 20px;
   }
 }
