@@ -18537,6 +18537,7 @@ var SearchQuote = function (_Component) {
         return data.json();
       }).then(function (json) {
         document.getElementById('quote-display-container').classList.add('open');
+        _this2.setState({ tags: '' });
         _this2.setState({
           quotes: json
         });
@@ -19239,8 +19240,6 @@ var DisplayQuotes = function (_Component) {
     _this.state = {
       quotes: []
     };
-
-    // this.displayAll = this.displayAll.bind(this);
     return _this;
   }
 
@@ -19249,21 +19248,6 @@ var DisplayQuotes = function (_Component) {
     value: function componentWillReceiveProps(newProps) {
       this.setState({ quotes: newProps.quotes });
     }
-
-    // // display all quotes in the database
-    // displayAll(){
-    //   fetch('/api/quotes/')
-    //     .then((data) => {
-    //       return data.json();
-    //     })
-    //     .then((json) => {
-    //       this.toggleSections('quote-display-container', 'post-quote','search');
-    //       this.setState({
-    //         quotes: json
-    //       });
-    //     });
-    // }
-
   }, {
     key: 'render',
     value: function render() {

@@ -12,6 +12,10 @@
     "watch:server": "nodemon server/app.js",
     "watch": "NODE_ENV=development npm run watch:webpack & npm run watch:server"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cazyw/shakespeare-quotes.git"
+  },
   "keywords": [
     "shakespeare",
     "quotes"
@@ -20,9 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "ejs": "^2.5.7",
     "express": "^4.16.2",
-    "html-webpack-plugin": "^3.1.0",
     "mongoose": "^5.0.3",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",

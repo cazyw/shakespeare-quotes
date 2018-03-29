@@ -49,6 +49,10 @@ const QuoteSchema = new Schema({
     }],
     required: [true, 'Tags are required'],
     validate: [hasTags, 'Tags are required!']
+  },
+  created_date:  {
+    type: Date, 
+    default: Date.now
   }
 });
 

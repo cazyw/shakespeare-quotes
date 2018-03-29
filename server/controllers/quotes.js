@@ -23,7 +23,7 @@ function retrieveQuotes(req, res, next) {
     displayAllQuotes(res, next);
   } else {
     const selectedTags = collateTags(req.query.tags);
-    displaySelectedQuotes(res, selectedTags);
+    displaySelectedQuotes(res, selectedTags, next);
   }
 }
 
