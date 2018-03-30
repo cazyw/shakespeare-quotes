@@ -27,4 +27,4 @@ QuoteList.propTypes = {
   quotes: PropTypes.array
 };
 
-module.exports = QuoteList;
+export default QuoteList;

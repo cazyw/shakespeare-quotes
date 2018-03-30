@@ -24,6 +24,10 @@ a {
   cursor: pointer;
 }
 
+main {
+  margin-top: 70px;
+}
+
 .quote-box {
   max-width: 800px;
   margin: 20px auto;

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
 import Header from './page-components/Header';
+import './styles.css';
 
 export default class Home extends Component {
   constructor(props) {
@@ -45,12 +46,14 @@ export default class Home extends Component {
     return (
       <div>
         <Header displayAllQuotes={this.displayAll} />
+        <main>
         <h1 className="title">Speaking Shakespeare</h1>
-        <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
+        <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
         <div className="page-body">
           <PostQuote />
           <SearchQuote quotes={this.state.quotes} />
         </div>
+        </main>
       </div>
     );
   }

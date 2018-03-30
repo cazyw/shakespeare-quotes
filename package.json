@@ -2,15 +2,14 @@
   "name": "shakespeare-quotes",
   "version": "1.0.0",
   "description": "collection of Shakespeare Quotes",
-  "main": "server/app.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node server/app.js",
+    "start": "node server/server.js",
+    "client": "cd client && npm start",
+    "server": "nodemon server/server.js",
+    "build-react": "cd client && npm run build",
     "test": "NODE_ENV=test mocha --recursive --slow 0",
-    "test-watch": "NODE_ENV=test npm run watch:webpack & nodemon --exec 'npm test'",
-    "build": "webpack --progress",
-    "watch:webpack": "webpack --progress --watch",
-    "watch:server": "nodemon server/app.js",
-    "watch": "NODE_ENV=development npm run watch:webpack & npm run watch:server"
+    "dev": "NODE_ENV=development concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -25,23 +24,14 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mongoose": "^5.0.3",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "mongoose": "^5.0.3"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
     "chai": "*",
-    "css-loader": "^0.28.9",
+    "concurrently": "^3.5.0",
     "eslint": "^4.18.1",
-    "eslint-plugin-react": "^7.7.0",
     "mocha": "*",
     "nodemon": "^1.14.12",
-    "style-loader": "^0.20.1",
     "supertest": "^3.0.0",
     "webpack": "^3.10.0"
   },

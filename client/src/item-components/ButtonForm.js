@@ -19,4 +19,4 @@ ButtonForm.propTypes = {
   label: PropTypes.string
 };
 
-module.exports = ButtonForm;
+export default ButtonForm;

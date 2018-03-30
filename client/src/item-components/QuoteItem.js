@@ -24,7 +24,7 @@ class QuoteItem extends Component {
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.act})`;
     return(
       <li className="quote-box">
-        <span className='quote quote-span'>"{this.props.quote}"</span>
+        <span className='quote quote-span'>&quot;{this.props.quote}&quot;</span>
         <span className='work quote-span'>{this.props.work}</span>
         <span className='act quote-span'>{act}</span>
         <span className='scene quote-span'>{scene}</span>    
@@ -42,5 +42,5 @@ QuoteItem.propTypes = {
   tags: PropTypes.array,
 };
 
-module.exports = QuoteItem;
+export default QuoteItem;
 
