@@ -56,9 +56,9 @@ export default class Header extends Component {
             </div>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav navbar-right">
-                <li onClick={this.showPostSection}><a>Add Quote</a></li>
-                <li onClick={this.showSearchSection}><a>Search</a></li>
-                <li onClick={this.displayAll}><a>All</a></li>
+                <li onClick={this.showPostSection}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Add Quote</a></li>
+                <li onClick={this.showSearchSection}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Search</a></li>
+                <li onClick={this.displayAll}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">All</a></li>
               </ul>
             </div>
           </div>
