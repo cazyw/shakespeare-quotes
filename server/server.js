@@ -31,7 +31,6 @@ if (process.env.NODE_ENV === 'development'){
 
 // static files
 // serve the react app files
-// app.use(express.static(`${__dirname}/../client/build`));
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(bodyParser.json());
 

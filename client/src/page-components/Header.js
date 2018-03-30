@@ -7,12 +7,13 @@ export default class Header extends Component {
     this.toggleSections = this.toggleSections.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
-    this.parentFunction = this.parentFunction.bind(this);
+    this.displayAll = this.displayAll.bind(this);
   }
 
-  parentFunction() {
+  displayAll() {
     this.props.displayAllQuotes();
   }
+
 
   toggleSections(sectionToOpen, sectionToClose1, sectionToClose2){
     if (document.getElementById(sectionToClose1).classList.contains('open') || 
@@ -29,10 +30,12 @@ export default class Header extends Component {
 
   showPostSection() {
     this.toggleSections('post-quote','search','quote-display-container');
+    this.props.displayNoQuotes();
   }
-
+  
   showSearchSection() {
     this.toggleSections('search','post-quote','quote-display-container'); 
+    this.props.displayNoQuotes();
   }
 
   render(){
@@ -55,7 +58,7 @@ export default class Header extends Component {
               <ul className="nav navbar-nav navbar-right">
                 <li onClick={this.showPostSection}><a>Add Quote</a></li>
                 <li onClick={this.showSearchSection}><a>Search</a></li>
-                <li onClick={this.parentFunction}><a>All</a></li>
+                <li onClick={this.displayAll}><a>All</a></li>
               </ul>
             </div>
           </div>

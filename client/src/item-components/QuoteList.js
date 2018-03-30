@@ -10,9 +10,6 @@ import QuoteItem from './QuoteItem';
 import PropTypes from 'prop-types';
 
 class QuoteList extends Component {
-  constructor(props){
-    super(props);  
-  }
 
   render(){
     return this.props.quotes.map((quoteQ, index) => {

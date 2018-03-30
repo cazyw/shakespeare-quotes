@@ -29,7 +29,7 @@ export default class Home extends Component {
   }
 
   // display all quotes in the database
-  displayAll(){
+  displayAll = () => {
     fetch('/api/quotes/')
       .then((data) => {
         return data.json();
@@ -42,10 +42,16 @@ export default class Home extends Component {
       });
   }
 
+  displayNone = () => {
+    this.setState({
+      quotes: []
+    });
+  }
+
   render(){
     return (
       <div>
-        <Header displayAllQuotes={this.displayAll} />
+        <Header displayAllQuotes={this.displayAll} displayNoQuotes={this.displayNone} />
         <main>
         <h1 className="title">Speaking Shakespeare</h1>
         <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>

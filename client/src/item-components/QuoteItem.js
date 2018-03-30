@@ -8,9 +8,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class QuoteItem extends Component {
-  constructor(props){
-    super(props);  
-  }
 
   displayTags(tags) {
     const tagButtons = tags.map((tag, index) => {
