@@ -8,6 +8,9 @@ const express = require('express');
 const quotesController = require('./controllers/quotes');
 const router = express.Router();
 
+// get a random quote from the db
+router.get('/quotes/random', quotesController.retrieveRandomQuote);
+
 // get a list of quotes from the db
 router.get('/quotes', quotesController.retrieveQuotes);
 

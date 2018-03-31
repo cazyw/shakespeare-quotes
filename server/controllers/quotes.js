@@ -14,11 +14,17 @@ const displayAllQuotes = (res, next) => {
 };
 
 const displaySelectedQuotes = (res, selectedTags, next) => {
-  Quote.find({ tags: { $in: selectedTags } })
+  Quote.find([{ tags: { $in: selectedTags } }])
     .exec()
     .then(quote => res.send(quote))
     .catch(error => next(error)); // passes error to app.js
 };
+
+function retrieveRandomQuote(req, res, next) {
+  Quote.aggregate([{ $sample: { size: 1 } }])
+    .then(quote => res.send(quote))
+    .catch(error => next(error));
+}
 
 function retrieveQuotes(req, res, next) {
   if(!req.query.tags){
@@ -55,6 +61,7 @@ function deleteQuote(req, res, next) {
 
 module.exports = {
   collateTags,
+  retrieveRandomQuote,
   displayAllQuotes,
   displaySelectedQuotes,
   retrieveQuotes,

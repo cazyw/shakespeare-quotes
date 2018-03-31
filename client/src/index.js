@@ -15,6 +15,19 @@ export default class Home extends Component {
     this.toggleSections = this.toggleSections.bind(this);
   }
 
+  componentWillMount() {
+    fetch('/api/quotes/random')
+      .then(data => {
+        return data.json();
+      })
+      .then(json => {
+        this.toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
+        this.setState({
+          quotes: json
+        });
+      });
+  }
+
   toggleSections(sectionToOpen, sectionToClose1, sectionToClose2){
     if (document.getElementById(sectionToClose1).classList.contains('open') || 
         document.getElementById(sectionToClose2).classList.contains('open')){
@@ -35,10 +48,13 @@ export default class Home extends Component {
         return data.json();
       })
       .then((json) => {
-        this.toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
-        this.setState({
-          quotes: json
-        });
+        document.getElementById('quote-display-container').classList.remove('open');
+        setTimeout(() => {
+          this.toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
+          this.setState({
+            quotes: json
+          });
+        }, 750);
       });
   }
 
