@@ -8,7 +8,7 @@
 const expect = require('chai').expect;
 const request = require('supertest');
 const mongoose = require('mongoose');
-const {app} = require('../server/app');
+const {app} = require('../server/server');
 const {Quote} = require('../models/quote');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
@@ -128,7 +128,7 @@ describe('Routes', () => {
 
   describe('GET /api/quotes', () => {
     
-    it('should return all quotes', (done) => {
+    it('should return all quote', (done) => {
       request(app)
         .get('/api/quotes')
         .expect(200)

@@ -7,7 +7,7 @@
 
 const expect = require('chai').expect;
 const request = require('supertest');
-const {app} = require('../server/app');
+const {app} = require('../server/server');
 
 const quote = {
   work: 'The Taming of the Shrew',

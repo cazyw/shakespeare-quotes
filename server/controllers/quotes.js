@@ -14,7 +14,7 @@ const displayAllQuotes = (res, next) => {
 };
 
 const displaySelectedQuotes = (res, selectedTags, next) => {
-  Quote.find([{ tags: { $in: selectedTags } }])
+  Quote.find({ tags: { $in: selectedTags } })
     .exec()
     .then(quote => res.send(quote))
     .catch(error => next(error)); // passes error to app.js
