@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import DisplayQuotes from './DisplayQuotes';
+import { FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 import './SearchQuote.css';
 
 export default class SearchQuote extends Component {
@@ -60,11 +61,12 @@ export default class SearchQuote extends Component {
     return(
       <div className="homepage">
           <form className="" id="quote-search-container" onSubmit={this.handleSubmit}>
-            <div className='form-inner'>
-              <label>Enter search tags, separated by a space</label>
-              <input type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
-              <ButtonForm type="Submit" label="Find Quotes" />
-            </div>
+          <FormGroup controlId="formBasicText" className="form-inner" >
+            <ControlLabel>Enter search tags, separated by a space</ControlLabel>
+            <FormControl type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
+            <FormControl.Feedback />
+            <ButtonForm type="submit" label="Find Quotes" className="form-button" />
+            </FormGroup>
           </form>
         <DisplayQuotes quotes={this.state.quotes} />
       </div>

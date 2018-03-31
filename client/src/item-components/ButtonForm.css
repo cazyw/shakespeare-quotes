@@ -1,8 +1,8 @@
-input + button,
-.form-row + button {
+.form-button {
   background: rgb(85, 85, 85);
   color: rgb(255, 255, 255);
   border: 0;
+  border-radius: 0;
   padding: 10px;
   font-size: 1em;
   width: 150px;
@@ -11,8 +11,11 @@ input + button,
   cursor: pointer;
 }
 
-input + button:focus,
-.form-row + button  {
+#quote-search-container .form-button {
+  margin-top: 20px;
+}
+
+.form-button:focus {
   outline-color: rgb(85, 85, 85);
   outline-width: 0px;
 }

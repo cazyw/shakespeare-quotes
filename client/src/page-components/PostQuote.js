@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
+import { FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 import './PostQuote.css';
 
 export default class PostQuote extends Component {
@@ -70,6 +71,39 @@ export default class PostQuote extends Component {
 
     event.preventDefault();
   }
+
+  // <form className='' id='quote-post-container' onSubmit={this.submitQuote}>
+  //         <div className='form-inner'>
+  //           <label className='instruction'>Add a quote to the collection</label>
+  //           <div className='form-row'>
+  //             <div className='form-group col-xs-6'>
+  //               <label htmlFor='work'>Work</label>
+  //               <input className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
+  //             </div>
+  //             <div className='form-group col-xs-3'>
+  //               <label htmlFor='act'>Act</label>
+  //               <input className='form-control' type='text' name='act' placeholder='3' onChange={this.handleChange} value={this.state.act} required={required} />
+  //             </div>
+  //             <div className='form-group col-xs-3'>
+  //               <label htmlFor='scene'>Scene</label>
+  //               <input className='form-control' type='text' name='scene' placeholder='1' onChange={this.handleChange} value={this.state.scene} required={required} />
+  //             </div>
+  //           </div>
+  //           <div className='form-row'>
+  //             <div className='form-group col-md-12'>
+  //               <label htmlFor='quote'>Quote</label>
+  //               <input className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onChange={this.handleChange} value={this.state.quote} required  />
+  //             </div>
+  //           </div>
+  //           <div className='form-row'>
+  //             <div className='form-group col-md-12'>
+  //               <label htmlFor='tags'>Tags</label>
+  //               <input className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onChange={this.handleChange} value={this.state.tags} required  />
+  //             </div>
+  //           </div>
+  //           <ButtonForm type='submit' label='Add Quote' className='form-button' />
+  //         </div>
+  //       </form>
     
   render(){
     let required = this.state.act !== '' || this.state.scene !== '';
@@ -77,36 +111,36 @@ export default class PostQuote extends Component {
     return(
       <div className='homepage' >
         <form className='' id='quote-post-container' onSubmit={this.submitQuote}>
-          <div className='form-inner'>
-            <label className='instruction'>Add a quote to the collection</label>
+          <FormGroup controlId='formControlsText' className='form-inner'>
+            <ControlLabel className='instruction'>Add a quote to the collection</ControlLabel>
             <div className='form-row'>
-              <div className='form-group col-xs-6'>
-                <label htmlFor='work'>Work</label>
-                <input className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
-              </div>
-              <div className='form-group col-xs-3'>
-                <label htmlFor='act'>Act</label>
-                <input className='form-control' type='text' name='act' placeholder='3' onChange={this.handleChange} value={this.state.act} required={required} />
-              </div>
-              <div className='form-group col-xs-3'>
-                <label htmlFor='scene'>Scene</label>
-                <input className='form-control' type='text' name='scene' placeholder='1' onChange={this.handleChange} value={this.state.scene} required={required} />
-              </div>
+              <FormGroup className='form-group col-xs-6'>
+                <ControlLabel>Work</ControlLabel>
+                <FormControl className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
+              </FormGroup>
+              <FormGroup className='form-group col-xs-3'>
+                <ControlLabel>Act</ControlLabel>
+                <FormControl className='form-control' type='text' name='act' placeholder='3' onChange={this.handleChange} value={this.state.act} required={required} />
+              </FormGroup>
+              <FormGroup className='form-group col-xs-3'>
+                <ControlLabel>Scene</ControlLabel>
+                <FormControl className='form-control' type='text' name='scene' placeholder='1' onChange={this.handleChange} value={this.state.scene} required={required} />
+              </FormGroup>
             </div>
             <div className='form-row'>
-              <div className='form-group col-md-12'>
-                <label htmlFor='quote'>Quote</label>
-                <input className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onChange={this.handleChange} value={this.state.quote} required  />
-              </div>
+              <FormGroup className='form-group col-md-12'>
+                <ControlLabel>Quote</ControlLabel>
+                <FormControl className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onChange={this.handleChange} value={this.state.quote} required  />
+              </FormGroup>
             </div>
             <div className='form-row'>
-              <div className='form-group col-md-12'>
-                <label htmlFor='tags'>Tags</label>
-                <input className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onChange={this.handleChange} value={this.state.tags} required  />
-              </div>
+              <FormGroup className='form-group col-md-12'>
+                <ControlLabel>Tags</ControlLabel>
+                <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onChange={this.handleChange} value={this.state.tags} required  />
+              </FormGroup>
             </div>
-            <ButtonForm type='Submit' label='Add Quote' />
-          </div>
+            <ButtonForm type='submit' label='Add Quote' className='form-button' />
+          </FormGroup>
         </form>
       </div>
     );

@@ -6,11 +6,12 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import './ButtonForm.css';
 
 class ButtonForm extends Component {
   render() {
-    return <button type={this.props.type} className={this.props.className}>{this.props.label}</button>;
+    return <Button type={this.props.type} className={this.props.className}>{this.props.label}</Button>;
   }
 }
 

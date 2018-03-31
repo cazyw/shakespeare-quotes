@@ -1,7 +1,7 @@
-input[type="text"]{
+input.form-control[type="text"]{
   display: block;
   width: 100%;
-  margin: 10px 0;
+  margin: 5px 0;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid rgb(221, 221, 221);
@@ -13,7 +13,7 @@ input.form-control {
   margin-bottom: 5px;
 }
 
-div.form-group.col-xs-6, 
+div.col-xs-6, 
 div.form-group.col-xs-3,
 div.form-group.col-md-12 {
   margin-bottom: 10px;
@@ -21,6 +21,10 @@ div.form-group.col-md-12 {
 
 .form-inner {
   padding: 20px;
+}
+
+.instruction {
+  margin-bottom: 10px;
 }
 
 #quote-post-container {
