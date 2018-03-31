@@ -16,13 +16,6 @@ Will look into adding: login (to delete/modify quotes), better data validation/s
 
 Go to https://shakespeare-sunday.herokuapp.com/
 
-You can:
-
-* add quotes
-* search for quotes (via tags)
-  * the search terms do not need to be exact, but the tag must contain the search term e.g. searching for 'love' will also retrieve any quotes tagged 'loves'
-* display all quotes in the database
-
 <img src="" width="450" alt="">
 
 ## System Dependencies & Configuration
@@ -41,7 +34,7 @@ Clone the repository.
 
 Install node, mongodb and robomongo for local server usage. To install the other required packages, run:
 ```
-$ npm install-all
+$ npm run install-all
 ```
 
 Start the database locally (in my case path required as not stored in the default location):
@@ -57,9 +50,9 @@ $ npm run dev
 
 This will automatically open the browser to http://localhost:3000/
 
-For online production, accounts were setup in **Heroku** and **mLab**
+For online production, accounts were setup in Heroku and mLab.
 
-The following was added to `package.json` to build and bundle the React/front-end files for production so the web app only runs on one server (Express server).
+The following was added to `package.json` to build and bundle the React/front-end files for production so the web app only runs on one server (Express server). Heroku automatically runs this.
 ```
 "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
 ```
@@ -86,7 +79,7 @@ client/
 
 ```
 
-The working files that go into the React front-end:
+The working files that go into the React front-end (`.css` files not shown):
 
 ```
 src/
@@ -130,7 +123,7 @@ And it'd be a cool way for me to learn and put into practice routing, Express, A
 
 As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case). A new step for me in this project was to add a `config.js` file that included different settings for production (Heroku), development (locally) and testing (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data). 
 
-Initially I had used **webpack** to build my final `.js` file however once I looked more into React, I decided to use the `create-react-app` package which black-boxes the transpiling and compiling of the react (webapck and babel configuration).
+Initially I had used Webpack to build my final `.js` file however once I looked more into React, I decided to use the `create-react-app` package which black-boxes the transpiling and compiling of the react (webapck and babel configuration).
 
 I also used ESLint in this project and am getting to know some of the settings and configuration options. I learnt that `&` runs scripts concurrently and `&&` runs them sequentially. 
 
@@ -166,10 +159,9 @@ mongoimport --db shakespeare --collection quotes --drop --file ./quotes.json
 ```
 
 
-
 ### Display
 
-This section is still being worked on. This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. I'm going through Stephen Grider's course on Udemy [Modern React with Redux](https://www.udemy.com/react-redux/) as a foundation for how to use React but applying it to my own project. Initially I setup webpack and its configuration myself however I decided to switch to the `create-react-app` package as that includes some additional features/minification of files.
+This section is still being worked on. This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. I'm going through Stephen Grider's course on Udemy [Modern React with Redux](https://www.udemy.com/react-redux/) as a foundation for how to use React but applying it to my own project. Initially I setup webpack and its configuration myself however I decided to switch to the `create-react-app` package as that includes some additional features/minification of files. Also using react-bootstrap.
 
 ### Testing
 

@@ -37,11 +37,21 @@ export default class SearchQuote extends Component {
         return data.json();
       })
       .then((json) => {
-        document.getElementById('quote-display-container').classList.add('open');
         this.setState({tags: ''});
-        this.setState({
-          quotes: json
-        });
+        if(document.getElementById('quote-display-container').classList.contains('open')){
+          document.getElementById('quote-display-container').classList.remove('open');
+          setTimeout(() => {
+            this.setState({
+              quotes: json
+            });
+            document.getElementById('quote-display-container').classList.add('open');
+          }, 750);
+        } else {
+          this.setState({
+            quotes: json
+          });
+          document.getElementById('quote-display-container').classList.add('open');
+        }
       });
     event.preventDefault();
   }
