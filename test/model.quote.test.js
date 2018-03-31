@@ -3,7 +3,7 @@
  * Testing quotes model
  * Does not require a connection to any database
  * To run this test only
- * $ ./node_modules/mocha/bin/mocha test/quote.test.js
+ * $ ./node_modules/mocha/bin/mocha test/model.quote.test.js
  */
 'use strict';
 

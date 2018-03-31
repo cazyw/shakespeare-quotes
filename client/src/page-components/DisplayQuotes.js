@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import QuoteList from '../item-components/QuoteList';
+import './DisplayQuotes.css';
 
 export default class DisplayQuotes extends Component {
 

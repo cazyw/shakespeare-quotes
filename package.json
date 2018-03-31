@@ -1,7 +1,7 @@
 {
   "name": "shakespeare-quotes",
   "version": "1.0.0",
-  "description": "collection of Shakespeare Quotes",
+  "description": "Collection of Shakespeare Quotes",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -9,6 +9,7 @@
     "server": "nodemon server/server.js",
     "build-react": "cd client && npm run build",
     "test": "NODE_ENV=test mocha --recursive --slow 0",
+    "test-watch": "nodemon --exec \"npm test\"",
     "dev": "NODE_ENV=development concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "install-all": "npm install && cd client && npm install"

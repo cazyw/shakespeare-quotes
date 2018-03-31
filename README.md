@@ -158,6 +158,15 @@ At the moment there's not a lot of deep validation (e.g. checking whether the wo
 
 For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this free but less-reliable option. The `config` file selects the correct database (online, local, test) depending on the `NODE_ENV` setting.
 
+#### Notes
+
+Importing a file into the local database (drop to remove existing data):
+```
+mongoimport --db shakespeare --collection quotes --drop --file ./quotes.json
+```
+
+
+
 ### Display
 
 This section is still being worked on. This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. I'm going through Stephen Grider's course on Udemy [Modern React with Redux](https://www.udemy.com/react-redux/) as a foundation for how to use React but applying it to my own project. Initially I setup webpack and its configuration myself however I decided to switch to the `create-react-app` package as that includes some additional features/minification of files.

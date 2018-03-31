@@ -1,0 +1,18 @@
+input + button,
+.form-row + button {
+  background: rgb(85, 85, 85);
+  color: rgb(255, 255, 255);
+  border: 0;
+  padding: 10px;
+  font-size: 1em;
+  width: 150px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+
+input + button:focus,
+.form-row + button  {
+  outline-color: rgb(85, 85, 85);
+  outline-width: 0px;
+}

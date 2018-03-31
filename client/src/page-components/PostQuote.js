@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
+import './PostQuote.css';
 
 export default class PostQuote extends Component {
 
@@ -74,8 +75,8 @@ export default class PostQuote extends Component {
     let required = this.state.act !== '' || this.state.scene !== '';
         
     return(
-      <div className='homepage' id='quote-post-container'>
-        <form className='' id='post-quote' onSubmit={this.submitQuote}>
+      <div className='homepage' >
+        <form className='' id='quote-post-container' onSubmit={this.submitQuote}>
           <div className='form-inner'>
             <label className='instruction'>Add a quote to the collection</label>
             <div className='form-row'>

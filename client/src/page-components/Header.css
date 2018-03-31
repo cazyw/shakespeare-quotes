@@ -1,0 +1,19 @@
+a {
+  cursor: pointer;
+}
+
+li:hover {
+  background:rgba(159, 137, 100, 0.2);
+}
+
+li:active{
+  background:rgba(159, 137, 100, 0.2);
+}
+
+span.glyphicon {
+  margin-right: 5px;
+}
+
+/* .nav li:nth-of-type(3) {
+  padding-right: 10px;
+} */

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import './Header.css';
 
 export default class Header extends Component {
   constructor(props){
@@ -28,41 +30,68 @@ export default class Header extends Component {
     }
   }
 
+  // <li onClick={this.showPostSection}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Add Quote</a></li>
+  //               <li onClick={this.showSearchSection}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Search</a></li>
+  //               <li onClick={this.displayAll}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">All</a></li>
+              
+
   showPostSection() {
-    this.toggleSections('post-quote','search','quote-display-container');
+    this.toggleSections('quote-post-container','quote-search-container','quote-display-container');
     this.props.displayNoQuotes();
   }
   
   showSearchSection() {
-    this.toggleSections('search','post-quote','quote-display-container'); 
+    this.toggleSections('quote-search-container','quote-post-container','quote-display-container'); 
     this.props.displayNoQuotes();
   }
+
+  // <nav className="navbar navbar-default navbar-fixed-top">
+  //         <div className="container-fluid">
+  //           <div className="navbar-header">
+  //             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+  //               <span className="sr-only">Toggle navigation</span>
+  //               <span className="icon-bar"></span>
+  //               <span className="icon-bar"></span>
+  //               <span className="icon-bar"></span>
+  //             </button>
+  //             <a className="navbar-brand" href="/">
+  //               <span className="glyphicon glyphicon glyphicon glyphicon-tower"></span>Shakespeare
+  //             </a>
+  //           </div>
+  //           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  //             <ul className="nav navbar-nav navbar-right">
+  //               <li onClick={this.showPostSection}><a>Add Quote</a></li>
+  //               <li onClick={this.showSearchSection}><a>Search</a></li>
+  //               <li onClick={this.displayAll}><a>All</a></li>
+  //             </ul>
+  //           </div>
+  //         </div>
+  //       </nav>
 
   render(){
     return (
       <header>
-        <nav className="navbar navbar-default navbar-fixed-top">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <a className="navbar-brand" href="/">
-                <span className="glyphicon glyphicon glyphicon glyphicon-tower"></span>Shakespeare
-              </a>
-            </div>
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav navbar-right">
-                <li onClick={this.showPostSection}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Add Quote</a></li>
-                <li onClick={this.showSearchSection}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Search</a></li>
-                <li onClick={this.displayAll}><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">All</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        <Navbar fixedTop collapseOnSelect>
+          <Navbar.Header>
+          <Navbar.Brand>
+            <a href="/"><span className="glyphicon glyphicon glyphicon glyphicon-tower"></span>Shakespeare</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav pullRight>
+              <NavItem eventKey={1} onClick={this.showPostSection} >
+                Add Quote
+              </NavItem>
+              <NavItem eventKey={2} onClick={this.showSearchSection}>
+                Search
+              </NavItem>
+              <NavItem eventKey={3} onClick={this.displayAll}>
+                All
+              </NavItem>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </header>
     );
   }

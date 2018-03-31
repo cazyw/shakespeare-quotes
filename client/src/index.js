@@ -35,13 +35,14 @@ export default class Home extends Component {
         return data.json();
       })
       .then((json) => {
-        this.toggleSections('quote-display-container', 'post-quote','search');
+        this.toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
         this.setState({
           quotes: json
         });
       });
   }
 
+  // display no quotes
   displayNone = () => {
     this.setState({
       quotes: []
@@ -53,12 +54,12 @@ export default class Home extends Component {
       <div>
         <Header displayAllQuotes={this.displayAll} displayNoQuotes={this.displayNone} />
         <main>
-        <h1 className="title">Speaking Shakespeare</h1>
-        <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
-        <div className="page-body">
-          <PostQuote />
-          <SearchQuote quotes={this.state.quotes} />
-        </div>
+          <h1 className="title">Speaking Shakespeare</h1>
+          <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
+          <div className="page-body">
+            <PostQuote />
+            <SearchQuote quotes={this.state.quotes} />
+          </div>
         </main>
       </div>
     );
