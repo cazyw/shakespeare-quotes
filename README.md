@@ -16,7 +16,7 @@ Will look into adding: login (to delete/modify quotes), better data validation/s
 
 Go to https://shakespeare-sunday.herokuapp.com/
 
-<img src="" width="450" alt="">
+<img src="https://cazyw.github.io/img/react-express-shakespeare.jpg" width="450" alt="shakespeare subday">
 
 ## System Dependencies & Configuration
 
@@ -26,13 +26,13 @@ For this app:
 * Heroku account to host the service if using online
 * MongoDB and Robomongo (local), mLab (production))
 
-Check `package.json` for other packages installed. As I also used `create-react-app` for the front end, it has it's own `package.json` in the client/ folder.
+Check `package.json` for other packages installed. As I also used `create-react-app` for the front end; it has it's own `package.json` in the client/ folder.
 
 ## Application Installation Instructions
 
 Clone the repository.
 
-Install node, mongodb and robomongo for local server usage. To install the other required packages, run:
+Install node, mongodb and robomongo for local server usage. To install the other required packages (for both the Express server and React server), run:
 ```
 $ npm run install-all
 ```
@@ -79,7 +79,7 @@ client/
 
 ```
 
-The working files that go into the React front-end (`.css` files not shown):
+The working files that go into the React front-end (excluding `.css` files):
 
 ```
 src/
@@ -109,7 +109,7 @@ Then run the following:
 $ npm test
 ```
 
-This section is a work in progress as I develop more thorough testing practices. I'll also need to write unit tests that use mocking as at the moment my tests actually rely on an active database and server. 
+This section is a work in progress as I develop more thorough testing practices. I'll also need to write unit tests that use mocking as at the moment my tests actually rely on an active database and server. Slightly glitchy after I made a few changes to my project structure.
 
 ## Discussion
 
