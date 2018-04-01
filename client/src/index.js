@@ -64,6 +64,14 @@ export default class Home extends Component {
       quotes: []
     });
   }
+  
+  // display no quotes
+  displaySelected = (quotes) => {
+    this.setState({
+      quotes: [quotes]
+    });
+    document.getElementById('quote-display-container').classList.add('open');
+    }
 
   render(){
     return (
@@ -73,7 +81,7 @@ export default class Home extends Component {
           <h1 className="title">Speaking Shakespeare</h1>
           <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
           <div className="page-body">
-            <PostQuote />
+            <PostQuote displaySelectedQuote={this.displaySelected} />
             <SearchQuote quotes={this.state.quotes} />
           </div>
         </main>
