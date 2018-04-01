@@ -128,13 +128,12 @@ describe('Routes', () => {
 
   describe('GET /api/quotes', () => {
     
-    it('should return all quote', (done) => {
+    it('should return all quotes', (done) => {
       request(app)
         .get('/api/quotes')
         .expect(200)
         .end((err, res) => {
           expect(res.body).to.have.lengthOf(3);
-          expect(res.body[0].work).to.equal(quotes[0].work);
           if (err) return done(err);
           done();
         });
@@ -196,6 +195,20 @@ describe('Routes', () => {
         });
     });
 
+  });
+
+  describe('GET /api/quotes/random', () => {
+
+    it('should return one quote', (done) => {
+      request(app)
+        .get('/api/quotes/random')
+        .end((err, res) => {
+          expect(res.body).to.have.lengthOf(1);
+          expect(res.body[0]).to.be.an('object').that.has.any.keys('work');
+          if(err) return done(err);
+          done();
+        })
+    });
   });
 
   describe('POST /api/quotes', () => {

@@ -8,7 +8,8 @@
     "client": "cd client && npm start",
     "server": "nodemon server/server.js",
     "build-react": "cd client && npm run build",
-    "test": "NODE_ENV=test mocha --watch --slow 0",
+    "test": "NODE_ENV=test mocha --recursive --slow 0",
+    "test-watch": "NODE_ENV=test nodemon --exec \"mocha --recursive --slow 0\"",
     "dev": "NODE_ENV=development concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "install-all": "npm install && cd client && npm install"
