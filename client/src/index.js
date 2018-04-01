@@ -71,7 +71,7 @@ export default class Home extends Component {
       quotes: [quotes]
     });
     document.getElementById('quote-display-container').classList.add('open');
-    }
+  }
 
   render(){
     return (

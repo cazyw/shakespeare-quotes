@@ -32,6 +32,13 @@ export default class Header extends Component {
   }         
 
   showPostSection() {
+    // const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
+    // for(let field of inputFields) {
+    //   document.getElementById(field).value = 'woohoo';
+    //   document.getElementById(field).classList.remove('field-blank');
+    //   console.log(field + ' ' + document.getElementById(field).value);
+    //   document.getElementById(`help-${field}`).textContent = '';
+    // }
     this.toggleSections('quote-post-container','quote-search-container','quote-display-container');
   }
   

@@ -25,13 +25,12 @@ export default class PostQuote extends Component {
     this.resetFields = this.resetFields.bind(this);
     this.displaySelected = this.displaySelected.bind(this);
     this.submitQuote = this.submitQuote.bind(this);
-    // this.getValidationState = this.getValidationState.bind(this);
   }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
-    
+  
   // reset fields if sucessfully posted to the dataabse
   resetFields(){
     this.setState({
@@ -39,8 +38,13 @@ export default class PostQuote extends Component {
       act: '',
       scene: '',
       quote: '',
-      tags: ''
+      tags: []
     });
+    const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
+    for(let field of inputFields) {
+      document.getElementById(field).classList.remove('field-blank');
+      document.getElementById(`help-${field}`).textContent = '';
+    }
   }
 
   displaySelected(quote){
@@ -85,16 +89,6 @@ export default class PostQuote extends Component {
     event.preventDefault();
   }
 
-  // getValidationWork() {
-  //   const selectedTextArea = document.activeElement;
-  //   console.log(`selected: ${selectedTextArea}`);
-  //   // const length = this.state.work.length;
-  //   // if (length > 10) return 'success';
-  //   // else if (length > 5) return 'warning';
-  //   // else if (length > 0) return 'error';
-  //   // return null;
-  // }
-
   handleFocus(key) {
     const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
     const focusedField = inputFields[inputFields.indexOf(key)]
@@ -121,21 +115,21 @@ export default class PostQuote extends Component {
         
     return(
       <div className='homepage' >
-        <form className='' id='quote-post-container' onSubmit={this.submitQuote}>
+        <form className='' id='quote-post-container' onSubmit={this.submitQuote} onReset={this.resetFields} >
           <FormGroup controlId='formControlsText' className='form-inner'>
             <ControlLabel className='instruction'>Add a quote to the collection</ControlLabel>
             <div className='form-row'>
-              <FormGroup className='form-group col-xs-6'>
+              <FormGroup className='form-group col-xs-12 col-sm-6'>
                 <ControlLabel>Work</ControlLabel>
                 <HelpBlock id='help-work'></HelpBlock>
                 <FormControl className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
               </FormGroup>
-              <FormGroup className='form-group col-xs-3'>
+              <FormGroup className='form-group col-xs-6 col-sm-3'>
                 <ControlLabel>Act</ControlLabel>
                 <HelpBlock id='help-act'></HelpBlock>
                 <FormControl className='form-control' type='text' name='act' id='act' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} required={required} />
               </FormGroup>
-              <FormGroup className='form-group col-xs-3'>
+              <FormGroup className='form-group col-xs-6 col-sm-3'>
                 <ControlLabel>Scene</ControlLabel>
                 <HelpBlock id='help-scene'></HelpBlock>
                 <FormControl className='form-control' type='text' name='scene' id='scene' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} required={required} />
@@ -155,7 +149,10 @@ export default class PostQuote extends Component {
                 <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onFocus={this.handleFocus.bind(this, 'tags')}  onChange={this.handleChange} value={this.state.tags} required  />
               </FormGroup>
             </div>
-            <ButtonForm type='submit' label='Add Quote' className='form-button' />
+            <div className="post-buttons">
+              <ButtonForm type='submit' label='Add Quote' className='form-button' />
+              <ButtonForm type='reset' label='Reset' className='form-button' />
+            </div>
           </FormGroup>
         </form>
       </div>

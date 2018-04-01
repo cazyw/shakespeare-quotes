@@ -6,16 +6,18 @@
   padding: 10px;
   font-size: 1em;
   width: 150px;
-  margin: 0 auto;
-  display: block;
+  margin: 0 10px;
+  display: inline-block;
   cursor: pointer;
+}
+
+.form-button:hover {
+  outline-color: rgb(85, 85, 85);
+  outline-width: 0px;
 }
 
 #quote-search-container .form-button {
   margin-top: 20px;
 }
 
-.form-button:focus {
-  outline-color: rgb(85, 85, 85);
-  outline-width: 0px;
-}
+
