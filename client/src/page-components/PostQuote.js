@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
-import { FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import { FormControl, ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
 import './PostQuote.css';
 
 export default class PostQuote extends Component {
@@ -21,10 +21,11 @@ export default class PostQuote extends Component {
       tags: []
     };
 
-    this.submitQuote = this.submitQuote.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.resetFields = this.resetFields.bind(this);
     this.displaySelected = this.displaySelected.bind(this);
+    this.submitQuote = this.submitQuote.bind(this);
+    // this.getValidationState = this.getValidationState.bind(this);
   }
 
   handleChange(event) {
@@ -84,6 +85,37 @@ export default class PostQuote extends Component {
     event.preventDefault();
   }
 
+  // getValidationWork() {
+  //   const selectedTextArea = document.activeElement;
+  //   console.log(`selected: ${selectedTextArea}`);
+  //   // const length = this.state.work.length;
+  //   // if (length > 10) return 'success';
+  //   // else if (length > 5) return 'warning';
+  //   // else if (length > 0) return 'error';
+  //   // return null;
+  // }
+
+  handleFocus(key) {
+    const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
+    const focusedField = inputFields[inputFields.indexOf(key)]
+    console.log(`Focused on: ${focusedField}`);
+    const previousFields = inputFields.slice(0, inputFields.indexOf(key));
+    console.log(`sliced: ${previousFields}`);
+    for(let field of previousFields){
+      console.log(field);
+      const fieldValue = document.getElementById(field).value;
+      if(fieldValue === null || fieldValue === '') {
+        console.log(`${field} value: <blank>`);
+        document.getElementById(field).classList.add('field-blank');
+        document.getElementById(`help-${field}`).textContent = 'Required';
+      } else {
+        console.log(`${field} value: ${fieldValue}`);
+        document.getElementById(field).classList.remove('field-blank');
+        document.getElementById(`help-${field}`).textContent = '';
+      }
+    }
+  }
+
   render(){
     let required = this.state.act !== '' || this.state.scene !== '';
         
@@ -95,27 +127,32 @@ export default class PostQuote extends Component {
             <div className='form-row'>
               <FormGroup className='form-group col-xs-6'>
                 <ControlLabel>Work</ControlLabel>
+                <HelpBlock id='help-work'></HelpBlock>
                 <FormControl className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
               </FormGroup>
               <FormGroup className='form-group col-xs-3'>
                 <ControlLabel>Act</ControlLabel>
-                <FormControl className='form-control' type='text' name='act' placeholder='3' onChange={this.handleChange} value={this.state.act} required={required} />
+                <HelpBlock id='help-act'></HelpBlock>
+                <FormControl className='form-control' type='text' name='act' id='act' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} required={required} />
               </FormGroup>
               <FormGroup className='form-group col-xs-3'>
                 <ControlLabel>Scene</ControlLabel>
-                <FormControl className='form-control' type='text' name='scene' placeholder='1' onChange={this.handleChange} value={this.state.scene} required={required} />
+                <HelpBlock id='help-scene'></HelpBlock>
+                <FormControl className='form-control' type='text' name='scene' id='scene' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} required={required} />
               </FormGroup>
             </div>
             <div className='form-row'>
               <FormGroup className='form-group col-md-12'>
                 <ControlLabel>Quote</ControlLabel>
-                <FormControl className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onChange={this.handleChange} value={this.state.quote} required  />
+                <HelpBlock id='help-quote'></HelpBlock>
+                <FormControl className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onFocus={this.handleFocus.bind(this, 'quote')}  onChange={this.handleChange} value={this.state.quote} required  />
               </FormGroup>
             </div>
             <div className='form-row'>
               <FormGroup className='form-group col-md-12'>
                 <ControlLabel>Tags</ControlLabel>
-                <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onChange={this.handleChange} value={this.state.tags} required  />
+                <HelpBlock id='help-tags'></HelpBlock>
+                <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onFocus={this.handleFocus.bind(this, 'tags')}  onChange={this.handleChange} value={this.state.tags} required  />
               </FormGroup>
             </div>
             <ButtonForm type='submit' label='Add Quote' className='form-button' />

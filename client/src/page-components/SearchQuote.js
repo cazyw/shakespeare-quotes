@@ -57,12 +57,13 @@ export default class SearchQuote extends Component {
     event.preventDefault();
   }
 
+
   render(){
     return(
       <div className="homepage">
           <form className="" id="quote-search-container" onSubmit={this.handleSubmit}>
-          <FormGroup controlId="formBasicText" className="form-inner" >
-            <ControlLabel>Enter search tags, separated by a space</ControlLabel>
+          <FormGroup controlId="formBasicText" className="form-inner">
+            <ControlLabel>Enter search tags, separated by a space e.g. courage love family</ControlLabel>
             <FormControl type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
             <FormControl.Feedback />
             <ButtonForm type="submit" label="Find Quotes" className="form-button" />
