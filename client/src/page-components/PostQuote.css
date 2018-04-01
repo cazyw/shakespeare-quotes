@@ -34,8 +34,6 @@ div.form-group.col-md-12 {
 }
 
 .post-buttons {
-  margin:0 auto;
-  padding: 0 0;
   display: flex;
   justify-content: center;
 }
@@ -87,4 +85,12 @@ input.form-control.field-blank {
   .form-button {
     width: 100px;
   }
+}
+
+@media (max-width: 767px) {
+
+  #quote-post-container.open {
+    height: 450px;
+  }
+
 }

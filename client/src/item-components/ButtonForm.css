@@ -7,7 +7,7 @@
   font-size: 1em;
   width: 150px;
   margin: 0 10px;
-  display: inline-block;
+  display: block;
   cursor: pointer;
 }
 
@@ -20,4 +20,8 @@
   margin-top: 20px;
 }
 
+/* .reset-button {
+  display: inline-block;
+  clear: both;
+} */
 
