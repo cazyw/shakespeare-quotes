@@ -97,7 +97,7 @@ export default class PostQuote extends Component {
       act: this.state.act,
       scene: this.state.scene,
       quote: this.state.quote,
-      tags: (this.state.tags === [] || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
+      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
     };
     // only send if 'valid' input
     if(checkInputs(data, this.state.dataWorks)){

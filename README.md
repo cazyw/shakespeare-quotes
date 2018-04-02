@@ -93,7 +93,7 @@ src/
       |- QuoteList.js
       |- QuoteItem.js
   |- utils/
-      |- helperFunsions.js
+      |- helperFunctions.js
 
 ```
 
