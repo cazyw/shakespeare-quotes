@@ -82,6 +82,18 @@ input.form-control.field-blank {
     height: 450px;
   }
 
+  .form-inner {
+    padding: 10px;
+  }
+
+  .help-block {
+    margin-right: 0px;
+  }
+
+  .form-group {
+    padding-left: 10px;
+  }
+
   .form-button {
     width: 100px;
   }
