@@ -19,7 +19,7 @@ class QuoteItem extends Component {
 
   render(){
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
-    const scene = this.props.scene === '' ? '' : ` Scene ${this.props.act})`;
+    const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
     return(
       <li className="quote-box">
         <span className='quote quote-span'>&quot;{this.props.quote}&quot;</span>

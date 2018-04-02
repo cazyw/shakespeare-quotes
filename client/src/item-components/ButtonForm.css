@@ -11,7 +11,10 @@
   cursor: pointer;
 }
 
-.form-button:hover {
+.form-button:hover,
+.form-button:focus,
+.form-button:active
+ {
   outline-color: rgb(85, 85, 85);
   outline-width: 0px;
 }

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
 import Header from './page-components/Header';
+import { toggleSections, openElement, closeElement } from './utils/helperFunctions';
 import './styles.css';
 
 export default class Home extends Component {
@@ -12,7 +13,6 @@ export default class Home extends Component {
       quotes: []
     };
     this.displayAll = this.displayAll.bind(this);
-    this.toggleSections = this.toggleSections.bind(this);
   }
 
   componentWillMount() {
@@ -21,24 +21,11 @@ export default class Home extends Component {
         return data.json();
       })
       .then(json => {
-        this.toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
+        toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
         this.setState({
           quotes: json
         });
       });
-  }
-
-  toggleSections(sectionToOpen, sectionToClose1, sectionToClose2){
-    if (document.getElementById(sectionToClose1).classList.contains('open') || 
-        document.getElementById(sectionToClose2).classList.contains('open')){
-      document.getElementById(sectionToClose1).classList.remove('open');
-      document.getElementById(sectionToClose2).classList.remove('open');
-      setTimeout(() => {
-        document.getElementById(sectionToOpen).classList.add('open');
-      }, 750);
-    } else {
-      document.getElementById(sectionToOpen).classList.add('open');
-    }
   }
 
   // display all quotes in the database
@@ -48,13 +35,14 @@ export default class Home extends Component {
         return data.json();
       })
       .then((json) => {
-        document.getElementById('quote-display-container').classList.remove('open');
+        const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 750 : 0;
+        closeElement('quote-display-container');
+        toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
         setTimeout(() => {
-          this.toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
           this.setState({
             quotes: json
           });
-        }, 750);
+        }, timeOut);
       });
   }
 
@@ -70,7 +58,7 @@ export default class Home extends Component {
     this.setState({
       quotes: [quotes]
     });
-    document.getElementById('quote-display-container').classList.add('open');
+    openElement('quote-display-container');
   }
 
   render(){

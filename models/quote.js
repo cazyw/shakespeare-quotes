@@ -18,7 +18,7 @@ function hasTags(val) {
 
 // blank or up to three digits
 function isInteger(val){
-  return /^(?:|[1-9][0-9]{0,2})$/.test(val);
+  return /^[1-9]{0,1}[0-9]{0,2}$/.test(val);
 }
 
 // create quote schema & model

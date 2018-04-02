@@ -8,13 +8,12 @@ A rough version is up and running here: https://shakespeare-sunday.herokuapp.com
 
 ## Status
 
-Simple server-side routing and basic React rendering mostly completed. 
-Currently working on refactoring and restructuring the code, testing and adding futher validation to the model schema.
-Will look into adding: login (to delete/modify quotes), better data validation/suggestions.
+Currently working on refactoring and restructuring the code, testing and adding futher validation to the form input.
+Will look into adding: login (to delete/modify quotes), better searching of tags.
 
 ## Operating Instructions
 
-Go to https://shakespeare-sunday.herokuapp.com/
+Go to https://shakespeare-sunday.herokuapp.com/. May take a while to spin up (using free Heroku and mLab tier)
 
 <img src="https://cazyw.github.io/img/react-express-shakespeare.jpg" width="450" alt="shakespeare subday">
 
@@ -93,6 +92,8 @@ src/
       |- ButtonForm.js
       |- QuoteList.js
       |- QuoteItem.js
+  |- utils/
+      |- helperFunsions.js
 
 ```
 
@@ -109,27 +110,25 @@ Then run the following:
 $ npm test
 ```
 
-This section is a work in progress as I develop more thorough testing practices. I'll also need to write unit tests that use mocking as at the moment my tests actually rely on an active database and server. Slightly glitchy after I made a few changes to my project structure.
+This section is a work in progress as I develop more thorough testing practices. Still need to add testing for React front-end.
 
 ## Discussion
 
-The idea for this project came about because I participate in  a worldwide twitter event each Sunday - `#ShakespeareSunday`. Started by [@HollowCrownFans](https://twitter.com/HollowCrownFans?lang=en), every Sunday users around the world tweet Shakespeare quotes that follow a particular theme (e.g. light and dark).
+The idea for this project came about because I participate in a worldwide twitter event each Sunday - `#ShakespeareSunday`. Started by [@HollowCrownFans](https://twitter.com/HollowCrownFans?lang=en), every Sunday users around the world tweet Shakespeare quotes that follow a particular theme (e.g. light and dark).
 
-I thought it'd be fun to build an online collection of Shakespeare quotes so I could save the quotes I'd selected each week and tag them with keywords. As themes are sometimes re-used or quotes might be applicable across multiple themes, this would be a way for me to see if any quotes I'd previously used match a theme. 
-
-And it'd be a cool way for me to learn and put into practice routing, Express, APIs, databases (MongoDB), React, forms and testing! An additional step I might add is authentication. 
+I thought it'd be fun to build an online collection of Shakespeare quotes so I could save the quotes I'd selected each week and tag them with keywords. And it'd be a cool way for me to learn and put into practice Node, Express, APIs, databases (MongoDB), React, forms and testing! 
 
 ### Setup and Environment
 
-As I build more complicated apps, I've been learning to integrate more features (e.g. mongoDB in this case). A new step for me in this project was to add a `config.js` file that included different settings for production (Heroku), development (locally) and testing (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local database (otherwise clearing the database for testing wipes out all my data). 
+I've been integrating more features/frameworks (e.g. mongoDB and React in this case). A new step for me in this project was to add a `config.js` file that included different settings for production (Heroku), development (locally) and testing (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local development database. 
 
-Initially I had used Webpack to build my final `.js` file however once I looked more into React, I decided to use the `create-react-app` package which black-boxes the transpiling and compiling of the react (webapck and babel configuration).
+Initially I had used Webpack to build my final `.js` file however once I looked more into React, I decided to use the `create-react-app` package which black-boxes the transpiling and compiling of React (webapck and babel configuration).
 
 I also used ESLint in this project and am getting to know some of the settings and configuration options. I learnt that `&` runs scripts concurrently and `&&` runs them sequentially. 
 
 ### Server
 
-Coding in Javascript, I again am using `Node.js` and the `express` framework to create my API. This time adding  `express.Router` to create modular route handlers and separating the controller logic into its own file. The main `server.js` file sets up the server, and does the console logging and error handling. 
+Using `Node.js` and the `express` framework to create my API. This time adding `express.Router` to create modular route handlers and separating the controller logic into its own file. The main `server.js` file sets up the server, and does the console logging and error handling. 
 
 A separate server is run (in development) for the React front-end (based on the `create-react-app` package).
 
@@ -142,26 +141,28 @@ The project required installing MongoDB (database) and mongoose (object data mod
 In thinking on the model of the data, I looked at the information usually included in tweets and what information might be useful, deciding on:
 
 * The title of the piece of work (play, sonnet etc) [required]
-* The act [conditional requirement - depends if Scene entered]
-* The scene [conditional requirement - depends if Act entered]
+* The act [conditional requirement - depends if Scene entered, must be a number]
+* The scene [conditional requirement - depends if Act entered, must be a number]
 * The quote itself [required]
 * Tags / keywords [required]
 
-At the moment there's not a lot of deep validation (e.g. checking whether the work/act/scene is correct).
+At the moment there's not a lot of deep validation.
 
-For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. It uses AWS cloud storage. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this free but less-reliable option. The `config` file selects the correct database (online, local, test) depending on the `NODE_ENV` setting.
+For online storage, I went with `mLab` as it can be added as an add-on to Heroku, has a free tier and is a cloud Database-as-a-Service for MongoDB. Although the free 'sandbox' database should not be used in production, as this is a personal project, I'm using this free but less-reliable option. The `config` file selects the correct database (online, local, test) depending on the `NODE_ENV` setting.
 
 #### Notes
 
-Importing a file into the local database (drop to remove existing data):
+Exporting and importing a file into the local database (drop to remove existing data):
 ```
-mongoimport --db shakespeare --collection quotes --drop --file ./quotes.json
+$ mongoexport --db shakespeare --collection quotes --out <filename>.json
+$ mongoimport --db shakespeare --collection quotes --drop --file ./<filename>.json
 ```
-
 
 ### Display
 
-This section is still being worked on. This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. I'm going through Stephen Grider's course on Udemy [Modern React with Redux](https://www.udemy.com/react-redux/) as a foundation for how to use React but applying it to my own project. Initially I setup webpack and its configuration myself however I decided to switch to the `create-react-app` package as that includes some additional features/minification of files. Also using react-bootstrap.
+This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. Initially I setup webpack and its configuration myself however I decided to switch to the `create-react-app` package as that includes some additional features/minification of files. Also using react-bootstrap.
+
+Added some functions to perform basic form validation checks however doesn't check that the details entered are necessarily correct.
 
 ### Testing
 

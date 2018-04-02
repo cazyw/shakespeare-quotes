@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { toggleSections } from '../utils/helperFunctions';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
 
 export default class Header extends Component {
   constructor(props){
     super(props);
-    this.toggleSections = this.toggleSections.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
     this.displayAll = this.displayAll.bind(this);
@@ -15,35 +15,12 @@ export default class Header extends Component {
   displayAll() {
     this.props.displayAllQuotes();
   }
-
-  toggleSections(sectionToOpen, sectionToClose1, sectionToClose2){
-    if (document.getElementById(sectionToClose1).classList.contains('open') || 
-        document.getElementById(sectionToClose2).classList.contains('open')){
-      document.getElementById(sectionToClose1).classList.remove('open');
-      document.getElementById(sectionToClose2).classList.remove('open');
-      setTimeout(() => {
-        this.props.displayNoQuotes();
-        document.getElementById(sectionToOpen).classList.add('open');
-      }, 750);
-    } else {
-      this.props.displayNoQuotes();
-      document.getElementById(sectionToOpen).classList.add('open');
-    }
-  }         
-
   showPostSection() {
-    // const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
-    // for(let field of inputFields) {
-    //   document.getElementById(field).value = 'woohoo';
-    //   document.getElementById(field).classList.remove('field-blank');
-    //   console.log(field + ' ' + document.getElementById(field).value);
-    //   document.getElementById(`help-${field}`).textContent = '';
-    // }
-    this.toggleSections('quote-post-container','quote-search-container','quote-display-container');
+    toggleSections('quote-post-container','quote-search-container','quote-display-container');
   }
   
   showSearchSection() {
-    this.toggleSections('quote-search-container','quote-post-container','quote-display-container'); 
+    toggleSections('quote-search-container','quote-post-container','quote-display-container'); 
   }
 
   render(){

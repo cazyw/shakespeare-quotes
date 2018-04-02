@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import DisplayQuotes from './DisplayQuotes';
 import { FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import { openElement, closeElement } from '../utils/helperFunctions';
 import './SearchQuote.css';
 
 export default class SearchQuote extends Component {
@@ -39,20 +40,14 @@ export default class SearchQuote extends Component {
       })
       .then((json) => {
         this.setState({tags: ''});
-        if(document.getElementById('quote-display-container').classList.contains('open')){
-          document.getElementById('quote-display-container').classList.remove('open');
-          setTimeout(() => {
-            this.setState({
-              quotes: json
-            });
-            document.getElementById('quote-display-container').classList.add('open');
-          }, 750);
-        } else {
+        const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 750 : 0;
+        closeElement('quote-display-container');
+        setTimeout(() => {
           this.setState({
             quotes: json
           });
-          document.getElementById('quote-display-container').classList.add('open');
-        }
+          openElement('quote-display-container');
+        }, timeOut);
       });
     event.preventDefault();
   }
@@ -63,10 +58,10 @@ export default class SearchQuote extends Component {
       <div className="homepage">
           <form className="" id="quote-search-container" onSubmit={this.handleSubmit}>
           <FormGroup controlId="formBasicText" className="form-inner">
-            <ControlLabel>Enter search tags, separated by a space e.g. courage love family</ControlLabel>
+            <ControlLabel>Enter search tags, separated by a space (e.g. courage love family)</ControlLabel>
             <FormControl type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
             <FormControl.Feedback />
-            <ButtonForm type="submit" label="Find Quotes" className="form-button" />
+            <ButtonForm type="submit" label="Find Quotes" className="form-button search-button" />
             </FormGroup>
           </form>
         <DisplayQuotes quotes={this.state.quotes} />

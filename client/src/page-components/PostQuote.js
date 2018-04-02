@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import { FormControl, ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
+import { errorHighlighting, resetWarnings, checkInputs } from '../utils/helperFunctions';
 import './PostQuote.css';
 
 export default class PostQuote extends Component {
@@ -18,7 +19,46 @@ export default class PostQuote extends Component {
       act: '',
       scene: '',
       quote: '',
-      tags: []
+      tags: [],
+      dataWorks: [
+        "All's Well That Ends Well",
+        "As You Like It",
+        "The Comedy of Errors",
+        "Cymbeline",
+        "Love's Labours Lost",
+        "Measure for Measure",
+        "The Merry Wives of Windsor",
+        "The Merchant of Venice",
+        "A Midsummer Night's Dream",
+        "Much Ado About Nothing",
+        "Pericles, Prince of Tyre",
+        "Taming of the Shrew",
+        "The Tempest",
+        "Troilus and Cressida",
+        "Twelfth Night",
+        "Two Gentlemen of Verona",
+        "Winter's Tale",
+        "Henry IV, part 1",
+        "Henry IV, part 2",
+        "Henry V",
+        "Henry VI, part 1",
+        "Henry VI, part 2",
+        "Henry VI, part 3",
+        "Henry VIII",
+        "King John",
+        "Richard II",
+        "Richard III",
+        "Antony and Cleopatra",
+        "Coriolanus",
+        "Hamlet",
+        "Julius Caesar",
+        "King Lear",
+        "Macbeth",
+        "Othello",
+        "Romeo and Juliet",
+        "Timon of Athens",
+        "Titus Andronicus"
+      ]
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,6 +66,7 @@ export default class PostQuote extends Component {
     this.displaySelected = this.displaySelected.bind(this);
     this.submitQuote = this.submitQuote.bind(this);
   }
+
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
@@ -40,11 +81,8 @@ export default class PostQuote extends Component {
       quote: '',
       tags: []
     });
-    const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
-    for(let field of inputFields) {
-      document.getElementById(field).classList.remove('field-blank');
-      document.getElementById(`help-${field}`).textContent = '';
-    }
+    resetWarnings();
+    document.querySelector('.reset-button').blur();
   }
 
   displaySelected(quote){
@@ -53,65 +91,53 @@ export default class PostQuote extends Component {
 
   // post data to the database
   submitQuote(event) {
-    fetch('/api/quotes', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify({
-        work: this.state.work,
-        act: this.state.act,
-        scene: this.state.scene,
-        quote: this.state.quote,
-        tags: this.state.tags.toLowerCase().split(',')
+    event.preventDefault()
+    const data = {
+      work: this.state.work,
+      act: this.state.act,
+      scene: this.state.scene,
+      quote: this.state.quote,
+      tags: (this.state.tags === [] || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
+    };
+    // only send if 'valid' input
+    if(checkInputs(data, this.state.dataWorks)){
+      fetch('/api/quotes', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(data)
       })
-    })
-      .then((res) => {
-        if(res.status === 200) {
-          const newTags = this.state.tags.toLowerCase().split(',');
-          this.displaySelected({
-            work: this.state.work,
-            act: this.state.act,
-            scene: this.state.scene,
-            quote: this.state.quote,
-            tags: newTags
-          });
-          this.resetFields();
-        } else {
-          res.json().then(body => alert(`${body.error}`));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => {
+          if(res.status === 200) {
+            this.displaySelected(data);
+            this.resetFields();
+          } else {
+            res.json().then(body => alert(`${body.error}`));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
-    event.preventDefault();
+    }
   }
 
   handleFocus(key) {
     const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
-    const focusedField = inputFields[inputFields.indexOf(key)]
-    console.log(`Focused on: ${focusedField}`);
     const previousFields = inputFields.slice(0, inputFields.indexOf(key));
-    console.log(`sliced: ${previousFields}`);
     for(let field of previousFields){
-      console.log(field);
       const fieldValue = document.getElementById(field).value;
       if(fieldValue === null || fieldValue === '') {
-        console.log(`${field} value: <blank>`);
-        document.getElementById(field).classList.add('field-blank');
-        document.getElementById(`help-${field}`).textContent = 'Required';
+        errorHighlighting(true, field, 'Required');
       } else {
-        console.log(`${field} value: ${fieldValue}`);
-        document.getElementById(field).classList.remove('field-blank');
-        document.getElementById(`help-${field}`).textContent = '';
+        errorHighlighting(false, field, '');
       }
     }
   }
 
   render(){
-    let required = this.state.act !== '' || this.state.scene !== '';
         
     return(
       <div className='homepage' >
@@ -122,42 +148,51 @@ export default class PostQuote extends Component {
               <FormGroup className='form-group col-xs-12 col-sm-6 col-md-6'>
                 <ControlLabel>Work</ControlLabel>
                 <HelpBlock id='help-work'></HelpBlock>
-                <FormControl className='form-control' type='text' name='work' id='work' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} required  />
+                <FormControl className='form-control' type='text' name='work' id='work' list='data-works' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} />
               </FormGroup>
               <FormGroup className='form-group col-xs-6 col-sm-3 col-md-3'>
                 <ControlLabel>Act</ControlLabel>
                 <HelpBlock id='help-act'></HelpBlock>
-                <FormControl className='form-control' type='text' name='act' id='act' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} required={required} />
+                <FormControl className='form-control' type='text' name='act' id='act' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} />
               </FormGroup>
               <FormGroup className='form-group col-xs-6 col-sm-3 col-md-3'>
                 <ControlLabel>Scene</ControlLabel>
                 <HelpBlock id='help-scene'></HelpBlock>
-                <FormControl className='form-control' type='text' name='scene' id='scene' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} required={required} />
+                <FormControl className='form-control' type='text' name='scene' id='scene' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} />
               </FormGroup>
             </div>
             <div className='form-row'>
               <FormGroup className='form-group col-xs-12 col-sm-12 col-md-12'>
                 <ControlLabel>Quote</ControlLabel>
                 <HelpBlock id='help-quote'></HelpBlock>
-                <FormControl className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onFocus={this.handleFocus.bind(this, 'quote')}  onChange={this.handleChange} value={this.state.quote} required  />
+                <FormControl className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onFocus={this.handleFocus.bind(this, 'quote')}  onChange={this.handleChange} value={this.state.quote} />
               </FormGroup>
             </div>
             <div className='form-row'>
               <FormGroup className='form-group col-xs-12 col-sm-12 col-md-12'>
-                <ControlLabel>Tags</ControlLabel>
+                <ControlLabel>Tags (e.g. courage, family)</ControlLabel>
                 <HelpBlock id='help-tags'></HelpBlock>
-                <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onFocus={this.handleFocus.bind(this, 'tags')}  onChange={this.handleChange} value={this.state.tags} required  />
+                <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onFocus={this.handleFocus.bind(this, 'tags')}  onChange={this.handleChange} value={this.state.tags}  />
               </FormGroup>
             </div>
             <div className="form-row post-buttons col-xs-12 col-sm-12 col-md-12">
-              <ButtonForm type='submit' label='Add Quote' className='form-button' />
+              <ButtonForm type='submit' label='Add Quote' className='form-button submit-button' />
               <ButtonForm type='reset' label='Reset' className='form-button reset-button' />
             </div>
           </FormGroup>
         </form>
+
+
+
+        <datalist id="data-works">
+          {this.state.dataWorks.map((work, key) =>
+            <option key={`dataWork-${key}`} value={work} />
+        )}
+        </datalist>
       </div>
     );
   }
 
 
 }
+
