@@ -5,7 +5,9 @@
 'use strict';
 
 const express = require('express');
+const p3p = require('p3p');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('../config').get(process.env.NODE_ENV);
@@ -32,10 +34,11 @@ if (process.env.NODE_ENV === 'development'){
 // static files
 // serve the react app files
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(cookieParser());
 app.use(bodyParser.json());
 
 // initialise routes
-app.use('/api', require('./routes'));
+app.use('/api', p3p(p3p.recommended), require('./routes'));
 
 app.get('*', (req, res) => {
   res.status(404).send({

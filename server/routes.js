@@ -5,11 +5,16 @@
 'use strict';
 
 const express = require('express');
+const p3p = require('p3p');
 const quotesController = require('./controllers/quotes');
 const router = express.Router();
 
 // get a random quote from the db
 router.get('/quotes/random', quotesController.retrieveRandomQuote);
+
+// TEST - set cookie
+router.get('/quotes/cookie', p3p(p3p.recommended), quotesController.setCookieTest);
+
 
 // get a list of quotes from the db
 router.get('/quotes', quotesController.retrieveQuotes);

@@ -26,20 +26,37 @@ function retrieveRandomQuote(req, res, next) {
     .catch(error => next(error));
 }
 
+function setCookieTest(req, res, next) {
+  // Add headers
+  const origin = req.get('origin');
+    // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', origin);
+
+    // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+    // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  var expiry = new Date();
+  expiry.setMonth(myDate.getMonth() + 1);
+
+  res.cookie('shakespeare-cookie', 'whatFoolsTheseMortalsBe', { domain: '.shakespeare-sunday.herokuapp.com', path: '/', expires: expiry});
+  res.send(204);
+  console.log(`test cookie set`);
+}
+
+
 function retrieveQuotes(req, res, next) {
   if(!req.query.tags){
     displayAllQuotes(res, next);
   } else {
     const selectedTags = collateTags(req.query.tags);
     displaySelectedQuotes(res, selectedTags, next);
-  }
-  setCookie() {
-    browser.cookies.set({
-      name: "shakespeare-cookie",
-      value: "to be or not to be",
-      path: "/",
-      domain: "shakespeare-sunday.herokuapp.com"
-    });
   }
 }
 
@@ -75,5 +92,6 @@ module.exports = {
   retrieveQuotes,
   postQuote,
   updateQuote,
-  deleteQuote
+  deleteQuote,
+  setCookieTest
 };
