@@ -33,6 +33,14 @@ function retrieveQuotes(req, res, next) {
     const selectedTags = collateTags(req.query.tags);
     displaySelectedQuotes(res, selectedTags, next);
   }
+  setCookie() {
+    browser.cookies.set({
+      name: "shakespeare-cookie",
+      value: "to be or not to be",
+      path: "/",
+      domain: "shakespeare-sunday.herokuapp.com"
+    });
+  }
 }
 
 function postQuote(req, res, next) {
