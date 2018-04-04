@@ -45,7 +45,7 @@ function setCookieTest(req, res, next) {
   var expiry = new Date();
   expiry.setMonth(expiry.getMonth() + 1);
 
-  res.cookie('shakespeare-cookie', 'whatFoolsTheseMortalsBe', { domain: '.shakespeare-sunday.herokuapp.com', path: '/', expires: expiry});
+  res.cookie('shakespeare-cookie', 'tobeornottobe', { domain: '.shakespeare-sunday.herokuapp.com', path: '/', expires: expiry});
   res.send(204);
   console.log(`test cookie set`);
 }
