@@ -43,7 +43,7 @@ function setCookieTest(req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
 
   var expiry = new Date();
-  expiry.setMonth(myDate.getMonth() + 1);
+  expiry.setMonth(expiry.getMonth() + 1);
 
   res.cookie('shakespeare-cookie', 'whatFoolsTheseMortalsBe', { domain: '.shakespeare-sunday.herokuapp.com', path: '/', expires: expiry});
   res.send(204);
