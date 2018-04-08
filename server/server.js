@@ -5,7 +5,7 @@
 'use strict';
 
 const express = require('express');
-const p3p = require('p3p');
+// const p3p = require('p3p');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
@@ -38,7 +38,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 // initialise routes
-app.use('/api', p3p(p3p.recommended), require('./routes'));
+// app.use('/api', p3p(p3p.recommended), require('./routes'));
+app.use('/api', require('./routes'));
 
 app.get('*', (req, res) => {
   res.status(404).send({
