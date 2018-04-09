@@ -60,20 +60,15 @@ export default class PostQuote extends Component {
         "Titus Andronicus"
       ]
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.resetFields = this.resetFields.bind(this);
-    this.displaySelected = this.displaySelected.bind(this);
-    this.submitQuote = this.submitQuote.bind(this);
   }
 
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
   }
   
   // reset fields if sucessfully posted to the dataabse
-  resetFields(){
+  resetFields = () => {
     this.setState({
       work: '',
       act: '',
@@ -85,19 +80,21 @@ export default class PostQuote extends Component {
     document.querySelector('.reset-button').blur();
   }
 
-  displaySelected(quote){
+  displaySelected = (quote) => {
     this.props.displaySelectedQuote(quote);
   }
 
   // post data to the database
-  submitQuote(event) {
+  submitQuote = (event) => {
     event.preventDefault()
     const data = {
       work: this.state.work,
       act: this.state.act,
       scene: this.state.scene,
       quote: this.state.quote,
-      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
+      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase()
+                                                                                                                    .split(',')
+                                                                                                                    .map(word => encodeURI(word.trim()))
     };
     // only send if 'valid' input
     if(checkInputs(data, this.state.dataWorks)){
@@ -124,7 +121,7 @@ export default class PostQuote extends Component {
     }
   }
 
-  handleFocus(key) {
+  handleFocus = (key) => {
     const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
     const previousFields = inputFields.slice(0, inputFields.indexOf(key));
     for(let field of previousFields){

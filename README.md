@@ -2,7 +2,7 @@
 
 ## Objective
 
-Create an online collection of Shakespeare quotes. Users can submit quotes and search for quotes that have been tagged with certain keywords.
+Create an online collection of Shakespeare quotes. Users can submit quotes and search for quotes that have been tagged with certain keywords. Users can click on tags to pull up a selection of similarly tagged quotes.
 
 A rough version is up and running here: https://shakespeare-sunday.herokuapp.com/
 

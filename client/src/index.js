@@ -12,7 +12,6 @@ export default class Home extends Component {
     this.state = {
       quotes: []
     };
-    this.displayAll = this.displayAll.bind(this);
   }
 
   componentWillMount() {
@@ -37,8 +36,8 @@ export default class Home extends Component {
       .then((json) => {
         const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 750 : 0;
         closeElement('quote-display-container');
-        toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
         setTimeout(() => {
+          toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
           this.setState({
             quotes: json
           });
@@ -53,7 +52,7 @@ export default class Home extends Component {
     });
   }
   
-  // display no quotes
+  // display selected quotes
   displaySelected = (quotes) => {
     this.setState({
       quotes: [quotes]

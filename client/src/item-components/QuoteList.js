@@ -8,13 +8,40 @@
 import React, { Component } from 'react';
 import QuoteItem from './QuoteItem';
 import PropTypes from 'prop-types';
+import { openElement, closeElement } from '../utils/helperFunctions';
 
 class QuoteList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      quotes: []
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ quotes: newProps.quotes });
+  }
+
+  updateQuoteListFromTag = (tag) => {
+    fetch(`/api/quotes?tags=${encodeURI(tag)}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(json => {
+        closeElement('quote-display-container');
+        setTimeout(() => {
+          openElement('quote-display-container');
+          this.setState({
+            quotes: json
+          });
+        }, 750);
+      });
+  }
 
   render(){
-    return this.props.quotes.map((quoteQ, index) => {
+    return this.state.quotes.map((quoteQ, index) => {
       return(
-        <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} />
+        <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} passTagSelected={this.updateQuoteListFromTag} />
       );
     });
   }

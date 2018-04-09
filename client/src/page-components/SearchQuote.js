@@ -19,20 +19,17 @@ export default class SearchQuote extends Component {
       tags: '',
       quotes: []
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
   
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({tags: event.target.value});
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     var tags = this.state.tags.toLowerCase();
     fetch('/api/quotes?tags=' + tags)
       .then((data) => {
@@ -40,12 +37,16 @@ export default class SearchQuote extends Component {
       })
       .then((json) => {
         this.setState({tags: ''});
+
+        const helpText = json.length === 0 ? 'No matches' : '';
+        
         const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 750 : 0;
         closeElement('quote-display-container');
         setTimeout(() => {
           this.setState({
             quotes: json
           });
+          document.getElementById('searchResultMessage').textContent = helpText;
           openElement('quote-display-container');
         }, timeOut);
       });
@@ -64,6 +65,7 @@ export default class SearchQuote extends Component {
             <ButtonForm type="submit" label="Find Quotes" className="form-button search-button" />
             </FormGroup>
           </form>
+          <div id="searchResultMessage"></div>
         <DisplayQuotes quotes={this.state.quotes} />
       </div>
     );

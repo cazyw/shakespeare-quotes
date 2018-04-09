@@ -10,9 +10,13 @@ import './QuoteItem.css';
 
 class QuoteItem extends Component {
 
-  displayTags(tags) {
+  handleClick = (tag) => {
+    this.props.passTagSelected(tag);
+  }
+
+  displayTags = (tags) => {
     const tagButtons = tags.map((tag, index) => {
-      return (<span key={index} className='tag'>{tag}</span>);
+      return (<span key={index} className='tag' onClick={this.handleClick.bind(this, tag)}>{decodeURI(tag)}</span>);
     });
     return tagButtons;
   }

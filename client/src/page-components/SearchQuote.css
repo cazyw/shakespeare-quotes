@@ -47,6 +47,16 @@ label {
             transition: height 0.5s linear;
 }
 
+#searchResultMessage {
+  color: rgb(255, 255, 255);
+  max-width: 800px;
+  font-size: 1.5em;
+  font-weight: 400;
+  text-align: center;
+  margin: 10px auto;
+
+}
+
 @media (max-width: 378px) {
   #quote-search-container.open  {
     height: 190px;

@@ -5,21 +5,15 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
 
 export default class Header extends Component {
-  constructor(props){
-    super(props);
-    this.showPostSection = this.showPostSection.bind(this);
-    this.showSearchSection = this.showSearchSection.bind(this);
-    this.displayAll = this.displayAll.bind(this);
-  }
 
-  displayAll() {
+  displayAll = () => {
     this.props.displayAllQuotes();
   }
-  showPostSection() {
+  showPostSection = () => {
     toggleSections('quote-post-container','quote-search-container','quote-display-container');
   }
   
-  showSearchSection() {
+  showSearchSection = () => {
     toggleSections('quote-search-container','quote-post-container','quote-display-container'); 
   }
 
