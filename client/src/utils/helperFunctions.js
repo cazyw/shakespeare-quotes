@@ -1,14 +1,14 @@
-const openElement = (sectionToOpen) => {
+export const openElement = (sectionToOpen) => {
   document.getElementById(sectionToOpen).classList.add('open');
 }
 
-const closeElement = (sectionToClose) => {
+export const closeElement = (sectionToClose) => {
   document.getElementById(sectionToClose).classList.remove('open');
 }
 
-const toggleSections = (sectionToOpen, sectionToClose1, sectionToClose2) => {
-  const timeOut = document.getElementById(sectionToClose1).classList.contains('open') || 
-                  document.getElementById(sectionToClose2).classList.contains('open') ? 750 : 0;
+export const toggleSections = (sectionToOpen, sectionToClose1, sectionToClose2) => {
+const timeOut = document.getElementById(sectionToClose1).classList.contains('open') || 
+document.getElementById(sectionToClose2).classList.contains('open') ? 750 : 0;
   
   closeElement(sectionToClose1);
   closeElement(sectionToClose2);
@@ -17,7 +17,7 @@ const toggleSections = (sectionToOpen, sectionToClose1, sectionToClose2) => {
   }, timeOut);
 }
 
-const errorHighlighting = (showError, field, errorText) => {
+export const errorHighlighting = (showError, field, errorText) => {
   if (showError) {
     document.getElementById(field).classList.add('field-blank');
   } else {
@@ -26,14 +26,14 @@ const errorHighlighting = (showError, field, errorText) => {
   document.getElementById(`help-${field}`).textContent = errorText;
 }
 
-const resetWarnings = () => {
+export const resetWarnings = () => {
   const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
   for(let field of inputFields) {
     errorHighlighting(false, field, '');
   }
 }
 
-const checkInputs = (inputs, dataWorks) => {
+export const checkInputs = (inputs, dataWorks) => {
   resetWarnings();
   let errors = 0;
 
@@ -78,13 +78,4 @@ const checkInputs = (inputs, dataWorks) => {
 
   if(errors > 0) return false;
   return true;
-}
-
-module.exports = {
-  toggleSections,
-  openElement,
-  closeElement,
-  errorHighlighting,
-  resetWarnings,
-  checkInputs
 }
