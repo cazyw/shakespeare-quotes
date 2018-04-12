@@ -1,14 +1,24 @@
 const { Quote } = require('../../models/quote');
 const pluralize = require('pluralize');
+const dotenv = require('dotenv'); 
+dotenv.load();
 
 const pluralSingular = (tagArray) => {
-  originalSet = new Set([]);
+  let originalSet = new Set([]);
   tagArray.forEach((tag) => {
     originalSet.add(pluralize.plural(tag));
     originalSet.add(pluralize.singular(tag));
   });
+
+  // const relatedWordsuseCanonical = true;
+  // const relationshipTypes = 'synonym';
+  // const limitPerRelationshipType = 10;
+  // const api_key = process.env.WORDNIK_API_KEY;
+
+
   return [...originalSet];
-}
+
+};
 
 const collateTags = (tags) => {
   const tagArray = tags.split(' ').map(tag => tag.trim());
