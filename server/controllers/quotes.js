@@ -21,7 +21,7 @@ const pluralSingular = (tagArray) => {
 };
 
 const collateTags = (tags) => {
-  const tagArray = tags.split(' ').map(tag => tag.trim());
+  const tagArray = tags.split(' ').map(tag => tag.trim().toLowerCase());
   const expandedTags = pluralSingular(tagArray);
   return expandedTags.map(tag => new RegExp(tag, 'i'));
 };
@@ -57,6 +57,14 @@ function retrieveQuotes(req, res, next) {
 
 function postQuote(req, res, next) {
   // save new instance of a quote (returns a promise)
+  try {
+    req.body.tags = req.body.tags[0].toLowerCase()
+      .split(',')
+      .map(word => encodeURI(word.trim()));
+
+  } catch(error) {
+    throw new Error(`Error: ${error}`);
+  }
   Quote.create(req.body)
     .then(quote => res.json(quote))
     .catch(error => next(error)); // passes error to app.js

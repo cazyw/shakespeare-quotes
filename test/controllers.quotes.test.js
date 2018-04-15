@@ -17,7 +17,7 @@ describe('Controllers', () => {
       expect(actual).to.deep.equal(expected);
 
       actual = controllerQuotes.collateTags(tags3);
-      expected = [/FRIENDS/i, /FRIEND/i, /roMANS/i, /roMAN/i, /soldiers/i, /soldier/i];
+      expected = [/friends/i, /friend/i, /romans/i, /roman/i, /soldiers/i, /soldier/i];
       expect(actual).to.deep.equal(expected);
     });
   });
