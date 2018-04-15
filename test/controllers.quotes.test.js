@@ -9,15 +9,15 @@ describe('Controllers', () => {
       const tags3 = 'FRIENDS roMANS soldiers';
 
       let actual = controllerQuotes.collateTags(tags1);
-      let expected = [/love/i];
+      let expected = [/loves/i, /love/i];
       expect(actual).to.deep.equal(expected);
       
       actual = controllerQuotes.collateTags(tags2);
-      expected = [/courage/i, /war/i, /battle/i];
+      expected = [/courages/i, /courage/i, /wars/i, /war/i, /battles/i, /battle/i];
       expect(actual).to.deep.equal(expected);
 
       actual = controllerQuotes.collateTags(tags3);
-      expected = [/FRIENDS/i, /roMANS/i, /soldiers/i];
+      expected = [/FRIENDS/i, /FRIEND/i, /roMANS/i, /roMAN/i, /soldiers/i, /soldier/i];
       expect(actual).to.deep.equal(expected);
     });
   });

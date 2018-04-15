@@ -7,7 +7,7 @@
 
 const expect = require('chai').expect;
 const request = require('supertest');
-const {app} = require('../server/server');
+const app = require('../server/server');
 
 const quote = {
   work: 'The Taming of the Shrew',
@@ -20,6 +20,11 @@ const quote = {
 const warningOutput = { warning: 'there\'s nothing here' };
 
 describe('App', () => {
+
+  after((done) => {
+    app.close();
+    done();
+  });
 
   describe('GET ', () => {
     it('should return status 200 and render html on /', (done) => {

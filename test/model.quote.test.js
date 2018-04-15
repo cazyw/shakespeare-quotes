@@ -10,13 +10,32 @@
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
 const {Quote} = require('../models/quote');
+const MONGO_URI = 'mongodb://localhost/testDatabase';
 
 describe('Quote Schema', () => {
 
   before((done) => {
-    mongoose.models = {};
-    mongoose.modelSchemas = {};
-    done();
+    if(!mongoose.connection.readyState) {
+      mongoose.models = {};
+      mongoose.modelSchemas = {};
+      mongoose.connect(MONGO_URI).then(() => done());
+    } else {
+      // console.log('Error: mongodb has not been started. Run mongod --dbpath ~/data/db');
+      mongoose.models = {};
+      mongoose.modelSchemas = {};
+      done();
+    }
+  });
+
+  after((done) => {
+    if(mongoose.connection.db) {
+      mongoose.connection.db.dropDatabase().then(() => {
+        mongoose.connection.close();
+        done();
+      });
+    } else {
+      done();
+    }
   });
 
   it('should be invalid if "work" is missing', (done) => {

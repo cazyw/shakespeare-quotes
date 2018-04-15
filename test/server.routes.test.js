@@ -8,7 +8,7 @@
 const expect = require('chai').expect;
 const request = require('supertest');
 const mongoose = require('mongoose');
-const {app} = require('../server/server');
+const app = require('../server/server');
 const {Quote} = require('../models/quote');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
@@ -98,6 +98,8 @@ const caseQuote = {
 describe('Routes', () => {
   
   before((done) => {
+    mongoose.models = {};
+    mongoose.modelSchemas = {};
     if(!mongoose.connection.readyState) {
       mongoose.connect(MONGO_URI).then(() => done());
     } else {
@@ -107,11 +109,12 @@ describe('Routes', () => {
   });
 
   after((done) => {
-    mongoose.models = {};
-    mongoose.modelSchemas = {};
+    app.close();
     if(mongoose.connection.db) {
-      mongoose.connection.db.dropDatabase();
-      done();
+      mongoose.connection.db.dropDatabase().then(() => {
+        mongoose.connection.close();
+        done();
+      });
     } else {
       done();
     }
@@ -207,7 +210,7 @@ describe('Routes', () => {
           expect(res.body[0]).to.be.an('object').that.has.any.keys('work');
           if(err) return done(err);
           done();
-        })
+        });
     });
   });
 

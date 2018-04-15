@@ -58,6 +58,6 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`listening on port ${port}`));
+let server = app.listen(port, () => console.log(`listening on port ${port}`));
 
-module.exports = {app}; // for testing
+module.exports = server; // for testing
