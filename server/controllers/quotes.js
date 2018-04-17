@@ -74,16 +74,14 @@ function updateQuote(req, res, next) {
   Quote.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(() => {
       Quote.findOne({_id: req.params.id})
-        .then(quote => res.send(quote));
+        .then(quote => res.status(200).send(quote));
     })
     .catch(next); // passes error to app.js
 }
 
 function deleteQuote(req, res, next) {
-  Quote.findByIdAndRemove({
-    _id: req.params.id
-  })
-    .then(quote => res.send(quote))
+  Quote.findByIdAndRemove({ _id: req.params.id })
+    .then(quote => res.status(200).send(quote))
     .catch(next); // passes error to app.js
 }
 

@@ -9,11 +9,13 @@ const expect = require('chai').expect;
 const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../server/server');
-const {Quote} = require('../models/quote');
+const { Quote } = require('../models/quote');
+const { ObjectID } = require('mongodb');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
 
 const quotes = [{
+  _id: new ObjectID(),
   work: 'The Taming of the Shrew',
   act: '1',
   scene: '2',
@@ -21,6 +23,7 @@ const quotes = [{
   tags: ['learning', 'education', 'teaching']
 },
 {
+  _id: new ObjectID(),
   work: 'Hamlet',
   act: '3',
   scene: '2',
@@ -28,6 +31,7 @@ const quotes = [{
   tags: ['love', 'fear', 'doubt', 'protect']
 },
 {
+  _id: new ObjectID(),
   work: 'Henry IV Part 1',
   act: '1',
   scene: '2',
@@ -348,6 +352,24 @@ describe('Routes', () => {
         });
     });
 
+  });
+
+  describe('DELETE /api/quotes/:id', () => {
+    it('should delete the quote given the id', (done) => {
+      request(app)
+        .delete(`/api/quotes/${quotes[0]._id}`)
+        .expect(200)
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.body).to.be.an('object');
+          expect(res.body.work).to.equal('The Taming of the Shrew');
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(2);
+            done();
+          }).catch((e) => done(e));
+        });
+
+    });
   });
 
 });
