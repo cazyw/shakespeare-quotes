@@ -9,16 +9,19 @@ import PropTypes from 'prop-types';
 import './QuoteItem.css';
 
 class QuoteItem extends Component {
-
-  handleClick = (tag) => {
+  handleClick(tag) {
     this.props.passTagSelected(tag);
   }
 
-  displayTags = (tags) => {
+  displayTags(tags) {
     const tagButtons = tags.map((tag, index) => {
       return (<span key={index} className='tag' onClick={this.handleClick.bind(this, tag)}>{decodeURI(tag)}</span>);
     });
     return tagButtons;
+  }
+
+  handleDelete(key) {
+    this.props.deleteQuote(key);
   }
 
   render(){
@@ -26,6 +29,7 @@ class QuoteItem extends Component {
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
     return(
       <li className="quote-box">
+        <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item)}>X</span>
         <span className='quote quote-span'>&quot;{this.props.quote}&quot;</span>
         <span className='work quote-span'>{this.props.work}</span>
         <span className='act quote-span'>{act}</span>
@@ -42,6 +46,9 @@ QuoteItem.propTypes = {
   scene: PropTypes.string,
   quote: PropTypes.string,
   tags: PropTypes.array,
+  item: PropTypes.number,
+  passTagSelected: PropTypes.func,
+  deleteQuote: PropTypes.func
 };
 
 export default QuoteItem;

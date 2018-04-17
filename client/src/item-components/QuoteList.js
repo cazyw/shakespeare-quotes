@@ -15,14 +15,16 @@ class QuoteList extends Component {
     super(props);
     this.state = {
       quotes: []
-    }
+    };
+    this.deleteQuote = this.deleteQuote.bind(this);
+    this.updateQuoteListFromTag = this.updateQuoteListFromTag.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
 
-  updateQuoteListFromTag = (tag) => {
+  updateQuoteListFromTag(tag) {
     fetch(`/api/quotes?tags=${encodeURI(tag)}`)
       .then(data => {
         return data.json();
@@ -38,10 +40,16 @@ class QuoteList extends Component {
       });
   }
 
+  deleteQuote(key) {
+    let updatedQuotes = [...this.state.quotes];
+    updatedQuotes.splice(key, 1);
+    this.setState({ quotes: updatedQuotes });
+  }
+
   render(){
     return this.state.quotes.map((quoteQ, index) => {
       return(
-        <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} passTagSelected={this.updateQuoteListFromTag} />
+        <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} passTagSelected={this.updateQuoteListFromTag} deleteQuote={this.deleteQuote} item={index} />
       );
     });
   }

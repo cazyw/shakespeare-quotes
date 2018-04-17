@@ -47,3 +47,8 @@ span.tag {
   cursor: pointer;
   font-size: 0.8em;
 }
+
+.delete-tick {
+  float: right;
+  cursor: pointer;
+}

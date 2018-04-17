@@ -19,17 +19,20 @@ export default class SearchQuote extends Component {
       tags: '',
       quotes: []
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
   
-  handleChange = (event) => {
+  handleChange(event) {
     this.setState({tags: event.target.value});
   }
 
-  handleSubmit = (event) => {
+  handleSubmit(event) {
     var tags = this.state.tags.toLowerCase();
     fetch('/api/quotes?tags=' + tags)
       .then((data) => {
@@ -57,15 +60,15 @@ export default class SearchQuote extends Component {
   render(){
     return(
       <div className="homepage">
-          <form className="" id="quote-search-container" onSubmit={this.handleSubmit}>
+        <form className="" id="quote-search-container" onSubmit={this.handleSubmit}>
           <FormGroup controlId="formBasicText" className="form-inner">
             <ControlLabel>Enter search tags, separated by a space (e.g. courage love family)</ControlLabel>
             <FormControl type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
             <FormControl.Feedback />
             <ButtonForm type="submit" label="Find Quotes" className="form-button search-button" />
-            </FormGroup>
-          </form>
-          <div id="searchResultMessage"></div>
+          </FormGroup>
+        </form>
+        <div id="searchResultMessage"></div>
         <DisplayQuotes quotes={this.state.quotes} />
       </div>
     );

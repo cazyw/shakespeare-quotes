@@ -354,8 +354,10 @@ describe('Routes', () => {
 
   });
 
+  // describe();
+
   describe('DELETE /api/quotes/:id', () => {
-    it('should delete the quote given the id', (done) => {
+    it('should delete the quote given a valid id', (done) => {
       request(app)
         .delete(`/api/quotes/${quotes[0]._id}`)
         .expect(200)
@@ -368,7 +370,20 @@ describe('Routes', () => {
             done();
           }).catch((e) => done(e));
         });
+    });
 
+    it('should not delete any quotes given an invalid id', (done) => {
+      request(app)
+        .delete('/api/quotes/1234567890')
+        .expect(422)
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.body).to.have.property('error');
+          Quote.find().then((quotes) => {
+            expect(quotes).to.have.lengthOf(3);
+            done();
+          }).catch((e) => done(e));
+        });
     });
   });
 

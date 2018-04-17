@@ -57,14 +57,6 @@ function retrieveQuotes(req, res, next) {
 
 function postQuote(req, res, next) {
   // save new instance of a quote (returns a promise)
-  try {
-    req.body.tags = req.body.tags[0].toLowerCase()
-      .split(',')
-      .map(word => encodeURI(word.trim()));
-
-  } catch(error) {
-    throw new Error(`Error: ${error}`);
-  }
   Quote.create(req.body)
     .then(quote => res.json(quote))
     .catch(error => next(error)); // passes error to app.js

@@ -12,6 +12,10 @@ export default class Home extends Component {
     this.state = {
       quotes: []
     };
+
+    this.displayAll = this.displayAll.bind(this);
+    this.displayNone = this.displayNone.bind(this);
+    this.displaySelected = this.displaySelected.bind(this);
   }
 
   componentWillMount() {
@@ -28,7 +32,7 @@ export default class Home extends Component {
   }
 
   // display all quotes in the database
-  displayAll = () => {
+  displayAll() {
     fetch('/api/quotes/')
       .then((data) => {
         return data.json();
@@ -46,14 +50,14 @@ export default class Home extends Component {
   }
 
   // display no quotes
-  displayNone = () => {
+  displayNone() {
     this.setState({
       quotes: []
     });
   }
   
   // display selected quotes
-  displaySelected = (quotes) => {
+  displaySelected(quotes) {
     this.setState({
       quotes: [quotes]
     });

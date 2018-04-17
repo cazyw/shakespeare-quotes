@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
+import PropTypes from 'prop-types';
 import { FormControl, ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
 import { errorHighlighting, resetWarnings, checkInputs } from '../utils/helperFunctions';
 import './PostQuote.css';
@@ -21,54 +22,58 @@ export default class PostQuote extends Component {
       quote: '',
       tags: [],
       dataWorks: [
-        "All's Well That Ends Well",
-        "As You Like It",
-        "The Comedy of Errors",
-        "Cymbeline",
-        "Love's Labours Lost",
-        "Measure for Measure",
-        "The Merry Wives of Windsor",
-        "The Merchant of Venice",
-        "A Midsummer Night's Dream",
-        "Much Ado About Nothing",
-        "Pericles, Prince of Tyre",
-        "Taming of the Shrew",
-        "The Tempest",
-        "Troilus and Cressida",
-        "Twelfth Night",
-        "Two Gentlemen of Verona",
-        "Winter's Tale",
-        "Henry IV, part 1",
-        "Henry IV, part 2",
-        "Henry V",
-        "Henry VI, part 1",
-        "Henry VI, part 2",
-        "Henry VI, part 3",
-        "Henry VIII",
-        "King John",
-        "Richard II",
-        "Richard III",
-        "Antony and Cleopatra",
-        "Coriolanus",
-        "Hamlet",
-        "Julius Caesar",
-        "King Lear",
-        "Macbeth",
-        "Othello",
-        "Romeo and Juliet",
-        "Timon of Athens",
-        "Titus Andronicus"
+        'All\'s Well That Ends Well',
+        'As You Like It',
+        'The Comedy of Errors',
+        'Cymbeline',
+        'Love\'s Labours Lost',
+        'Measure for Measure',
+        'The Merry Wives of Windsor',
+        'The Merchant of Venice',
+        'A Midsummer Night\'s Dream',
+        'Much Ado About Nothing',
+        'Pericles, Prince of Tyre',
+        'Taming of the Shrew',
+        'The Tempest',
+        'Troilus and Cressida',
+        'Twelfth Night',
+        'Two Gentlemen of Verona',
+        'Winter\'s Tale',
+        'Henry IV, part 1',
+        'Henry IV, part 2',
+        'Henry V',
+        'Henry VI, part 1',
+        'Henry VI, part 2',
+        'Henry VI, part 3',
+        'Henry VIII',
+        'King John',
+        'Richard II',
+        'Richard III',
+        'Antony and Cleopatra',
+        'Coriolanus',
+        'Hamlet',
+        'Julius Caesar',
+        'King Lear',
+        'Macbeth',
+        'Othello',
+        'Romeo and Juliet',
+        'Timon of Athens',
+        'Titus Andronicus'
       ]
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.submitQuote = this.submitQuote.bind(this);
+    this.resetFields = this.resetFields.bind(this);
   }
 
 
-  handleChange = (event) => {
+  handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
   
   // reset fields if sucessfully posted to the dataabse
-  resetFields = () => {
+  resetFields() {
     this.setState({
       work: '',
       act: '',
@@ -80,19 +85,19 @@ export default class PostQuote extends Component {
     document.querySelector('.reset-button').blur();
   }
 
-  displaySelected = (quote) => {
+  displaySelected(quote) {
     this.props.displaySelectedQuote(quote);
   }
 
   // post data to the database
-  submitQuote = (event) => {
-    event.preventDefault()
+  submitQuote(event) {
+    event.preventDefault();
     const data = {
       work: this.state.work,
       act: this.state.act,
       scene: this.state.scene,
       quote: this.state.quote,
-      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null) ? [] : [encodeURI(this.state.tags)]
+      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
     };
     // only send if 'valid' input
     if(checkInputs(data, this.state.dataWorks)){
@@ -119,7 +124,7 @@ export default class PostQuote extends Component {
     }
   }
 
-  handleFocus = (key) => {
+  handleFocus(key) {
     const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
     const previousFields = inputFields.slice(0, inputFields.indexOf(key));
     for(let field of previousFields){
@@ -177,17 +182,18 @@ export default class PostQuote extends Component {
           </FormGroup>
         </form>
 
-
-
         <datalist id="data-works">
           {this.state.dataWorks.map((work, key) =>
             <option key={`dataWork-${key}`} value={work} />
-        )}
+          )}
         </datalist>
       </div>
     );
   }
 
-
 }
+
+PostQuote.propTypes = {
+  displaySelectedQuote: PropTypes.func
+};
 
