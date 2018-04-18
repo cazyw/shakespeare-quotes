@@ -111,11 +111,14 @@ export default class PostQuote extends Component {
       })
         .then((res) => {
           if(res.status === 200) {
-            this.displaySelected(data);
             this.resetFields();
+            return res.json();
           } else {
             res.json().then(body => alert(`${body.error}`));
           }
+        })
+        .then((jsonData) => {
+          this.displaySelected(jsonData);
         })
         .catch((error) => {
           console.log(error);

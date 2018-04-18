@@ -40,16 +40,25 @@ class QuoteList extends Component {
       });
   }
 
-  deleteQuote(key) {
+  deleteQuote(key, objId) {
     let updatedQuotes = [...this.state.quotes];
     updatedQuotes.splice(key, 1);
     this.setState({ quotes: updatedQuotes });
+
+    fetch(`/api/quotes/${objId}`, { method: 'delete' })
+      .then((res) => {
+        if(res.status === 200) return res.json();
+        res.json().then(body => alert(`${body.error}`));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render(){
     return this.state.quotes.map((quoteQ, index) => {
       return(
-        <QuoteItem key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} passTagSelected={this.updateQuoteListFromTag} deleteQuote={this.deleteQuote} item={index} />
+        <QuoteItem objId={quoteQ._id} key={index} quote={quoteQ.quote} work={quoteQ.work} act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} passTagSelected={this.updateQuoteListFromTag} deleteQuote={this.deleteQuote} item={index} />
       );
     });
   }

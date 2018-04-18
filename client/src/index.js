@@ -25,6 +25,7 @@ export default class Home extends Component {
       })
       .then(json => {
         toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
+        console.log(json[0]._id);
         this.setState({
           quotes: json
         });
