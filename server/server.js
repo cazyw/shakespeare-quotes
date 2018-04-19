@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 /*
- * Shakespeare Quote App
- * Main app server
- */
+* Shakespeare Quote App
+* Main app server
+*/
+
 'use strict';
 
 const express = require('express');
@@ -58,6 +60,7 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 5000;
+//eslint-disable-next-line no-console
 let server = app.listen(port, () => console.log(`listening on port ${port}`));
 
 module.exports = server; // for testing

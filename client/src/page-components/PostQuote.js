@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import PropTypes from 'prop-types';
 import { FormControl, ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
-import { errorHighlighting, resetWarnings, checkInputs } from '../utils/helperFunctions';
+import { errorHighlighting, resetWarnings, checkInputs, shakespeareWorks } from '../utils/helperFunctions';
 import './PostQuote.css';
 
 export default class PostQuote extends Component {
@@ -21,45 +21,7 @@ export default class PostQuote extends Component {
       scene: '',
       quote: '',
       tags: [],
-      dataWorks: [
-        'All\'s Well That Ends Well',
-        'As You Like It',
-        'The Comedy of Errors',
-        'Cymbeline',
-        'Love\'s Labours Lost',
-        'Measure for Measure',
-        'The Merry Wives of Windsor',
-        'The Merchant of Venice',
-        'A Midsummer Night\'s Dream',
-        'Much Ado About Nothing',
-        'Pericles, Prince of Tyre',
-        'Taming of the Shrew',
-        'The Tempest',
-        'Troilus and Cressida',
-        'Twelfth Night',
-        'Two Gentlemen of Verona',
-        'Winter\'s Tale',
-        'Henry IV, part 1',
-        'Henry IV, part 2',
-        'Henry V',
-        'Henry VI, part 1',
-        'Henry VI, part 2',
-        'Henry VI, part 3',
-        'Henry VIII',
-        'King John',
-        'Richard II',
-        'Richard III',
-        'Antony and Cleopatra',
-        'Coriolanus',
-        'Hamlet',
-        'Julius Caesar',
-        'King Lear',
-        'Macbeth',
-        'Othello',
-        'Romeo and Juliet',
-        'Timon of Athens',
-        'Titus Andronicus'
-      ]
+      dataWorks: shakespeareWorks
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -121,6 +83,7 @@ export default class PostQuote extends Component {
           this.displaySelected(jsonData);
         })
         .catch((error) => {
+          // eslint-disable-next-line no-console
           console.log(error);
         });
 

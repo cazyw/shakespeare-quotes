@@ -9,13 +9,10 @@ const pluralSingular = (tagArray) => {
     originalSet.add(pluralize.plural(tag));
     originalSet.add(pluralize.singular(tag));
   });
-
   // const relatedWordsuseCanonical = true;
   // const relationshipTypes = 'synonym';
   // const limitPerRelationshipType = 10;
   // const api_key = process.env.WORDNIK_API_KEY;
-
-
   return [...originalSet];
 
 };

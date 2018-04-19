@@ -27,6 +27,8 @@ class QuoteItem extends Component {
   render(){
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
+    const tweet = encodeURI(`"${this.props.quote}" - ${this.props.work} (Act ${this.props.act}, Sc ${this.props.scene})`);
+    const tweetURL = `https://twitter.com/intent/tweet?text=${tweet}&hashtags=ShakespeareSunday`;
     return(
       <li className="quote-box" id={this.props.objId}>
         <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props.objId)}>X</span>
@@ -34,7 +36,15 @@ class QuoteItem extends Component {
         <span className='work quote-span'>{this.props.work}</span>
         <span className='act quote-span'>{act}</span>
         <span className='scene quote-span'>{scene}</span>    
-        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span>      
+        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}
+        
+          <span className='tweet'>
+            <a className='twitter-share-button' href={tweetURL}>Tweet</a>
+          </span>
+
+        </span>   
+           
+        
       </li>
     );
   }

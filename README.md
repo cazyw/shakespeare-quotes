@@ -2,14 +2,17 @@
 
 ## Objective
 
-Create an online collection of Shakespeare quotes. Users can submit quotes and search for quotes that have been tagged with certain keywords. Users can click on tags to pull up a selection of similarly tagged quotes.
+Create an online collection of Shakespeare quotes. Users can 
+* submit quotes into the collection
+* search for quotes that have been tagged with certain keywords
+* tweet quotes
+* delete quotes (authentication to be added to restrict functionality)
 
 A rough version is up and running here: https://shakespeare-sunday.herokuapp.com/
 
 ## Status
 
 Currently working on refactoring and restructuring the code, testing and adding futher validation to the form input.
-Will look into adding: login (to delete/modify quotes), better searching of tags.
 
 ## Operating Instructions
 
@@ -122,7 +125,10 @@ New frameworks used in this project include mongoDB and React. I also added a `c
 
 Initially I had used Webpack to build my final `.js` file however once I looked more into React, I decided to use the `create-react-app` package which black-boxes the transpiling and compiling of React (webapck and babel configuration).
 
-I also used ESLint in this project and am getting to know some of the settings and configuration options.
+I also used ESLint in this project and am getting to know some of the settings and configuration options. To run eslint in the console: 
+```
+$ npm run lint
+```
 
 ### Server
 
@@ -160,13 +166,15 @@ This is my first real dive into React so it's been a learning experience looking
 
 Added some functions to perform basic form validation checks however doesn't check that the details entered are necessarily correct.
 
-### APIs Used
+### APIs / External Functionality Used
 
 Looking to use [Wordnik API](http://api.wordnik.com) to assist with keyword (tag) searching. In order to identify quotes that may be relevant, some manipulation of search terms will be done such as 
 * searching for plural and singular versions of a tag
 * searching for synonyms
 
 The API will be used to retrieve synonyms of keywords entered.
+
+Twitter's [Tweet Web Intent](https://dev.twitter.com/web/tweet-button/web-intent) is used to allow users to tweet quotes directly to Twitter.
 
 ### Testing
 

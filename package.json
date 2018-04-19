@@ -12,6 +12,7 @@
     "build-react": "cd client && npm run build",
     "test": "NODE_ENV=test mocha --slow 0",
     "test-watch": "NODE_ENV=test nodemon --exec \"mocha --recursive --slow 0\"",
+    "lint": "eslint . --ext .js --ignore-pattern 'node_modules/' --ignore-pattern 'build/'",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {

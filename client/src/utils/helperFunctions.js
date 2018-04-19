@@ -1,13 +1,13 @@
 export const openElement = (sectionToOpen) => {
   document.getElementById(sectionToOpen).classList.add('open');
-}
+};
 
 export const closeElement = (sectionToClose) => {
   document.getElementById(sectionToClose).classList.remove('open');
-}
+};
 
 export const toggleSections = (sectionToOpen, sectionToClose1, sectionToClose2) => {
-const timeOut = document.getElementById(sectionToClose1).classList.contains('open') || 
+  const timeOut = document.getElementById(sectionToClose1).classList.contains('open') || 
 document.getElementById(sectionToClose2).classList.contains('open') ? 750 : 0;
   
   closeElement(sectionToClose1);
@@ -15,7 +15,7 @@ document.getElementById(sectionToClose2).classList.contains('open') ? 750 : 0;
   setTimeout(() => {
     openElement(sectionToOpen);
   }, timeOut);
-}
+};
 
 export const errorHighlighting = (showError, field, errorText) => {
   if (showError) {
@@ -24,14 +24,14 @@ export const errorHighlighting = (showError, field, errorText) => {
     document.getElementById(field).classList.remove('field-blank');
   }
   document.getElementById(`help-${field}`).textContent = errorText;
-}
+};
 
 export const resetWarnings = () => {
   const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
   for(let field of inputFields) {
     errorHighlighting(false, field, '');
   }
-}
+};
 
 export const checkInputs = (inputs, dataWorks) => {
   resetWarnings();
@@ -69,8 +69,8 @@ export const checkInputs = (inputs, dataWorks) => {
     errors += 1;
   }
 
-   // check tags
-   if(inputs.tags.length < 1){
+  // check tags
+  if(inputs.tags.length < 1){
     errorHighlighting(true, 'tags', 'Required');
     errors += 1;
   }
@@ -78,4 +78,44 @@ export const checkInputs = (inputs, dataWorks) => {
 
   if(errors > 0) return false;
   return true;
-}
+};
+
+export const shakespeareWorks = [
+  'All\'s Well That Ends Well',
+  'As You Like It',
+  'The Comedy of Errors',
+  'Cymbeline',
+  'Love\'s Labours Lost',
+  'Measure for Measure',
+  'The Merry Wives of Windsor',
+  'The Merchant of Venice',
+  'A Midsummer Night\'s Dream',
+  'Much Ado About Nothing',
+  'Pericles, Prince of Tyre',
+  'Taming of the Shrew',
+  'The Tempest',
+  'Troilus and Cressida',
+  'Twelfth Night',
+  'Two Gentlemen of Verona',
+  'Winter\'s Tale',
+  'Henry IV, part 1',
+  'Henry IV, part 2',
+  'Henry V',
+  'Henry VI, part 1',
+  'Henry VI, part 2',
+  'Henry VI, part 3',
+  'Henry VIII',
+  'King John',
+  'Richard II',
+  'Richard III',
+  'Antony and Cleopatra',
+  'Coriolanus',
+  'Hamlet',
+  'Julius Caesar',
+  'King Lear',
+  'Macbeth',
+  'Othello',
+  'Romeo and Juliet',
+  'Timon of Athens',
+  'Titus Andronicus'
+];
