@@ -168,7 +168,7 @@ describe('Routes', () => {
         });
     });
 
-    it('should return entries where the seach term is part of a tag word', (done) => {
+    it('should return entries where the seach term is part of a tag word (but not quote)', (done) => {
       request(app)
         .get('/api/quotes')
         .query({ tags: 'learn' })
@@ -190,7 +190,19 @@ describe('Routes', () => {
         });
     });
 
-    it('should return no entries if a tag with no matches in the db is provided', (done) => {
+    it('should return entries where the seach term is part of a quote (but not a tag)', (done) => {
+      request(app)
+        .get('/api/quotes')
+        .query({ tags: 'sport' })
+        .end((err, res) => {
+          expect(res.body).to.have.lengthOf(1);
+          expect(res.body[0].work).to.equal(quotes[2].work);
+          if(err) return done(err);
+          done();
+        });
+    });
+
+    it('should return no entries if a search term is not in a tag or quote', (done) => {
       request(app)
         .get('/api/quotes')
         .query({tags: 'England'})
@@ -201,7 +213,7 @@ describe('Routes', () => {
           done();
         });
     });
-
+      
   });
 
   describe('GET /api/quotes/random', () => {
@@ -353,8 +365,6 @@ describe('Routes', () => {
     });
 
   });
-
-  // describe();
 
   describe('DELETE /api/quotes/:id', () => {
     it('should delete the quote given a valid id', (done) => {
