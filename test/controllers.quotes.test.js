@@ -3,7 +3,7 @@ const controllerQuotes = require('../server/controllers/quotes');
 
 describe('Controllers', () => {
   describe('Quotes', () => {
-    it('collateTags should transform query string into regexp', () => {
+    it('collateTags should transform query string into regexp and include singular/plural', () => {
       const tags1 = 'love';
       const tags2 = 'courage war battle';
       const tags3 = 'FRIENDS roMANS soldiers';
