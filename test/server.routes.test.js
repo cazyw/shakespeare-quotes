@@ -10,94 +10,9 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../server/server');
 const { Quote } = require('../models/quote');
-const { ObjectID } = require('mongodb');
+const { quotes, validQuotes, invalidQuotes, caseQuotes, updatedQuotes } = require('./helpers');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
-
-const quotes = [{
-  _id: new ObjectID(),
-  work: 'The Taming of the Shrew',
-  act: '1',
-  scene: '2',
-  quote: 'O this learning, what a thing it is!',
-  tags: ['learning', 'education', 'teaching']
-},
-{
-  _id: new ObjectID(),
-  work: 'Hamlet',
-  act: '3',
-  scene: '2',
-  quote: 'Where love is great, the littlest doubts are fear. Where little fears grow great, great love grows there.',
-  tags: ['love', 'fear', 'doubt', 'protect']
-},
-{
-  _id: new ObjectID(),
-  work: 'Henry IV Part 1',
-  act: '1',
-  scene: '2',
-  quote: 'If all the year were playing holidays, to sport would be as tedious as to work; But when they seldom come, they wished-for come, and nothing pleaseth but rare accidents.',
-  tags: ['holiday', 'accidents', 'rare', 'work', 'suprise']
-}];
-
-const validQuotes = [{
-  work: 'Sonnet 50',
-  act: '',
-  scene: '',
-  quote: 'For that same groan doth put this in my mind; My grief lies onward, and my joy behind.',
-  tags: ['grief', 'joy']
-},
-{
-  work: 'Henry V',
-  act: '4',
-  scene: '1',
-  quote: 'I am afeard there are few die well that die in a battle...',
-  tags: ['death', 'battle', 'war']
-}];
-
-const invalidQuote = [
-  {
-    work: '',
-    act: '4',
-    scene: '1',
-    quote: 'I am afeard there are few die well that die in a battle...',
-    tags: ['death', 'battle', 'war']
-  } ,
-  {
-    work: 'Henry V',
-    act: '',
-    scene: '1',
-    quote: 'I am afeard there are few die well that die in a battle...',
-    tags: ['death', 'battle', 'war']
-  } ,
-  {
-    work: 'Henry V',
-    act: '4',
-    scene: '',
-    quote: 'I am afeard there are few die well that die in a battle...',
-    tags: ['death', 'battle', 'war']
-  } ,
-  {
-    work: 'Henry V',
-    act: '4',
-    scene: '1',
-    quote: '',
-    tags: ['death', 'battle', 'war']
-  } ,
-  {
-    work: 'Henry V',
-    act: '4',
-    scene: '1',
-    quote: 'I am afeard there are few die well that die in a battle...',
-  } ,
-];
-
-const caseQuote = {
-  work: 'Sonnet 50',
-  act: '',
-  scene: '',
-  quote: 'For that same groan doth put this in my mind; My grief lies onward, and my joy behind.',
-  tags: ['Grief', 'Joy']
-};
 
 describe('Routes', () => {
   
@@ -266,74 +181,10 @@ describe('Routes', () => {
         });
     });
 
-    it('should not create a quote if "work" is missing', (done) => {
+    it('should not create a quote if fields are not all completed', (done) => {
       request(app)
         .post('/api/quotes')
-        .send(invalidQuote[0])
-        .expect(422)
-        .end((err, res) => {
-          expect(res.body).to.have.key('error');
-          if (err) return done(err);
-
-          Quote.find().then((quotes) => {
-            expect(quotes).to.have.lengthOf(3);
-            done();
-          }).catch((e) => done(e));
-        });
-    });
-
-    it('should not create a quote if "act" is missing', (done) => {
-      request(app)
-        .post('/api/quotes')
-        .send(invalidQuote[1])
-        .expect(422)
-        .end((err, res) => {
-          expect(res.body).to.have.key('error');
-          if (err) return done(err);
-
-          Quote.find().then((quotes) => {
-            expect(quotes).to.have.lengthOf(3);
-            done();
-          }).catch((e) => done(e));
-        });
-    });
-
-    it('should not create a quote "scene" is missing', (done) => {
-      request(app)
-        .post('/api/quotes')
-        .send(invalidQuote[2])
-        .expect(422)
-        .end((err, res) => {
-          expect(res.body).to.have.key('error');
-          if (err) return done(err);
-
-          Quote.find().then((quotes) => {
-            expect(quotes).to.have.lengthOf(3);
-            done();
-          }).catch((e) => done(e));
-        });
-    });
-
-    it('should not create a quote if "quote" is missing', (done) => {
-      request(app)
-        .post('/api/quotes')
-        .send(invalidQuote[3])
-        .expect(422)
-        .end((err, res) => {
-          expect(res.body).to.have.key('error');
-          if (err) return done(err);
-
-          Quote.find().then((quotes) => {
-            expect(quotes).to.have.lengthOf(3);
-            done();
-          }).catch((e) => done(e));
-        });
-    });
-
-    it('should not create a quote if "tag" is missing', (done) => {
-      request(app)
-        .post('/api/quotes')
-        .send(invalidQuote[4])
+        .send(invalidQuotes)
         .expect(422)
         .end((err, res) => {
           expect(res.body).to.have.key('error');
@@ -349,10 +200,10 @@ describe('Routes', () => {
     it('should convert tags to lower case', (done) => {
       request(app)
         .post('/api/quotes')
-        .send(caseQuote)
+        .send(caseQuotes)
         .expect(200)
         .end((err, res) => {
-          expect(res.body.work).to.equal(caseQuote.work);
+          expect(res.body.work).to.equal(caseQuotes.work);
           if(err) return done(err);
 
           Quote.find().then((quotes) => {
@@ -393,6 +244,33 @@ describe('Routes', () => {
             expect(quotes).to.have.lengthOf(3);
             done();
           }).catch((e) => done(e));
+        });
+    });
+  });
+
+  describe('PUT /api/quotes/:id', () => {
+    it('should update the quote given a valid id', (done) => {
+      request(app)
+        .put(`/api/quotes/${quotes[0]._id}`)
+        .send(updatedQuotes)
+        .expect(200)
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.body).to.be.an('object');
+          expect(res.body.tags).to.include.members(['hollow crown', 'rare']);
+          done();
+        });
+    });
+
+    it('should not update a quote given an invalid id', (done) => {
+      request(app)
+        .put('/api/quotes/12345678')
+        .send(updatedQuotes)
+        .expect(422)
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.body).to.have.property('error');
+          done();
         });
     });
   });
