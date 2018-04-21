@@ -66,7 +66,8 @@ function updateQuote(req, res, next) {
   Quote.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(() => {
       Quote.findOne({_id: req.params.id})
-        .then(quote => res.status(200).send(quote));
+        .then(quote => res.status(200).send(quote))
+        .catch(error => next(error)); 
     })
     .catch(next); // passes error to app.js
 }

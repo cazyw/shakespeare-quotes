@@ -28,7 +28,6 @@ class QuoteItem extends Component {
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
     const tweet = encodeURIComponent(`"${this.props.quote}"`) + encodeURI(` - ${this.props.work} (Act ${this.props.act}, Sc ${this.props.scene})`);
-    console.log(tweet);
     const tweetURL = `https://twitter.com/intent/tweet?text=${tweet}&hashtags=ShakespeareSunday`;
     return(
       <li className="quote-box" id={this.props.objId}>
