@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import PropTypes from 'prop-types';
 import { FormControl, ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
-import { errorHighlighting, resetWarnings, checkInputs, shakespeareWorks } from '../utils/helperFunctions';
+import { errorHighlighting, resetWarnings, checkInputs } from '../utils/helperFunctions';
+import { shakespeareWorks } from '../utils/constants';
 import './PostQuote.css';
 
 export default class PostQuote extends Component {
