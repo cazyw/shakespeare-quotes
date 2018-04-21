@@ -7,7 +7,6 @@ const Schema = mongoose.Schema;
 
 // validator, either both Act and Scene must be blank (e.g. for sonnets)
 // or they must both be filled out
-
 function hasActOrScene() { 
   return (this.act != '' || this.scene != '');
 }
@@ -21,12 +20,11 @@ function isInteger(val){
   return /^[1-9]{0,1}[0-9]{0,2}$/.test(val);
 }
 
-// create quote schema & model
 const QuoteSchema = new Schema({
   
   work: {
     type: String,
-    required: [true, 'Work (Play, Sonnet etc) field is required']
+    required: [true, 'Work (Play, Sonnet etc) field must be completed']
   },
   act: {
     type: String,
@@ -40,7 +38,7 @@ const QuoteSchema = new Schema({
   },
   quote: {
     type: String,
-    required: [true, 'Quote is required']
+    required: [true, 'Quote field must be completed']
   },
   tags: {
     type: [{
@@ -56,8 +54,5 @@ const QuoteSchema = new Schema({
   }
 });
 
-
-// 'quote' collection
-
 const Quote = mongoose.model('quote', QuoteSchema);
-module.exports = {Quote};
+module.exports = { Quote };

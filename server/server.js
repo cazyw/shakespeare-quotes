@@ -37,7 +37,6 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(bodyParser.json());
 
 // initialise routes
-// app.use('/api', p3p(p3p.recommended), require('./routes'));
 app.use('/api', require('./routes'));
 
 app.get('*', (req, res) => {
@@ -63,4 +62,4 @@ const port = process.env.PORT || 5000;
 //eslint-disable-next-line no-console
 let server = app.listen(port, () => console.log(`listening on port ${port}`));
 
-module.exports = server; // for testing
+module.exports = server;

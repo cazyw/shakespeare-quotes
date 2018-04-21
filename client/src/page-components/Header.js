@@ -7,7 +7,6 @@ import './Header.css';
 export default class Header extends Component {
   constructor(props){
     super(props);
-
     this.displayAll = this.displayAll.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
@@ -16,6 +15,7 @@ export default class Header extends Component {
     this.props.displayAllQuotes();
   }
   showPostSection() {
+    document.getElementById('searchResultMessage').textContent = '';
     toggleSections('quote-post-container','quote-search-container','quote-display-container');
   }
   
@@ -35,15 +35,9 @@ export default class Header extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-              <NavItem eventKey={1} onClick={this.showPostSection} >
-                Add Quote
-              </NavItem>
-              <NavItem eventKey={2} onClick={this.showSearchSection}>
-                Search
-              </NavItem>
-              <NavItem eventKey={3} onClick={this.displayAll}>
-                All
-              </NavItem>
+              <NavItem eventKey={1} onClick={this.showPostSection}>Add Quote</NavItem>
+              <NavItem eventKey={2} onClick={this.showSearchSection}>Search</NavItem>
+              <NavItem eventKey={3} onClick={this.displayAll}>All</NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
 import Header from './page-components/Header';
-import { toggleSections, openElement, closeElement } from './utils/helperFunctions';
+import { openElement } from './utils/helperFunctions';
+import { getRandomQuote, getAllQuotes } from './utils/apiCalls';
 import './styles.css';
 
 export default class Home extends Component {
@@ -12,55 +13,26 @@ export default class Home extends Component {
     this.state = {
       quotes: []
     };
-
     this.displayAll = this.displayAll.bind(this);
     this.displayNone = this.displayNone.bind(this);
     this.displaySelected = this.displaySelected.bind(this);
   }
 
   componentWillMount() {
-    fetch('/api/quotes/random')
-      .then(data => {
-        return data.json();
-      })
-      .then(json => {
-        toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
-        this.setState({
-          quotes: json
-        });
-      });
+    getRandomQuote(this.displaySelected);
   }
 
-  // display all quotes in the database
   displayAll() {
-    fetch('/api/quotes/')
-      .then((data) => {
-        return data.json();
-      })
-      .then((json) => {
-        const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 750 : 0;
-        closeElement('quote-display-container');
-        setTimeout(() => {
-          toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
-          this.setState({
-            quotes: json
-          });
-        }, timeOut);
-      });
+    document.getElementById('searchResultMessage').textContent = '';
+    getAllQuotes(this.displaySelected);
   }
 
-  // display no quotes
   displayNone() {
-    this.setState({
-      quotes: []
-    });
+    this.setState({ quotes: [] });
   }
   
-  // display selected quotes
   displaySelected(quotes) {
-    this.setState({
-      quotes: [quotes]
-    });
+    this.setState({ quotes });
     openElement('quote-display-container');
   }
 

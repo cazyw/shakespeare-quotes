@@ -7,13 +7,13 @@
 import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import PropTypes from 'prop-types';
-import { FormControl, ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
-import { errorHighlighting, resetWarnings, checkInputs } from '../utils/helperFunctions';
+import { ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
+import { inputHasErrors, resetWarnings, checkIfPreviousFieldBlank } from '../utils/helperFunctions';
 import { shakespeareWorks } from '../utils/constants';
+import { postQuote } from '../utils/apiCalls';
 import './PostQuote.css';
 
 export default class PostQuote extends Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -22,20 +22,14 @@ export default class PostQuote extends Component {
       scene: '',
       quote: '',
       tags: [],
-      dataWorks: shakespeareWorks
+      titleOfWorks: shakespeareWorks
     };
-
     this.handleChange = this.handleChange.bind(this);
-    this.submitQuote = this.submitQuote.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.resetFields = this.resetFields.bind(this);
-  }
-
-
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+    this.displaySelected = this.displaySelected.bind(this);
   }
   
-  // reset fields if sucessfully posted to the dataabse
   resetFields() {
     this.setState({
       work: '',
@@ -45,70 +39,42 @@ export default class PostQuote extends Component {
       tags: []
     });
     resetWarnings();
-    document.querySelector('.reset-button').blur();
   }
 
   displaySelected(quote) {
-    this.props.displaySelectedQuote(quote);
+    this.props.displaySelectedQuote([quote]);
   }
 
-  // post data to the database
-  submitQuote(event) {
-    event.preventDefault();
-    const data = {
-      work: this.state.work,
-      act: this.state.act,
-      scene: this.state.scene,
-      quote: this.state.quote,
-      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
-    };
-    // only send if 'valid' input
-    if(checkInputs(data, this.state.dataWorks)){
-      fetch('/api/quotes', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-        .then((res) => {
-          if(res.status === 200) {
-            this.resetFields();
-            return res.json();
-          } else {
-            res.json().then(body => alert(`${body.error}`));
-          }
-        })
-        .then((jsonData) => {
-          this.displaySelected(jsonData);
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.log(error);
-        });
-
-    }
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   handleFocus(key) {
     const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
     const previousFields = inputFields.slice(0, inputFields.indexOf(key));
     for(let field of previousFields){
-      const fieldValue = document.getElementById(field).value;
-      if(fieldValue === null || fieldValue === '') {
-        errorHighlighting(true, field, 'Required');
-      } else {
-        errorHighlighting(false, field, '');
-      }
+      checkIfPreviousFieldBlank(field);
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const data = {
+      work: this.state.work,
+      act: this.state.act,
+      scene: this.state.scene,
+      quote: this.state.quote,
+      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null || this.state.tags === undefined) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
+    };
+    if(!inputHasErrors(data, this.state.titleOfWorks)){
+      postQuote(data, this.resetFields, this.displaySelected);
     }
   }
 
   render(){
-        
     return(
       <div className='homepage' >
-        <form className='' id='quote-post-container' onSubmit={this.submitQuote} onReset={this.resetFields} >
+        <form className='' id='quote-post-container' onSubmit={this.handleSubmit} onReset={this.resetFields} >
           <FormGroup controlId='formControlsText' className='form-inner'>
             <ControlLabel className='instruction'>Add a quote to the collection</ControlLabel>
             <div className='form-row'>
@@ -150,17 +116,15 @@ export default class PostQuote extends Component {
         </form>
 
         <datalist id="data-works">
-          {this.state.dataWorks.map((work, key) =>
+          {this.state.titleOfWorks.map((work, key) =>
             <option key={`dataWork-${key}`} value={work} />
           )}
         </datalist>
       </div>
     );
   }
-
 }
 
 PostQuote.propTypes = {
   displaySelectedQuote: PropTypes.func
 };
-

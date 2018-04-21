@@ -5,13 +5,11 @@
  *  - displays all quotes
  *  - display quotes that match certain keywords
  */
-
 import React, { Component } from 'react';
 import QuoteList from '../item-components/QuoteList';
 import './DisplayQuotes.css';
 
 export default class DisplayQuotes extends Component {
-
   constructor(props){
     super(props);
     this.state = {
