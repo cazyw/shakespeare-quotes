@@ -10,8 +10,8 @@
     "client": "cd client && npm start",
     "server": "nodemon server/server.js",
     "build-react": "cd client && npm run build",
-    "test": "NODE_ENV=test mocha --slow 0",
-    "test-watch": "NODE_ENV=test nodemon --exec \"mocha --recursive --slow 0\"",
+    "test": "NODE_ENV=test mocha --require babel-register --slow 0",
+    "test-watch": "NODE_ENV=test nodemon --exec \"mocha --recursive --require babel-register --slow 0\"",
     "lint": "eslint . --ext .js --ignore-pattern 'node_modules/' --ignore-pattern 'build/'",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
@@ -33,6 +33,9 @@
     "pluralize": "^7.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "chai": "*",
     "concurrently": "^3.5.0",
     "eslint": "^4.18.1",
@@ -44,5 +47,8 @@
   "engines": {
     "node": "8.9.1",
     "npm": "5.8.x"
-  }
+  },
+  "babel":{
+    "presets": ["env"]
+  } 
 }

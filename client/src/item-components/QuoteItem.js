@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { tweetUrl } from '../utils/helperFunctions';
 import './QuoteItem.css';
 
 class QuoteItem extends Component {
@@ -27,8 +28,6 @@ class QuoteItem extends Component {
   render(){
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
-    const tweet = encodeURIComponent(`"${this.props.quote}"`) + encodeURI(` - ${this.props.work} (Act ${this.props.act}, Sc ${this.props.scene})`);
-    const tweetURL = `https://twitter.com/intent/tweet?text=${tweet}&hashtags=ShakespeareSunday`;
     return(
       <li className="quote-box" id={this.props.objId}>
         <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props.objId)}>X</span>
@@ -37,14 +36,10 @@ class QuoteItem extends Component {
         <span className='act quote-span'>{act}</span>
         <span className='scene quote-span'>{scene}</span>    
         <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}
-        
           <span className='tweet'>
-            <a className='twitter-share-button' href={tweetURL}>Tweet</a>
+            <a className='twitter-share-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}>Tweet</a>
           </span>
-
         </span>   
-           
-        
       </li>
     );
   }
