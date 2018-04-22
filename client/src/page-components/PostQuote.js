@@ -38,7 +38,7 @@ export default class PostQuote extends Component {
       quote: '',
       tags: []
     });
-    resetWarnings();
+    resetWarnings('post');
   }
 
   displaySelected(quote) {
@@ -53,7 +53,7 @@ export default class PostQuote extends Component {
     const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
     const previousFields = inputFields.slice(0, inputFields.indexOf(key));
     for(let field of previousFields){
-      checkIfPreviousFieldBlank(field);
+      checkIfPreviousFieldBlank(field, 'post');
     }
   }
 
@@ -66,7 +66,7 @@ export default class PostQuote extends Component {
       quote: this.state.quote,
       tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null || this.state.tags === undefined) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
     };
-    if(!inputHasErrors(data, this.state.titleOfWorks)){
+    if(!inputHasErrors(data, this.state.titleOfWorks, 'post')){
       postQuote(data, this.resetFields, this.displaySelected);
     }
   }
@@ -80,32 +80,32 @@ export default class PostQuote extends Component {
             <div className='form-row'>
               <FormGroup className='form-group col-xs-12 col-sm-6 col-md-6'>
                 <ControlLabel>Work</ControlLabel>
-                <HelpBlock id='help-work'></HelpBlock>
-                <FormControl className='form-control' type='text' name='work' id='work' list='data-works' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} />
+                <HelpBlock id='help-work-post'></HelpBlock>
+                <FormControl className='form-control' type='text' name='work' id='work-post' list='data-works' placeholder='Henry V' onChange={this.handleChange} value={this.state.work} />
               </FormGroup>
               <FormGroup className='form-group col-xs-6 col-sm-3 col-md-3'>
                 <ControlLabel>Act</ControlLabel>
-                <HelpBlock id='help-act'></HelpBlock>
-                <FormControl className='form-control' type='text' name='act' id='act' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} />
+                <HelpBlock id='help-act-post'></HelpBlock>
+                <FormControl className='form-control' type='text' name='act' id='act-post' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} />
               </FormGroup>
               <FormGroup className='form-group col-xs-6 col-sm-3 col-md-3'>
                 <ControlLabel>Scene</ControlLabel>
-                <HelpBlock id='help-scene'></HelpBlock>
-                <FormControl className='form-control' type='text' name='scene' id='scene' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} />
+                <HelpBlock id='help-scene-post'></HelpBlock>
+                <FormControl className='form-control' type='text' name='scene' id='scene-post' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} />
               </FormGroup>
             </div>
             <div className='form-row'>
               <FormGroup className='form-group col-xs-12 col-sm-12 col-md-12'>
                 <ControlLabel>Quote</ControlLabel>
-                <HelpBlock id='help-quote'></HelpBlock>
-                <FormControl className='form-control' type='text' id='quote' name='quote' placeholder='Once more unto the breach, dear friends, once more' onFocus={this.handleFocus.bind(this, 'quote')}  onChange={this.handleChange} value={this.state.quote} />
+                <HelpBlock id='help-quote-post'></HelpBlock>
+                <FormControl className='form-control' type='text' name='quote' id='quote-post' placeholder='Once more unto the breach, dear friends, once more' onFocus={this.handleFocus.bind(this, 'quote')}  onChange={this.handleChange} value={this.state.quote} />
               </FormGroup>
             </div>
             <div className='form-row'>
               <FormGroup className='form-group col-xs-12 col-sm-12 col-md-12'>
                 <ControlLabel>Tags (e.g. courage, family)</ControlLabel>
-                <HelpBlock id='help-tags'></HelpBlock>
-                <FormControl className='form-control' type='text' id='tags' name='tags' placeholder='courage, friends, battle, comraderie' onFocus={this.handleFocus.bind(this, 'tags')}  onChange={this.handleChange} value={this.state.tags}  />
+                <HelpBlock id='help-tags-post'></HelpBlock>
+                <FormControl className='form-control' type='text' name='tags' id='tags-post' placeholder='courage, friends, battle, comraderie' onFocus={this.handleFocus.bind(this, 'tags')}  onChange={this.handleChange} value={this.state.tags}  />
               </FormGroup>
             </div>
             <div className="form-row post-buttons col-xs-12 col-sm-12 col-md-12">

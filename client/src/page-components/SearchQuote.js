@@ -3,6 +3,7 @@
  * Front-end React Component: Search Quote
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ButtonForm from '../item-components/ButtonForm';
 import DisplayQuotes from './DisplayQuotes';
 import { FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
@@ -56,8 +57,12 @@ export default class SearchQuote extends Component {
           </FormGroup>
         </form>
         <div id="searchResultMessage"></div>
-        <DisplayQuotes quotes={this.state.quotes} />
+        <DisplayQuotes quotes={this.state.quotes} editQuote={this.props.editQuote} />
       </div>
     );
   }
 }
+
+SearchQuote.propTypes = {
+  editQuote: PropTypes.func
+};

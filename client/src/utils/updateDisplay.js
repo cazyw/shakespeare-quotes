@@ -1,17 +1,20 @@
+import { TIMEOUT } from './constants';
+
 export const openElement = (sectionToOpen) => {
   document.getElementById(sectionToOpen).classList.add('open');
 };
 
-export const closeElement = (sectionToClose) => {
-  document.getElementById(sectionToClose).classList.remove('open');
+export const closeElements = (...sectionsToClose) => {
+  let sectionsClosed = false;
+  sectionsToClose.forEach(section => {
+    sectionsClosed = sectionsClosed || (document.getElementById(section).classList.contains('open') ? true : false);
+    document.getElementById(section).classList.remove('open');
+  });
+  return sectionsClosed;
 };
 
-export const toggleSections = (sectionToOpen, sectionToClose1, sectionToClose2) => {
-  const timeOut = document.getElementById(sectionToClose1).classList.contains('open') || 
-document.getElementById(sectionToClose2).classList.contains('open') ? 600 : 0;
-  
-  closeElement(sectionToClose1);
-  closeElement(sectionToClose2);
+export const toggleSections = (sectionToOpen, ...sectionsToClose) => {
+  const timeOut = closeElements(...sectionsToClose) ? TIMEOUT : 0;
   setTimeout(() => {
     openElement(sectionToOpen);
   }, timeOut);

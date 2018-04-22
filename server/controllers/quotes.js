@@ -63,12 +63,8 @@ function postQuote(req, res, next) {
 }
 
 function updateQuote(req, res, next) {
-  Quote.findByIdAndUpdate({_id: req.params.id}, req.body)
-    .then(() => {
-      Quote.findOne({_id: req.params.id})
-        .then(quote => res.status(200).send(quote))
-        .catch(error => next(error)); 
-    })
+  Quote.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true})
+    .then((updatedQuote) => res.status(200).send(updatedQuote))
     .catch(next); // passes error to app.js
 }
 

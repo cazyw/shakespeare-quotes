@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
+import UpdateQuote from './page-components/UpdateQuote';
 import Header from './page-components/Header';
 import { openElement } from './utils/updateDisplay';
 import { getRandomQuote, getAllQuotes } from './utils/apiCalls';
@@ -16,6 +17,7 @@ export default class Home extends Component {
     this.displayAll = this.displayAll.bind(this);
     this.displayNone = this.displayNone.bind(this);
     this.displaySelected = this.displaySelected.bind(this);
+    this.editQuote = this.editQuote.bind(this);
   }
 
   componentWillMount() {
@@ -36,6 +38,11 @@ export default class Home extends Component {
     openElement('quote-display-container');
   }
 
+  editQuote(quote) {
+    this.setState({ quotes: [quote] });
+    openElement('quote-update-container');
+  }
+
   render(){
     return (
       <div>
@@ -45,7 +52,8 @@ export default class Home extends Component {
           <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
           <div className="page-body">
             <PostQuote displaySelectedQuote={this.displaySelected} />
-            <SearchQuote quotes={this.state.quotes} />
+            <UpdateQuote quotes={this.state.quotes} editQuote={this.editQuote} displaySelectedQuote={this.displaySelected} />
+            <SearchQuote quotes={this.state.quotes} editQuote={this.editQuote} />
           </div>
         </main>
       </div>

@@ -6,6 +6,7 @@
  *  - display quotes that match certain keywords
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import QuoteList from '../item-components/QuoteList';
 import './DisplayQuotes.css';
 
@@ -24,8 +25,12 @@ export default class DisplayQuotes extends Component {
   render() {
     return(
       <div className="homepage" id="quote-display-container">
-        <ul><QuoteList quotes={this.state.quotes} /></ul>
+        <ul><QuoteList quotes={this.state.quotes} editQuote={this.props.editQuote} /></ul>
       </div>
     );
   }
 }
+
+DisplayQuotes.propTypes = {
+  editQuote: PropTypes.func
+};

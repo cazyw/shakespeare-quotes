@@ -1,78 +1,78 @@
-export const errorHighlighting = (showError, field, errorText) => {
+export const errorHighlighting = (showError, field, suffix, errorText) => {
   if (showError) {
-    document.getElementById(field).classList.add('field-blank');
+    document.getElementById(`${field}-${suffix}`).classList.add('field-blank');
   } else {
-    document.getElementById(field).classList.remove('field-blank');
+    document.getElementById(`${field}-${suffix}`).classList.remove('field-blank');
   }
-  document.getElementById(`help-${field}`).textContent = errorText;
+  document.getElementById(`help-${field}-${suffix}`).textContent = errorText;
 };
 
-export const resetWarnings = () => {
+export const resetWarnings = (suffix) => {
   const inputFields = ['work', 'act', 'scene', 'quote', 'tags'];
   for(let field of inputFields) {
-    errorHighlighting(false, field, '');
+    errorHighlighting(false, field, suffix, '');
   }
   document.querySelector('.reset-button').blur();
 };
 
-export const checkIfPreviousFieldBlank = (field) => {
-  const fieldValue = document.getElementById(field).value;
+export const checkIfPreviousFieldBlank = (field, suffix) => {
+  const fieldValue = document.getElementById(`${field}-${suffix}`).value;
   if(fieldValue === null || fieldValue === '') {
-    errorHighlighting(true, field, 'Required');
+    errorHighlighting(true, field, suffix, 'Required');
   } else {
-    errorHighlighting(false, field, '');
+    errorHighlighting(false, field, suffix, '');
   }
 };
 
-export const inputHasErrors = (data, titleOfWorks) => {
-  resetWarnings();
+export const inputHasErrors = (data, titleOfWorks, suffix) => {
+  resetWarnings(suffix);
   document.querySelector('.submit-button').blur();
-  return workHasErrors(titleOfWorks, data.work) ||
-  actHasErrors(data.act, data.scene) ||
-  sceneHasErrors(data.scene, data.act) ||
-  quoteHasErrors(data.quote) ||
-  tagHasErrors(data.tags);
+  return workHasErrors(titleOfWorks, data.work, suffix) ||
+  actHasErrors(data.act, data.scene, suffix) ||
+  sceneHasErrors(data.scene, data.act, suffix) ||
+  quoteHasErrors(data.quote, suffix) ||
+  tagHasErrors(data.tags, suffix);
 };
 
-const workHasErrors = (titleOfWorks, workEntered) => {
+const workHasErrors = (titleOfWorks, workEntered, suffix) => {
   if(titleOfWorks.indexOf(workEntered) === -1){
-    errorHighlighting(true, 'work', 'Invalid input');
+    errorHighlighting(true, 'work', suffix, 'Invalid input');
     return true;
   }
 };
 
-const actHasErrors = (actEntered, sceneEntered) => {
+const actHasErrors = (actEntered, sceneEntered, suffix) => {
   if(!/^[1-9]{0,1}$/.test(actEntered)){
-    errorHighlighting(true, 'act', 'Invalid input');
+    errorHighlighting(true, 'act', suffix, 'Invalid input');
     return true;
   }
   if(actEntered === '' && sceneEntered !== ''){
-    errorHighlighting(true, 'act', 'Required');
+    errorHighlighting(true, 'act', suffix, 'Required');
     return true;
   }
 };
 
-const sceneHasErrors = (sceneEntered, actEntered) => {
+const sceneHasErrors = (sceneEntered, actEntered, suffix) => {
   if(!/^[1-9]{0,1}$/.test(sceneEntered)){
-    errorHighlighting(true, 'scene', 'Invalid input');
+    errorHighlighting(true, 'scene', suffix, 'Invalid input');
     return true;
   }
   if(actEntered === '' && sceneEntered !== ''){
-    errorHighlighting(true, 'acene', 'Required');
+    errorHighlighting(true, 'acene', suffix, 'Required');
     return true;
   }
 };
 
-const quoteHasErrors = (quoteEntered) => {
+const quoteHasErrors = (quoteEntered, suffix) => {
   if(quoteEntered.length < 1){
-    errorHighlighting(true, 'quote', 'Required');
+    errorHighlighting(true, 'quote', suffix, 'Required');
     return true;
   }
 };
 
-const tagHasErrors = (tagsEntered) => {
+const tagHasErrors = (tagsEntered, suffix) => {
   if(tagsEntered.length < 1){
-    errorHighlighting(true, 'tags', 'Required');
+    errorHighlighting(true, 'tags', suffix, 'Required');
     return true;
   }
 };

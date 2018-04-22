@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { toggleSections } from '../utils/updateDisplay';
+import { resetWarnings } from '../utils/errorHandling';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
 
@@ -15,12 +16,13 @@ export default class Header extends Component {
     this.props.displayAllQuotes();
   }
   showPostSection() {
+    resetWarnings('post');
     document.getElementById('searchResultMessage').textContent = '';
-    toggleSections('quote-post-container','quote-search-container','quote-display-container');
+    toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container');
   }
   
   showSearchSection() {
-    toggleSections('quote-search-container','quote-post-container','quote-display-container'); 
+    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container'); 
   }
 
   render(){
