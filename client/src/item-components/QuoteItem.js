@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { tweetUrl } from '../utils/helperFunctions';
+import { resetWarnings } from '../utils/errorHandling';
 import './QuoteItem.css';
 
 class QuoteItem extends Component {
@@ -25,28 +26,36 @@ class QuoteItem extends Component {
     this.props.deleteQuote(key, objId);
   }
 
+  handleEdit(quote) {
+    resetWarnings('update');
+    this.props.editQuote(quote);
+  }
+
   render(){
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
     return(
-      <li className="quote-box" id={this.props.objId}>
-        <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props.objId)}>X</span>
+      <li className="quote-box" id={this.props._id}>
+
         <span className='quote quote-span'>&quot;{this.props.quote}&quot;</span>
         <span className='work quote-span'>{this.props.work}</span>
         <span className='act quote-span'>{act}</span>
         <span className='scene quote-span'>{scene}</span>    
-        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}
+        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span> 
+        <div className='controls'>
           <span className='tweet'>
-            <a className='twitter-share-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}>Tweet</a>
+            <a className='twitter-share-button tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}>Tweet</a>
           </span>
-        </span>   
+          <span className='update-tick' onClick={this.handleEdit.bind(this, this.props)}> Edit </span>
+          <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props._id)}>X</span>
+        </div>
       </li>
     );
   }
 }
 
 QuoteItem.propTypes = {
-  objId: PropTypes.string,
+  _id: PropTypes.string,
   work: PropTypes.string,
   act: PropTypes.string,
   scene: PropTypes.string,
@@ -54,7 +63,8 @@ QuoteItem.propTypes = {
   tags: PropTypes.array,
   item: PropTypes.number,
   passTagSelected: PropTypes.func,
-  deleteQuote: PropTypes.func
+  deleteQuote: PropTypes.func,
+  editQuote: PropTypes.func
 };
 
 export default QuoteItem;

@@ -48,12 +48,43 @@ span.tag {
   font-size: 0.8em;
 }
 
+div.controls {
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .delete-tick {
-  float: right;
+  /* float: right; */
   cursor: pointer;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background: rgba(11, 12, 12, 0.501);
+}
+.update-tick {
+  /* float: right; */
+  cursor: pointer;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background: rgba(20, 237, 0, 0.466);
 }
 
 .tweet {
-  float: right;
   cursor: pointer;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background: rgba(0, 172, 237, 0.8);
+
+}
+
+.tweet-button {
+  color: white;
 }

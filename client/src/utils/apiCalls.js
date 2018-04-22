@@ -1,10 +1,10 @@
-import { openElement, closeElement, toggleSections } from './updateDisplay';
+import { openElement, closeElements, toggleSections } from './updateDisplay';
 
 export const getRandomQuote = (displaySelected) => {
   fetch('/api/quotes/random')
     .then((res) => res.json())
     .then(json => {
-      toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
+      toggleSections('quote-display-container', 'quote-post-container','quote-search-container', 'quote-update-container');
       displaySelected(json);
     })
     .catch((error) => {
@@ -17,12 +17,8 @@ export const getAllQuotes = (displaySelected) => {
   fetch('/api/quotes/')
     .then((res) => res.json())
     .then((json) => {
-      const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 600 : 0;
-      closeElement('quote-display-container');
-      setTimeout(() => {
-        toggleSections('quote-display-container', 'quote-post-container','quote-search-container');
-        displaySelected(json);
-      }, timeOut);
+      toggleSections('quote-display-container', 'quote-display-container', 'quote-post-container', 'quote-search-container', 'quote-update-container');
+      displaySelected(json);
     });
 };
 
@@ -57,8 +53,7 @@ export const searchQuotes = (tags, searchResults, resetTags = function(){}) => {
     .then((json) => {
       resetTags();
       const searchFeedback = json.length === 0 ? 'No matches' : '';
-      const timeOut = document.getElementById('quote-display-container').classList.contains('open') ? 600 : 0;
-      closeElement('quote-display-container');
+      const timeOut = closeElements('quote-display-container', 'quote-update-container');
       setTimeout(() => {
         searchResults(json);
         document.getElementById('searchResultMessage').textContent = searchFeedback;
@@ -72,7 +67,7 @@ export const searchQuotes = (tags, searchResults, resetTags = function(){}) => {
 };
 
 export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
-  fetch(`/api/quotes/${objId}`, { method: 'delete' })
+  fetch(`/api/quotes/${objId}`, { method: 'DELETE' })
     .then((res) => {
       if(res.status === 200) return res.json();
       res.json().then(body => alert(`${body.error}`));
@@ -83,4 +78,26 @@ export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
       // eslint-disable-next-line no-console
       console.log(error);
     });
+};
+
+export const updateQuote = (quote, displayQuotes) => {
+  fetch(`/api/quotes/${quote.id}`, { 
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify(quote)
+  })
+    .then((res) => {
+      if(res.status === 200) return res.json();
+      res.json().then(body => alert(`${body.error}`));
+      throw new Error(`unable to update the quote, ${res.status} error`);
+    })
+    .then((jsonData) => displayQuotes(jsonData))
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    });
+  toggleSections('quote-update-container', 'quote-display-container', 'quote-post-container', 'quote-search-container');  
 };
