@@ -20,7 +20,7 @@ const pluralSingular = (tagArray) => {
 const collateTags = (tags) => {
   const tagArray = tags.split(' ').map(tag => tag.trim().toLowerCase());
   const expandedTags = pluralSingular(tagArray);
-  return expandedTags.map(tag => new RegExp(tag, 'i'));
+  return expandedTags.map(tag => new RegExp('^' + tag, 'i'));
 };
 
 const displayAllQuotes = (res, next) => {
