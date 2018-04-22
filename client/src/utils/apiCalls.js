@@ -1,4 +1,4 @@
-import { openElement, closeElement, toggleSections } from './helperFunctions';
+import { openElement, closeElement, toggleSections } from './updateDisplay';
 
 export const getRandomQuote = (displaySelected) => {
   fetch('/api/quotes/random')

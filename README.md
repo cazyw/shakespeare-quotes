@@ -94,7 +94,11 @@ src/
       |- QuoteList.js
       |- QuoteItem.js
   |- utils/
+      |- apiCalls.js
+      |- constants.js
+      |- errorHandling.js
       |- helperFunctions.js
+      |- updateDisplay.js
 
 ```
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { toggleSections } from '../utils/helperFunctions';
+import { toggleSections } from '../utils/updateDisplay';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
 

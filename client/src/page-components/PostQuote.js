@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import ButtonForm from '../item-components/ButtonForm';
 import PropTypes from 'prop-types';
 import { ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
-import { inputHasErrors, resetWarnings, checkIfPreviousFieldBlank } from '../utils/helperFunctions';
+import { inputHasErrors, resetWarnings, checkIfPreviousFieldBlank } from '../utils/errorHandling';
 import { shakespeareWorks } from '../utils/constants';
 import { postQuote } from '../utils/apiCalls';
 import './PostQuote.css';

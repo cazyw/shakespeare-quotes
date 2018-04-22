@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
 import Header from './page-components/Header';
-import { openElement } from './utils/helperFunctions';
+import { openElement } from './utils/updateDisplay';
 import { getRandomQuote, getAllQuotes } from './utils/apiCalls';
 import './styles.css';
 
