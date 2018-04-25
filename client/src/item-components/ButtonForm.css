@@ -11,20 +11,31 @@
   cursor: pointer;
 }
 
+.submit-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.cancel-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.reset-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .form-button:hover,
 .form-button:focus,
 .form-button:active
- {
+{
   outline-color: rgb(85, 85, 85);
   outline-width: 0px;
+  background: rgb(85, 85, 85);
+  color: rgb(255, 255, 255);
 }
 
 #quote-search-container .form-button {
   margin-top: 20px;
 }
-
-/* .reset-button {
-  display: inline-block;
-  clear: both;
-} */
 

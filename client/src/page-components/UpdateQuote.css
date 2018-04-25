@@ -68,6 +68,13 @@ input.form-control.field-blank {
             transition: height 0.5s linear;
 }
 
+@media (max-width: 767px) {
+  #quote-update-container.open {
+    height: 450px;
+  }
+
+}
+
 @media (max-width: 500px) {
   div.form-group.col-xs-6 {
     padding-right: 2px;
@@ -80,6 +87,7 @@ input.form-control.field-blank {
   }
   #quote-update-container.open {
     height: 450px;
+    margin: auto -15px;
   }
 
   .form-inner {
@@ -95,14 +103,10 @@ input.form-control.field-blank {
   }
 
   .form-button {
-    width: 100px;
-  }
-}
-
-@media (max-width: 767px) {
-
-  #quote-update-container.open {
-    height: 450px;
+    width: 120px;
   }
 
+  div.form-group.col-xs-12 {
+    padding-right: 2px;
+  }
 }

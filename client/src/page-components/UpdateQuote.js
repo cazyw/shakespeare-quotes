@@ -12,6 +12,7 @@ import { inputHasErrors, checkIfPreviousFieldBlank } from '../utils/errorHandlin
 import { shakespeareWorks } from '../utils/constants';
 import { updateQuote } from '../utils/apiCalls';
 import './UpdateQuote.css';
+import { closeElements } from '../utils/updateDisplay';
 
 export default class UpdateQuote extends Component {
   constructor(props){
@@ -27,6 +28,7 @@ export default class UpdateQuote extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
     this.displaySelected = this.displaySelected.bind(this);
   }
 
@@ -68,8 +70,23 @@ export default class UpdateQuote extends Component {
       tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null || this.state.tags === undefined) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
     };
     if(!inputHasErrors(data, this.state.titleOfWorks, 'update')){
+      document.querySelector('.submit-button').blur();
       updateQuote(data, this.displaySelected);
     }
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+    closeElements('quote-update-container');
+    document.querySelector('.quote-box').style.display = 'block';
+    this.displaySelected({
+      id: this.state.id,
+      work: this.state.work,
+      act: this.state.act,
+      scene: this.state.scene,
+      quote: this.state.quote,
+      tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null || this.state.tags === undefined) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
+    });
   }
 
   render(){
@@ -111,6 +128,7 @@ export default class UpdateQuote extends Component {
             </div>
             <div className="form-row post-buttons col-xs-12 col-sm-12 col-md-12">
               <ButtonForm type='submit' label='Update Quote' className='form-button submit-button' />
+              <ButtonForm type='button' click={this.handleCancel} label='Cancel' className='form-button cancel-button' />
             </div>
           </FormGroup>
         </form>
