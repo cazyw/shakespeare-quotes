@@ -80,6 +80,7 @@ input.form-control.field-blank {
   }
   #quote-post-container.open {
     height: 450px;
+    margin: auto -15px;
   }
 
   .form-inner {

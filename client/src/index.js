@@ -41,6 +41,7 @@ export default class Home extends Component {
   editQuote(quote) {
     this.setState({ quotes: [quote] });
     openElement('quote-update-container');
+    document.querySelector('.quote-box').style.display = 'none';
   }
 
   render(){

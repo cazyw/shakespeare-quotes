@@ -94,7 +94,10 @@ export const updateQuote = (quote, displayQuotes) => {
       res.json().then(body => alert(`${body.error}`));
       throw new Error(`unable to update the quote, ${res.status} error`);
     })
-    .then((jsonData) => displayQuotes(jsonData))
+    .then((jsonData) => {
+      document.querySelector('.quote-box').style.display = 'block';
+      displayQuotes(jsonData);
+    })
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.log(error);

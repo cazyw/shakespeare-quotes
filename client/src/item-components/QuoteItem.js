@@ -44,7 +44,7 @@ class QuoteItem extends Component {
         <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span> 
         <div className='controls'>
           <span className='tweet'>
-            <a className='twitter-share-button tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}>Tweet</a>
+            <a className='tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}><img width='25px' height='25px' src='./Twitter_Logo_WhiteOnImage.png' alt='twitter logo' /></a>
           </span>
           <span className='update-tick' onClick={this.handleEdit.bind(this, this.props)}> Edit </span>
           <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props._id)}>X</span>
