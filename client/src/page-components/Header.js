@@ -18,6 +18,7 @@ export default class Header extends Component {
   showPostSection() {
     resetWarnings('post');
     document.getElementById('searchResultMessage').textContent = '';
+    document.querySelector('#quote-display-container').style.display = 'none';
     toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container');
   }
   

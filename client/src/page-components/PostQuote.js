@@ -59,6 +59,7 @@ export default class PostQuote extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    document.querySelector('#quote-display-container').style.display = 'block';
     const data = {
       work: this.state.work,
       act: this.state.act,

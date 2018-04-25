@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { tweetUrl } from '../utils/helperFunctions';
 import { resetWarnings } from '../utils/errorHandling';
 import './QuoteItem.css';
+import twitterLogo from './Twitter_Logo_WhiteOnImage.png';
 
 class QuoteItem extends Component {
   handleClick(tag) {
@@ -44,7 +45,7 @@ class QuoteItem extends Component {
         <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span> 
         <div className='controls'>
           <span className='tweet'>
-            <a className='tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}><img width='25px' height='25px' src='./Twitter_Logo_WhiteOnImage.png' alt='twitter logo' /></a>
+            <a className='tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}><img width='25px' height='25px' src={twitterLogo} alt='twitter logo' /></a>
           </span>
           <span className='update-tick' onClick={this.handleEdit.bind(this, this.props)}> Edit </span>
           <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props._id)}>X</span>
