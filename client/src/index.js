@@ -36,7 +36,6 @@ export default class Home extends Component {
   
   displaySelected(quotes) {
     this.setState({ quotes });
-    openElement('quote-display-container');
   }
 
   editQuote(quote) {

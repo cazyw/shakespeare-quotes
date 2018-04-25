@@ -1,4 +1,5 @@
 import { openElement, closeElements, toggleSections } from './updateDisplay';
+import { TIMEOUT } from '../utils/constants';
 
 export const getRandomQuote = (displaySelected) => {
   fetch('/api/quotes/random')
@@ -17,8 +18,10 @@ export const getAllQuotes = (displaySelected) => {
   fetch('/api/quotes/')
     .then((res) => res.json())
     .then((json) => {
-      toggleSections('quote-display-container', 'quote-display-container', 'quote-post-container', 'quote-search-container', 'quote-update-container');
-      displaySelected(json);
+      toggleSections('quote-display-container','quote-display-container', 'quote-post-container', 'quote-search-container', 'quote-update-container');
+      setTimeout(() => {
+        displaySelected(json);
+      }, TIMEOUT);
     });
 };
 
