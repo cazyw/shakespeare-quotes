@@ -30,6 +30,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "mongoose": "^5.0.3",
+    "passport": "^0.4.0",
     "pluralize": "^7.0.0"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "eslint-plugin-react": "^7.7.0",
     "mocha": "*",
     "nodemon": "^1.14.12",
+    "sinon": "^5.0.6",
     "supertest": "^3.0.0"
   },
   "engines": {
