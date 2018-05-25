@@ -43,7 +43,6 @@
     "eslint-plugin-react": "^7.7.0",
     "mocha": "*",
     "nodemon": "^1.14.12",
-    "sinon": "^5.0.6",
     "supertest": "^3.0.0"
   },
   "engines": {
