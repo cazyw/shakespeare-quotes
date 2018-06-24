@@ -7,6 +7,7 @@ Create an online collection of Shakespeare quotes. Users can
 * search for quotes that have been tagged with certain keywords
 * tweet quotes
 * delete quotes
+* automatically generate a number of quotes (to do)
 
 A rough version is up and running here: https://shakespeare-sunday.herokuapp.com/
 
@@ -14,7 +15,7 @@ A rough version is up and running here: https://shakespeare-sunday.herokuapp.com
 
 Currently working on refactoring and restructuring the code, testing and adding futher validation to the form input.
 
-Also working on a feature that will automatically find a number of quotes based on search terms. Complete works are located here: http://shakespeare.mit.edu/index.html. The idea will be to
+Also working on a feature that will automatically find a number of quotes based on search terms. Complete works are located here: http://shakespeare.mit.edu/index.html. At the moment I am searching for quotes in google and manually adding the ones I like. The idea with this will be for the app to find quotes that match keywords and I can select which ones to add to my collection. Still to work out how to implement this efficiently.
 
 ## Operating Instructions
 
