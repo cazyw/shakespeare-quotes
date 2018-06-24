@@ -6,13 +6,15 @@ Create an online collection of Shakespeare quotes. Users can
 * submit quotes into the collection
 * search for quotes that have been tagged with certain keywords
 * tweet quotes
-* delete quotes (authentication to be added to restrict functionality)
+* delete quotes
 
 A rough version is up and running here: https://shakespeare-sunday.herokuapp.com/
 
 ## Status
 
 Currently working on refactoring and restructuring the code, testing and adding futher validation to the form input.
+
+Also working on a feature that will automatically find a number of quotes based on search terms. Complete works are located here: http://shakespeare.mit.edu/index.html. The idea will be to
 
 ## Operating Instructions
 
