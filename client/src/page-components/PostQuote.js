@@ -29,7 +29,7 @@ export default class PostQuote extends Component {
     this.resetFields = this.resetFields.bind(this);
     this.displaySelected = this.displaySelected.bind(this);
   }
-  
+
   resetFields() {
     this.setState({
       work: '',
@@ -87,12 +87,12 @@ export default class PostQuote extends Component {
               <FormGroup className='form-group col-xs-6 col-sm-3 col-md-3'>
                 <ControlLabel>Act</ControlLabel>
                 <HelpBlock id='help-act-post'></HelpBlock>
-                <FormControl className='form-control' type='text' name='act' id='act-post' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} />
+                <FormControl className='form-control' type='number' name='act' id='act-post' placeholder='3' onFocus={this.handleFocus.bind(this, 'act')} onChange={this.handleChange} value={this.state.act} />
               </FormGroup>
               <FormGroup className='form-group col-xs-6 col-sm-3 col-md-3'>
                 <ControlLabel>Scene</ControlLabel>
                 <HelpBlock id='help-scene-post'></HelpBlock>
-                <FormControl className='form-control' type='text' name='scene' id='scene-post' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} />
+                <FormControl className='form-control' type='number' name='scene' id='scene-post' placeholder='1' onFocus={this.handleFocus.bind(this, 'scene')}  onChange={this.handleChange} value={this.state.scene} />
               </FormGroup>
             </div>
             <div className='form-row'>
