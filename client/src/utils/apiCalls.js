@@ -43,7 +43,10 @@ export const postQuote = (data, resetFields, displaySelected) => {
         throw new Error(`unable to post, ${res.status} error`);
       }
     })
-    .then((jsonData) => displaySelected(jsonData))
+    .then(json => {
+      displaySelected(json);
+      openElement('quote-display-container');
+    })
     .catch((error) => {
     // eslint-disable-next-line no-console
       console.log(error);
