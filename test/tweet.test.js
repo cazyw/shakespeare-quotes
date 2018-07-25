@@ -7,10 +7,24 @@ describe('Tweeting Quotes', () => {
       quote: 'to be or not to be; that is the question: isn\'t it?',
       work: 'Hamlet',
       act: '3',
-      scene:'1',
+      scene: '1',
     };
     // eslint-disable-next-line quotes
     const encodedData = `%22to%20be%20or%20not%20to%20be%3B%20that%20is%20the%20question%3A%20isn't%20it%3F%22%20-%20Hamlet%20(Act%203%2C%20Sc%201)`;
+    const expectedOutput = `https://twitter.com/intent/tweet?text=${encodedData}&hashtags=ShakespeareSunday`;
+    const encodedUrl = tweetUrl(data.quote, data.work, data.act, data.scene);
+    expect(encodedUrl).to.eq(expectedOutput);
+  });
+
+  it('should not include the act or scene if it has no value', () => {
+    const data = {
+      quote: 'to be or not to be; that is the question: isn\'t it?',
+      work: 'Sonnet 18',
+      act: '',
+      scene: '',
+    };
+    // eslint-disable-next-line quotes
+    const encodedData = `%22to%20be%20or%20not%20to%20be%3B%20that%20is%20the%20question%3A%20isn't%20it%3F%22%20-%20Sonnet%2018`;
     const expectedOutput = `https://twitter.com/intent/tweet?text=${encodedData}&hashtags=ShakespeareSunday`;
     const encodedUrl = tweetUrl(data.quote, data.work, data.act, data.scene);
     expect(encodedUrl).to.eq(expectedOutput);
