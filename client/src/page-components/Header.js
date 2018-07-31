@@ -21,9 +21,10 @@ export default class Header extends Component {
     document.querySelector('#quote-display-container').style.display = 'none';
     toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container');
   }
-  
+
   showSearchSection() {
-    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container'); 
+    document.querySelector('#quote-display-container').style.display = 'none';
+    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container');
   }
 
   render(){
@@ -52,4 +53,3 @@ export default class Header extends Component {
 Header.propTypes = {
   displayAllQuotes: PropTypes.func
 };
-  
