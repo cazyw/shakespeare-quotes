@@ -2,7 +2,7 @@
 
 ## Objective
 
-Create an online collection of Shakespeare quotes. Users can 
+Create an online collection of Shakespeare quotes. Users can
 * submit quotes into the collection
 * search for quotes that have been tagged with certain keywords
 * tweet quotes
@@ -56,6 +56,11 @@ $ npm run dev
 
 This will automatically open the browser to http://localhost:3000/
 
+To rebuild the app:
+```
+$ npm run build-react
+```
+
 The following was added to `package.json` to build and bundle the React/front-end files for production so the web app only runs on one server (Express server). Heroku automatically runs this.
 ```
 "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
@@ -76,7 +81,7 @@ models/
 client/
   |- build
     |- index.html
-    |- static/  
+    |- static/
         |- css
         |- js
         |- media
@@ -125,22 +130,22 @@ To do: testing for React front-end.
 
 The idea for this project came about because I participate in a worldwide twitter event each Sunday - `#ShakespeareSunday`. Started by [@HollowCrownFans](https://twitter.com/HollowCrownFans?lang=en), every Sunday users around the world tweet Shakespeare quotes that follow a particular theme (e.g. light and dark).
 
-I thought it'd be fun to build an online collection of Shakespeare quotes I use. And it'd be a cool way for me to learn and put into practice Node, Express, APIs, databases (MongoDB), React, forms and testing! 
+I thought it'd be fun to build an online collection of Shakespeare quotes I use. And it'd be a cool way for me to learn and put into practice Node, Express, APIs, databases (MongoDB), React, forms and testing!
 
 ### Setup and Environment
 
-New frameworks used in this project include mongoDB and React. I also added a `config.js` file that included different settings for production (Heroku), development (locally) and testing (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local development database. 
+New frameworks used in this project include mongoDB and React. I also added a `config.js` file that included different settings for production (Heroku), development (locally) and testing (for testing). This was particularly important as I wanted my test cases to run against a test database and not the local development database.
 
 Initially I had used Webpack to build my final `.js` file however once I looked more into React, I decided to use the `create-react-app` package which black-boxes the transpiling and compiling of React (webapck and babel configuration).
 
-I also used ESLint in this project and am getting to know some of the settings and configuration options. To run eslint in the console: 
+I also used ESLint in this project and am getting to know some of the settings and configuration options. To run eslint in the console:
 ```
 $ npm run lint
 ```
 
 ### Server
 
-Using `Node.js` and the `express` framework to create my API. This time adding `express.Router` to create modular route handlers and separating the controller logic into its own file. The main `server.js` file sets up the server, and does the console logging and error handling. 
+Using `Node.js` and the `express` framework to create my API. This time adding `express.Router` to create modular route handlers and separating the controller logic into its own file. The main `server.js` file sets up the server, and does the console logging and error handling.
 
 A separate server is run (in development) for the React front-end (based on the `create-react-app` package).
 
@@ -176,7 +181,7 @@ Added some functions to perform basic form validation checks however doesn't che
 
 ### APIs / External Functionality Used
 
-Looking to use [Wordnik API](http://api.wordnik.com) to assist with keyword (tag) searching. In order to identify quotes that may be relevant, some manipulation of search terms will be done such as 
+Looking to use [Wordnik API](http://api.wordnik.com) to assist with keyword (tag) searching. In order to identify quotes that may be relevant, some manipulation of search terms will be done such as
 * searching for plural and singular versions of a tag
 * searching for synonyms
 
@@ -188,7 +193,7 @@ Twitter's [Tweet Web Intent](https://dev.twitter.com/web/tweet-button/web-intent
 
 I am using the `mocha` framework, and using the `supertest` and `chai` libraries. It's been an interesting learning experience as I'm getting a better understanding of how to do testing. Setup and teardown functions have been added. At the moment the tests run against a test database and running server. I'll look into mocking the setup and unit-level testing.
 
-`routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data. 
+`routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data.
 
 ## Contributing
 Carol Wong
