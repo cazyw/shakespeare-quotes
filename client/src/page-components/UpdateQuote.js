@@ -12,7 +12,7 @@ import { inputHasErrors, checkIfPreviousFieldBlank } from '../utils/errorHandlin
 import { shakespeareWorks } from '../utils/constants';
 import { updateQuote } from '../utils/apiCalls';
 import './UpdateQuote.css';
-import { closeElements } from '../utils/updateDisplay';
+import { openElement, toggleSections } from '../utils/updateDisplay';
 
 export default class UpdateQuote extends Component {
   constructor(props){
@@ -33,7 +33,7 @@ export default class UpdateQuote extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ 
+    this.setState({
       id: newProps.quotes[0]._id === undefined ? newProps.quotes[0].objId : newProps.quotes[0]._id,
       work: newProps.quotes[0].work,
       act: newProps.quotes[0].act,
@@ -72,13 +72,13 @@ export default class UpdateQuote extends Component {
     if(!inputHasErrors(data, this.state.titleOfWorks, 'update')){
       document.querySelector('.submit-button').blur();
       updateQuote(data, this.displaySelected);
+      openElement('quote-display-container');
     }
   }
 
   handleCancel(event) {
     event.preventDefault();
-    closeElements('quote-update-container');
-    document.querySelector('.quote-box').style.display = 'block';
+    toggleSections('quote-display-container', 'quote-update-container');
     this.displaySelected({
       id: this.state.id,
       work: this.state.work,
@@ -87,6 +87,7 @@ export default class UpdateQuote extends Component {
       quote: this.state.quote,
       tags: (this.state.tags.length < 1 || this.state.tags === '' || this.state.tags === null || this.state.tags === undefined) ? [] : this.state.tags.toLowerCase().split(',').map(word => word.trim())
     });
+    document.querySelector('.quote-box').style.display = 'block';
   }
 
   render(){
