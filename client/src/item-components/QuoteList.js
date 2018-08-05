@@ -51,9 +51,9 @@ class QuoteList extends Component {
   render(){
     return this.state.quotes.map((quoteQ, index) => {
       return(
-        <QuoteItem objId={quoteQ._id} key={index} quote={quoteQ.quote} work={quoteQ.work} 
-          act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags} 
-          passTagSelected={this.searchByTag} deleteQuote={this.handleDelete} 
+        <QuoteItem objId={quoteQ._id} key={index} quote={quoteQ.quote} work={quoteQ.work}
+          act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags}
+          passTagSelected={this.searchByTag} deleteQuote={this.handleDelete}
           editQuote={this.handleEdit} clearDisplay={this.displayQuotes} item={index} />
       );
     });

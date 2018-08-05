@@ -36,19 +36,19 @@ class QuoteItem extends Component {
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
     return(
-      <li className="quote-box" id={this.props._id}>
+      <li className="quote-box" id={this.props.objId}>
 
         <span className='quote quote-span'>&quot;{this.props.quote}&quot;</span>
         <span className='work quote-span'>{this.props.work}</span>
         <span className='act quote-span'>{act}</span>
-        <span className='scene quote-span'>{scene}</span>    
-        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span> 
+        <span className='scene quote-span'>{scene}</span>
+        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span>
         <div className='controls'>
           <span className='tweet'>
             <a className='tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}><img width='25px' height='25px' src={twitterLogo} alt='twitter logo' /></a>
           </span>
           <span className='update-tick' onClick={this.handleEdit.bind(this, this.props)}> Edit </span>
-          <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props._id)}>X</span>
+          <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props.objId)}>X</span>
         </div>
       </li>
     );
@@ -56,7 +56,7 @@ class QuoteItem extends Component {
 }
 
 QuoteItem.propTypes = {
-  _id: PropTypes.string,
+  objId: PropTypes.string,
   work: PropTypes.string,
   act: PropTypes.string,
   scene: PropTypes.string,

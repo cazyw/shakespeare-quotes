@@ -75,7 +75,10 @@ export const searchQuotes = (tags, searchResults, resetTags = function(){}) => {
 export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
   fetch(`/api/quotes/${objId}`, { method: 'DELETE' })
     .then((res) => {
-      if(res.status === 200) return res.json();
+      if(res.status === 200) {
+        alert('quote deleted');
+        return res.json();
+      }
       res.json().then(body => alert(`${body.error}`));
       throw new Error(`unable to delete, ${res.status} error`);
     })
@@ -87,7 +90,7 @@ export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
 };
 
 export const updateQuote = (quote, displayQuotes) => {
-  fetch(`/api/quotes/${quote.id}`, { 
+  fetch(`/api/quotes/${quote.id}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -108,5 +111,5 @@ export const updateQuote = (quote, displayQuotes) => {
       // eslint-disable-next-line no-console
       console.log(error);
     });
-  toggleSections('quote-update-container', 'quote-display-container', 'quote-post-container', 'quote-search-container');  
+  toggleSections('quote-update-container', 'quote-display-container', 'quote-post-container', 'quote-search-container');
 };
