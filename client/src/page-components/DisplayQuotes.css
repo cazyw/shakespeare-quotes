@@ -18,3 +18,9 @@
          -o-transition: opacity 0.5s linear;
             transition: opacity 0.5s linear;
 }
+
+.pagination-block {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
