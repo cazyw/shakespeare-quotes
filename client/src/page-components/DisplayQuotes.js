@@ -30,21 +30,25 @@ export default class DisplayQuotes extends Component {
 
   componentWillReceiveProps(newProps) {
     this.setState({
+      offset: 0,
       quotes: newProps.quotes,
       pageCount: Math.ceil(newProps.quotes.length / this.state.perPage)
     }, () => {
       this.quoteSubset();
     });
+    toggleSections('pagination-container', 'pagination-container');
   }
 
   quoteSubset() {
     const startQuote = this.state.offset;
     const endQuote = startQuote + this.state.perPage > this.state.quotes.length ? this.state.quotes.length : startQuote + this.state.perPage ;
-    toggleSections('quote-display-container', 'quote-display-container');
+
+    this.setState({
+      subQuotes: this.state.quotes.slice(startQuote, endQuote)
+    });
+
     setTimeout(() => {
-      this.setState({
-        subQuotes: this.state.quotes.slice(startQuote, endQuote)
-      });
+      openElement('quote-display-container');
     }, TIMEOUT);
   }
 

@@ -8,6 +8,7 @@ import ButtonForm from '../item-components/ButtonForm';
 import DisplayQuotes from './DisplayQuotes';
 import { FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 import { searchQuotes } from '../utils/apiCalls';
+import { closeElements } from './../utils/updateDisplay';
 import './SearchQuote.css';
 
 export default class SearchQuote extends Component {
@@ -26,15 +27,15 @@ export default class SearchQuote extends Component {
   componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
-  
+
   handleChange(event) {
     this.setState({tags: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    closeElements('pagination-container', 'quote-display-container');
     var tags = this.state.tags.toLowerCase();
-    document.querySelector('#quote-display-container').style.display = 'block';
     searchQuotes(tags, this.searchResults, this.resetTags);
   }
 

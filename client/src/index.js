@@ -4,7 +4,7 @@ import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
 import UpdateQuote from './page-components/UpdateQuote';
 import Header from './page-components/Header';
-import { openElement } from './utils/updateDisplay';
+import { openElement, closeElements } from './utils/updateDisplay';
 import { getRandomQuote, getAllQuotes } from './utils/apiCalls';
 import './styles.css';
 
@@ -25,7 +25,8 @@ export default class Home extends Component {
   }
 
   displayAll() {
-    openElement('quote-display-container');
+    closeElements('pagination-container');
+    // closeElements('quote-display-container');
     document.getElementById('searchResultMessage').textContent = '';
     getAllQuotes(this.displaySelected);
   }
@@ -33,7 +34,7 @@ export default class Home extends Component {
   displayNone() {
     this.setState({ quotes: [] });
   }
-  
+
   displaySelected(quotes) {
     this.setState({ quotes });
   }
