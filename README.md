@@ -6,11 +6,12 @@ Create an online collection of Shakespeare quotes. Users can
 * submit quotes into the collection
 * search for quotes that have been tagged with certain keywords
 * tweet quotes
+* edit quotes
 * delete quotes
 * pagination when displaying more than 10 quotes (to do)
 * automatically generate a number of quotes (to do)
 
-A rough version is up and running here: https://shakespeare-sunday.herokuapp.com/
+This is up and running here: https://shakespeare-sunday.herokuapp.com/
 
 ## Status
 
@@ -49,17 +50,12 @@ Start the database locally (in my case path required as not stored in the defaul
 $ mongod --dbpath ~/data/db/
 ```
 
-Start the Express server and React server:
+Start the Express server and React server (this also rebuilds when there are changes):
 ```
 $ npm run dev
 ```
 
 This will automatically open the browser to http://localhost:3000/
-
-To rebuild the app:
-```
-$ npm run build-react
-```
 
 The following was added to `package.json` to build and bundle the React/front-end files for production so the web app only runs on one server (Express server). Heroku automatically runs this.
 ```
