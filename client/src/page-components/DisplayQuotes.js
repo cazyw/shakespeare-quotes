@@ -9,8 +9,8 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import QuoteList from '../item-components/QuoteList';
+import { toggleSections, openElement } from '../utils/updateDisplay';
 import './DisplayQuotes.css';
-import { toggleSections } from '../utils/updateDisplay';
 import { TIMEOUT } from './../utils/constants';
 
 export default class DisplayQuotes extends Component {
@@ -21,7 +21,7 @@ export default class DisplayQuotes extends Component {
       subQuotes: [],
       pageCount: 0,
       offset: 0,
-      perPage: 10
+      perPage: 7
     };
 
     this.quoteSubset = this.quoteSubset.bind(this);
@@ -35,12 +35,11 @@ export default class DisplayQuotes extends Component {
     }, () => {
       this.quoteSubset();
     });
-
   }
 
   quoteSubset() {
     const startQuote = this.state.offset;
-    const endQuote = startQuote + 10 > this.state.quotes.length ? this.state.quotes.length : startQuote + 10 ;
+    const endQuote = startQuote + this.state.perPage > this.state.quotes.length ? this.state.quotes.length : startQuote + this.state.perPage ;
     toggleSections('quote-display-container', 'quote-display-container');
     setTimeout(() => {
       this.setState({
@@ -58,16 +57,17 @@ export default class DisplayQuotes extends Component {
   }
 
   render() {
-    if(this.state.quotes.length < 11) {
+    if(this.state.quotes.length <= this.state.perPage) {
       return(
         <div className="homepage" id="quote-display-container">
           <ul><QuoteList quotes={this.state.quotes} editQuote={this.props.editQuote} /></ul>
         </div>
       );
     }
+    openElement('pagination-container');
     return(
       <div>
-        <div className='pagination-block'>
+        <div className="pagination-block" id="pagination-container">
           <ReactPaginate previousLabel={'previous'}
             nextLabel={'next'}
             breakLabel={<a href="">...</a>}

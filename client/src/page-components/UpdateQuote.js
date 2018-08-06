@@ -33,14 +33,16 @@ export default class UpdateQuote extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({
-      id: newProps.quotes[0]._id === undefined ? newProps.quotes[0].objId : newProps.quotes[0]._id,
-      work: newProps.quotes[0].work,
-      act: newProps.quotes[0].act,
-      scene: newProps.quotes[0].scene,
-      quote: newProps.quotes[0].quote,
-      tags: newProps.quotes[0].tags.join(', '),
-    });
+    if(newProps.quotes.length > 0) {
+      this.setState({
+        id: newProps.quotes[0]._id === undefined ? newProps.quotes[0].objId : newProps.quotes[0]._id,
+        work: newProps.quotes[0].work,
+        act: newProps.quotes[0].act,
+        scene: newProps.quotes[0].scene,
+        quote: newProps.quotes[0].quote,
+        tags: newProps.quotes[0].tags.join(', '),
+      });
+    }
   }
 
   displaySelected(quote) {

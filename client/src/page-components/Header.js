@@ -4,27 +4,38 @@ import { toggleSections } from '../utils/updateDisplay';
 import { resetWarnings } from '../utils/errorHandling';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
+import { TIMEOUT } from './../utils/constants';
 
 export default class Header extends Component {
   constructor(props){
     super(props);
     this.displayAll = this.displayAll.bind(this);
+    this.displayNone = this.displayNone.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
   }
   displayAll() {
     this.props.displayAllQuotes();
   }
+
+  displayNone() {
+    this.props.displayNoQuotes();
+  }
+
   showPostSection() {
     resetWarnings('post');
     document.getElementById('searchResultMessage').textContent = '';
-    document.querySelector('#quote-display-container').style.display = 'none';
-    toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container');
+    toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container', 'pagination-container');
+    setTimeout(() => {
+      this.displayNone();
+    }, TIMEOUT);
   }
 
   showSearchSection() {
-    document.querySelector('#quote-display-container').style.display = 'none';
-    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container');
+    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container', 'pagination-container');
+    setTimeout(() => {
+      this.displayNone();
+    }, TIMEOUT);
   }
 
   render(){
@@ -51,5 +62,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  displayAllQuotes: PropTypes.func
+  displayAllQuotes: PropTypes.func,
+  displayNoQuotes: PropTypes.func
 };
