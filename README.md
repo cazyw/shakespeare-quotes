@@ -8,14 +8,14 @@ Create an online collection of Shakespeare quotes. Users can
 * tweet quotes
 * edit quotes
 * delete quotes
-* pagination when displaying more than 10 quotes (to do)
+* pagination when displaying more than 10 quotes
 * automatically generate a number of quotes (to do)
 
 This is up and running here: https://shakespeare-sunday.herokuapp.com/
 
 ## Status
 
-To do: refactor/review React state handling, add pagination
+To do: refactor/review React state handling
 
 Also working on a feature that will automatically find a number of quotes based on search terms. Complete works are located here: http://shakespeare.mit.edu/index.html. At the moment I am searching for quotes in google and manually adding the ones I like. The idea with this will be for the app to find quotes that match keywords and I can select which ones to add to my collection. Still to work out how to implement this efficiently.
 
@@ -149,7 +149,7 @@ A separate server is run (in development) for the React front-end (based on the 
 
 I decided to use `MongoDB` as it's a popular database that would work well for my small application. NoSQL allows more flexibility in data structure. Information is stored in 'documents' rather in separate tables that all need to be joined together, and data is stored in JSON format, which works well with Javascript and the web.
 
-Data model::
+Data model:
 
 * The title of the piece of work (play, sonnet etc) [required]
 * The act [conditional requirement - depends if Scene entered, must be a number]
@@ -174,6 +174,8 @@ $ mongoimport --db shakespeare --collection quotes --drop --file ./<filename>.js
 This is my first real dive into React so it's been a learning experience looking at how to build the front-end using React components, how to dynamically render content based on its state and pass data between parent and child elements. Initially I setup webpack and its configuration myself however I decided to switch to the `create-react-app` package as that includes some additional features/minification of files. Also using react-bootstrap.
 
 Added some functions to perform basic form validation checks however doesn't check that the details entered are necessarily correct.
+
+Pagination has now also been added using react-paginate. It was a good experience diving into their `demo.js` code and modifying it for this app's requirements.
 
 ### APIs / External Functionality Used
 
