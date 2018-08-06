@@ -25,7 +25,7 @@ export default class Home extends Component {
   }
 
   displayAll() {
-    document.querySelector('#quote-display-container').style.display = 'block';
+    openElement('quote-display-container');
     document.getElementById('searchResultMessage').textContent = '';
     getAllQuotes(this.displaySelected);
   }
