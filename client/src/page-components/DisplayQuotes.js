@@ -72,12 +72,12 @@ export default class DisplayQuotes extends Component {
     return(
       <div>
         <div className="pagination-block" id="pagination-container">
-          <ReactPaginate previousLabel={'previous'}
+          <ReactPaginate previousLabel={'prev'}
             nextLabel={'next'}
             breakLabel={<a href="">...</a>}
             breakClassName={'break-me'}
             pageCount={this.state.pageCount}
-            marginPagesDisplayed={2}
+            marginPagesDisplayed={1}
             pageRangeDisplayed={2}
             onPageChange={this.handlePageClick}
             containerClassName={'pagination'}

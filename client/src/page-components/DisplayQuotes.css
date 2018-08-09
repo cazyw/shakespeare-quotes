@@ -39,3 +39,12 @@
          -o-transition: opacity 0.5s linear;
             transition: opacity 0.5s linear;
 }
+
+
+
+@media (max-width: 450px){
+  .pagination > li >a,
+  .pagination > li > span {
+    padding: 4px 8px;
+  }
+}
