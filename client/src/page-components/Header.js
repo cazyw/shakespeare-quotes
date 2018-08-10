@@ -25,14 +25,14 @@ export default class Header extends Component {
   showPostSection() {
     resetWarnings('post');
     document.getElementById('searchResultMessage').textContent = '';
-    toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container', 'pagination-container');
+    toggleSections('quote-post-container','quote-search-container','quote-display-container', 'quote-update-container', 'pagination-container-top', 'pagination-container-bottom');
     setTimeout(() => {
       this.displayNone();
     }, TIMEOUT);
   }
 
   showSearchSection() {
-    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container', 'pagination-container');
+    toggleSections('quote-search-container','quote-post-container','quote-display-container', 'quote-update-container', 'pagination-container-top', 'pagination-container-bottom');
     setTimeout(() => {
       this.displayNone();
     }, TIMEOUT);

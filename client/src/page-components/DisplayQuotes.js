@@ -36,7 +36,8 @@ export default class DisplayQuotes extends Component {
     }, () => {
       this.quoteSubset();
     });
-    toggleSections('pagination-container', 'pagination-container');
+    toggleSections('pagination-container-top', 'pagination-container-top');
+    toggleSections('pagination-container-bottom', 'pagination-container-bottom');
   }
 
   quoteSubset() {
@@ -68,10 +69,11 @@ export default class DisplayQuotes extends Component {
         </div>
       );
     }
-    openElement('pagination-container');
+    openElement('pagination-container-top');
+    openElement('pagination-container-bottom');
     return(
       <div>
-        <div className="pagination-block" id="pagination-container">
+        <div className="pagination-container" id="pagination-container-top">
           <ReactPaginate previousLabel={'prev'}
             nextLabel={'next'}
             breakLabel={<a href="">...</a>}
@@ -86,6 +88,19 @@ export default class DisplayQuotes extends Component {
         </div>
         <div className="homepage" id="quote-display-container">
           <ul><QuoteList quotes={this.state.subQuotes} editQuote={this.props.editQuote} /></ul>
+        </div>
+        <div className="pagination-container" id="pagination-container-bottom">
+          <ReactPaginate previousLabel={'prev'}
+            nextLabel={'next'}
+            breakLabel={<a href="">...</a>}
+            breakClassName={'break-me'}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={2}
+            onPageChange={this.handlePageClick}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'} />
         </div>
       </div>
     );

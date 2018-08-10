@@ -34,7 +34,7 @@ export default class SearchQuote extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    closeElements('pagination-container', 'quote-display-container');
+    closeElements('pagination-container-top', 'pagination-container-bottom', 'quote-display-container');
     var tags = this.state.tags.toLowerCase();
     searchQuotes(tags, this.searchResults, this.resetTags);
   }
