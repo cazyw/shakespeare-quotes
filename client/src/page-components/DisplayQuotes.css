@@ -40,7 +40,11 @@
             transition: opacity 0.5s linear;
 }
 
-
+.pagination > .disabled > a,
+.pagination > li > a,
+.pagination > li > span {
+    background: rgba(255, 255, 255, 0.8);
+  }
 
 @media (max-width: 450px){
   .pagination > li >a,
