@@ -59,6 +59,7 @@ export default class DisplayQuotes extends Component {
     this.setState({ offset: offset }, () => {
       this.quoteSubset();
     });
+    window.scrollTo(0, 0);
   }
 
   render() {
