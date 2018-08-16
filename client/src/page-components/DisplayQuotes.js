@@ -91,17 +91,6 @@ export default class DisplayQuotes extends Component {
           <ul><QuoteList quotes={this.state.subQuotes} editQuote={this.props.editQuote} /></ul>
         </div>
         <div className="pagination-container" id="pagination-container-bottom">
-          <ReactPaginate previousLabel={'prev'}
-            nextLabel={'next'}
-            breakLabel={<a href="">...</a>}
-            breakClassName={'break-me'}
-            pageCount={this.state.pageCount}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={2}
-            onPageChange={this.handlePageClick}
-            containerClassName={'pagination'}
-            subContainerClassName={'pages pagination'}
-            activeClassName={'active'} />
         </div>
       </div>
     );
