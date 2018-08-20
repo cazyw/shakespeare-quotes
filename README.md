@@ -16,7 +16,6 @@ This is up and running here: https://shakespeare-sunday.herokuapp.com/
 ## Status
 
 To do:
-* Fix/add pagination controls to the bottom of the page. Previous attempt did not sync the bottom and top controls so the bottom controls were removed.
 * refactor/review React state handling
 
 Also working on a feature that will automatically find a number of quotes based on search terms. Complete works are located here: http://shakespeare.mit.edu/index.html. At the moment I am searching for quotes in google and manually adding the ones I like. The idea with this will be for the app to find quotes that match keywords and I can select which ones to add to my collection. Still to work out how to implement this efficiently.

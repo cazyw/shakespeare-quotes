@@ -21,7 +21,8 @@ export default class DisplayQuotes extends Component {
       subQuotes: [],
       pageCount: 0,
       offset: 0,
-      perPage: 7
+      perPage: 7,
+      selected: null
     };
 
     this.quoteSubset = this.quoteSubset.bind(this);
@@ -56,7 +57,7 @@ export default class DisplayQuotes extends Component {
   handlePageClick(data) {
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset: offset }, () => {
+    this.setState({ offset: offset, selected }, () => {
       this.quoteSubset();
     });
     window.scrollTo(0, 0);
@@ -85,12 +86,25 @@ export default class DisplayQuotes extends Component {
             onPageChange={this.handlePageClick}
             containerClassName={'pagination'}
             subContainerClassName={'pages pagination'}
-            activeClassName={'active'} />
+            activeClassName={'active'}
+            forcePage={this.state.selected} />
         </div>
         <div className="homepage" id="quote-display-container">
           <ul><QuoteList quotes={this.state.subQuotes} editQuote={this.props.editQuote} /></ul>
         </div>
         <div className="pagination-container" id="pagination-container-bottom">
+          <ReactPaginate previousLabel={'prev'}
+            nextLabel={'next'}
+            breakLabel={<a href="">...</a>}
+            breakClassName={'break-me'}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={2}
+            onPageChange={this.handlePageClick}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+            forcePage={this.state.selected} />
         </div>
       </div>
     );
