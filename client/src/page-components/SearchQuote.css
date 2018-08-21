@@ -57,8 +57,16 @@ label {
 
 }
 
+@media (max-width: 500px) {
+  form#quote-search-container,
+  form#quote-search-container.open {
+    margin: 10px -15px;
+  }
+}
+
 @media (max-width: 378px) {
   #quote-search-container.open  {
     height: 190px;
   }
 }
+
