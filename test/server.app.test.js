@@ -33,7 +33,7 @@ describe('App', () => {
         .set('Accept', 'text/html')
         .expect(200)
         .expect('Content-Type', /text\/html/)
-        .expect(/DOCTYPE html/)
+        .expect(/DOCTYPE html/i)
         .end(done);
     });
 

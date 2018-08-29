@@ -12,7 +12,7 @@ if (!fs.existsSync(modifiedDir)){
   fs.mkdirSync(modifiedDir);
 }
 
-// retrieve links for shakespeare's works
+// retrieve links for shakespeare's works from http://shakespeare.mit.edu/
 let shakespeareWorksLinks = async () => {
   const browser = await pupeteer.launch({headless: false});
   const page = await browser.newPage();
