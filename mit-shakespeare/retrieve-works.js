@@ -12,10 +12,22 @@ if (!fs.existsSync(originalDir)){
 //   fs.mkdirSync(modifiedDir);
 // }
 
-// retrieve links for shakespeare's works from http://shakespeare.mit.edu/
-let shakespeareWorksLinks = async () => {
+let puppeteerSetup = async () => {
   const browser = await pupeteer.launch({headless: false});
   const page = await browser.newPage();
+  return {
+    browser,
+    page
+  };
+};
+
+let puppeteerTeardown = async (browser) => {
+  await browser.close();
+};
+
+// retrieve links for shakespeare's works from http://shakespeare.mit.edu/
+let shakespeareWorksLinks = async () => {
+  const { browser, page } = await puppeteerSetup();
   await page.goto('http://shakespeare.mit.edu/', { waitUntil: 'networkidle2' });
   // await page.waitFor(1000);
 
@@ -32,21 +44,20 @@ let shakespeareWorksLinks = async () => {
     return works;
   });
 
-  await browser.close();
+  await puppeteerTeardown(browser);
   return result;
 };
 
 let downloadPage = async (url) => {
-  const browser = await pupeteer.launch({headless: false});
-  const page = await browser.newPage();
-  await page.goto(url);
+  const { browser, page } = await puppeteerSetup();
+  await page.goto(url, { waitUntil: 'networkidle2' });
   const html = await page.content();
   const filename = `${originalDir}/allswell.html`;
   fs.writeFileSync(filename, html, function (err) {
     if (err) throw err;
     console.log('Saved!');
   });
-  await browser.close();
+  await puppeteerTeardown(browser);
   return html;
 };
 
