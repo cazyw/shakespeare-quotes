@@ -15,10 +15,7 @@ if (!fs.existsSync(originalDir)){
 let puppeteerSetup = async () => {
   const browser = await pupeteer.launch({headless: false});
   const page = await browser.newPage();
-  return {
-    browser,
-    page
-  };
+  return { browser, page };
 };
 
 let puppeteerTeardown = async (browser) => {
@@ -36,15 +33,11 @@ let shakespeareWorksLinks = async () => {
     let isAWork = false;
     for(let i = 2; i < links.length; i++) {
       isAWork = links[i].href.includes('allswell') || links[i].href.includes('python') ? !isAWork : isAWork ;
-      if(isAWork){
-        works.push(links[i].href);
-      }
+      if(isAWork) works.push(links[i].href);
     }
     return works;
   });
-
   await puppeteerTeardown(browser);
-  // console.log(result);
   return result;
 };
 
@@ -52,8 +45,9 @@ let processLink = (url) => {
   var regexPlay = /edu\/(.+)\//i;
   var regexPoetry = /edu\/Poetry\/(.+)\.html/i;
   const isPoetry = url.match(regexPoetry);
-  const workName = isPoetry === null ? url.match(regexPlay)[1] : url.match(regexPoetry)[1];
+  const workName = isPoetry ? url.match(regexPoetry)[1] : url.match(regexPlay)[1];
   const fullUrl = url.replace('index.html', 'full.html');
+  console.log('work: ', workName, ' == ', fullUrl);
   return { workName, fullUrl };
 };
 
@@ -63,17 +57,14 @@ shakespeareWorksLinks().then((listOfWorks) => {
   });
 });
 
-let downloadAPage = async (url) => {
-  const { browser, page } = await puppeteerSetup();
+let downloadAPage = async (page, work, url) => {
   await page.goto(url, { waitUntil: 'networkidle2' });
   const html = await page.content();
-  const filename = `${originalDir}/allswell.html`;
+  const filename = `${originalDir}/${work}.html`;
   fs.writeFileSync(filename, html, function (err) {
     if (err) throw err;
     console.log(`Saved ${filename}!`);
   });
-  await puppeteerTeardown(browser);
-  return html;
 };
 
 // downloadAPage('http://shakespeare.mit.edu/allswell/full.html').then((output) => {
