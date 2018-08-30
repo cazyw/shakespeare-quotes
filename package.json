@@ -51,12 +51,15 @@
     "npm": "5.8.x"
   },
   "babel": {
-    "presets": [[
-      "env", {
-        "targets": {
-          "node": "current"
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
         }
-      }
-    ]]
+      ]
+    ]
   }
 }
