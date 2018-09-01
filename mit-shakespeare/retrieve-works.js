@@ -4,17 +4,9 @@ const fs = require('fs');
 const util = require('util');
 const fs_writeFile = util.promisify(fs.writeFile);
 const { asyncForEach } = require('./asyncHelper');
+const { createOriginalFolder, createModifiedFolder } = require('./folderHelper');
 const originalDir = './originalWorks';
 const modifiedDir = './modifiedWorks';
-
-// folders for original and modified works
-if (!fs.existsSync(originalDir)){
-  fs.mkdirSync(originalDir);
-}
-
-if (!fs.existsSync(modifiedDir)){
-  fs.mkdirSync(modifiedDir);
-}
 
 let browser;
 let page;
@@ -70,6 +62,7 @@ const downloadAPage = async (work, url) => {
 const downloadAllPages = async () => {
   await puppeteerSetup();
   const listOfWorks = await getShakespeareWorksLinks();
+  createOriginalFolder();
   await asyncForEach(listOfWorks, async (work) => {
     const { workName, fullUrl } = processLink(work);
     await downloadAPage(workName, fullUrl);
