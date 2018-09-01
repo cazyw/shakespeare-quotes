@@ -6,7 +6,7 @@ const fs_writeFile = util.promisify(fs.writeFile);
 const { asyncForEach } = require('./asyncHelper');
 const { createOriginalFolder, createModifiedFolder } = require('./folderHelper');
 const originalDir = './originalWorks';
-const modifiedDir = './modifiedWorks';
+// const modifiedDir = './modifiedWorks';
 
 let browser;
 let page;
@@ -20,9 +20,8 @@ const puppeteerTeardown = async () => {
   await browser.close();
 };
 
-// retrieve links for shakespeare's works from http://shakespeare.mit.edu/
+// get list of links for shakespeare's works from http://shakespeare.mit.edu/
 const getShakespeareWorksLinks = async () => {
-  // await puppeteerSetup();
   await page.goto('http://shakespeare.mit.edu/');
   await page.waitFor(1000);
   const result = await page.evaluate(() => {
@@ -35,10 +34,10 @@ const getShakespeareWorksLinks = async () => {
     }
     return works;
   });
-  const sublist = result.slice(0,3);
-  return sublist;
+  return result;
 };
 
+// get the work's name and url to full text
 const processLink = (url) => {
   var regexPlay = /edu\/(.+)\//i;
   var regexPoetry = /edu\/Poetry\/(.+)\.html/i;
@@ -49,16 +48,18 @@ const processLink = (url) => {
   return { workName, fullUrl };
 };
 
+// download the full text of a piece of work
 const downloadAPage = async (work, url) => {
   await page.goto(url);
   await page.waitFor(5000);
-  console.log('waiting for 5 seconds');
   const html = await page.content();
   const filename = `${originalDir}/${work}.html`;
   await fs_writeFile(filename, html);
   console.log(`Saved ${filename}!`);
 };
 
+// get the full list of works and download them all
+// there are 42 plays and sonnets
 const downloadAllPages = async () => {
   await puppeteerSetup();
   const listOfWorks = await getShakespeareWorksLinks();
