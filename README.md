@@ -195,5 +195,14 @@ I am using the `mocha` framework, and using the `supertest` and `chai` libraries
 
 `routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data.
 
+### Downloading of Shakespeare's works for analysis
+
+As well as manually searching for quotes and then adding them to this application, I decided to build a feature that would automatically scan and retrieve quotes that matched the given keyword. This part of the project is still a work in progress. At the moment I'm using Puppeteer to retrieve the list of shakespeare's works from the [MIT Shakespeare site](http://shakespeare.mit.edu/). Currently I've been able to download the full text of each piece of work (except the Sonnets). The next steps will be to:
+
+* download the Sonnets
+* extract the text (remove HTML markup)
+
+Once the text has been cleaned, I'll then need to consider how to best index / store the text and retrieve quotes.
+
 ## Contributing
 Carol Wong
