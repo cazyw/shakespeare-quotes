@@ -181,12 +181,6 @@ Pagination has now also been added using react-paginate. It was a good experienc
 
 ### APIs / External Functionality Used
 
-Looking to use [Wordnik API](http://api.wordnik.com) to assist with keyword (tag) searching. In order to identify quotes that may be relevant, some manipulation of search terms will be done such as
-* searching for plural and singular versions of a tag
-* searching for synonyms
-
-The API will be used to retrieve synonyms of keywords entered.
-
 Twitter's [Tweet Web Intent](https://dev.twitter.com/web/tweet-button/web-intent) is used to allow users to tweet quotes directly to Twitter.
 
 ### Testing
