@@ -58,8 +58,33 @@ const downloadAPage = async (work, url) => {
   console.log(`Saved ${filename}!`);
 };
 
+const downloadSonnets = async (sonnetUrl) => {
+  await puppeteerSetup();
+  console.log('Retrieving sonnets');
+  await page.goto(sonnetUrl);
+  await page.waitFor(5000);
+  const sonnets = await page.evaluate(() => {
+    const works = [];
+    let links = document.querySelectorAll('a');
+    let isAWork = false;
+    for(let i = 0; i < links.length; i++) {
+      isAWork = links[i].href.includes('sonnet');
+      if(isAWork) works.push(links[i].href);
+    }
+    return works;
+  });
+  console.log('Downloading sonnets');
+  await asyncForEach(sonnets, async (sonnet) => {
+    const { workName, fullUrl } = processLink(sonnet);
+    await downloadAPage(workName, fullUrl);
+  });
+  await puppeteerTeardown(browser);
+};
+
+downloadSonnets('http://shakespeare.mit.edu/Poetry/sonnets.html');
+
 // get the full list of works and download them all
-// there are 42 plays and sonnets
+// there are 42 plays and 154 sonnets
 const downloadAllPages = async () => {
   await puppeteerSetup();
   const listOfWorks = await getShakespeareWorksLinks();
@@ -67,11 +92,12 @@ const downloadAllPages = async () => {
   await asyncForEach(listOfWorks, async (work) => {
     const { workName, fullUrl } = processLink(work);
     await downloadAPage(workName, fullUrl);
+    if (workName === 'sonnets') downloadSonnets(fullUrl);
   });
   await puppeteerTeardown(browser);
 };
 
-downloadAllPages();
+// downloadAllPages();
 
 module.exports = {
   getShakespeareWorksLinks
