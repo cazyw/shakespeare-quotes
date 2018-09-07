@@ -1,22 +1,11 @@
-
-const pupeteer = require('puppeteer');
 const fs = require('fs');
 const util = require('util');
 const fs_writeFile = util.promisify(fs.writeFile);
 const { asyncForEach } = require('./asyncHelper');
 const { createOriginalFolder } = require('./folderHelper');
+const { puppeteerSetup, puppeteerTeardown } = require('./puppeteerHelper');
 const originalDir = './originalWorks';
 // const modifiedDir = './modifiedWorks';
-
-const puppeteerSetup = async () => {
-  const browser = await pupeteer.launch({headless: false});
-  const page = await browser.newPage();
-  return { browser, page };
-};
-
-const puppeteerTeardown = async (browser) => {
-  await browser.close();
-};
 
 
 // get list of links on a given page (main works or sonnets)
@@ -83,8 +72,6 @@ const downloadAllPages = async () => {
 
 module.exports = {
   getLinksToWorks,
-  puppeteerSetup,
-  puppeteerTeardown,
   processLink
 };
 

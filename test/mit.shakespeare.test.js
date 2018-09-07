@@ -4,7 +4,8 @@
 */
 
 const expect = require('chai').expect;
-const { getLinksToWorks, processLink, puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/retrieve-works');
+const { getLinksToWorks, processLink } = require('../mit-shakespeare/retrieveWorks');
+const { puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/puppeteerHelper');
 
 describe.only('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {
