@@ -31,13 +31,12 @@ const getLinksToWorks = async (page, url, workType) => {
 
 // get the work's name and url to full text
 const processLink = (url) => {
-  var regexPlay = /edu\/(.+)\//i;
-  var regexPoetry = /edu\/Poetry\/(.+)\.html/i;
+  const regexPlay = /edu\/(.+)\//i;
+  const regexPoetry = /edu\/Poetry\/(.+)\.html/i;
   const isPoetry = url.match(regexPoetry);
   const isPlay = url.match(regexPlay);
-  const workName = isPoetry ? url.match(regexPoetry)[1] : isPlay ? url.match(regexPlay)[1] : null;
+  const workName = isPoetry ? isPoetry[1] : isPlay ? isPlay[1] : null;
   const fullUrl = url.replace('index.html', 'full.html');
-  console.log('work: ', workName, ' == ', fullUrl);
   return { workName, fullUrl };
 };
 
@@ -48,7 +47,7 @@ const downloadAPage = async (page, work, url) => {
   const html = await page.content();
   const filename = `${originalDir}/${work}.html`;
   await fs_writeFile(filename, html);
-  console.log(`Saved ${filename}!`);
+  console.log(`Saved ${filename}!`); // eslint-disable-line no-console
 };
 
 // get the full list of works and download them all
@@ -56,19 +55,23 @@ const downloadAPage = async (page, work, url) => {
 const downloadAllPages = async () => {
   const mainUrl = 'http://shakespeare.mit.edu/';
   const sonnetsUrl = 'http://shakespeare.mit.edu/Poetry/sonnets.html';
+  createOriginalFolder();
+
   const { browser, page } = await puppeteerSetup();
+
   const listOfWorks = await getLinksToWorks(page, mainUrl, 'works');
   const listOfSonnets = await getLinksToWorks(page, sonnetsUrl, 'sonnets');
   const fullList = listOfWorks.concat(listOfSonnets);
-  createOriginalFolder();
+
   await asyncForEach(fullList, async (work) => {
     const { workName, fullUrl } = processLink(work);
     await downloadAPage(page, workName, fullUrl);
   });
+
   await puppeteerTeardown(browser);
 };
 
-// downloadAllPages();
+downloadAllPages();
 
 module.exports = {
   getLinksToWorks,
