@@ -28,12 +28,19 @@ describe.only('MIT Shakespeare', () => {
       let url = 'http://shakespeare.mit.edu/Poetry/VenusAndAdonis.html';
       let { workName, fullUrl } = processLink(url);
       expect(workName).to.eq('VenusAndAdonis');
-      expect(fullUrl).to.eq('http://shakespeare.mit.edu/Poetry/VenusAndAdonis.html');
-      url = 'http://shakespeare.mit.edu/Poetry/RapeOfLucrece.html';
+      expect(fullUrl).to.eq(url);
 
+      url = 'http://shakespeare.mit.edu/Poetry/RapeOfLucrece.html';
       ({ workName, fullUrl } = processLink(url));
       expect(workName).to.eq('RapeOfLucrece');
-      expect(fullUrl).to.eq('http://shakespeare.mit.edu/Poetry/RapeOfLucrece.html');
+      expect(fullUrl).to.eq(url);
+    });
+
+    it('should correctly identify and process sonnets', () => {
+      let url = 'http://shakespeare.mit.edu/Poetry/sonnet.XXXIX.html';
+      let { workName, fullUrl } = processLink(url);
+      expect(workName).to.eq('sonnet.XXXIX');
+      expect(fullUrl).to.eq(url);
     });
 
     it('should correctly identify and process plays', () => {
