@@ -18,20 +18,25 @@ const puppeteerTeardown = async (browser) => {
   await browser.close();
 };
 
-// get list of links for shakespeare's works from http://shakespeare.mit.edu/
-const getShakespeareWorksLinks = async (page) => {
-  await page.goto('http://shakespeare.mit.edu/');
+
+// get list of links on a given page (main works or sonnets)
+const getLinksToWorks = async (page, url, workType) => {
+  await page.goto(url);
   await page.waitFor(1000);
-  const result = await page.evaluate(() => {
+  const result = await page.evaluate((url, workType) => {
     const works = [];
     let links = document.querySelectorAll('a');
     let isAWork = false;
-    for(let i = 2; i < links.length; i++) {
-      isAWork = links[i].href.includes('allswell') || links[i].href.includes('python') ? !isAWork : isAWork ;
+    for(let i = 0; i < links.length; i++) {
+      if (workType === 'sonnets') {
+        isAWork = links[i].href.includes('sonnet');
+      } else if (workType === 'works') {
+        isAWork = links[i].href.includes('allswell') || links[i].href.includes('python') ? !isAWork : isAWork ;
+      }
       if(isAWork) works.push(links[i].href);
     }
     return works;
-  });
+  }, url, workType);
   return result;
 };
 
@@ -86,7 +91,7 @@ const downloadSonnets = async (page, sonnetUrl) => {
 // there are 42 plays and 154 sonnets
 const downloadAllPages = async () => {
   const {browser, page } = await puppeteerSetup();
-  const listOfWorks = await getShakespeareWorksLinks(page);
+  const listOfWorks = await getLinksToWorks(page);
   createOriginalFolder();
   await asyncForEach(listOfWorks, async (work) => {
     const { workName, fullUrl } = processLink(work);
@@ -99,7 +104,7 @@ const downloadAllPages = async () => {
 // downloadAllPages();
 
 module.exports = {
-  getShakespeareWorksLinks,
+  getLinksToWorks,
   puppeteerSetup,
   puppeteerTeardown,
   processLink

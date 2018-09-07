@@ -4,17 +4,22 @@
 */
 
 const expect = require('chai').expect;
-const { getShakespeareWorksLinks, processLink, puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/retrieve-works');
+const { getLinksToWorks, processLink, puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/retrieve-works');
 
-describe('MIT Shakespeare', () => {
+describe.only('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {
-    it('should get a list of 42 works', async function() {
+    it('should get a list of 42 plays/poetry and 154 sonnets', async function() {
       const expectedNumberOfWorks = 42;
+      const expectedNumberOfSonnets = 154;
+      const mainUrl = 'http://shakespeare.mit.edu/';
+      const sonnetsUrl = 'http://shakespeare.mit.edu/Poetry/sonnets.html';
       let { browser, page } = await puppeteerSetup();
-      const listOfWorks = await getShakespeareWorksLinks(page);
+      const listOfWorks = await getLinksToWorks(page, mainUrl, 'works');
+      const listOfSonnets = await getLinksToWorks(page, sonnetsUrl, 'sonnets');
       await puppeteerTeardown(browser);
 
       expect(listOfWorks.length).to.eq(expectedNumberOfWorks);
+      expect(listOfSonnets.length).to.eq(expectedNumberOfSonnets);
     });
   });
 
@@ -52,7 +57,8 @@ describe('MIT Shakespeare', () => {
       let url = 'http://shakespeare.mit.edu/index.html';
       let { workName, fullUrl } = processLink(url);
       expect(workName).to.eq(null);
-      expect(fullUrl).to.eq(null);
+      expect(fullUrl).to.not.eq(null);
     });
+
   });
 });
