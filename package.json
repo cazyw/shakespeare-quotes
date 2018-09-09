@@ -31,7 +31,8 @@
     "express": "^4.16.2",
     "mongoose": "^5.0.3",
     "pluralize": "^7.0.0",
-    "react-paginate": "^5.2.4"
+    "react-paginate": "^5.2.4",
+    "sanitize-html": "^1.18.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
