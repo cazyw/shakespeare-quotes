@@ -2,7 +2,7 @@ const fs = require('fs');
 const util = require('util');
 const fs_writeFile = util.promisify(fs.writeFile);
 const { asyncForEach } = require('./asyncHelper');
-const { createOriginalFolder } = require('./folderHelper');
+const { createFolder } = require('./folderHelper');
 const { puppeteerSetup, puppeteerTeardown } = require('./puppeteerHelper');
 const originalDir = './originalWorks';
 const modifiedDir = './modifiedWorks';
@@ -55,7 +55,7 @@ const downloadAPage = async (page, work, url) => {
 const downloadAllPages = async () => {
   const mainUrl = 'http://shakespeare.mit.edu/';
   const sonnetsUrl = 'http://shakespeare.mit.edu/Poetry/sonnets.html';
-  createOriginalFolder(originalDir);
+  createFolder(originalDir);
 
   const { browser, page } = await puppeteerSetup();
 

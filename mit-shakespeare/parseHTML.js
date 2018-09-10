@@ -2,10 +2,10 @@ const fs = require('fs');
 const util = require('util');
 const sanitizeHtml = require('sanitize-html');
 const fs_writeFile = util.promisify(fs.writeFile);
-const originalDir = './originalWorks';
-const modifiedDir = './modifiedWorks';
+// const originalDir = './originalWorks';
+// const modifiedDir = './modifiedWorks';
 
-const removeHtmlTags = (file) => {
+const removeHtmlTags = (originalDir, modifiedDir, file) => {
   fs.readFile(`./${originalDir}/${file}`, (err, data) => {
     if (err) throw err;
     const cleanHtml = sanitizeHtml(data, {
@@ -16,6 +16,6 @@ const removeHtmlTags = (file) => {
   });
 };
 
-removeHtmlTags('1henryiv.html');
+removeHtmlTags('originalWorks', 'modifiedWorks', '1henryiv.html');
 
 
