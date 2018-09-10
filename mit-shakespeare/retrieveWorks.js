@@ -5,7 +5,7 @@ const { asyncForEach } = require('./asyncHelper');
 const { createOriginalFolder } = require('./folderHelper');
 const { puppeteerSetup, puppeteerTeardown } = require('./puppeteerHelper');
 const originalDir = './originalWorks';
-// const modifiedDir = './modifiedWorks';
+const modifiedDir = './modifiedWorks';
 
 
 // get list of links on a given page (main works or sonnets)
@@ -55,7 +55,7 @@ const downloadAPage = async (page, work, url) => {
 const downloadAllPages = async () => {
   const mainUrl = 'http://shakespeare.mit.edu/';
   const sonnetsUrl = 'http://shakespeare.mit.edu/Poetry/sonnets.html';
-  createOriginalFolder();
+  createOriginalFolder(originalDir);
 
   const { browser, page } = await puppeteerSetup();
 
