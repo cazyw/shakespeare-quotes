@@ -4,8 +4,12 @@
 */
 
 const expect = require('chai').expect;
+const fs = require('fs');
+const util = require('util');
+const fs_readFile = util.promisify(fs.readFile);
 const { getLinksToWorks, processLink } = require('../mit-shakespeare/retrieveWorks');
 const { puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/puppeteerHelper');
+const { removeHtmlTags } = require('../mit-shakespeare/parseHTML');
 
 describe.only('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {
@@ -67,6 +71,21 @@ describe.only('MIT Shakespeare', () => {
       expect(workName).to.eq(null);
       expect(fullUrl).to.not.eq(null);
     });
+  });
+  context('removing HTML tags', () => {
+    const tagsDir = 'test/testFiles/tags';
+    const noTagsDir = 'test/testFiles/noTags';
+    const expectedDir = 'test/testFiles/expected';
+    const tagFile = 'htmlTagsTest.html';
 
+    it.only('should strip away all html tags', async () => {
+      if (fs.existsSync(`${noTagsDir}/${tagFile}`)){
+        fs.unlinkSync(`${noTagsDir}/${tagFile}`);
+      }
+      const expectedResult = await fs_readFile(`${expectedDir}/htmlTagsRemoved.html`, {encoding: 'utf8'});
+      await removeHtmlTags(tagsDir, noTagsDir, tagFile);
+      const textNoTags = await fs_readFile(`${noTagsDir}/${tagFile}`, {encoding: 'utf8'});
+      expect(textNoTags).to.eq(expectedResult);
+    });
   });
 });
