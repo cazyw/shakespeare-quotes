@@ -5,8 +5,6 @@ const { asyncForEach } = require('./asyncHelper');
 const { createFolder } = require('./folderHelper');
 const { puppeteerSetup, puppeteerTeardown } = require('./puppeteerHelper');
 const originalDir = './originalWorks';
-const modifiedDir = './modifiedWorks';
-
 
 // get list of links on a given page (main works or sonnets)
 const getLinksToWorks = async (page, url, workType) => {
@@ -71,7 +69,7 @@ const downloadAllPages = async () => {
   await puppeteerTeardown(browser);
 };
 
-downloadAllPages();
+// downloadAllPages();
 
 module.exports = {
   getLinksToWorks,

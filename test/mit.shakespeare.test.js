@@ -11,7 +11,7 @@ const { getLinksToWorks, processLink } = require('../mit-shakespeare/retrieveWor
 const { puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/puppeteerHelper');
 const { removeHtmlTags } = require('../mit-shakespeare/parseHTML');
 
-describe.only('MIT Shakespeare', () => {
+describe('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {
     it('should get a list of 42 plays/poetry and 154 sonnets', async function() {
       const expectedNumberOfWorks = 42;
@@ -78,7 +78,7 @@ describe.only('MIT Shakespeare', () => {
     const expectedDir = 'test/testFiles/expected';
     const tagFile = 'htmlTagsTest.html';
 
-    it.only('should strip away all html tags', async () => {
+    it('should strip away all html tags', async () => {
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)){
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
       }
