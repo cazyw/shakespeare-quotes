@@ -30,7 +30,7 @@ const removeHtmlTagsAllFiles = async () => {
   });
 };
 
-removeHtmlTagsAllFiles();
+// removeHtmlTagsAllFiles();
 
 module.exports = {
   removeHtmlTags
