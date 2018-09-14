@@ -45,6 +45,7 @@
     "mocha": "*",
     "nodemon": "^1.18.3",
     "puppeteer": "^1.7.0",
+    "sinon": "^6.3.3",
     "supertest": "^3.0.0"
   },
   "engines": {
