@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const { createFolder } = require('../mit-shakespeare/folderHelper');
 
-describe.only('Folder Helper Tests', () => {
+describe('Folder Helper Tests', () => {
   let stubFsExists;
   let stubFsMkdir;
 
