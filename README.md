@@ -189,6 +189,8 @@ I am using the `mocha` framework, and using the `supertest` and `chai` libraries
 
 `routes.test.js` uses the test database (so the development database is not used) and resets the database before each test. It tests that valid data posted to the database is saved, that invalid data is not, and that getting data from the database returns all data.
 
+I have now also added Istanbul for code coverage. This has been very useful to see whether I've added tests for various parts of the source code and armed with this knowledge I aim to increase code coverage. Having used Sinon at work for mocking, I've now also added it to this project.
+
 ### Downloading of Shakespeare's works for analysis
 
 As well as manually searching for quotes and then adding them to this application, I decided to build a feature that would automatically scan and retrieve quotes that matched the given keyword. This part of the project is still a work in progress. At the moment I'm using Puppeteer to retrieve the list of shakespeare's works from the [MIT Shakespeare site](http://shakespeare.mit.edu/). Currently I've been able to download the full text of each piece of work (except the Sonnets). The next steps will be to:
