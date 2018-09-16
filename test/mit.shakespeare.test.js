@@ -7,6 +7,7 @@ const expect = require('chai').expect;
 const fs = require('fs');
 const util = require('util');
 const fs_readFile = util.promisify(fs.readFile);
+const fs_mkdirSync = util.promisify(fs.mkdirSync);
 const { getLinksToWorks, processLink } = require('../mit-shakespeare/retrieveWorks');
 const { puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/puppeteerHelper');
 const { removeHtmlTags } = require('../mit-shakespeare/parseHTML');
@@ -81,6 +82,9 @@ describe('MIT Shakespeare', () => {
     it('should strip away all html tags', async () => {
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)){
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
+      }
+      if(!fs.existsSync(noTagsDir)){
+        await fs_mkdirSync(noTagsDir);
       }
       const expectedResult = await fs_readFile(`${expectedDir}/htmlTagsRemoved.html`, {encoding: 'utf8'});
       await removeHtmlTags(tagsDir, noTagsDir, tagFile);
