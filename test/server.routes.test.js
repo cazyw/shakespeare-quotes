@@ -15,7 +15,7 @@ const { quotes, validQuotes, invalidQuotes, caseQuotes, updatedQuotes } = requir
 const MONGO_URI = 'mongodb://localhost/testDatabase';
 
 describe('Routes', () => {
-  
+
   before((done) => {
     mongoose.models = {};
     mongoose.modelSchemas = {};
@@ -49,7 +49,7 @@ describe('Routes', () => {
   });
 
   describe('GET /api/quotes', () => {
-    
+
     it('should return all quotes', (done) => {
       request(app)
         .get('/api/quotes')
@@ -128,7 +128,7 @@ describe('Routes', () => {
           done();
         });
     });
-      
+
   });
 
   describe('GET /api/quotes/random', () => {

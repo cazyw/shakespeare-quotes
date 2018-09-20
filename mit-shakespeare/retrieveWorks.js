@@ -2,17 +2,19 @@ const fs = require('fs');
 const util = require('util');
 const fs_writeFile = util.promisify(fs.writeFile);
 const { asyncForEach } = require('./asyncHelper');
-const { createOriginalFolder } = require('./folderHelper');
+const { createFolder } = require('./folderHelper');
 const { puppeteerSetup, puppeteerTeardown } = require('./puppeteerHelper');
 const originalDir = './originalWorks';
-// const modifiedDir = './modifiedWorks';
 
+// due to this issue https://github.com/GoogleChrome/puppeteer/issues/1054,
+// the istanbul (coverage reporter) will cause error inside page.evaluate throwing exception.
+// the inserted "ignore" comment allows istanbul to succeed
 
 // get list of links on a given page (main works or sonnets)
 const getLinksToWorks = async (page, url, workType) => {
   await page.goto(url);
   await page.waitFor(1000);
-  const result = await page.evaluate((url, workType) => {
+  const result = await page.evaluate(/* istanbul ignore next */(url, workType) => {
     const works = [];
     let links = document.querySelectorAll('a');
     let isAWork = false;
@@ -55,7 +57,7 @@ const downloadAPage = async (page, work, url) => {
 const downloadAllPages = async () => {
   const mainUrl = 'http://shakespeare.mit.edu/';
   const sonnetsUrl = 'http://shakespeare.mit.edu/Poetry/sonnets.html';
-  createOriginalFolder();
+  createFolder(originalDir);
 
   const { browser, page } = await puppeteerSetup();
 
@@ -71,7 +73,7 @@ const downloadAllPages = async () => {
   await puppeteerTeardown(browser);
 };
 
-downloadAllPages();
+// downloadAllPages();
 
 module.exports = {
   getLinksToWorks,
