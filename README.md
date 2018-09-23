@@ -16,6 +16,7 @@ This is up and running here: https://shakespeare-sunday.herokuapp.com/
 ## Status
 
 To do:
+* add tests for files with less than 80% test coverage
 * automatically generate quotes based on keywords
 * refactor/review React state handling
 
@@ -119,7 +120,15 @@ $ mongod --dbpath ~/data/db/
 Then run the following:
 
 ```
+//run tests
 $ npm test
+
+// tests with coverage via Istanbul
+$ npm run test-coverage
+
+// tests with watch mode
+$npm run test-watch
+
 ```
 
 To do: testing for React front-end.
@@ -193,12 +202,13 @@ I have now also added Istanbul for code coverage. This has been very useful to s
 
 ### Downloading of Shakespeare's works for analysis
 
-As well as manually searching for quotes and then adding them to this application, I decided to build a feature that would automatically scan and retrieve quotes that matched the given keyword. This part of the project is still a work in progress. At the moment I'm using Puppeteer to retrieve the list of shakespeare's works from the [MIT Shakespeare site](http://shakespeare.mit.edu/). Currently I've been able to download the full text of each piece of work (except the Sonnets). The next steps will be to:
+As well as manually searching for quotes and then adding them to this application, I decided to build a feature that would automatically scan and retrieve quotes that matched the given keyword. This part of the project is still a work in progress. At the moment I'm using `Puppeteer` to retrieve the list of shakespeare's works from the [MIT Shakespeare site](http://shakespeare.mit.edu/). Currently I've been able to download the full text of each piece of work (plays and sonnets/poems).
 
-* download the Sonnets
-* extract the text (remove HTML markup)
+Using `sanitize-html`, I've been able to remove all HTML tags. The next steps will be to:
 
-Once the text has been cleaned, I'll then need to consider how to best index / store the text and retrieve quotes.
+* reformat the HTML into a more useful structure
+
+At the moment the text is in it's original short-length structure, with sentences split across multiple lines. I'll then need to consider how to best reformat and store the text to be able to search for and retrieve quotes/sentences.
 
 ## Contributing
 Carol Wong
