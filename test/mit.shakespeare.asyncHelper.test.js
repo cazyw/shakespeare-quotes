@@ -9,6 +9,17 @@ describe('Async for loop helper', () => {
     const newArr = [];
     await asyncForEach(arr, async (item) => {
       await wait(500).then(() => {
+        console.log(`looping through ${item}`); // eslint-disable-line no-console
+        newArr.push(item);
+      });
+    });
+    expect(newArr).to.eql(arr);
+  });
+  it('should not throw an error for an empty array', async () => {
+    const arr = [];
+    const newArr = [];
+    await asyncForEach(arr, async (item) => {
+      await wait(1500).then(() => {
         newArr.push(item);
       });
     });
