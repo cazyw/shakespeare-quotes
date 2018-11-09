@@ -10,6 +10,6 @@ steps:
 
   - wait
 
-steps:
-  - label: ':hammer: Tests'
-    command: 'npm test'
+# steps:
+#   - label: ':hammer: Tests'
+#     command: 'npm test'
