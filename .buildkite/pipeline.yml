@@ -1,11 +1,3 @@
 steps:
-  - label: Start Pipeline
-    command: echo "Hello!"
-
-  - wait
-
   - label: ':hammer: Tests'
-    command:
-      - npm install
-      - wait
-      - npm test
+    command: 'npm install && npm test'
