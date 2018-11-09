@@ -1,3 +1,7 @@
 steps:
-  - label: Example Test
+  - label: Console Log
     command: echo "Hello!"
+
+steps:
+  - label: ':hammer: Tests'
+    command: 'npm test'
