@@ -4,12 +4,10 @@ steps:
 
   - wait
 
-steps:
   - label: ':npm: NPM Install'
     command: 'npm install'
 
   - wait
 
-steps:
   - label: ':hammer: Tests'
     command: 'npm test'

@@ -65,6 +65,17 @@ The following was added to `package.json` to build and bundle the React/front-en
 "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
 ```
 
+### Buildkite
+
+The Github repository now includes a number of restrictions including:
+* Require pull request reviews before merging
+* Require status checks to pass before merging
+
+The status checks includes a webhook using Buildkite which will run the automated tests and ensure they all pass.
+Buildkite: https://buildkite.com
+
+Buildkite requires an active agent in order to run and currently the agent is run on my local PC.
+
 
 ## Project file structure
 
