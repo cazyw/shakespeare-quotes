@@ -6,5 +6,6 @@ steps:
 
   - label: ':hammer: Tests'
     command:
-      - 'npm install'
-      - 'npm test'
+      - npm install
+      - wait
+      - npm test
