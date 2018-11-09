@@ -1,6 +1,14 @@
 steps:
-  - label: Console Log
+  - label: Start Pipeline
     command: echo "Hello!"
+
+  - wait
+
+steps:
+  - label: ':npm: NPM Install'
+    command: 'npm install'
+
+  - wait
 
 steps:
   - label: ':hammer: Tests'
