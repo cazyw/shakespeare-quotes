@@ -6,9 +6,9 @@
 
 const expect = require('chai').expect;
 const fs = require('fs');
-const util = require('util');
-const fs_readFile = util.promisify(fs.readFile);
-const fs_mkdirSync = util.promisify(fs.mkdirSync);
+const { promisify } = require('util');
+const fs_readFile = promisify(fs.readFile);
+// const fs_mkdirSync = promisify(fs.mkdirSync);
 const {
   getLinksToWorks,
   processLink
@@ -96,7 +96,7 @@ describe('MIT Shakespeare', () => {
       }
       console.log('after check exists');
       if (!fs.existsSync(noTagsDir)) {
-        await fs_mkdirSync(noTagsDir);
+        fs.mkdirSync(noTagsDir);
       }
       console.log('reading expected file');
       const expectedResult = await fs_readFile(
