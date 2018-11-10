@@ -21,7 +21,7 @@ const { removeHtmlTags } = require('../mit-shakespeare/parseHTML');
 
 describe('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {
-    it('should get a list of 42 plays/poetry and 154 sonnets', async function() {
+    it('should get a list of 42 plays/poetry and 154 sonnets', async () => {
       const expectedNumberOfWorks = 42;
       const expectedNumberOfSonnets = 154;
       const mainUrl = 'http://shakespeare.mit.edu/';
@@ -89,7 +89,7 @@ describe('MIT Shakespeare', () => {
     const expectedDir = 'test/testFiles/expected';
     const tagFile = 'htmlTagsTest.html';
 
-    it('should strip away all html tags', async () => {
+    it.only('should strip away all html tags', async () => {
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)) {
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
       }
