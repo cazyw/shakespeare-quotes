@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /*
  * Shakespeare Quote App
  * Testing mit-shakespeare files
@@ -8,7 +7,6 @@ const expect = require('chai').expect;
 const fs = require('fs');
 const { promisify } = require('util');
 const fs_readFile = promisify(fs.readFile);
-// const fs_mkdirSync = promisify(fs.mkdirSync);
 const {
   getLinksToWorks,
   processLink
@@ -88,25 +86,22 @@ describe('MIT Shakespeare', () => {
     const noTagsDir = 'test/testFiles/noTags';
     const expectedDir = 'test/testFiles/expected';
     const tagFile = 'htmlTagsTest.html';
-    console.log('in context');
-    it.only('should strip away all html tags', async () => {
-      console.log('before check exists');
+
+    it('should strip away all html tags', async () => {
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)) {
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
       }
-      console.log('after check exists');
+
       if (!fs.existsSync(noTagsDir)) {
         fs.mkdirSync(noTagsDir);
       }
-      console.log('reading expected file');
+
       const expectedResult = await fs_readFile(
         `${expectedDir}/htmlTagsRemoved.html`,
         { encoding: 'utf8' }
       );
 
-      console.log('removing tags file');
       await removeHtmlTags(tagsDir, noTagsDir, tagFile);
-      console.log('reading tags removed file');
       const textNoTags = await fs_readFile(`${noTagsDir}/${tagFile}`, {
         encoding: 'utf8'
       });
