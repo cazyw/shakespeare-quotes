@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 /*
-* Shakespeare Quote App
-* Main app server
-*/
+ * Shakespeare Quote App
+ * Main app server
+ */
 
 'use strict';
 
@@ -15,15 +15,26 @@ const config = require('../config').get(process.env.NODE_ENV);
 const app = express();
 
 // connect to mongodb
-const options = { connectTimeoutMS: 30000 };
-mongoose.connect(config.database, options).catch(() => console.log('cannot connect to the database - check: is it running?'));
+const options = { connectTimeoutMS: 30000, useNewUrlParser: true };
+mongoose
+  .connect(
+    config.database,
+    options
+  )
+  .catch(() =>
+    console.log('cannot connect to the database - check: is it running?')
+  );
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 // log all server calls if in development
-if (process.env.NODE_ENV === 'development'){
-  db.on('error', () => console.error.bind(console, 'MongoDB connection error:'));
-  db.once('open', () => console.log(`We are connected to the ${config.database} database!`));
+if (process.env.NODE_ENV === 'development') {
+  db.on('error', () =>
+    console.error.bind(console, 'MongoDB connection error:')
+  );
+  db.once('open', () =>
+    console.log(`We are connected to the ${config.database} database!`)
+  );
   app.use((req, res, next) => {
     const now = new Date().toString();
     console.log(`Log -- ${now}: ${req.method} ${req.url}`);
@@ -41,13 +52,13 @@ app.use('/api', require('./routes'));
 
 app.get('*', (req, res) => {
   res.status(404).send({
-    warning: 'there\'s nothing here'
+    warning: "there's nothing here"
   });
 });
 
 app.post('*', (req, res) => {
   res.status(404).send({
-    warning: 'there\'s nothing here'
+    warning: "there's nothing here"
   });
 });
 
