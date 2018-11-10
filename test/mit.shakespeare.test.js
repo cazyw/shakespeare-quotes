@@ -88,11 +88,13 @@ describe('MIT Shakespeare', () => {
     const noTagsDir = 'test/testFiles/noTags';
     const expectedDir = 'test/testFiles/expected';
     const tagFile = 'htmlTagsTest.html';
-
+    console.log('in context');
     it.only('should strip away all html tags', async () => {
+      console.log('before check exists');
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)) {
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
       }
+      console.log('after check exists');
       if (!fs.existsSync(noTagsDir)) {
         await fs_mkdirSync(noTagsDir);
       }
