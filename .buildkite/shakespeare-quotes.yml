@@ -1,0 +1,14 @@
+steps:
+  - command: "buildkite-agent pipeline upload"
+    label: ":pipeline:"
+
+  - wait
+
+  - command: "npm install && cd client && npm install && npm run build && cd .. && npm test"
+    label: ":hammer: Tests"
+
+  - wait
+
+  - command: "git push heroku master"
+    label: ":heroku: Deploy to Heroku"
+    branches: "master"
