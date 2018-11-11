@@ -5,7 +5,5 @@ steps:
   - wait
 
   - label: ':heroku: Deploy to Heroku'
-    command:
-      - 'git remote add heroku https://git.heroku.com/shakespeare-sunday.git'
-      - 'git push heroku master'
+    command: 'git push heroku master'
     branches: 'master'
