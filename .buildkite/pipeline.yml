@@ -1,3 +1,9 @@
 steps:
   - label: ':hammer: Tests'
     command: 'npm install && cd client && npm install && npm run build && cd .. && npm test'
+
+  - wait
+
+  - label: ':heroku: Deploy to Heroku'
+    command: 'git push heroku master'
+    branches: 'master'
