@@ -65,11 +65,12 @@ The following was added to `package.json` to build and bundle the React/front-en
 "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
 ```
 
-### Buildkite
+### CI Deployment with Buildkite
 
 The Github repository now includes a number of restrictions including:
 * Require pull request reviews before merging
 * Require status checks to pass before merging
+* Deployment to Heroku on merge into master (and tests passing)
 
 The status checks includes a webhook using Buildkite which will run the automated tests and ensure they all pass.
 Buildkite: https://buildkite.com
