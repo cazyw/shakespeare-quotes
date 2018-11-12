@@ -1,11 +1,11 @@
 const { Quote } = require('../../models/quote');
 const pluralize = require('pluralize');
-const dotenv = require('dotenv'); 
+const dotenv = require('dotenv');
 dotenv.load();
 
-const pluralSingular = (tagArray) => {
+const pluralSingular = tagArray => {
   let originalSet = new Set([]);
-  tagArray.forEach((tag) => {
+  tagArray.forEach(tag => {
     originalSet.add(pluralize.plural(tag));
     originalSet.add(pluralize.singular(tag));
   });
@@ -14,27 +14,24 @@ const pluralSingular = (tagArray) => {
   // const limitPerRelationshipType = 10;
   // const api_key = process.env.WORDNIK_API_KEY;
   return [...originalSet];
-
 };
 
-const collateTags = (tags) => {
+const collateTags = tags => {
   const tagArray = tags.split(' ').map(tag => tag.trim().toLowerCase());
   const expandedTags = pluralSingular(tagArray);
-  return expandedTags.map(tag => new RegExp('^' + tag +'|.*[^\\w]' + tag, 'i'));
+  return expandedTags.map(tag => new RegExp('^' + tag + '|.*[^\\w]' + tag, 'i'));
 };
 
 const displayAllQuotes = (res, next) => {
-  Quote.find({}).sort( '-created_date' )
+  Quote.find({})
+    .sort('-created_date')
     .exec()
     .then(quote => res.send(quote))
     .catch(error => next(error)); // passes error to app.js
 };
 
 const displaySelectedQuotes = (res, selectedTags, next) => {
-  Quote.find({$or:[
-    { quote: { $in: selectedTags } },
-    { tags: { $in: selectedTags } }
-  ]})
+  Quote.find({ $or: [{ quote: { $in: selectedTags } }, { tags: { $in: selectedTags } }] })
     .exec()
     .then(quote => res.send(quote))
     .catch(error => next(error)); // passes error to app.js
@@ -47,7 +44,7 @@ function retrieveRandomQuote(req, res, next) {
 }
 
 function retrieveQuotes(req, res, next) {
-  if(!req.query.tags){
+  if (!req.query.tags) {
     displayAllQuotes(res, next);
   } else {
     const selectedTags = collateTags(req.query.tags);
@@ -63,13 +60,13 @@ function postQuote(req, res, next) {
 }
 
 function updateQuote(req, res, next) {
-  Quote.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true})
-    .then((updatedQuote) => res.status(200).send(updatedQuote))
+  Quote.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    .then(updatedQuote => res.status(200).send(updatedQuote))
     .catch(next); // passes error to app.js
 }
 
 function deleteQuote(req, res, next) {
-  Quote.findByIdAndRemove({ _id: req.params.id })
+  Quote.findOneAndDelete({ _id: req.params.id })
     .then(quote => res.status(200).send(quote))
     .catch(next); // passes error to app.js
 }

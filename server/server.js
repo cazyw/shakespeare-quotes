@@ -21,20 +21,14 @@ mongoose
     config.database,
     options
   )
-  .catch(() =>
-    console.log('cannot connect to the database - check: is it running?')
-  );
+  .catch(() => console.log('cannot connect to the database - check: is it running?'));
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 // log all server calls if in development
 if (process.env.NODE_ENV === 'development') {
-  db.on('error', () =>
-    console.error.bind(console, 'MongoDB connection error:')
-  );
-  db.once('open', () =>
-    console.log(`We are connected to the ${config.database} database!`)
-  );
+  db.on('error', () => console.error.bind(console, 'MongoDB connection error:'));
+  db.once('open', () => console.log(`We are connected to the ${config.database} database!`));
   app.use((req, res, next) => {
     const now = new Date().toString();
     console.log(`Log -- ${now}: ${req.method} ${req.url}`);
