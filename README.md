@@ -24,7 +24,7 @@ Also working on a feature that will automatically find a number of quotes based 
 
 ## Operating Instructions
 
-Go to https://shakespeare-sunday.herokuapp.com/. May take a while to spin up (using free Heroku and mLab tier)
+Go to https://shakespeare-sunday.herokuapp.com/.
 
 <img src="https://cazyw.github.io/img/react-express-shakespeare.jpg" width="450" alt="shakespeare subday">
 
@@ -35,6 +35,7 @@ For this app:
 * npm - v5.8.0
 * Heroku account (online)
 * MongoDB (local), mLab (online)
+* Buildkite agent (for deployment via CI)
 
 Check `package.json` for other packages installed. As I also used `create-react-app` for the front end; it has its own `package.json` in the client/ folder.
 
@@ -72,10 +73,10 @@ The Github repository now includes a number of restrictions including:
 * Require status checks to pass before merging
 * Deployment to Heroku on merge into master (and tests passing)
 
-The status checks includes a webhook using Buildkite which will run the automated tests and ensure they all pass.
+The status checks includes a webhook using Buildkite. Buildkite will run the automated tests and ensure they all pass.
 Buildkite: https://buildkite.com
 
-Buildkite requires an active agent in order to run and currently the agent is run on my local PC.
+Buildkite requires an active agent in order to run and currently I am using an agent run on my local PC. The agent is started whenever a push is made up to the repository. [Notes on Buildkite setup](https://github.com/cazyw/templates-configs-tools/blob/master/notes/Buildkite.md)
 
 
 ## Project file structure
