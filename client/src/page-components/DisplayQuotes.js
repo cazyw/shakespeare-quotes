@@ -14,7 +14,7 @@ import './DisplayQuotes.css';
 import { TIMEOUT } from './../utils/constants';
 
 export default class DisplayQuotes extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       quotes: [],
@@ -30,20 +30,26 @@ export default class DisplayQuotes extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({
-      offset: 0,
-      quotes: newProps.quotes,
-      pageCount: Math.ceil(newProps.quotes.length / this.state.perPage)
-    }, () => {
-      this.quoteSubset();
-    });
+    this.setState(
+      {
+        offset: 0,
+        quotes: newProps.quotes,
+        pageCount: Math.ceil(newProps.quotes.length / this.state.perPage)
+      },
+      () => {
+        this.quoteSubset();
+      }
+    );
     toggleSections('pagination-container-top', 'pagination-container-top');
     toggleSections('pagination-container-bottom', 'pagination-container-bottom');
   }
 
   quoteSubset() {
     const startQuote = this.state.offset;
-    const endQuote = startQuote + this.state.perPage > this.state.quotes.length ? this.state.quotes.length : startQuote + this.state.perPage ;
+    const endQuote =
+      startQuote + this.state.perPage > this.state.quotes.length
+        ? this.state.quotes.length
+        : startQuote + this.state.perPage;
 
     this.setState({
       subQuotes: this.state.quotes.slice(startQuote, endQuote)
@@ -64,21 +70,24 @@ export default class DisplayQuotes extends Component {
   }
 
   render() {
-    if(this.state.quotes.length <= this.state.perPage) {
-      return(
+    if (this.state.quotes.length <= this.state.perPage) {
+      return (
         <div className="homepage" id="quote-display-container">
-          <ul><QuoteList quotes={this.state.quotes} editQuote={this.props.editQuote} /></ul>
+          <ul>
+            <QuoteList quotes={this.state.quotes} editQuote={this.props.editQuote} />
+          </ul>
         </div>
       );
     }
     openElement('pagination-container-top');
     openElement('pagination-container-bottom');
-    return(
+    return (
       <div>
         <div className="pagination-container" id="pagination-container-top">
-          <ReactPaginate previousLabel={'prev'}
+          <ReactPaginate
+            previousLabel={'prev'}
             nextLabel={'next'}
-            breakLabel={<a href="">...</a>}
+            breakLabel={<a target="_blank">...</a>}
             breakClassName={'break-me'}
             pageCount={this.state.pageCount}
             marginPagesDisplayed={1}
@@ -87,15 +96,19 @@ export default class DisplayQuotes extends Component {
             containerClassName={'pagination'}
             subContainerClassName={'pages pagination'}
             activeClassName={'active'}
-            forcePage={this.state.selected} />
+            forcePage={this.state.selected}
+          />
         </div>
         <div className="homepage" id="quote-display-container">
-          <ul><QuoteList quotes={this.state.subQuotes} editQuote={this.props.editQuote} /></ul>
+          <ul>
+            <QuoteList quotes={this.state.subQuotes} editQuote={this.props.editQuote} />
+          </ul>
         </div>
         <div className="pagination-container" id="pagination-container-bottom">
-          <ReactPaginate previousLabel={'prev'}
+          <ReactPaginate
+            previousLabel={'prev'}
             nextLabel={'next'}
-            breakLabel={<a href="">...</a>}
+            breakLabel={<a target="_blank">...</a>}
             breakClassName={'break-me'}
             pageCount={this.state.pageCount}
             marginPagesDisplayed={1}
@@ -104,7 +117,8 @@ export default class DisplayQuotes extends Component {
             containerClassName={'pagination'}
             subContainerClassName={'pages pagination'}
             activeClassName={'active'}
-            forcePage={this.state.selected} />
+            forcePage={this.state.selected}
+          />
         </div>
       </div>
     );
