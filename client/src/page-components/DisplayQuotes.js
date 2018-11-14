@@ -87,7 +87,7 @@ export default class DisplayQuotes extends Component {
           <ReactPaginate
             previousLabel={'prev'}
             nextLabel={'next'}
-            breakLabel={<a target="_blank">...</a>}
+            breakLabel={'...'}
             breakClassName={'break-me'}
             pageCount={this.state.pageCount}
             marginPagesDisplayed={1}
@@ -108,7 +108,7 @@ export default class DisplayQuotes extends Component {
           <ReactPaginate
             previousLabel={'prev'}
             nextLabel={'next'}
-            breakLabel={<a target="_blank">...</a>}
+            breakLabel={'...'}
             breakClassName={'break-me'}
             pageCount={this.state.pageCount}
             marginPagesDisplayed={1}
