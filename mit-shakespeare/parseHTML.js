@@ -15,8 +15,10 @@ const removeHtmlTags = async (originalDir, modifiedDir, file) => {
     return data;
   });
   const cleanedHtml = sanitizeHtml(html, {
-    allowedTags: [],
-    allowedAttributes: []
+    allowedTags: ['a'],
+    allowedAttributes: {
+      a: ['name']
+    }
   });
   const newFile = path.resolve(modifiedDir, file);
   await fs_writeFile(newFile, cleanedHtml);
@@ -25,12 +27,30 @@ const removeHtmlTags = async (originalDir, modifiedDir, file) => {
 
 const removeHtmlTagsAllFiles = async () => {
   const files = await fs_readDir('originalWorks');
-  await asyncForEach(files, async (work) => {
+  await asyncForEach(files, async work => {
     await removeHtmlTags('originalWorks', 'modifiedWorks', work);
   });
 };
 
+const extractLines = async (modifiedDir, file) => {
+  const work = await fs_readFile(`${modifiedDir}/${file}`, { encoding: 'utf8' }, async (err, data) => {
+    if (err) throw err;
+    // console.log('data', data);
+    const allLines = data.split(/\r\n|\n/);
+    // Reading line by line
+    const speech = allLines.filter(line => line.startsWith('<a name'));
+    const a = speech.map(line => line.replace('</a>', ''));
+    const newFile = path.resolve(modifiedDir, '_test.html');
+    await fs_writeFile(newFile, a[0]);
+    console.log(`saved ${newFile}`); // eslint-disable-line no-console
+    return data;
+  });
+  return work;
+};
+
 // removeHtmlTagsAllFiles();
+
+extractLines('modifiedWorks', '1henryiv.html');
 
 module.exports = {
   removeHtmlTags
