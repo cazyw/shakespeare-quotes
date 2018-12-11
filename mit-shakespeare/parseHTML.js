@@ -32,25 +32,53 @@ const removeHtmlTagsAllFiles = async () => {
   });
 };
 
-const extractLines = async (modifiedDir, file) => {
-  const work = await fs_readFile(`${modifiedDir}/${file}`, { encoding: 'utf8' }, async (err, data) => {
-    if (err) throw err;
-    // console.log('data', data);
-    const allLines = data.split(/\r\n|\n/);
-    // Reading line by line
-    const speech = allLines.filter(line => line.startsWith('<a name'));
-    const a = speech.map(line => line.replace('</a>', ''));
-    const newFile = path.resolve(modifiedDir, '_test.html');
-    await fs_writeFile(newFile, a[0]);
-    console.log(`saved ${newFile}`); // eslint-disable-line no-console
-    return data;
+const lowerCase = (match, p1) => {
+  return ` ${p1.toLowerCase()}`;
+};
+
+const cleanText = data => {
+  let allLines = data.split(/\r\n|\n/);
+
+  let lines = allLines.filter(line => line.startsWith('<a name') && !line.startsWith('<a name="speech'));
+  const blob = lines.join(' ');
+
+  const noEndTag = blob.replace(/<\/a>/gi, '');
+  const noLineNum = noEndTag.replace(/\.\d+"/gi, '"');
+  const setQuoteEnding = noLineNum.replace(/([^0-9](\.|\?|!) ?)/gi, '$1\n');
+  const noClosingATags = setQuoteEnding.replace(/ <a name="\d+\.\d+">(.)/gi, lowerCase);
+  const noExtraSpaces = noClosingATags.replace(/ {2,}/gi, '');
+
+  allLines = noExtraSpaces.split(/\r\n|\n/);
+
+  let actScene = '';
+
+  return allLines.map(line => {
+    if (line.startsWith('<a name')) {
+      actScene = line.match(/<a name="\d+\.\d+">/);
+      return line;
+    } else {
+      return actScene + line;
+    }
   });
-  return work;
+};
+
+const formatQuotes = async (originalDir, modifiedDir, file) => {
+  const newFile = path.resolve(modifiedDir, file);
+  const text = await fs_readFile(`${originalDir}/${file}`, 'utf8');
+  const quotes = cleanText(text);
+  await fs_writeFile(newFile, quotes.join('\n'));
+  console.log(`saved ${newFile}`); // eslint-disable-line no-console
+};
+
+const formatAllFiles = async () => {
+  const files = await fs_readDir('modifiedWorks');
+  await asyncForEach(files, async work => {
+    await formatQuotes('modifiedWorks', 'finalWorks', work);
+  });
 };
 
 // removeHtmlTagsAllFiles();
-
-extractLines('modifiedWorks', '1henryiv.html');
+formatAllFiles();
 
 module.exports = {
   removeHtmlTags
