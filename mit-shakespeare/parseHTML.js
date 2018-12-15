@@ -70,10 +70,21 @@ const formatQuotes = async (originalDir, modifiedDir, file) => {
   console.log(`saved ${newFile}`); // eslint-disable-line no-console
 };
 
+const formatSonnets = async (originalDir, modifiedDir, file) => {
+  const newFile = path.resolve(modifiedDir, file);
+  const text = await fs_readFile(`${originalDir}/${file}`, 'utf8');
+  await fs_writeFile(newFile, text);
+  console.log(`saved ${newFile}`); // eslint-disable-line no-console
+};
+
 const formatAllFiles = async () => {
   const files = await fs_readDir('modifiedWorks');
   await asyncForEach(files, async work => {
-    await formatQuotes('modifiedWorks', 'finalWorks', work);
+    if (work.startsWith('sonnet') || work.startsWith('Venus')) {
+      await formatSonnets('modifiedWorks', 'finalWorks', work);
+    } else {
+      await formatQuotes('modifiedWorks', 'finalWorks', work);
+    }
   });
 };
 
