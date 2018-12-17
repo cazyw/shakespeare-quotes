@@ -79,7 +79,7 @@ describe('MIT Shakespeare', () => {
     const expectedDir = 'test/testFiles/expected';
     const tagFile = 'htmlTagsTest.html';
 
-    it.only('should strip away all html tags (except a name)', async () => {
+    it('should strip away all html tags (except a name)', async () => {
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)) {
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
       }

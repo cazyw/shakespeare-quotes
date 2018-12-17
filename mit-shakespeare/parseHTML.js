@@ -92,5 +92,6 @@ const formatAllFiles = async () => {
 formatAllFiles();
 
 module.exports = {
-  removeHtmlTags
+  removeHtmlTags,
+  removeHtmlTagsAllFiles
 };
