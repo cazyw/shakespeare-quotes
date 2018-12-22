@@ -46,13 +46,13 @@ app.use('/api', require('./routes'));
 
 app.get('*', (req, res) => {
   res.status(404).send({
-    warning: "there's nothing here"
+    warning: 'there\'s nothing here'
   });
 });
 
 app.post('*', (req, res) => {
   res.status(404).send({
-    warning: "there's nothing here"
+    warning: 'there\'s nothing here'
   });
 });
 
