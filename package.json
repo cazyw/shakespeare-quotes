@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^7.7.0",
     "mocha": "*",
     "nodemon": "^1.18.3",
-    "nyc": "^13.0.1",
+    "nyc": "^13.3.0",
     "puppeteer": "^1.7.0",
     "sinon": "^6.3.3",
     "supertest": "^3.0.0"
