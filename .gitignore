@@ -90,3 +90,9 @@ $RECYCLE.BIN/
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 .nyc_output/
+
+# Specific to this project
+cypress/
+mit-shakespeare/finalWorks/
+mit-shakespeare/originalWorks/
+mit-shakespeare/modifiedWorks/
