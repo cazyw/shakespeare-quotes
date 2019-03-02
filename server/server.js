@@ -36,11 +36,13 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-app.all('*', function(req, res, next){
-  if (req.secure) {
-    return next();
+app.use((req, res, next) => {
+  if(!req.secure) {
+    var secureUrl = 'https://' + req.headers['host'] + req.url;
+    res.writeHead(301, { 'Location':  secureUrl });
+    res.end();
   }
-  res.redirect('https://'+ req.hostname + req.url);
+  next();
 });
 
 // static files
