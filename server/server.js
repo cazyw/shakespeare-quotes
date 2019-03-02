@@ -36,11 +36,13 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+// redirect to https
 app.use((req, res, next) => {
-  if(req.headers['x-forwarded-proto'] !== 'https') {
-    var secureUrl = 'https://' + req.headers['host'] + req.url;
-    res.writeHead(301, { 'Location':  secureUrl });
-    res.end();
+  if(process.env.NODE_ENV === 'production') {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      var secureUrl = 'https://' + req.headers['host'] + req.url;
+      res.redirect(secureUrl);
+    }
   }
   next();
 });

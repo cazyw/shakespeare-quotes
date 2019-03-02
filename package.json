@@ -5,14 +5,14 @@
   "main": "server/server.js",
   "scripts": {
     "install-all": "npm install && cd client && npm install",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev": "export NODE_ENV=development && concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server/server.js",
     "client": "cd client && npm start",
     "server": "nodemon server/server.js",
     "build-react": "cd client && rm -rf build && npm run build",
-    "test": "set NODE_ENV=test&& mocha --require babel-register --slow 0 --timeout 15000  --exit",
-    "test-coverage": "set NODE_ENV=test&& nyc mocha --require babel-register --slow 0 --timeout 15000 --exit",
-    "test-watch": "NODE_ENV=test nodemon --exec \"mocha --recursive --require babel-register --slow 0\"",
+    "test": "export NODE_ENV=test && mocha --require babel-register --slow 0 --timeout 15000  --exit",
+    "test-coverage": "export NODE_ENV=test && nyc mocha --require babel-register --slow 0 --timeout 15000 --exit",
+    "test-watch": "export NODE_ENV=test nodemon --exec \"mocha --recursive --require babel-register --slow 0\"",
     "lint": "eslint . --ext .js --ignore-pattern 'node_modules/' --ignore-pattern 'build/'",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
