@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use((req, res, next) => {
-  if(!req.secure) {
+  if(req.headers['x-forwarded-proto'] !== 'https') {
     var secureUrl = 'https://' + req.headers['host'] + req.url;
     res.writeHead(301, { 'Location':  secureUrl });
     res.end();
