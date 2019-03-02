@@ -13,7 +13,7 @@ input.form-control {
   margin-bottom: 5px;
 }
 
-div.col-xs-6, 
+div.col-xs-6,
 div.form-group.col-xs-3,
 div.form-group.col-md-12 {
   margin-bottom: 10px;
@@ -51,22 +51,28 @@ input.form-control.field-blank {
   color: rgb(255, 255, 255);
   background: rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  -webkit-transition: height 0.5s linear;
-     -moz-transition: height 0.5s linear;
-      -ms-transition: height 0.5s linear;
-       -o-transition: height 0.5s linear;
-          transition: height 0.5s linear;
-}
+  opacity: 0;
+  -webkit-transition: opacity 0.3s linear;
+     -moz-transition: opacity 0.3s linear;
+      -ms-transition: opacity 0.3s linear;
+       -o-transition: opacity 0.3s linear;
+          transition: opacity 0.3s linear;
+          transition-delay: 300ms, 0s;
+          transition-property: height, opacity;
+        }
+
 
 #quote-post-container.open {
-  margin: auto auto;
   height: 350px;
-    -webkit-transition: height 0.5s linear;
-       -moz-transition: height 0.5s linear;
-        -ms-transition: height 0.5s linear;
-         -o-transition: height 0.5s linear;
-            transition: height 0.5s linear;
-}
+  opacity: 1;
+  -webkit-transition: height 0 linear, opacity 0.3s linear;
+     -moz-transition: height 0 linear, opacity 0.3s linear;
+      -ms-transition: height 0 linear, opacity 0.3s linear;
+       -o-transition: height 0 linear, opacity 0.3s linear;
+          transition: height 0 linear, opacity 0.3s linear;
+          transition-delay: 0ms, 300ms;
+          transition-property: height, opacity;
+  }
 
 @media (max-width: 500px) {
   div.form-group.col-xs-6 {
