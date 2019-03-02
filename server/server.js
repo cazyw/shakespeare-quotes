@@ -42,7 +42,13 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(bodyParser.json());
 
 // initialise routes
-app.use('/api', require('./routes'));
+app.use('/api', (req, res) => {
+  if(req.protocol === 'http') {
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+  require('./routes');
+});
+
 
 app.get('*', (req, res) => {
   res.status(404).send({
