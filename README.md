@@ -56,7 +56,8 @@ $ mongod --dbpath ~/data/db/
 
 Start the Express server and React server (this also rebuilds when there are changes):
 ```
-$ npm run dev
+$ npm run dev // mac
+$ npm run dev:windows // windows
 ```
 
 This will automatically open the browser to http://localhost:3000/
