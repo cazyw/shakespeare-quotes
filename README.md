@@ -11,7 +11,7 @@ Create an online collection of Shakespeare quotes. Users can
 * pagination when displaying more than 10 quotes
 * automatically generate a number of quotes (to do)
 
-This is up and running here: https://shakespeare-sunday.herokuapp.com/
+This is up and running here: https://shakespeare.cazcodes.dev/
 
 ## Status
 
