@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
 import PostQuote from './page-components/PostQuote';
 import UpdateQuote from './page-components/UpdateQuote';
 import Header from './page-components/Header';
-import { openElement, closeElements } from './utils/updateDisplay';
-import { getRandomQuote, getAllQuotes } from './utils/apiCalls';
+import {openElement, closeElements} from './utils/updateDisplay';
+import {getRandomQuote, getAllQuotes} from './utils/apiCalls';
 import './styles.css';
 
 export default class Home extends Component {
@@ -20,7 +20,7 @@ export default class Home extends Component {
     this.editQuote = this.editQuote.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     getRandomQuote(this.displaySelected);
   }
 
@@ -31,29 +31,43 @@ export default class Home extends Component {
   }
 
   displayNone() {
-    this.setState({ quotes: [] });
+    this.setState({quotes: []});
   }
 
   displaySelected(quotes) {
-    this.setState({ quotes });
+    this.setState({quotes});
   }
 
   editQuote(quote) {
-    this.setState({ quotes: [quote] });
+    this.setState({quotes: [quote]});
     openElement('quote-update-container');
     document.querySelector('.quote-box').style.display = 'none';
   }
 
-  render(){
+  render() {
     return (
       <div>
         <Header displayAllQuotes={this.displayAll} displayNoQuotes={this.displayNone} />
         <main>
           <h1 className="title">Speaking Shakespeare</h1>
-          <h2 className="sub-title">A collection of Shakespeare quotes for <a href="https://twitter.com/hashtag/ShakespeareSunday?src=hash" target="_blank" rel="noopener noreferrer" alt="Shakespeare Sunday hashtag on Twitter">#ShakespeareSunday</a></h2>
+          <h2 className="sub-title">
+            A collection of Shakespeare quotes for{' '}
+            <a
+              href="https://twitter.com/hashtag/ShakespeareSunday?src=hash"
+              target="_blank"
+              rel="noopener noreferrer"
+              alt="Shakespeare Sunday hashtag on Twitter"
+            >
+              #ShakespeareSunday
+            </a>
+          </h2>
           <div className="page-body">
             <PostQuote displaySelectedQuote={this.displaySelected} />
-            <UpdateQuote quotes={this.state.quotes} editQuote={this.editQuote} displaySelectedQuote={this.displaySelected} />
+            <UpdateQuote
+              quotes={this.state.quotes}
+              editQuote={this.editQuote}
+              displaySelectedQuote={this.displaySelected}
+            />
             <SearchQuote quotes={this.state.quotes} editQuote={this.editQuote} />
           </div>
         </main>
@@ -63,4 +77,3 @@ export default class Home extends Component {
 }
 
 ReactDOM.render(<Home />, document.getElementById('quotes'));
-

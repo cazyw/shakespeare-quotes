@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 const path = require('path');
 const util = require('util');
 const fs = require('fs');
 const sanitizeHtml = require('sanitize-html');
-const { asyncForEach } = require('./asyncHelper');
+const {asyncForEach} = require('./asyncHelper');
 
 // case sensitive !!!!!
 const fs_writeFile = util.promisify(fs.writeFile);
@@ -25,7 +26,7 @@ const removeHtmlTags = async (originalDir, modifiedDir, file) => {
 
 const removeHtmlTagsAllFiles = async () => {
   const files = await fs_readDir('originalWorks');
-  await asyncForEach(files, async (work) => {
+  await asyncForEach(files, async work => {
     await removeHtmlTags('originalWorks', 'modifiedWorks', work);
   });
 };

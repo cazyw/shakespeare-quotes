@@ -5,13 +5,13 @@
  *  - displays all quotes
  *  - display quotes that match certain keywords
  */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import QuoteList from '../item-components/QuoteList';
-import { toggleSections, openElement } from '../utils/updateDisplay';
+import {toggleSections, openElement} from '../utils/updateDisplay';
 import './DisplayQuotes.css';
-import { TIMEOUT } from './../utils/constants';
+import {TIMEOUT} from './../utils/constants';
 
 export default class DisplayQuotes extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class DisplayQuotes extends Component {
     this.handlePageClick = this.handlePageClick.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
+  USAFE_componentWillReceiveProps(newProps) {
     this.setState(
       {
         offset: 0,
@@ -63,7 +63,7 @@ export default class DisplayQuotes extends Component {
   handlePageClick(data) {
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset: offset, selected }, () => {
+    this.setState({offset: offset, selected}, () => {
       this.quoteSubset();
     });
     window.scrollTo(0, 0);
