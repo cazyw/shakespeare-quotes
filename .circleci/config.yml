@@ -6,8 +6,8 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run:
-        name: NPM install
-        command: npm install-all
+          name: Npm install
+          command: npm install-all
       - run:
-        name: Tests
-        command: npm test
+          name: Tests
+          command: npm run test:unit

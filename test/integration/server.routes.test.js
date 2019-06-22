@@ -7,9 +7,9 @@
 const expect = require('chai').expect;
 const request = require('supertest');
 const mongoose = require('mongoose');
-const app = require('../server/server');
-const { Quote } = require('../models/quote');
-const { quotes, validQuotes, invalidQuotes, caseQuotes, updatedQuotes } = require('./helpers');
+const app = require('../../server/server');
+const { Quote } = require('../../models/quote');
+const { quotes, validQuotes, invalidQuotes, caseQuotes, updatedQuotes } = require('../utility/helpers');
 
 const MONGO_URI = 'mongodb://localhost/testDatabase';
 
@@ -18,12 +18,7 @@ describe('Routes', () => {
     mongoose.models = {};
     mongoose.modelSchemas = {};
     if (!mongoose.connection.readyState) {
-      mongoose
-        .connect(
-          MONGO_URI,
-          { useNewUrlParser: true }
-        )
-        .then(() => done());
+      mongoose.connect(MONGO_URI, { useNewUrlParser: true }).then(() => done());
     } else {
       // console.log('Error: mongodb has not been started. Run mongod --dbpath ~/data/db');
       done();

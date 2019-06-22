@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { asyncForEach } = require('../mit-shakespeare/asyncHelper');
+const { asyncForEach } = require('../../mit-shakespeare/asyncHelper');
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 

@@ -1,4 +1,3 @@
-
 /*
  * Shakespeare Quote App
  * Testing app.js
@@ -7,7 +6,7 @@
 
 const expect = require('chai').expect;
 const request = require('supertest');
-const app = require('../server/server');
+const app = require('../../server/server');
 
 const quote = {
   work: 'The Taming of the Shrew',
@@ -17,17 +16,17 @@ const quote = {
   tags: ['learning', 'education', 'teaching']
 };
 
-const warningOutput = { warning: 'there\'s nothing here' };
+// eslint-disable-next-line quotes
+const warningOutput = { warning: "there's nothing here" };
 
 describe('App', () => {
-
-  after((done) => {
+  after(done => {
     app.close();
     done();
   });
 
   describe('GET ', () => {
-    it('should return status 200 and render html on /', (done) => {
+    it('should return status 200 and render html on /', done => {
       request(app)
         .get('/')
         .set('Accept', 'text/html')
@@ -37,14 +36,16 @@ describe('App', () => {
         .end(done);
     });
 
-    it('should return status 404 on invalid routes', (done) => {
+    it('should return status 404 on invalid routes', done => {
       request(app)
         .get('/api')
         .expect(404)
-        .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
+        .expect(res => {
+          expect(res.body)
+            .to.be.an('object')
+            .to.deep.include(warningOutput);
         })
-        .end((err) => {
+        .end(err => {
           if (err) return done(err);
         });
 
@@ -52,10 +53,12 @@ describe('App', () => {
         .get('/random')
         .expect(404)
         .expect('Content-Type', /json/)
-        .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
+        .expect(res => {
+          expect(res.body)
+            .to.be.an('object')
+            .to.deep.include(warningOutput);
         })
-        .end((err) => {
+        .end(err => {
           if (err) return done(err);
           done();
         });
@@ -63,38 +66,44 @@ describe('App', () => {
   });
 
   describe('POST ', () => {
-    it('should return status 404 on invalid routes', (done) => {
+    it('should return status 404 on invalid routes', done => {
       request(app)
         .post('/')
         .send(quote)
         .expect(404)
-        .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
+        .expect(res => {
+          expect(res.body)
+            .to.be.an('object')
+            .to.deep.include(warningOutput);
         })
-        .end((err) => {
-          if(err) return done(err);
+        .end(err => {
+          if (err) return done(err);
         });
 
       request(app)
         .post('/api')
         .send(quote)
         .expect(404)
-        .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
+        .expect(res => {
+          expect(res.body)
+            .to.be.an('object')
+            .to.deep.include(warningOutput);
         })
-        .end((err) => {
-          if(err) return done(err);
+        .end(err => {
+          if (err) return done(err);
         });
 
       request(app)
         .post('/random')
         .send(quote)
         .expect(404)
-        .expect((res) => {
-          expect(res.body).to.be.an('object').to.deep.include(warningOutput);
+        .expect(res => {
+          expect(res.body)
+            .to.be.an('object')
+            .to.deep.include(warningOutput);
         })
-        .end((err) => {
-          if(err) return done(err);
+        .end(err => {
+          if (err) return done(err);
           done();
         });
     });
