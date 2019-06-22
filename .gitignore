@@ -96,3 +96,4 @@ cypress/
 mit-shakespeare/finalWorks/
 mit-shakespeare/originalWorks/
 mit-shakespeare/modifiedWorks/
+test/testFiles/noTags/htmlTagsTest.html
