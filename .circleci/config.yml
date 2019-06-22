@@ -7,7 +7,7 @@ jobs:
       - checkout # check out the code in the project directory
       - run:
           name: Npm install
-          command: npm install-all
+          command: npm run install-all
       - run:
           name: Tests
           command: npm run test:unit
