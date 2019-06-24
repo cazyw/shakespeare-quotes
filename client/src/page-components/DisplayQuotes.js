@@ -22,23 +22,23 @@ export default class DisplayQuotes extends Component {
       pageCount: 0,
       offset: 0,
       perPage: 7,
-      selected: null
+      selected: null,
     };
 
     this.quoteSubset = this.quoteSubset.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
   }
 
-  USAFE_componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) {
     this.setState(
       {
         offset: 0,
         quotes: newProps.quotes,
-        pageCount: Math.ceil(newProps.quotes.length / this.state.perPage)
+        pageCount: Math.ceil(newProps.quotes.length / this.state.perPage),
       },
       () => {
         this.quoteSubset();
-      }
+      },
     );
     toggleSections('pagination-container-top', 'pagination-container-top');
     toggleSections('pagination-container-bottom', 'pagination-container-bottom');
@@ -52,7 +52,7 @@ export default class DisplayQuotes extends Component {
         : startQuote + this.state.perPage;
 
     this.setState({
-      subQuotes: this.state.quotes.slice(startQuote, endQuote)
+      subQuotes: this.state.quotes.slice(startQuote, endQuote),
     });
 
     setTimeout(() => {
@@ -126,5 +126,5 @@ export default class DisplayQuotes extends Component {
 }
 
 DisplayQuotes.propTypes = {
-  editQuote: PropTypes.func
+  editQuote: PropTypes.func,
 };

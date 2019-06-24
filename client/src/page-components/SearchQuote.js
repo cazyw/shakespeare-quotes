@@ -17,7 +17,7 @@ export default class SearchQuote extends Component {
     super(props);
     this.state = {
       tags: '',
-      quotes: []
+      quotes: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +25,7 @@ export default class SearchQuote extends Component {
     this.searchResults = this.searchResults.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) {
     if (!arraysMatch(newProps.quotes, this.state.quotes)) this.setState({quotes: newProps.quotes});
   }
 
@@ -74,5 +74,5 @@ export default class SearchQuote extends Component {
 
 SearchQuote.propTypes = {
   editQuote: PropTypes.func,
-  quotes: PropTypes.array
+  quotes: PropTypes.array,
 };
