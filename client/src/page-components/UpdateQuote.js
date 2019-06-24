@@ -24,7 +24,7 @@ export default class UpdateQuote extends Component {
       scene: '',
       quote: '',
       tags: '',
-      titleOfWorks: shakespeareWorks
+      titleOfWorks: shakespeareWorks,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,7 +32,7 @@ export default class UpdateQuote extends Component {
     this.displaySelected = this.displaySelected.bind(this);
   }
 
-  USAFE_componentWillReceiveProps(newProps) {
+  omponentWillReceiveProps(newProps) {
     if (newProps.quotes.length > 0) {
       this.setState({
         id: newProps.quotes[0]._id === undefined ? newProps.quotes[0].objId : newProps.quotes[0]._id,
@@ -40,7 +40,7 @@ export default class UpdateQuote extends Component {
         act: newProps.quotes[0].act,
         scene: newProps.quotes[0].scene,
         quote: newProps.quotes[0].quote,
-        tags: newProps.quotes[0].tags.join(', ')
+        tags: newProps.quotes[0].tags.join(', '),
       });
     }
   }
@@ -76,9 +76,9 @@ export default class UpdateQuote extends Component {
         this.state.tags === undefined
           ? []
           : this.state.tags
-            .toLowerCase()
-            .split(',')
-            .map(word => word.trim())
+              .toLowerCase()
+              .split(',')
+              .map(word => word.trim()),
     };
     if (!inputHasErrors(data, this.state.titleOfWorks, 'update')) {
       document.querySelector('.submit-button').blur();
@@ -103,9 +103,9 @@ export default class UpdateQuote extends Component {
         this.state.tags === undefined
           ? []
           : this.state.tags
-            .toLowerCase()
-            .split(',')
-            .map(word => word.trim())
+              .toLowerCase()
+              .split(',')
+              .map(word => word.trim()),
     });
     document.querySelector('.quote-box').style.display = 'block';
   }
@@ -220,5 +220,5 @@ UpdateQuote.propTypes = {
   act: PropTypes.string,
   scene: PropTypes.string,
   quote: PropTypes.string,
-  tags: PropTypes.array
+  tags: PropTypes.array,
 };
