@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: circleci/node:10.13.0-stretch # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run:
+          name: Npm install
+          command: npm run install-all
+      - run:
+          name: Tests
+          command: npm run test:unit

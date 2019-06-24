@@ -7,15 +7,9 @@ const expect = require('chai').expect;
 const fs = require('fs');
 const { promisify } = require('util');
 const fs_readFile = promisify(fs.readFile);
-const {
-  getLinksToWorks,
-  processLink
-} = require('../mit-shakespeare/retrieveWorks');
-const {
-  puppeteerSetup,
-  puppeteerTeardown
-} = require('../mit-shakespeare/puppeteerHelper');
-const { removeHtmlTags } = require('../mit-shakespeare/parseHTML');
+const { getLinksToWorks, processLink } = require('../../mit-shakespeare/retrieveWorks');
+const { puppeteerSetup, puppeteerTeardown } = require('../../mit-shakespeare/puppeteerHelper');
+const { removeHtmlTags } = require('../../mit-shakespeare/parseHTML');
 
 describe('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {
@@ -68,9 +62,7 @@ describe('MIT Shakespeare', () => {
       url = 'http://shakespeare.mit.edu/twelfth_night/index.html';
       ({ workName, fullUrl } = processLink(url));
       expect(workName).to.eq('twelfth_night');
-      expect(fullUrl).to.eq(
-        'http://shakespeare.mit.edu/twelfth_night/full.html'
-      );
+      expect(fullUrl).to.eq('http://shakespeare.mit.edu/twelfth_night/full.html');
     });
 
     it('should correctly identify and process non-works', () => {
@@ -96,14 +88,11 @@ describe('MIT Shakespeare', () => {
         fs.mkdirSync(noTagsDir);
       }
 
-      const expectedResult = await fs_readFile(
-        `${expectedDir}/htmlTagsRemoved.html`,
-        { encoding: 'utf8' }
-      );
+      const expectedResult = await fs_readFile(`${expectedDir}/htmlTagsRemoved.html`, { encoding: 'utf8' });
 
       await removeHtmlTags(tagsDir, noTagsDir, tagFile);
       const textNoTags = await fs_readFile(`${noTagsDir}/${tagFile}`, {
-        encoding: 'utf8'
+        encoding: 'utf8',
       });
       expect(textNoTags).to.eq(expectedResult);
     });

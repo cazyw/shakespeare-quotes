@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-console */
 /*
  * Shakespeare Quote App
@@ -55,14 +56,14 @@ app.use('/api', require('./routes'));
 app.get('*', (req, res) => {
   res.status(404).send({
     // eslint-disable-next-line quotes
-    warning: "there's nothing here"
+    warning: "there's nothing here",
   });
 });
 
 app.post('*', (req, res) => {
   res.status(404).send({
     // eslint-disable-next-line quotes
-    warning: "there's nothing here"
+    warning: "there's nothing here",
   });
 });
 
@@ -70,7 +71,7 @@ app.post('*', (req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   res.status(422).send({
-    error: err.message
+    error: err.message,
   });
 });
 
