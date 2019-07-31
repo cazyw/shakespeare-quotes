@@ -11,7 +11,7 @@ Create an online collection of Shakespeare quotes. Users can
 * pagination when displaying more than 10 quotes
 * automatically generate a number of quotes (to do)
 
-This is up and running here: https://shakespeare-sunday.herokuapp.com/
+This is up and running here: https://shakespeare.cazcodes.dev/
 
 ## Status
 
@@ -56,7 +56,8 @@ $ mongod --dbpath ~/data/db/
 
 Start the Express server and React server (this also rebuilds when there are changes):
 ```
-$ npm run dev
+$ npm run dev // mac
+$ npm run dev:windows // windows
 ```
 
 This will automatically open the browser to http://localhost:3000/

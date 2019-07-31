@@ -1,7 +1,7 @@
 const fs = require('fs');
 const sinon = require('sinon');
 const expect = require('chai').expect;
-const { createFolder } = require('../mit-shakespeare/folderHelper');
+const { createFolder } = require('../../mit-shakespeare/folderHelper');
 
 describe('Folder Helper Tests', () => {
   let stubFsExists;
@@ -28,6 +28,4 @@ describe('Folder Helper Tests', () => {
     createFolder('aFolder');
     expect(stubFsMkdir.called).to.eq(true);
   });
-
-
 });

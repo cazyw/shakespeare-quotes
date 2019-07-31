@@ -1,4 +1,4 @@
-export const TIMEOUT = 600;
+export const TIMEOUT = 500;
 
 export const shakespeareWorks = [
   'All\'s Well That Ends Well',

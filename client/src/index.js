@@ -26,7 +26,6 @@ export default class Home extends Component {
 
   displayAll() {
     closeElements('pagination-container-top', 'pagination-container-bottom');
-    // closeElements('quote-display-container');
     document.getElementById('searchResultMessage').textContent = '';
     getAllQuotes(this.displaySelected);
   }

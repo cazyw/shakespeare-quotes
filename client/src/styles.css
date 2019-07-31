@@ -17,6 +17,11 @@ main {
   margin-top: 70px;
 }
 
+footer {
+  font-size: 0.75em;
+  text-align: center;
+}
+
 .title {
   text-align: center;
   font-size: 2em;
@@ -31,10 +36,20 @@ main {
   color: rgb(255, 255, 255);
 }
 
+.site-container-wrap {
+  display: flex;
+  min-height: 95vh;
+  flex-direction: column;
+}
+
 @media (max-width: 369px) {
   h1.title {
     font-size: 1.8em;
   }
+  footer {
+    font-size: 0.5em;
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -49,6 +64,8 @@ main {
     margin: 0px -10px;
   }
 }
+
+
 
 /* /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */

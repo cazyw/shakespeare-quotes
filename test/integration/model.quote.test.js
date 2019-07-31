@@ -9,16 +9,15 @@
 
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
-const {Quote} = require('../models/quote');
+const { Quote } = require('../../models/quote');
 const MONGO_URI = 'mongodb://localhost/testDatabase';
 
 describe('Quote Schema', () => {
-
-  before((done) => {
-    if(!mongoose.connection.readyState) {
+  before(done => {
+    if (!mongoose.connection.readyState) {
       mongoose.models = {};
       mongoose.modelSchemas = {};
-      mongoose.connect(MONGO_URI).then(() => done());
+      mongoose.connect(MONGO_URI, { useNewUrlParser: true }).then(() => done());
     } else {
       // console.log('Error: mongodb has not been started. Run mongod --dbpath ~/data/db');
       mongoose.models = {};
@@ -27,8 +26,8 @@ describe('Quote Schema', () => {
     }
   });
 
-  after((done) => {
-    if(mongoose.connection.db) {
+  after(done => {
+    if (mongoose.connection.db) {
       mongoose.connection.db.dropDatabase().then(() => {
         mongoose.connection.close();
         done();
@@ -38,7 +37,7 @@ describe('Quote Schema', () => {
     }
   });
 
-  it('should be invalid if "work" is missing', (done) => {
+  it('should be invalid if "work" is missing', done => {
     let quote = new Quote({
       act: '4',
       scene: '1',
@@ -46,13 +45,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.work).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "work" is blank', (done) => {
+  it('should be invalid if "work" is blank', done => {
     let quote = new Quote({
       work: '',
       act: '4',
@@ -61,28 +60,28 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.work).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "act" is missing', (done) => {
+  it('should be invalid if "act" is missing', done => {
     let quote = new Quote({
       work: 'Henry V',
-      act:'',
+      act: '',
       scene: '1',
       quote: 'I am afeard there are few die well that die in a battle...',
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.act).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "act" is blank and "scene" is not', (done) => {
+  it('should be invalid if "act" is blank and "scene" is not', done => {
     let quote = new Quote({
       work: 'Henry V',
       scene: '1',
@@ -90,13 +89,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.act).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "act" is not a numerical value', (done) => {
+  it('should be invalid if "act" is not a numerical value', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: 'IV',
@@ -105,13 +104,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.act).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "scene" is missing', (done) => {
+  it('should be invalid if "scene" is missing', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
@@ -119,13 +118,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.scene).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "scene" is blank and "act" is not', (done) => {
+  it('should be invalid if "scene" is blank and "act" is not', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
@@ -134,13 +133,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.scene).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "scene" is not a numerical value', (done) => {
+  it('should be invalid if "scene" is not a numerical value', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
@@ -149,13 +148,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.scene).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "quote" is missing', (done) => {
+  it('should be invalid if "quote" is missing', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
@@ -163,13 +162,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.quote).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "quote" is blank', (done) => {
+  it('should be invalid if "quote" is blank', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
@@ -178,27 +177,27 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.quote).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "tags" is missing', (done) => {
+  it('should be invalid if "tags" is missing', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
       scene: '1',
-      quote: 'I am afeard there are few die well that die in a battle...',
+      quote: 'I am afeard there are few die well that die in a battle...'
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.tags).to.exist;
       done();
     });
   });
 
-  it('should be invalid if "tags" array is empty', (done) => {
+  it('should be invalid if "tags" array is empty', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '4',
@@ -207,13 +206,13 @@ describe('Quote Schema', () => {
       tags: []
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err.errors.tags).to.exist;
       done();
     });
   });
 
-  it('should be valid if all fields are completed', (done) => {
+  it('should be valid if all fields are completed', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '2',
@@ -222,13 +221,13 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err).to.be.null;
       done();
     });
   });
 
-  it('should be valid if all fields are completed (both act and scene blank)', (done) => {
+  it('should be valid if all fields are completed (both act and scene blank)', done => {
     let quote = new Quote({
       work: 'Henry V',
       act: '',
@@ -237,11 +236,9 @@ describe('Quote Schema', () => {
       tags: ['death', 'battle', 'war']
     });
 
-    quote.validate((err) => {
+    quote.validate(err => {
       expect(err).to.be.null;
       done();
     });
   });
-
-
 });
