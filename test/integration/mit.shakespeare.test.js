@@ -79,7 +79,7 @@ describe('MIT Shakespeare', () => {
     const expectedDir = 'test/testFiles/expected';
     const tagFile = 'htmlTagsTest.html';
 
-    it('should strip away all html tags', async () => {
+    it('should strip away all html tags (except a name)', async () => {
       if (fs.existsSync(`${noTagsDir}/${tagFile}`)) {
         fs.unlinkSync(`${noTagsDir}/${tagFile}`);
       }
@@ -92,7 +92,7 @@ describe('MIT Shakespeare', () => {
 
       await removeHtmlTags(tagsDir, noTagsDir, tagFile);
       const textNoTags = await fs_readFile(`${noTagsDir}/${tagFile}`, {
-        encoding: 'utf8',
+        encoding: 'utf8'
       });
       expect(textNoTags).to.eq(expectedResult);
     });
