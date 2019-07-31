@@ -7,9 +7,9 @@ const expect = require('chai').expect;
 const fs = require('fs');
 const { promisify } = require('util');
 const fs_readFile = promisify(fs.readFile);
-const { getLinksToWorks, processLink } = require('../mit-shakespeare/retrieveWorks');
-const { puppeteerSetup, puppeteerTeardown } = require('../mit-shakespeare/puppeteerHelper');
-const { removeHtmlTags } = require('../mit-shakespeare/parseHTML');
+const { getLinksToWorks, processLink } = require('../../mit-shakespeare/retrieveWorks');
+const { puppeteerSetup, puppeteerTeardown } = require('../../mit-shakespeare/puppeteerHelper');
+const { removeHtmlTags } = require('../../mit-shakespeare/parseHTML');
 
 describe('MIT Shakespeare', () => {
   context('retrieving works from MIT shakespeare website', () => {

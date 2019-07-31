@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-console */
 /*
  * Shakespeare Quote App
@@ -17,10 +18,7 @@ const app = express();
 // connect to mongodb
 const options = { connectTimeoutMS: 30000, useNewUrlParser: true };
 mongoose
-  .connect(
-    config.database,
-    options
-  )
+  .connect(config.database, options)
   .catch(() => console.log('cannot connect to the database - check: is it running?'));
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
@@ -36,6 +34,17 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+// redirect to https
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      var secureUrl = 'https://' + req.headers['host'] + req.url;
+      res.redirect(secureUrl);
+    }
+  }
+  next();
+});
+
 // static files
 // serve the react app files
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -46,20 +55,21 @@ app.use('/api', require('./routes'));
 
 app.get('*', (req, res) => {
   res.status(404).send({
-    warning: "there's nothing here"
+    warning: "there's nothing here",
   });
 });
 
 app.post('*', (req, res) => {
   res.status(404).send({
-    warning: "there's nothing here"
+    warning: "there's nothing here",
   });
 });
 
 // error handling middleware
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   res.status(422).send({
-    error: err.message
+    error: err.message,
   });
 });
 
