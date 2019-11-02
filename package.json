@@ -34,7 +34,7 @@
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
-    "mongoose": "^5.2.16",
+    "mongoose": "^5.7.5",
     "pluralize": "^7.0.0",
     "react-paginate": "^5.2.4",
     "sanitize-html": "^1.18.5"
