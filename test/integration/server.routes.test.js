@@ -142,83 +142,83 @@ describe('Routes', () => {
     });
   });
 
-  describe('POST /api/quotes', () => {
-    it('should create a quote with valid data (all fields completed)', done => {
-      request(app)
-        .post('/api/quotes')
-        .send(validQuotes[0])
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.work).to.equal(validQuotes[0].work);
-          if (err) return done(err);
+  // describe('POST /api/quotes', () => {
+  //   it('should create a quote with valid data (all fields completed)', done => {
+  //     request(app)
+  //       .post('/api/quotes')
+  //       .send(validQuotes[0])
+  //       .expect(200)
+  //       .end((err, res) => {
+  //         expect(res.body.work).to.equal(validQuotes[0].work);
+  //         if (err) return done(err);
 
-          Quote.find()
-            .then(quotes => {
-              expect(quotes).to.have.lengthOf(4);
-              expect(quotes[3].quote).to.equal(validQuotes[0].quote);
-              done();
-            })
-            .catch(e => done(e));
-        });
-    });
+  //         Quote.find()
+  //           .then(quotes => {
+  //             expect(quotes).to.have.lengthOf(4);
+  //             expect(quotes[3].quote).to.equal(validQuotes[0].quote);
+  //             done();
+  //           })
+  //           .catch(e => done(e));
+  //       });
+  //   });
 
-    it('should create a quote with valid data (neither act nor scene completed)', done => {
-      request(app)
-        .post('/api/quotes')
-        .send(validQuotes[1])
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.work).to.equal(validQuotes[1].work);
-          if (err) return done(err);
+  //   it('should create a quote with valid data (neither act nor scene completed)', done => {
+  //     request(app)
+  //       .post('/api/quotes')
+  //       .send(validQuotes[1])
+  //       .expect(200)
+  //       .end((err, res) => {
+  //         expect(res.body.work).to.equal(validQuotes[1].work);
+  //         if (err) return done(err);
 
-          Quote.find()
-            .then(quotes => {
-              expect(quotes).to.have.lengthOf(4);
-              expect(quotes[3].quote).to.equal(validQuotes[1].quote);
-              done();
-            })
-            .catch(e => done(e));
-        });
-    });
+  //         Quote.find()
+  //           .then(quotes => {
+  //             expect(quotes).to.have.lengthOf(4);
+  //             expect(quotes[3].quote).to.equal(validQuotes[1].quote);
+  //             done();
+  //           })
+  //           .catch(e => done(e));
+  //       });
+  //   });
 
-    it('should not create a quote if fields are not all completed', done => {
-      request(app)
-        .post('/api/quotes')
-        .send(invalidQuotes)
-        .expect(422)
-        .end((err, res) => {
-          expect(res.body).to.have.key('error');
-          if (err) return done(err);
+  //   it('should not create a quote if fields are not all completed', done => {
+  //     request(app)
+  //       .post('/api/quotes')
+  //       .send(invalidQuotes)
+  //       .expect(422)
+  //       .end((err, res) => {
+  //         expect(res.body).to.have.key('error');
+  //         if (err) return done(err);
 
-          Quote.find()
-            .then(quotes => {
-              expect(quotes).to.have.lengthOf(3);
-              done();
-            })
-            .catch(e => done(e));
-        });
-    });
+  //         Quote.find()
+  //           .then(quotes => {
+  //             expect(quotes).to.have.lengthOf(3);
+  //             done();
+  //           })
+  //           .catch(e => done(e));
+  //       });
+  //   });
 
-    it('should convert tags to lower case', done => {
-      request(app)
-        .post('/api/quotes')
-        .send(caseQuotes)
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.work).to.equal(caseQuotes.work);
-          if (err) return done(err);
+  //   it('should convert tags to lower case', done => {
+  //     request(app)
+  //       .post('/api/quotes')
+  //       .send(caseQuotes)
+  //       .expect(200)
+  //       .end((err, res) => {
+  //         expect(res.body.work).to.equal(caseQuotes.work);
+  //         if (err) return done(err);
 
-          Quote.find()
-            .then(quotes => {
-              expect(quotes).to.have.lengthOf(4);
-              expect(quotes[3].tags).to.include('grief');
-              expect(quotes[3].tags).to.not.include('Joy');
-              done();
-            })
-            .catch(e => done(e));
-        });
-    });
-  });
+  //         Quote.find()
+  //           .then(quotes => {
+  //             expect(quotes).to.have.lengthOf(4);
+  //             expect(quotes[3].tags).to.include('grief');
+  //             expect(quotes[3].tags).to.not.include('Joy');
+  //             done();
+  //           })
+  //           .catch(e => done(e));
+  //       });
+  //   });
+  // });
 
   describe('DELETE /api/quotes/:id', () => {
     it('should delete the quote given a valid id', done => {
