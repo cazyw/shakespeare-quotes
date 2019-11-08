@@ -6,15 +6,15 @@ const config = {
   },
 
   development: {
-    database: 'mongodb://localhost:27017/shakespeare'
+    database: 'mongodb://mongo:27017/shakespeare'
   },
 
   test: {
-    database: 'mongodb://localhost:27017/testDatabase'
+    database: 'mongodb://mongo:27017/testDatabase'
   },
 
   default: {
-    database: 'mongodb://localhost:27017/shakespeare'
+    database: 'mongodb://mongo:27017/shakespeare'
   }
 };
 
