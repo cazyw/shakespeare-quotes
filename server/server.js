@@ -16,7 +16,7 @@ const config = require('../config').get(process.env.NODE_ENV);
 const app = express();
 
 // connect to mongodb
-const options = { connectTimeoutMS: 30000, useNewUrlParser: true };
+const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true };
 mongoose
   .connect(config.database, options)
   .catch(() => console.log('cannot connect to the database - check: is it running?'));
@@ -55,13 +55,13 @@ app.use('/api', require('./routes'));
 
 app.get('*', (req, res) => {
   res.status(404).send({
-    warning: "there's nothing here",
+    warning: "there's nothing here"
   });
 });
 
 app.post('*', (req, res) => {
   res.status(404).send({
-    warning: "there's nothing here",
+    warning: "there's nothing here"
   });
 });
 
@@ -69,7 +69,7 @@ app.post('*', (req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   res.status(422).send({
-    error: err.message,
+    error: err.message
   });
 });
 

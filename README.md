@@ -2,7 +2,9 @@
 
 ## Objective
 
-Create an online collection of Shakespeare quotes. Users can
+Create an online collection of Shakespeare quotes for #ShakespeareSunday.
+
+Users can:
 
 - submit quotes into the collection
 - search for quotes that have been tagged with certain keywords
@@ -10,7 +12,6 @@ Create an online collection of Shakespeare quotes. Users can
 - edit quotes
 - delete quotes
 - pagination when displaying more than 10 quotes
-- automatically generate a number of quotes (to do)
 
 This is up and running here: https://shakespeare.cazyw.dev/
 
@@ -18,26 +19,26 @@ This is up and running here: https://shakespeare.cazyw.dev/
 
 To do:
 
-- add tests for files with less than 80% test coverage
-- automatically generate quotes based on keywords
-- refactor/review React state handling
-
-Also working on a feature that will automatically find a number of quotes based on search terms. Complete works are located here: http://shakespeare.mit.edu/index.html. At the moment I am searching for quotes in google and manually adding the ones I like. The idea with this will be for the app to find quotes that match keywords and I can select which ones to add to my collection. Still to work out how to implement this efficiently. Currently using Puppeteer to automatically retrieve the content from the website.
+- hot module loading in docker container
+- authentication
+- refactor the react side and add testing
 
 ## Operating Instructions
 
-Go to https://shakespeare-sunday.herokuapp.com/.
+Go to https://shakespeare.cazyw.dev/
 
-<img src="https://cazyw.github.io/img/react-express-shakespeare.jpg" width="450" alt="shakespeare subday">
+<img src="https://cazyw.github.io/img/react-express-shakespeare.jpg" width="450" alt="shakespeare sunday">
 
 ## System Dependencies & Configuration
 
+Using docker containers in development.
+
 For this app:
 
-- node - v8.9.1
-- npm - v5.8.0
-- Heroku account (online)
-- MongoDB (local), mLab (online)
+- node - v12.13.0
+- npm - v6.12.x
+- Heroku account for hosting (online)
+- MongoDB (local - docker), mLab (online)
 - Buildkite agent (for deployment via CI)
 
 Check `package.json` for other packages installed. As I also used `create-react-app` for the front end; it has its own `package.json` in the client/ folder.
@@ -46,26 +47,40 @@ Check `package.json` for other packages installed. As I also used `create-react-
 
 Clone the repository.
 
-Install node and mongodb for local server usage. To install the other required packages (for both the Express server and React server), run:
+### Docker
 
+```Shell
+# build the node and mongodb containers
+docker-compose up --build -d
+
+# get into the node docker container
+docker exec -it shakespeare sh
+
+# stop and remove the docker containers
+docker-compose down -v
 ```
+
+The mongodb data is stored in a local data folder.
+
+### Inside docker
+
+To install the other required packages (for both the Express server and React server), run:
+
+```Shell
 $ npm run install-all
+
+# to build the react-front-end
+$ npm run build-react
 ```
 
-Start the database locally (in my case path required as not stored in the default location):
+Start the Express server and React server (this also rebuilds when there are changes **to fix now that we are using docker**):
 
-```
-$ mongod --dbpath ~/data/db/
-```
-
-Start the Express server and React server (this also rebuilds when there are changes):
-
-```
-$ npm run dev // mac
-$ npm run dev:windows // windows
+```Shell
+$ npm run dev # mac
+$ npm run dev:windows # windows
 ```
 
-This will automatically open the browser to http://localhost:3000/
+Open the browser to http://localhost:5000/
 
 The following was added to `package.json` to build and bundle the React/front-end files for production so the web app only runs on one server (Express server). Heroku automatically runs this.
 
@@ -90,54 +105,61 @@ Buildkite requires an active agent in order to run and currently I am using an a
 
 The project uses `react-scripts` to build the final front-end bundle for production. The following are the _main_ final project files:
 
-```
-server/
-  |- server.js
-  |- routes.js
-  |- controllers/
-      |- quotes.js
-models/
-  |- quote.js
-client/
-  |- build
-    |- index.html
-    |- static/
-        |- css
-        |- js
-        |- media
+Made with linux tree command
 
 ```
+.
+├── client
+├── docker
+├── docker-compose.yml
+├── models
+├── server
+└── test
 
-The working files that go into the React front-end (excluding `.css` files):
+# express server
+server
+├── controllers
+│   └── quotes.js
+├── routes.js
+└── server.js
+models
+└── quote.js
 
-```
-src/
-  |- index.js
-  |- page-components/
-      |- Header.js
-      |- PostQuote.js
-      |- SearchQuote.js
-      |- DisplayQuotes.js
-  |- item-components/
-      |- ButtonForm.js
-      |- QuoteList.js
-      |- QuoteItem.js
-  |- utils/
-      |- apiCalls.js
-      |- constants.js
-      |- errorHandling.js
-      |- helperFunctions.js
-      |- updateDisplay.js
-
+# react front-end
+client/src
+├── index.js
+├── item-components
+│   ├── ButtonForm.css
+│   ├── ButtonForm.js
+│   ├── QuoteItem.css
+│   ├── QuoteItem.js
+│   ├── QuoteList.js
+│   └── Twitter_Logo_WhiteOnImage.png
+├── page-components
+│   ├── DisplayQuotes.css
+│   ├── DisplayQuotes.js
+│   ├── Header.css
+│   ├── Header.js
+│   ├── PostQuote.css
+│   ├── PostQuote.js
+│   ├── SearchQuote.css
+│   ├── SearchQuote.js
+│   ├── UpdateQuote.css
+│   └── UpdateQuote.js
+├── styles.css
+└── utils
+    ├── apiCalls.js
+    ├── constants.js
+    ├── errorHandling.js
+    ├── helperFunctions.js
+    └── updateDisplay.js
 ```
 
 ## Testing
 
-Testing using the **mocha** framework, and using the **supertest** and **chai** libraries. Since it connects to mongodb, the database needs to be running first (in my case):
+Testing using the **mocha** framework, and using the **supertest** and **chai** libraries.
 
-```
-$ mongod --dbpath ~/data/db/
-```
+**to fix: chrome in docker**
 
 Then run the following:
 
