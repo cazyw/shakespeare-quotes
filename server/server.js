@@ -16,7 +16,8 @@ const config = require('../config').get(process.env.NODE_ENV);
 const app = express();
 
 // connect to mongodb
-const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true };
+const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
+
 mongoose
   .connect(config.database, options)
   .catch(() => console.log('cannot connect to the database - check: is it running?'));
