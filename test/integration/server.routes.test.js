@@ -43,7 +43,8 @@ describe('Routes', () => {
       .then(() => {
         return Quote.insertMany(quotes);
       })
-      .then(() => done());
+      .then(() => done())
+      .catch(() => done());
   });
 
   describe('GET /api/quotes', () => {

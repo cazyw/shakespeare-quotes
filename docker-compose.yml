@@ -3,6 +3,7 @@ services:
   node:
     container_name: shakespeare
     build: ./docker/
+    image: nodeapp:shakespeare
     command: sh
     volumes:
       - .:/app
