@@ -9,18 +9,29 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../../server/server');
 const { Quote } = require('../../models/quote');
-const { quotes, validQuotes, invalidQuotes, caseQuotes, updatedQuotes } = require('../utility/helpers');
+// const { quotes, validQuotes, invalidQuotes, caseQuotes, updatedQuotes } = require('../utility/helpers');
+const { quotes, updatedQuotes } = require('../utility/helpers');
+const config = require('../../config').get('test');
 
-const MONGO_URI = 'mongodb://localhost/testDatabase';
+// connect to mongodb
+const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true };
 
 describe('Routes', () => {
   before(done => {
     mongoose.models = {};
     mongoose.modelSchemas = {};
+    console.log('============= inside test =================');
     if (!mongoose.connection.readyState) {
-      mongoose.connect(MONGO_URI, { useNewUrlParser: true }).then(() => done());
+      console.log('============= ready state ================= config.database', config.database);
+      mongoose
+        .connect(config.database, options)
+        .then(() => done())
+        .catch(() => {
+          console.log('cannot connect to the database - check: is it running?');
+          done();
+        });
     } else {
-      // console.log('Error: mongodb has not been started. Run mongod --dbpath ~/data/db');
+      console.log('============= not ready state ================= config.database', config.database);
       done();
     }
   });
