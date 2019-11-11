@@ -10,3 +10,12 @@ dockerDown:
 dockerPrune:
 	docker container prune -f
 	docker image prune -af
+
+npmInstall:
+	docker exec shakespeare /bin/sh -c "npm install"
+
+npmTest:
+	docker exec shakespeare /bin/sh -c "npm test"
+
+npmStart:
+	docker exec shakespeare /bin/sh -c "npm start"

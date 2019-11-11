@@ -14,24 +14,20 @@ const { quotes, updatedQuotes } = require('../utility/helpers');
 const config = require('../../config').get('test');
 
 // connect to mongodb
-const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true };
+const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
 
 describe('Routes', () => {
   before(done => {
     mongoose.models = {};
     mongoose.modelSchemas = {};
-    console.log('============= inside test =================');
     if (!mongoose.connection.readyState) {
-      console.log('============= ready state ================= config.database', config.database);
       mongoose
         .connect(config.database, options)
         .then(() => done())
         .catch(() => {
-          console.log('cannot connect to the database - check: is it running?');
           done();
         });
     } else {
-      console.log('============= not ready state ================= config.database', config.database);
       done();
     }
   });
