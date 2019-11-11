@@ -13,6 +13,7 @@
     "server": "nodemon server/server.js",
     "build-react": "cd client && rm -rf build && npm run build",
     "test": "export NODE_ENV=test && mocha test/**/*.js --require babel-register --slow 0 --timeout 15000  --exit",
+    "test:integration": "export NODE_ENV=test && mocha test/integration/*.js --require babel-register --slow 0 --timeout 15000  --exit",
     "test:unit": "export NODE_ENV=test && mocha test/unit/*.js --require babel-register --slow 0 --timeout 15000  --exit ",
     "test-coverage": "export NODE_ENV=test && nyc mocha --require babel-register --slow 0 --timeout 15000 --exit",
     "test-watch": "export NODE_ENV=test nodemon --exec \"mocha --recursive --require babel-register --slow 0\"",

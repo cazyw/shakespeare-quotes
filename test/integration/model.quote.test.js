@@ -10,14 +10,17 @@
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
 const { Quote } = require('../../models/quote');
-const MONGO_URI = 'mongodb://localhost/testDatabase';
+const config = require('../../config').get('test');
+
+// connect to mongodb
+const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
 
 describe('Quote Schema', () => {
   before(done => {
     if (!mongoose.connection.readyState) {
       mongoose.models = {};
       mongoose.modelSchemas = {};
-      mongoose.connect(MONGO_URI, { useNewUrlParser: true }).then(() => done());
+      mongoose.connect(config.database, options);
     } else {
       // console.log('Error: mongodb has not been started. Run mongod --dbpath ~/data/db');
       mongoose.models = {};

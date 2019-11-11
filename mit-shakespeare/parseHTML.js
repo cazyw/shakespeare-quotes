@@ -89,7 +89,7 @@ const formatAllFiles = async () => {
 };
 
 // removeHtmlTagsAllFiles();
-formatAllFiles();
+// formatAllFiles();
 
 module.exports = {
   removeHtmlTags,
