@@ -27,7 +27,7 @@ To do:
 
 Go to https://shakespeare.cazyw.dev/
 
-<img src="https://cazyw.github.io/img/react-express-shakespeare.jpg" width="450" alt="shakespeare sunday">
+<img src="https://raw.githubusercontent.com/cazyw/shakespeare-quotes/master/react-express-shakespeare.webp" width="450" alt="shakespeare sunday">
 
 ## System Dependencies & Configuration
 
