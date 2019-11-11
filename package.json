@@ -7,7 +7,6 @@
     "install-all": "npm install && cd client && npm install",
     "setenv": "set NODE_ENV=development",
     "dev": "export NODE_ENV=development && concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "dev:windows": "set NODE_ENV=development&& concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server/server.js",
     "client": "cd client && npm start",
     "server": "nodemon server/server.js",

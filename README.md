@@ -50,17 +50,28 @@ Clone the repository.
 ### Docker
 
 ```Shell
-# build the node and mongodb containers
-docker-compose up --build -d
+# build and start the node and mongodb containers
+make dockerUp
 
-# get into the node docker container
-docker exec -it shakespeare sh
+# get into the node docker container to execute commands
+make dockerX
 
 # stop and remove the docker containers
-docker-compose down -v
+make dockerDown
+
+# prune any stopped containers and unused images
+make dockerPrune
 ```
 
 The mongodb data is stored in a local data folder.
+
+The following commands are also available:
+
+```Shell
+make npmInstall
+make npmTest
+make npmStart
+```
 
 ### Inside docker
 
@@ -76,8 +87,7 @@ $ npm run build-react
 Start the Express server and React server (this also rebuilds when there are changes **to fix now that we are using docker**):
 
 ```Shell
-$ npm run dev # mac
-$ npm run dev:windows # windows
+$ npm run dev
 ```
 
 Open the browser to http://localhost:5000/
