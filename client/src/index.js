@@ -20,7 +20,7 @@ export default class Home extends Component {
     this.editQuote = this.editQuote.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     getRandomQuote(this.displaySelected);
   }
 

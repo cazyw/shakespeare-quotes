@@ -12,7 +12,7 @@ import { closeElements } from './../utils/updateDisplay';
 import './SearchQuote.css';
 
 export default class SearchQuote extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       tags: '',
@@ -24,12 +24,12 @@ export default class SearchQuote extends Component {
     this.searchResults = this.searchResults.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
 
   handleChange(event) {
-    this.setState({tags: event.target.value});
+    this.setState({ tags: event.target.value });
   }
 
   handleSubmit(event) {
@@ -44,16 +44,22 @@ export default class SearchQuote extends Component {
   }
 
   resetTags() {
-    this.setState({tags: ''});
+    this.setState({ tags: '' });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="homepage">
         <form className="" id="quote-search-container" onSubmit={this.handleSubmit}>
           <FormGroup controlId="formBasicText" className="form-inner">
             <ControlLabel>Enter search tags, separated by a space (e.g. courage love family)</ControlLabel>
-            <FormControl type="text" placeholder="courage family battle" onChange={this.handleChange} value={this.state.tags} required  />
+            <FormControl
+              type="text"
+              placeholder="courage family battle"
+              onChange={this.handleChange}
+              value={this.state.tags}
+              required
+            />
             <FormControl.Feedback />
             <ButtonForm type="submit" label="Find Quotes" className="form-button search-button" />
           </FormGroup>

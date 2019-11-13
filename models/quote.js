@@ -7,8 +7,8 @@ const Schema = mongoose.Schema;
 
 // validator, either both Act and Scene must be blank (e.g. for sonnets)
 // or they must both be filled out
-function hasActOrScene() { 
-  return (this.act != '' || this.scene != '');
+function hasActOrScene() {
+  return this.act != '' || this.scene != '';
 }
 
 function hasTags(val) {
@@ -16,12 +16,11 @@ function hasTags(val) {
 }
 
 // blank or up to three digits
-function isInteger(val){
+function isInteger(val) {
   return /^[1-9]{0,1}[0-9]{0,2}$/.test(val);
 }
 
 const QuoteSchema = new Schema({
-  
   work: {
     type: String,
     required: [true, 'Work (Play, Sonnet etc) field must be completed']
@@ -41,15 +40,17 @@ const QuoteSchema = new Schema({
     required: [true, 'Quote field must be completed']
   },
   tags: {
-    type: [{
-      type: String,
-      lowercase: true
-    }],
+    type: [
+      {
+        type: String,
+        lowercase: true
+      }
+    ],
     required: [true, 'Tags are required'],
     validate: [hasTags, 'Tags are required!']
   },
-  created_date:  {
-    type: Date, 
+  created_date: {
+    type: Date,
     default: Date.now
   }
 });

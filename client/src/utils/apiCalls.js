@@ -1,24 +1,35 @@
 import { openElement, closeElements, toggleSections } from './updateDisplay';
 import { TIMEOUT } from '../utils/constants';
 
-export const getRandomQuote = (displaySelected) => {
+export const getRandomQuote = displaySelected => {
   fetch('/api/quotes/random')
-    .then((res) => res.json())
+    .then(res => res.json())
     .then(json => {
-      toggleSections('quote-display-container', 'quote-post-container','quote-search-container', 'quote-update-container');
+      toggleSections(
+        'quote-display-container',
+        'quote-post-container',
+        'quote-search-container',
+        'quote-update-container'
+      );
       displaySelected(json);
     })
-    .catch((error) => {
+    .catch(error => {
       // eslint-disable-next-line no-console
       console.log(error);
     });
 };
 
-export const getAllQuotes = (displaySelected) => {
+export const getAllQuotes = displaySelected => {
   fetch('/api/quotes/')
-    .then((res) => res.json())
-    .then((json) => {
-      toggleSections('quote-display-container','quote-display-container', 'quote-post-container', 'quote-search-container', 'quote-update-container');
+    .then(res => res.json())
+    .then(json => {
+      toggleSections(
+        'quote-display-container',
+        'quote-display-container',
+        'quote-post-container',
+        'quote-search-container',
+        'quote-update-container'
+      );
       setTimeout(() => {
         displaySelected(json);
       }, TIMEOUT);
@@ -29,13 +40,13 @@ export const postQuote = (data, resetFields, displaySelected) => {
   fetch('/api/quotes', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type':'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
-    .then((res) => {
-      if(res.status === 200) {
+    .then(res => {
+      if (res.status === 200) {
         resetFields();
         return res.json();
       } else {
@@ -47,16 +58,16 @@ export const postQuote = (data, resetFields, displaySelected) => {
       displaySelected(json);
       openElement('quote-display-container');
     })
-    .catch((error) => {
-    // eslint-disable-next-line no-console
+    .catch(error => {
+      // eslint-disable-next-line no-console
       console.log(error);
     });
 };
 
-export const searchQuotes = (tags, searchResults, resetTags = function(){}) => {
+export const searchQuotes = (tags, searchResults, resetTags = function() {}) => {
   fetch(`/api/quotes?tags=${encodeURI(tags)}`)
-    .then((data) => data.json())
-    .then((json) => {
+    .then(data => data.json())
+    .then(json => {
       resetTags();
       const searchFeedback = json.length === 0 ? 'No matches' : '';
       const timeOut = closeElements('quote-display-container', 'quote-update-container');
@@ -66,7 +77,7 @@ export const searchQuotes = (tags, searchResults, resetTags = function(){}) => {
         openElement('quote-display-container');
       }, timeOut);
     })
-    .catch((error) => {
+    .catch(error => {
       // eslint-disable-next-line no-console
       console.log(error);
     });
@@ -74,8 +85,8 @@ export const searchQuotes = (tags, searchResults, resetTags = function(){}) => {
 
 export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
   fetch(`/api/quotes/${objId}`, { method: 'DELETE' })
-    .then((res) => {
-      if(res.status === 200) {
+    .then(res => {
+      if (res.status === 200) {
         alert('quote deleted');
         return res.json();
       }
@@ -83,7 +94,7 @@ export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
       throw new Error(`unable to delete, ${res.status} error`);
     })
     .then(() => displayQuotes(updatedQuoteList))
-    .catch((error) => {
+    .catch(error => {
       // eslint-disable-next-line no-console
       console.log(error);
     });
@@ -93,21 +104,21 @@ export const updateQuote = (quote, displayQuotes) => {
   fetch(`/api/quotes/${quote.id}`, {
     method: 'PUT',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type':'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(quote)
   })
-    .then((res) => {
-      if(res.status === 200) return res.json();
+    .then(res => {
+      if (res.status === 200) return res.json();
       res.json().then(body => alert(`${body.error}`));
       throw new Error(`unable to update the quote, ${res.status} error`);
     })
-    .then((jsonData) => {
+    .then(jsonData => {
       document.querySelector('.quote-box').style.display = 'block';
       displayQuotes(jsonData);
     })
-    .catch((error) => {
+    .catch(error => {
       // eslint-disable-next-line no-console
       console.log(error);
     });

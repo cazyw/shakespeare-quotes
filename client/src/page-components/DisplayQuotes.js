@@ -29,7 +29,7 @@ export default class DisplayQuotes extends Component {
     this.handlePageClick = this.handlePageClick.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.setState(
       {
         offset: 0,

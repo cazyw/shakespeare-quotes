@@ -1,15 +1,15 @@
 export const TIMEOUT = 500;
 
 export const shakespeareWorks = [
-  'All\'s Well That Ends Well',
+  "All's Well That Ends Well",
   'As You Like It',
   'The Comedy of Errors',
   'Cymbeline',
-  'Love\'s Labours Lost',
+  "Love's Labours Lost",
   'Measure for Measure',
   'The Merry Wives of Windsor',
   'The Merchant of Venice',
-  'A Midsummer Night\'s Dream',
+  "A Midsummer Night's Dream",
   'Much Ado About Nothing',
   'Pericles, Prince of Tyre',
   'Taming of the Shrew',
@@ -17,7 +17,7 @@ export const shakespeareWorks = [
   'Troilus and Cressida',
   'Twelfth Night',
   'Two Gentlemen of Verona',
-  'Winter\'s Tale',
+  "Winter's Tale",
   'Henry IV, part 1',
   'Henry IV, part 2',
   'Henry V',

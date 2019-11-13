@@ -6,10 +6,9 @@
     "node": true,
     "mocha": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
       "jsx": true
     },
     "sourceType": "module",
@@ -17,8 +16,8 @@
   },
   "plugins": ["react"],
   "rules": {
-    "indent": ["error", 2],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"]
+    // "indent": ["error", 2],
+    // "quotes": ["error", "single"],
+    // "semi": ["error", "always"]
   }
 }
