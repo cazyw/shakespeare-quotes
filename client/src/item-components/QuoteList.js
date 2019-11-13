@@ -11,7 +11,7 @@ import { closeElements } from '../utils/updateDisplay';
 import { TIMEOUT } from '../utils/constants';
 
 class QuoteList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       quotes: []
@@ -22,7 +22,7 @@ class QuoteList extends Component {
     this.displayQuotes = this.displayQuotes.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.setState({ quotes: newProps.quotes });
   }
 
@@ -48,13 +48,23 @@ class QuoteList extends Component {
     }, TIMEOUT);
   }
 
-  render(){
+  render() {
     return this.state.quotes.map((quoteQ, index) => {
-      return(
-        <QuoteItem objId={quoteQ._id} key={index} quote={quoteQ.quote} work={quoteQ.work}
-          act={quoteQ.act} scene={quoteQ.scene} tags={quoteQ.tags}
-          passTagSelected={this.searchByTag} deleteQuote={this.handleDelete}
-          editQuote={this.handleEdit} clearDisplay={this.displayQuotes} item={index} />
+      return (
+        <QuoteItem
+          objId={quoteQ._id}
+          key={index}
+          quote={quoteQ.quote}
+          work={quoteQ.work}
+          act={quoteQ.act}
+          scene={quoteQ.scene}
+          tags={quoteQ.tags}
+          passTagSelected={this.searchByTag}
+          deleteQuote={this.handleDelete}
+          editQuote={this.handleEdit}
+          clearDisplay={this.displayQuotes}
+          item={index}
+        />
       );
     });
   }

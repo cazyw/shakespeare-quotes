@@ -14,25 +14,29 @@ const originalDir = './originalWorks';
 const getLinksToWorks = async (page, url, workType) => {
   await page.goto(url);
   await page.waitFor(1000);
-  const result = await page.evaluate(/* istanbul ignore next */(url, workType) => {
-    const works = [];
-    let links = document.querySelectorAll('a');
-    let isAWork = false;
-    for(let i = 0; i < links.length; i++) {
-      if (workType === 'sonnets') {
-        isAWork = links[i].href.includes('sonnet');
-      } else if (workType === 'works') {
-        isAWork = links[i].href.includes('allswell') || links[i].href.includes('python') ? !isAWork : isAWork ;
+  const result = await page.evaluate(
+    /* istanbul ignore next */ (url, workType) => {
+      const works = [];
+      let links = document.querySelectorAll('a');
+      let isAWork = false;
+      for (let i = 0; i < links.length; i++) {
+        if (workType === 'sonnets') {
+          isAWork = links[i].href.includes('sonnet');
+        } else if (workType === 'works') {
+          isAWork = links[i].href.includes('allswell') || links[i].href.includes('python') ? !isAWork : isAWork;
+        }
+        if (isAWork) works.push(links[i].href);
       }
-      if(isAWork) works.push(links[i].href);
-    }
-    return works;
-  }, url, workType);
+      return works;
+    },
+    url,
+    workType
+  );
   return result;
 };
 
 // get the work's name and url to full text
-const processLink = (url) => {
+const processLink = url => {
   const regexPlay = /edu\/(.+)\//i;
   const regexPoetry = /edu\/Poetry\/(.+)\.html/i;
   const isPoetry = url.match(regexPoetry);
@@ -65,7 +69,7 @@ const downloadAllPages = async () => {
   const listOfSonnets = await getLinksToWorks(page, sonnetsUrl, 'sonnets');
   const fullList = listOfWorks.concat(listOfSonnets);
 
-  await asyncForEach(fullList, async (work) => {
+  await asyncForEach(fullList, async work => {
     const { workName, fullUrl } = processLink(work);
     await downloadAPage(page, workName, fullUrl);
   });
@@ -77,6 +81,6 @@ const downloadAllPages = async () => {
 
 module.exports = {
   getLinksToWorks,
-  processLink
+  processLink,
+  downloadAllPages
 };
-

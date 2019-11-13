@@ -18,7 +18,11 @@ class QuoteItem extends Component {
 
   displayTags(tags) {
     const tagButtons = tags.map((tag, index) => {
-      return (<span key={index} className='tag' onClick={this.handleClick.bind(this, tag)}>{decodeURI(tag)}</span>);
+      return (
+        <span key={index} className="tag" onClick={this.handleClick.bind(this, tag)}>
+          {decodeURI(tag)}
+        </span>
+      );
     });
     return tagButtons;
   }
@@ -32,23 +36,32 @@ class QuoteItem extends Component {
     this.props.editQuote(quote);
   }
 
-  render(){
+  render() {
     const act = this.props.act === '' ? '' : `(Act ${this.props.act}`;
     const scene = this.props.scene === '' ? '' : ` Scene ${this.props.scene})`;
-    return(
+    return (
       <li className="quote-box" id={this.props.objId}>
-
-        <span className='quote quote-span'>&quot;{this.props.quote}&quot;</span>
-        <span className='work quote-span'>{this.props.work}</span>
-        <span className='act quote-span'>{act}</span>
-        <span className='scene quote-span'>{scene}</span>
-        <span className='tags quote-span'>Tags: {this.displayTags(this.props.tags)}</span>
-        <div className='controls'>
-          <span className='tweet'>
-            <a className='tweet-button' href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}><img width='25px' height='25px' src={twitterLogo} alt='twitter logo' /></a>
+        <span className="quote quote-span">&quot;{this.props.quote}&quot;</span>
+        <span className="work quote-span">{this.props.work}</span>
+        <span className="act quote-span">{act}</span>
+        <span className="scene quote-span">{scene}</span>
+        <span className="tags quote-span">Tags: {this.displayTags(this.props.tags)}</span>
+        <div className="controls">
+          <span className="tweet">
+            <a
+              className="tweet-button"
+              href={tweetUrl(this.props.quote, this.props.work, this.props.act, this.props.scene)}
+            >
+              <img width="25px" height="25px" src={twitterLogo} alt="twitter logo" />
+            </a>
           </span>
-          <span className='update-tick' onClick={this.handleEdit.bind(this, this.props)}> Edit </span>
-          <span className='delete-tick' onClick={this.handleDelete.bind(this, this.props.item, this.props.objId)}>X</span>
+          <span className="update-tick" onClick={this.handleEdit.bind(this, this.props)}>
+            {' '}
+            Edit{' '}
+          </span>
+          <span className="delete-tick" onClick={this.handleDelete.bind(this, this.props.item, this.props.objId)}>
+            X
+          </span>
         </div>
       </li>
     );
@@ -69,4 +82,3 @@ QuoteItem.propTypes = {
 };
 
 export default QuoteItem;
-
