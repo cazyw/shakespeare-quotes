@@ -8,7 +8,7 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('../config').get(process.env.NODE_ENV);
@@ -16,7 +16,13 @@ const config = require('../config').get(process.env.NODE_ENV);
 const app = express();
 
 // connect to mongodb
-const options = { connectTimeoutMS: 30000, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
+const options = {
+  connectTimeoutMS: 30000,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+};
 
 mongoose
   .connect(config.database, options)
@@ -24,15 +30,10 @@ mongoose
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
-// log all server calls if in development
+// log all db errors if in development
 if (process.env.NODE_ENV === 'development') {
   db.on('error', () => console.error.bind(console, 'MongoDB connection error:'));
   db.once('open', () => console.log(`We are connected to the ${config.database} database!`));
-  app.use((req, res, next) => {
-    const now = new Date().toString();
-    console.log(`Log -- ${now}: ${req.method} ${req.url}`);
-    next();
-  });
 }
 
 // redirect to https
@@ -49,10 +50,14 @@ app.use((req, res, next) => {
 // static files
 // serve the react app files
 app.use(express.static(path.resolve(__dirname, '../client/build')));
-app.use(bodyParser.json());
+app.use(express.json());
+// logger
+app.use(morgan('combined'));
 
 // initialise routes
-app.use('/api', require('./routes'));
+app.use('/api/quotes', require('./routes/quotes'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
 
 app.get('*', (req, res) => {
   res.status(404).send({

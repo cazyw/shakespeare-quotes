@@ -9,7 +9,7 @@
     "dev": "export NODE_ENV=development && concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server/server.js",
     "client": "cd client && npm start",
-    "server": "nodemon server/server.js",
+    "watch": "nodemon server/server.js",
     "build-react": "cd client && rm -rf build && npm run build",
     "test": "export NODE_ENV=test && mocha test/**/*.js --require babel-register --slow 0 --timeout 15000  --exit",
     "test:integration": "export NODE_ENV=test && mocha test/integration/*.js --require babel-register --slow 0 --timeout 15000  --exit",
@@ -31,10 +31,13 @@
   "author": "Carol Wong",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
+    "express-validator": "^6.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.8",
+    "morgan": "^1.9.1",
     "pluralize": "^7.0.0",
     "react-paginate": "^5.2.4",
     "sanitize-html": "^1.18.5"
