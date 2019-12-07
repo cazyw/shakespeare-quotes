@@ -12,6 +12,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('../config').get(process.env.NODE_ENV);
+require('dotenv').config;
 
 const app = express();
 

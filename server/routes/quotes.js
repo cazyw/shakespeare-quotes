@@ -6,7 +6,7 @@
 
 const express = require('express');
 const quotesController = require('../controllers/quotes');
-const { check, validationResult } = require('express-validator');
+// const { check, validationResult } = require('express-validator');
 const router = express.Router();
 
 // get a random quote from the db
