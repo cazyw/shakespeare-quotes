@@ -9,10 +9,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const { User } = require('../../models/user');
 const bcrypt = require('bcryptjs');
-const saltRounds = 12;
 const jwt = require('jsonwebtoken');
-
-router.get('/', (req, res) => res.status(200).json({ msg: 'get users again' }));
 
 router.post(
   '/',
@@ -44,7 +41,7 @@ router.post(
         password
       });
 
-      const salt = await bcrypt.genSalt(saltRounds);
+      const salt = await bcrypt.genSalt(process.env.JWT_SALT);
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
@@ -55,12 +52,10 @@ router.post(
         }
       };
 
-      jwt.sign(payload, process.env.JWT_PVT, { expiresIn: 3600 }, (err, token) => {
+      jwt.sign(payload, process.env.JWT_PVT, { expiresIn: process.env.JWT_EXPIRE }, (err, token) => {
         if (err) throw err;
         res.status(200).json({ token });
       });
-
-      // res.status(200).json({ msg: 'User registered' });
     } catch (error) {
       return res.status(400).json({ errors: [{ msg: `Error: ${error}` }] });
     }

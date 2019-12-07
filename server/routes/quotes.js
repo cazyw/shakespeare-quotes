@@ -6,8 +6,8 @@
 
 const express = require('express');
 const quotesController = require('../controllers/quotes');
-// const { check, validationResult } = require('express-validator');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 // get a random quote from the db
 router.get('/random', quotesController.retrieveRandomQuote);
@@ -16,23 +16,7 @@ router.get('/random', quotesController.retrieveRandomQuote);
 router.get('/', quotesController.retrieveQuotes);
 
 // add a new quote to the db
-// router.post(
-//   '/',
-//   [
-//     check('work', 'Please provide the title').notEmpty(),
-//     check('quote', 'Please provide a quote').notEmpty(),
-//     check('tags', 'Please provide at least one tag')
-//       .isArray()
-//       .isLength({ min: 1 })
-//   ],
-//   (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
-//     return quotesController.postQuote(req, res);
-//   }
-// );
+router.post('/', auth, quotesController.postQuote);
 
 // update a quote in the db
 router.put('/:id', quotesController.updateQuote);
