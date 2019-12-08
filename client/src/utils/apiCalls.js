@@ -50,7 +50,7 @@ export const postQuote = (data, resetFields, displaySelected) => {
         resetFields();
         return res.json();
       } else {
-        res.json().then(body => alert(`${body.error}`));
+        res.json().then(body => alert(`Unable to save quote: ${body.error}`));
         throw new Error(`unable to post, ${res.status} error`);
       }
     })
@@ -90,7 +90,7 @@ export const deleteQuote = (objId, displayQuotes, updatedQuoteList) => {
         alert('quote deleted');
         return res.json();
       }
-      res.json().then(body => alert(`${body.error}`));
+      res.json().then(body => alert(`Unable to delete quote: ${body.error}`));
       throw new Error(`unable to delete, ${res.status} error`);
     })
     .then(() => displayQuotes(updatedQuoteList))
@@ -111,7 +111,7 @@ export const updateQuote = (quote, displayQuotes) => {
   })
     .then(res => {
       if (res.status === 200) return res.json();
-      res.json().then(body => alert(`${body.error}`));
+      res.json().then(body => alert(`Unable to update quote: ${body.error}`));
       throw new Error(`unable to update the quote, ${res.status} error`);
     })
     .then(jsonData => {

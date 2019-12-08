@@ -5,6 +5,7 @@ import { resetWarnings } from '../utils/errorHandling';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
 import { TIMEOUT } from './../utils/constants';
+import { registerUser } from '../utils/auth';
 
 export default class Header extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Header extends Component {
     this.displayNone = this.displayNone.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
+    this.registerUser = this.registerUser.bind(this);
   }
   displayAll() {
     this.props.displayAllQuotes();
@@ -52,6 +54,13 @@ export default class Header extends Component {
     }, TIMEOUT);
   }
 
+  registerUser() {
+    registerUser({
+      email: 'rando',
+      password: '123'
+    });
+  }
+
   render() {
     return (
       <header>
@@ -66,12 +75,17 @@ export default class Header extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-              {/* <NavItem eventKey={1} onClick={this.showPostSection}>Add Quote</NavItem> */}
+              <NavItem eventKey={1} onClick={this.showPostSection}>
+                Add Quote
+              </NavItem>
               <NavItem eventKey={2} onClick={this.showSearchSection}>
                 Search
               </NavItem>
               <NavItem eventKey={3} onClick={this.displayAll}>
                 All
+              </NavItem>
+              <NavItem eventKey={4} onClick={this.registerUser}>
+                Register User
               </NavItem>
             </Nav>
           </Navbar.Collapse>
