@@ -7,11 +7,13 @@ import Header from './page-components/Header';
 import { openElement, closeElements } from './utils/updateDisplay';
 import { getRandomQuote, getAllQuotes } from './utils/apiCalls';
 import './styles.css';
+import RegisterUser from './page-components/RegisterUser';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isAuth: false,
       quotes: []
     };
     this.displayAll = this.displayAll.bind(this);
@@ -69,6 +71,7 @@ export default class Home extends Component {
               displaySelectedQuote={this.displaySelected}
             />
             <SearchQuote quotes={this.state.quotes} editQuote={this.editQuote} />
+            <RegisterUser isAuth={this.state.isAuth} />
           </div>
         </main>
       </div>
@@ -77,5 +80,3 @@ export default class Home extends Component {
 }
 
 ReactDOM.render(<Home />, document.getElementById('quotes'));
-
-// <PostQuote displaySelectedQuote={this.displaySelected} />

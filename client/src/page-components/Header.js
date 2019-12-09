@@ -5,7 +5,6 @@ import { resetWarnings } from '../utils/errorHandling';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Header.css';
 import { TIMEOUT } from './../utils/constants';
-import { registerUser } from '../utils/auth';
 
 export default class Header extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ export default class Header extends Component {
     this.displayNone = this.displayNone.bind(this);
     this.showPostSection = this.showPostSection.bind(this);
     this.showSearchSection = this.showSearchSection.bind(this);
-    this.registerUser = this.registerUser.bind(this);
+    this.showRegisterUser = this.showRegisterUser.bind(this);
   }
   displayAll() {
     this.props.displayAllQuotes();
@@ -29,6 +28,7 @@ export default class Header extends Component {
     document.getElementById('searchResultMessage').textContent = '';
     toggleSections(
       'quote-post-container',
+      'register-user-container',
       'quote-search-container',
       'quote-display-container',
       'quote-update-container',
@@ -43,6 +43,7 @@ export default class Header extends Component {
   showSearchSection() {
     toggleSections(
       'quote-search-container',
+      'register-user-container',
       'quote-post-container',
       'quote-display-container',
       'quote-update-container',
@@ -54,11 +55,19 @@ export default class Header extends Component {
     }, TIMEOUT);
   }
 
-  registerUser() {
-    registerUser({
-      email: 'rando',
-      password: '123'
-    });
+  showRegisterUser() {
+    toggleSections(
+      'register-user-container',
+      'quote-search-container',
+      'quote-post-container',
+      'quote-display-container',
+      'quote-update-container',
+      'pagination-container-top',
+      'pagination-container-bottom'
+    );
+    setTimeout(() => {
+      this.displayNone();
+    }, TIMEOUT);
   }
 
   render() {
@@ -84,7 +93,7 @@ export default class Header extends Component {
               <NavItem eventKey={3} onClick={this.displayAll}>
                 All
               </NavItem>
-              <NavItem eventKey={4} onClick={this.registerUser}>
+              <NavItem eventKey={4} onClick={this.showRegisterUser}>
                 Register User
               </NavItem>
             </Nav>

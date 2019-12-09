@@ -14,7 +14,7 @@ const jwt = require('jsonwebtoken');
 router.post(
   '/',
   [
-    check('email').isEmail(),
+    check('email', 'Please enter an email address').isEmail(),
     check('password', 'Please enter a password with 12 or more characters').isLength({ min: 12 })
   ],
   async (req, res) => {
@@ -24,7 +24,6 @@ router.post(
     }
 
     const { email, password } = req.body;
-    console.log('EMAIL', email);
     try {
       let user = await User.findOne({ email });
 
@@ -33,17 +32,15 @@ router.post(
       }
 
       if (email !== 'tardis@cazyw.dev') {
-        return res.status(200).send({ msg: 'Thank you, but registration is currently closed' });
+        return res.status(403).json({ error: [{ msg: 'Thank you, but registration is currently closed' }] });
       }
 
       user = new User({
         email,
         password
       });
-      console.log('salting');
       const salt = await bcrypt.genSalt(parseInt(process.env.JWT_SALT));
       user.password = await bcrypt.hash(password, salt);
-      console.log('saving');
       await user.save();
 
       const payload = {
@@ -54,7 +51,7 @@ router.post(
 
       jwt.sign(payload, process.env.JWT_PVT, { expiresIn: process.env.JWT_EXPIRE }, (err, token) => {
         if (err) throw err;
-        res.status(200).json({ msg: token });
+        res.status(201).json({ token: token });
       });
     } catch (error) {
       return res.status(400).json({ error: [{ msg: `Error: ${error}` }] });
