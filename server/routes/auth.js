@@ -47,8 +47,7 @@ router.post(
           id: user.id
         }
       };
-
-      jwt.sign(payload, process.env.JWT_PVT, { expiresIn: process.env.JWT_EXPIRE }, (err, token) => {
+      jwt.sign(payload, process.env.JWT_PVT, { expiresIn: parseInt(process.env.JWT_EXPIRE) }, (err, token) => {
         if (err) throw err;
         res.status(200).json({ token });
       });

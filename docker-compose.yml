@@ -17,6 +17,9 @@ services:
       - mongo
     environment:
       - NODE_ENV=development
+      - JWT_PVT=${JWT_PVT}
+      - JWT_SALT=${JWT_SALT}
+      - JWT_EXPIRE=${JWT_EXPIRE}
   mongo:
     container_name: mongo
     image: mongo
