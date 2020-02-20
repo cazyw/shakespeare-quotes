@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
-    "eslint": "^5.16.0",
+    "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.13.0",
     "react": "^16.8.6",
     "react-bootstrap": "^0.32.1",
