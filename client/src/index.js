@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SearchQuote from './page-components/SearchQuote';
-// import PostQuote from './page-components/PostQuote';
+import PostQuote from './page-components/PostQuote';
 import UpdateQuote from './page-components/UpdateQuote';
 import Header from './page-components/Header';
 import { openElement, closeElements } from './utils/updateDisplay';
@@ -62,6 +62,7 @@ export default class Home extends Component {
             </a>
           </h2>
           <div className="page-body">
+            <PostQuote displaySelectedQuote={this.displaySelected} />
             <UpdateQuote
               quotes={this.state.quotes}
               editQuote={this.editQuote}
@@ -76,5 +77,3 @@ export default class Home extends Component {
 }
 
 ReactDOM.render(<Home />, document.getElementById('quotes'));
-
-// <PostQuote displaySelectedQuote={this.displaySelected} />
