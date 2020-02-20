@@ -15,7 +15,7 @@ router.get('/quotes/random', quotesController.retrieveRandomQuote);
 router.get('/quotes', quotesController.retrieveQuotes);
 
 // add a new quote to the db
-// router.post('/quotes', quotesController.postQuote);
+router.post('/quotes', quotesController.postQuote);
 
 // update a quote in the db
 router.put('/quotes/:id', quotesController.updateQuote);

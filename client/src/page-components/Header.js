@@ -66,7 +66,9 @@ export default class Header extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-              {/* <NavItem eventKey={1} onClick={this.showPostSection}>Add Quote</NavItem> */}
+              <NavItem eventKey={1} onClick={this.showPostSection}>
+                Add Quote
+              </NavItem>
               <NavItem eventKey={2} onClick={this.showSearchSection}>
                 Search
               </NavItem>
