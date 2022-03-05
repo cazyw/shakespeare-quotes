@@ -55,7 +55,7 @@ const actHasErrors = (actEntered, sceneEntered, suffix) => {
 };
 
 const sceneHasErrors = (sceneEntered, actEntered, suffix) => {
-  if (!/^[1-9]{0,2}$/.test(sceneEntered)) {
+  if (!/^[0-9]{0,2}$/.test(sceneEntered)) {
     errorHighlighting(true, 'scene', suffix, 'Invalid input');
     return true;
   }
