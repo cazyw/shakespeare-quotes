@@ -37,7 +37,7 @@
     "mongoose": "^5.7.8",
     "pluralize": "^7.0.0",
     "react-paginate": "^5.2.4",
-    "sanitize-html": "^1.18.5"
+    "sanitize-html": "^2.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
